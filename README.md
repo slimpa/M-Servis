@@ -12,7 +12,21 @@ git add . je za sve, za odredjene fajlove njihova imena
 git commit -m "poruka"
 git push origin master
 
-git pull
+git pull ->da se povece zadnja verzija sa gita
+# Baza
+Kada iz foldera gdje se nalazi projekat pokrenemo git bash trenutno smo na master grani, za prelazak na granu sa bazom izvrsimo komandu
+git checkout baza
+
+Fajlovi u trenutnom folderu ce se promjeniti, tj.prikazace samo fajlove koji se nalaze na grani baza. Nakon izmjena tih fajlove treba uraditi 
+git add . je za sve, za odredjene fajlove njihova imena
+
+git commit -m "poruka"
+git push origin baza
+
+Za povratak na master granu izvrsiti komandu 
+git checkout maaste
+
+
 
 
 nemojte pusati sve fajlove zbog konflikta
