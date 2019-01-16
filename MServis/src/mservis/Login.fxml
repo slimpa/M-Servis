@@ -6,13 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="240.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="240.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.LoginController">
    <children>
-      <Label layoutX="40.0" layoutY="78.0" prefHeight="17.0" prefWidth="104.0" text="User name" />
-      <Label layoutX="40.0" layoutY="120.0" prefHeight="17.0" prefWidth="62.0" text="Password" />
+      <Label layoutX="40.0" layoutY="78.0" prefHeight="17.0" prefWidth="104.0" text="Korisničko ime" />
+      <Label layoutX="40.0" layoutY="120.0" prefHeight="17.0" prefWidth="62.0" text="Lozinka" />
       <TextField layoutX="136.0" layoutY="74.0" prefHeight="25.0" prefWidth="205.0" />
       <PasswordField layoutX="136.0" layoutY="116.0" prefHeight="25.0" prefWidth="205.0" />
-      <Button layoutX="34.0" layoutY="179.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Exit" />
-      <Button layoutX="232.0" layoutY="182.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Login" />
+      <Button layoutX="34.0" layoutY="179.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Izlaz" />
+      <Button layoutX="232.0" layoutY="182.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Prijava" />
    </children>
 </AnchorPane>

@@ -1,8 +1,8 @@
-package dao;
+package DAO;
+
+import DTO.TipDodatneOpremeDTO;
 
 import java.util.List;
-
-import dto.TipDodatneOpremeDTO;
 
 public interface TipDodatneOpremeDAO {
 

@@ -1,8 +1,8 @@
-package dao;
+package DAO;
+
+import DTO.DodatnaOpremaDTO;
 
 import java.util.List;
-
-import dto.DodatnaOpremaDTO;
 
 public interface DodatnaOpremaDAO {
 

@@ -1,22 +1,16 @@
-package dao;
+package DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import DTO.AdminDTO;
+
 import java.util.List;
 
-import dbu.ConnectionPool;
-import dbu.DBUtilities;
-import dto.AdminDTO;
-
 public interface AdminDAO {
-	
-	
+
 	/**
 	 * 
 	 * @param admin
 	 */
-	public boolean insert(AdminDTO admin) ;
+	boolean insert(AdminDTO admin);
 
 	/**
 	 * 

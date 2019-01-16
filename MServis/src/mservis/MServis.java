@@ -24,10 +24,14 @@ public class MServis extends Application {
         
         Scene scene = new Scene(root);
         
+        stage.setTitle("Prijavljivanje");
         stage.setScene(scene);
         stage.show();
-    }
+        //stage.hide();
+        
 
+    }
+    
     /**
      * @param args the command line arguments
      */

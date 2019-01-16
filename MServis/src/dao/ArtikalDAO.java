@@ -1,8 +1,8 @@
-package dao;
+package DAO;
+
+import DTO.ArtikalDTO;
 
 import java.util.List;
-
-import dto.ArtikalDTO;
 
 public interface ArtikalDAO {
 
@@ -16,7 +16,7 @@ public interface ArtikalDAO {
 	 * 
 	 * @param artikal
 	 */
-	boolean update(ArtikalDTO artikal);
+	boolean update(ArtikalDAO artikal);
 
 	/**
 	 * 

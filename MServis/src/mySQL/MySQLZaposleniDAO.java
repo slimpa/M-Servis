@@ -1,7 +1,7 @@
-package mySQL;
+package MySQL;
 
-import dao.ZaposleniDAO;
-import dto.ZaposleniDTO;
+import DAO.ZaposleniDAO;
+import DTO.ZaposleniDTO;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package mySQL;
+package MySQL;
 
-import dao.IzvjestajDAO;
-import dto.IzvjestajDTO;
+import DAO.IzvjestajDAO;
+import DTO.IzvjestajDTO;
 
 import java.util.List;
 

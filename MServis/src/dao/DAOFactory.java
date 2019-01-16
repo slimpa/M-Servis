@@ -1,6 +1,6 @@
-package dao;
+package DAO;
 
-import dto.UgradjeniRezervniDioDTO;
+import DTO.UgradjeniRezervniDioDTO;
 
 public abstract class DAOFactory {
 

@@ -1,7 +1,7 @@
-package mySQL;
+package MySQL;
 
-import dao.RezervniDioDAO;
-import dto.RezervniDioDTO;
+import DAO.RezervniDioDAO;
+import DTO.RezervniDioDTO;
 
 import java.util.List;
 

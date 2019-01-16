@@ -1,8 +1,8 @@
-package dao;
+package DAO;
+
+import DTO.ZaposleniDTO;
 
 import java.util.List;
-
-import dto.ZaposleniDTO;
 
 public interface ZaposleniDAO {
 

@@ -1,7 +1,7 @@
-package mySQL;
+package MySQL;
 
-import dao.ServisTelefonaHasIzvjestajDAO;
-import dto.ServisTelefonaHasIzvjestajDTO;
+import DAO.ServisTelefonaHasIzvjestajDAO;
+import DTO.ServisTelefonaHasIzvjestajDTO;
 
 import java.util.List;
 

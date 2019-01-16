@@ -1,7 +1,7 @@
-package mySQL;
+package MySQL;
 
-import dao.KlijentDAO;
-import dto.KlijentDTO;
+import DAO.KlijentDAO;
+import DTO.KlijentDTO;
 
 import java.util.List;
 

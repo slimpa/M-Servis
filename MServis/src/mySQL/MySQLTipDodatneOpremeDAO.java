@@ -1,7 +1,7 @@
-package mySQL;
+package MySQL;
 
-import dao.TipDodatneOpremeDAO;
-import dto.TipDodatneOpremeDTO;
+import DAO.TipDodatneOpremeDAO;
+import DTO.TipDodatneOpremeDTO;
 
 import java.util.List;
 
