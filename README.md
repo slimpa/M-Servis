@@ -13,3 +13,6 @@ git commit -m "poruka"
 git push origin master
 
 git pull
+
+
+nemojte pusati sve fajlove zbog konflikta
