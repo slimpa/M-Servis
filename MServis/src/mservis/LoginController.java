@@ -17,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -32,14 +34,18 @@ public class LoginController implements Initializable {
     
     @FXML
     private AnchorPane loginPane;
-    
+    @FXML
+    private TextField usernameTF;
+    @FXML
+    private PasswordField passwordPF;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
     
     public void btnPrijavaHandler(ActionEvent e){
-        
+        String username = usernameTF.getText();
+
         Stage stage = new Stage();
         Parent root2;
         try {

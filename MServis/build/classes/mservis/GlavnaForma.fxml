@@ -14,6 +14,7 @@
             <Button layoutX="56.0" layoutY="200.0" mnemonicParsing="false" onAction="#btnRadSaArtiklimaHandler" prefHeight="25.0" prefWidth="130.0" text="Rad sa artiklima" />
             <Button layoutX="56.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnRadSaRacunimaHandler" prefHeight="25.0" prefWidth="130.0" text="Račun" />
             <Button fx:id="odjavaButton" layoutX="274.0" layoutY="329.0" mnemonicParsing="false" onAction="#odjavaButtonHandler" prefHeight="25.0" prefWidth="103.0" text="Odjava" />
+            <Button fx:id="servisButton" layoutX="56.0" layoutY="304.0" mnemonicParsing="false" onAction="#btnServisHandler" prefHeight="25.0" prefWidth="130.0" text="Servis" />
          </children>
       </Pane>
    </children>

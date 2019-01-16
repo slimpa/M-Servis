@@ -41,6 +41,8 @@ public class GlavnaFormaController implements Initializable {
     private Button racuniButton;
     @FXML
     private Button odjavaButton;
+    @FXML
+    private Button servisButton;
     
      public void btnRadSaDobavljacimaHandler(ActionEvent e){
         
@@ -53,7 +55,7 @@ public class GlavnaFormaController implements Initializable {
             
             stage.setTitle("Dobavljaci");
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,7 +73,7 @@ public class GlavnaFormaController implements Initializable {
             
             stage.setTitle("Izvjestaji");
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -90,7 +92,7 @@ public class GlavnaFormaController implements Initializable {
             
             stage.setTitle("Narudzbe");
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -108,7 +110,7 @@ public class GlavnaFormaController implements Initializable {
             
             stage.setTitle("Manipulacija artiklima");
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -126,7 +128,7 @@ public class GlavnaFormaController implements Initializable {
             
             stage.setTitle("Racunima");
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -134,6 +136,24 @@ public class GlavnaFormaController implements Initializable {
         
     }
     
+    public void btnServisHandler(ActionEvent e){
+        
+        Stage stage = new Stage();
+        Parent root2;
+        try {
+            root2 = FXMLLoader.load(getClass().getResource("Servis.fxml"));
+
+            Scene scene = new Scene(root2);
+            
+            stage.setTitle("Servis");
+            stage.setScene(scene);
+            stage.showAndWait();
+         } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
     public void odjavaButtonHandler(ActionEvent e){
         Stage stage = new Stage();
         Parent root2;
