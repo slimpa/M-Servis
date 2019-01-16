@@ -23,6 +23,7 @@ Fajlovi u trenutnom folderu ce se promjeniti, tj.prikazace samo fajlove koji se 
 git add . je za sve, za odredjene fajlove njihova imena
 
 git commit -m "poruka"
+
 git push origin baza
 
 Za povratak na master granu izvrsiti komandu 
