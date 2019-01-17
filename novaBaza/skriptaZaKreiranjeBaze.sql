@@ -116,6 +116,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `m:servis`.`Proizvodjac` (
   `IdProizvodjac` INT NOT NULL AUTO_INCREMENT,
   `Naziv` VARCHAR(255) NOT NULL,
+  `Obrisano` TINYINT NOT NULL,
   PRIMARY KEY (`IdProizvodjac`),
   UNIQUE INDEX `Naziv_UNIQUE` (`Naziv` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -190,6 +191,7 @@ CREATE TABLE IF NOT EXISTS `m:servis`.`Telefon` (
   `IdModeTelefona` INT NOT NULL,
   `SerijskiBroj` VARCHAR(255) NOT NULL,
   `Boja` VARCHAR(255) NOT NULL,
+  `Obrisano` TINYINT NOT NULL,
   PRIMARY KEY (`IdModeTelefona`, `SerijskiBroj`),
   CONSTRAINT `fk_Telefon_ModelTelefona1`
     FOREIGN KEY (`IdModeTelefona`)
@@ -227,6 +229,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `m:servis`.`TipDodatneOpreme` (
   `IdTipDodatneOpreme` INT NOT NULL AUTO_INCREMENT,
   `TipOpreme` VARCHAR(255) NOT NULL,
+  `Obrisano` TINYINT NOT NULL,
   PRIMARY KEY (`IdTipDodatneOpreme`))
 ENGINE = InnoDB;
 
@@ -317,6 +320,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `m:servis`.`StanjeTelefona` (
   `IdStanjeTelefona` INT NOT NULL AUTO_INCREMENT,
   `Stanje` VARCHAR(255) NOT NULL,
+  `Obrisano` TINYINT NOT NULL,
   PRIMARY KEY (`IdStanjeTelefona`))
 ENGINE = InnoDB;
 
@@ -328,6 +332,7 @@ CREATE TABLE IF NOT EXISTS `m:servis`.`CijenovnikUsluga` (
   `IdCijenovnikUsluga` INT NOT NULL AUTO_INCREMENT,
   `Naziv` VARCHAR(255) NOT NULL,
   `Cijena` DECIMAL(10,2) NOT NULL,
+  `Obrisano` TINYINT NOT NULL,
   PRIMARY KEY (`IdCijenovnikUsluga`))
 ENGINE = InnoDB;
 

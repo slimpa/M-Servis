@@ -1,45 +1,45 @@
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('Samsung');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('Nokia');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('Alcatel');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('Apple');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('Huawei');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('Xiaomi');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('HTC');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('Sony');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('LG');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('ZTE');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('Motorola');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('Lenovo');
-INSERT INTO `m:servis`.`proizvodjac` (`Naziv`) VALUES ('Microsoft');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('Samsung','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('Nokia','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('Alcatel','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('Apple','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('Huawei','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('Xiaomi','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('HTC','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('Sony','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('LG','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('ZTE','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('Motorola','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('Lenovo','0');
+INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES ('Microsoft','0');
 
 
 INSERT INTO `m:servis`.`dobavljac` (`Naziv`, `Adresa`, `Telefon`, `Email`, `Obrisano`) VALUES ('Mobis', 'Vuka Karadžića 23 Banja Luka', '051 333 111', 'mobis@mobile.com', '0');
 INSERT INTO `m:servis`.`dobavljac` (`Naziv`, `Adresa`, `Telefon`, `Email`, `Obrisano`) VALUES ('Beoecotle', 'Omladinska ulica bb Banja Luka', '051 241 222', 'beo@mail.com', '0');
 INSERT INTO `m:servis`.`dobavljac` (`Naziv`, `Adresa`, `Telefon`, `Email`, `Obrisano`) VALUES ('MD Electronics', 'Aleja Svetog Save 1', '065 222 333 ', 'md@electronics.org', '0');
 
-INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`) VALUES ('Maska');
-INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`) VALUES ('Punjač');
-INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`) VALUES ('Slušalice');
-INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`) VALUES ('Kabal');
-INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`) VALUES ('USB');
-INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`) VALUES ('Powerbank');
-INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`) VALUES ('Ostalo');
-INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`) VALUES ('Zvučnik');
-INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`) VALUES ('Folija');
+INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`,`Obrisano`) VALUES ('Maska','0');
+INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`,`Obrisano`) VALUES ('Punjač','0');
+INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`,`Obrisano`) VALUES ('Slušalice','0');
+INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`,`Obrisano`) VALUES ('Kabal','0');
+INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`,`Obrisano`) VALUES ('USB','0');
+INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`,`Obrisano`) VALUES ('Powerbank','0');
+INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`,`Obrisano`) VALUES ('Ostalo','0');
+INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`,`Obrisano`) VALUES ('Zvučnik','0');
+INSERT INTO `m:servis`.`tipdodatneopreme` (`TipOpreme`,`Obrisano`) VALUES ('Folija','0');
 
-INSERT INTO `m:servis`.`stanjetelefona` (`Stanje`) VALUES ('Pokvaren');
-INSERT INTO `m:servis`.`stanjetelefona` (`Stanje`) VALUES ('Na servisu');
-INSERT INTO `m:servis`.`stanjetelefona` (`Stanje`) VALUES ('Popravljen');
-INSERT INTO `m:servis`.`stanjetelefona` (`Stanje`) VALUES ('Nemoguće popraviti');
+INSERT INTO `m:servis`.`stanjetelefona` (`Stanje`,`Obrisano`) VALUES ('Pokvaren','0');
+INSERT INTO `m:servis`.`stanjetelefona` (`Stanje`,`Obrisano`) VALUES ('Na servisu','0');
+INSERT INTO `m:servis`.`stanjetelefona` (`Stanje`,`Obrisano`) VALUES ('Popravljen','0');
+INSERT INTO `m:servis`.`stanjetelefona` (`Stanje`,`Obrisano`) VALUES ('Nemoguće popraviti','0');
 
-INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`) VALUES ('Zamjena ekrana', '50');
-INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`) VALUES ('Dekodiranje telefona', '20');
-INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`) VALUES ('Instalacija softvera', '30');
-INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`) VALUES ('Zamjena zvučnika', '44.5');
-INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`) VALUES ('Zamjena baterija', '10.5');
-INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`) VALUES ('Reinstalacija OS-a', '30');
-INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`) VALUES ('Popravak tipki', '20.5');
-INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`) VALUES ('Zamjena stakla na ekranu', '10.99');
+INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Zamjena ekrana', '50','0');
+INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Dekodiranje telefona', '20','0');
+INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Instalacija softvera', '30','0');
+INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Zamjena zvučnika', '44.5','0');
+INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Zamjena baterija', '10.5','0');
+INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Reinstalacija OS-a', '30','0');
+INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Popravak tipki', '20.5','0');
+INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Zamjena stakla na ekranu', '10.99','0');
 
 
 INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Telefon Samsung S9+', '1', '111000', '5', '0');
