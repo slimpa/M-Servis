@@ -87,8 +87,7 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	public ProizvodjacDAO getProizvodjacDAO() {
-		// TODO - implement MySQLDAOFactory.getProizvodjacDAO
-		throw new UnsupportedOperationException();
+		return new MySQLProizvodjacDAO();
 	}
 
 	public ModelTelefonaDAO getModelTelefonaDAO() {

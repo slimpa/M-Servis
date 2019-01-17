@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nikola/Desktop/M-Servis/MServis/src/dbu/ConnectionPool.properties</file>
-            <file>file:/C:/Users/Nikola/Desktop/M-Servis/MServis/src/mySQL/MySQLOsobaDAO.java</file>
-            <file>file:/C:/Users/Nikola/Desktop/M-Servis/MServis/src/mservis/MServis.java</file>
-            <file>file:/C:/Users/Nikola/Desktop/M-Servis/MServis/src/dbu/ConnectionPool.java</file>
-            <file>file:/C:/Users/Nikola/Desktop/M-Servis/MServis/src/mySQL/MySQLDAOFactory.java</file>
-            <file>file:/C:/Users/Nikola/Desktop/M-Servis/MServis/src/dto/KlijentDTO.java</file>
-            <file>file:/C:/Users/Nikola/Desktop/M-Servis/MServis/src/dto/OsobaDTO.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mySQL/MySQLProizvodjacDAO.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/AdminController.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mySQL/MySQLDAOFactory.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/MServis.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/Admin.fxml</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mySQL/MySQLAdminDAO.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/dto/ProizvodjacDTO.java</file>
         </group>
     </open-files>
 </project-private>
