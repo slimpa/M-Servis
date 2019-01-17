@@ -1,8 +1,8 @@
-package DAO;
-
-import DTO.IzvjestajDTO;
+package dao;
 
 import java.util.List;
+
+import dto.IzvjestajDTO;
 
 public interface IzvjestajDAO {
 

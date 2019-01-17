@@ -11,7 +11,7 @@
       <Label layoutX="40.0" layoutY="78.0" prefHeight="17.0" prefWidth="104.0" text="Korisničko ime" />
       <Label layoutX="40.0" layoutY="120.0" prefHeight="17.0" prefWidth="62.0" text="Lozinka" />
       <TextField fx:id="usernameTF" layoutX="136.0" layoutY="74.0" prefHeight="25.0" prefWidth="205.0" />
-      <PasswordField fx:id="passwordTF" layoutX="136.0" layoutY="116.0" prefHeight="25.0" prefWidth="205.0" />
+      <PasswordField fx:id="passwordPF" layoutX="136.0" layoutY="116.0" prefHeight="25.0" prefWidth="205.0" />
       <Button layoutX="34.0" layoutY="179.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Izlaz" />
       <Button fx:id="btnPrijava" layoutX="232.0" layoutY="182.0" mnemonicParsing="false" onAction="#btnPrijavaHandler" prefHeight="25.0" prefWidth="117.0" text="Prijava" />
    </children>

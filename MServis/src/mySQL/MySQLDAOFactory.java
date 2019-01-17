@@ -1,6 +1,6 @@
-package MySQL;
+package mysqldao;
 
-import DAO.*;
+import dao.*;
 
 public class MySQLDAOFactory extends DAOFactory {
 

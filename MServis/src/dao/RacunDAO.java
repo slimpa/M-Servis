@@ -1,8 +1,8 @@
-package DAO;
-
-import DTO.RacunDTO;
+package dao;
 
 import java.util.List;
+
+import dto.RacunDTO;
 
 public interface RacunDAO {
 

@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.ModelTelefonHasRezervniDioDAO;
-import DTO.ModelTelefonaHasRezervniDioDTO;
+import dto.ModelTelefonaHasRezervniDioDTO;
 
 import java.util.List;
+
+import dao.ModelTelefonHasRezervniDioDAO;
 
 public class MySQLModelTelefonHasRezervniDioDAO implements ModelTelefonHasRezervniDioDAO {
 

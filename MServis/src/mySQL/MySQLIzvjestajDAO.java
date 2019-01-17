@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.IzvjestajDAO;
-import DTO.IzvjestajDTO;
+import dto.IzvjestajDTO;
 
 import java.util.List;
+
+import dao.IzvjestajDAO;
 
 public class MySQLIzvjestajDAO implements IzvjestajDAO {
 

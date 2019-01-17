@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.ProizvodjacDAO;
-import DTO.ProizvodjacDTO;
+import dto.ProizvodjacDTO;
 
 import java.util.List;
+
+import dao.ProizvodjacDAO;
 
 public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 

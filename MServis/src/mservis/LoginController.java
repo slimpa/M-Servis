@@ -45,7 +45,8 @@ public class LoginController implements Initializable {
     
     public void btnPrijavaHandler(ActionEvent e){
         String username = usernameTF.getText();
-
+        String password = passwordPF.getText();
+        System.out.println(username + password);
         Stage stage = new Stage();
         Parent root2;
         try {

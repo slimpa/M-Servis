@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.TipDodatneOpremeDAO;
-import DTO.TipDodatneOpremeDTO;
+import dto.TipDodatneOpremeDTO;
 
 import java.util.List;
+
+import dao.TipDodatneOpremeDAO;
 
 public class MySQLTipDodatneOpremeDAO implements TipDodatneOpremeDAO {
 

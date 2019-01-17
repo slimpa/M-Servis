@@ -1,8 +1,8 @@
-package DAO;
-
-import DTO.RacunHasServisTelefonaDTO;
+package dao;
 
 import java.util.List;
+
+import dto.RacunHasServisTelefonaDTO;
 
 public interface RacunHasServisTelefonaDAO {
 

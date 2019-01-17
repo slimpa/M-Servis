@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.ArtikalHasIzvjestajDAO;
-import DTO.ArtikalHasIzvjestajDTO;
+import dto.ArtikalHasIzvjestajDTO;
 
 import java.util.List;
+
+import dao.ArtikalHasIzvjestajDAO;
 
 public class MySQLArtikalHasIzvjestajDAO implements ArtikalHasIzvjestajDAO {
 

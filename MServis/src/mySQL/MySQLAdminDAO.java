@@ -1,9 +1,10 @@
 package MySQL;
 
-import DAO.AdminDAO;
-import DTO.AdminDTO;
+import dto.AdminDTO;
 
 import java.util.List;
+
+import dao.AdminDAO;
 
 public class MySQLAdminDAO implements AdminDAO {
 

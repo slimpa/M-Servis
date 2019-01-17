@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.ServisTelefonaHasIzvjestajDAO;
-import DTO.ServisTelefonaHasIzvjestajDTO;
+import dto.ServisTelefonaHasIzvjestajDTO;
 
 import java.util.List;
+
+import dao.ServisTelefonaHasIzvjestajDAO;
 
 public class MySQLServisTelefonaHasIzvjestajDAO implements ServisTelefonaHasIzvjestajDAO {
 

@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.ServisTelefonaDAO;
-import DTO.ServisTelefonaDTO;
+import dto.ServisTelefonaDTO;
 
 import java.util.List;
+
+import dao.ServisTelefonaDAO;
 
 public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
 

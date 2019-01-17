@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.KlijentDAO;
-import DTO.KlijentDTO;
+import dto.KlijentDTO;
 
 import java.util.List;
+
+import dao.KlijentDAO;
 
 public class MySQLKlijentDAO implements KlijentDAO {
 

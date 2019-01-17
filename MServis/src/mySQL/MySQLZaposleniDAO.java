@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.ZaposleniDAO;
-import DTO.ZaposleniDTO;
+import dto.ZaposleniDTO;
 
 import java.util.List;
+
+import dao.ZaposleniDAO;
 
 public class MySQLZaposleniDAO implements ZaposleniDAO {
 

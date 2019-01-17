@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.RacunHasArtikalDAO;
-import DTO.RacunHasArtikalDTO;
+import dto.RacunHasArtikalDTO;
 
 import java.util.List;
+
+import dao.RacunHasArtikalDAO;
 
 public class MySQLRacunHasArtikalDAO implements RacunHasArtikalDAO {
 

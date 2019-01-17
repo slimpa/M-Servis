@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.StanjeTelefonaDAO;
-import DTO.StanjeTelefonaDTO;
+import dto.StanjeTelefonaDTO;
 
 import java.util.List;
+
+import dao.StanjeTelefonaDAO;
 
 public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
 
@@ -48,9 +49,10 @@ public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public boolean insert(StanjeTelefonaDTO stanjeTelefona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public boolean insert(StanjeTelefonaDTO stanjeTelefona) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

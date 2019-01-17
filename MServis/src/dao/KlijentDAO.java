@@ -1,8 +1,8 @@
-package DAO;
-
-import DTO.KlijentDTO;
+package dao;
 
 import java.util.List;
+
+import dto.KlijentDTO;
 
 public interface KlijentDAO {
 

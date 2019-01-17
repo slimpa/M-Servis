@@ -1,8 +1,8 @@
-package DAO;
-
-import DTO.UgradjeniRezervniDioDTO;
+package dao;
 
 import java.util.List;
+
+import dto.UgradjeniRezervniDioDTO;
 
 public interface UgradjeniRezervniDioDAO {
 

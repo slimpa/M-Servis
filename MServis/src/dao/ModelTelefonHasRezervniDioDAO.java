@@ -1,8 +1,8 @@
-package DAO;
-
-import DTO.ModelTelefonaHasRezervniDioDTO;
+package dao;
 
 import java.util.List;
+
+import dto.ModelTelefonaHasRezervniDioDTO;
 
 public interface ModelTelefonHasRezervniDioDAO {
 

@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.ArtikalDAO;
-import DTO.ArtikalDTO;
+import dto.ArtikalDTO;
 
 import java.util.List;
+
+import dao.ArtikalDAO;
 
 public class MySQLArtikalDAO implements ArtikalDAO {
 
@@ -48,9 +49,10 @@ public class MySQLArtikalDAO implements ArtikalDAO {
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public boolean update(ArtikalDAO artikal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public boolean update(ArtikalDAO artikal) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

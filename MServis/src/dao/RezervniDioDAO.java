@@ -1,8 +1,8 @@
-package DAO;
-
-import DTO.RezervniDioDTO;
+package dao;
 
 import java.util.List;
+
+import dto.RezervniDioDTO;
 
 public interface RezervniDioDAO {
 

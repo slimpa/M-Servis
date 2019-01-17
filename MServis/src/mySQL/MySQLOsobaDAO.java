@@ -1,9 +1,10 @@
-package MySQL;
+package mysqldao;
 
-import DAO.OsobaDAO;
-import DTO.OsobaDTO;
+import dto.OsobaDTO;
 
 import java.util.List;
+
+import dao.OsobaDAO;
 
 public class MySQLOsobaDAO implements OsobaDAO {
 

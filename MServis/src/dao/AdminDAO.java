@@ -1,8 +1,8 @@
-package DAO;
-
-import DTO.AdminDTO;
+package dao;
 
 import java.util.List;
+
+import dto.AdminDTO;
 
 public interface AdminDAO {
 
