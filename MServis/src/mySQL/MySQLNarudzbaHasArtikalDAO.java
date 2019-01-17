@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
 
-import dto.NarudzbaHasArtikalDTO;
+import DAO.NarudzbaHasArtikalDAO;
+import DTO.NarudzbaHasArtikalDTO;
 
 import java.util.List;
-
-import dao.NarudzbaHasArtikalDAO;
 
 public class MySQLNarudzbaHasArtikalDAO implements NarudzbaHasArtikalDAO {
 

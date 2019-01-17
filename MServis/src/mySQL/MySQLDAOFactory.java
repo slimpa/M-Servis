@@ -1,136 +1,127 @@
-package MySQL;
+package MYSQL;
 
-import dao.*;
+import DAO.*;
 
 public class MySQLDAOFactory extends DAOFactory {
 
-	@Override
 	public ArtikalDAO getArtikalDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getArtikalDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public TelefonDAO getTelefonDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getTelefonDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public DodatnaOpremaDAO getDodatnaOpremaDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getDodatnaOpremaDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public RezervniDioDAO getRezervniDioDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getRezervniDioDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public OsobaDAO getOsobaDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getOsobaDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public ZaposleniDAO getZaposleniDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getZaposleniDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public KlijentDAO getKlijentDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getKlijentDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public RacunDAO getRacunDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getRacunDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public IzvjestajDAO getIzvjestajDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getIzvjestajDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public ServisTelefonaDAO getServisTelefonaDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getServisTelefonaDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public AdminDAO getAdminDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getAdminDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public DobavljacDAO getDobavljacDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getDobavljacDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public ProizvodjacDAO getProizvodjacDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getProizvodjacDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public ModelTelefonaDAO getModelTelefonaDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getModelTelefonaDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public UgradjeniRezervniDioDAO getUgradjeniRezervniDioDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getUgradjeniRezervniDioDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public ArtikalHasDobavljacDAO getArtikalHasDobavljacDAO() {
-		return null;
-	}
-
-	@Override
 	public RacunHasArtikalDAO getRacunHasArtikalDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getRacunHasArtikalDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public NarudzbaDAO getNarudzbaDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getNarudzbaDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public NarudzbaHasArtikalDAO getNarudzbaHasArtikalDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getNarudzbaHasArtikalDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public ModelTelefonHasRezervniDioDAO getModelTelefonaHasRezervniDioDAO() {
-		return null;
-	}
-
-	@Override
 	public TipDodatneOpremeDAO getTipDodatneOpremeDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getTipDodatneOpremeDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public CjenovnikUslugaDAO getCjenovnikUslugaDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getCjenovnikUslugaDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public StanjeTelefonaDAO getStanjeTelefonaDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getStanjeTelefonaDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public ArtikalHasIzvjestajDAO getArtikalHasIzvjestaj() {
-		return null;
+	public ServisTelefonaHasCjenovnikUslugaDAO getServisTelefonaHasCjenovnikUslugaDAO() {
+		// TODO - implement MySQLDAOFactory.getServisTelefonaHasCjenovnikUslugaDAO
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public ServisTelefonaHasIzvjestajDAO getServisTelefonaHasIzvjestajDAO() {
-		return null;
-	}
-
-	@Override
 	public RacunHasServisTelefonaDAO getRacunHasServisTelefonaDAO() {
-		return null;
+		// TODO - implement MySQLDAOFactory.getRacunHasServisTelefonaDAO
+		throw new UnsupportedOperationException();
 	}
+
+	public CijenaDAO getCijenaDAO() {
+		// TODO - implement MySQLDAOFactory.getCijenaDAO
+		throw new UnsupportedOperationException();
+	}
+
 }

@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
 
-import dto.StanjeTelefonaDTO;
+import DAO.StanjeTelefonaDAO;
+import DTO.StanjeTelefonaDTO;
 
 import java.util.List;
-
-import dao.StanjeTelefonaDAO;
 
 public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
 
@@ -12,7 +11,7 @@ public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
 	 * 
 	 * @param stanjeTelefona
 	 */
-	public boolean insert(StanjeTelefonaDAO stanjeTelefona) {
+	public boolean insert(StanjeTelefonaDTO stanjeTelefona) {
 		// TODO - implement MySQLStanjeTelefonaDAO.insert
 		throw new UnsupportedOperationException();
 	}
@@ -47,12 +46,6 @@ public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
 	public List<StanjeTelefonaDTO> selectBy(StanjeTelefonaDTO stanjeTelefona) {
 		// TODO - implement MySQLStanjeTelefonaDAO.selectBy
 		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean insert(StanjeTelefonaDTO stanjeTelefona) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

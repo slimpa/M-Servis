@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
 
-import dto.AdminDTO;
+import DAO.AdminDAO;
+import DTO.AdminDTO;
 
 import java.util.List;
-
-import dao.AdminDAO;
 
 public class MySQLAdminDAO implements AdminDAO {
 
@@ -13,7 +12,7 @@ public class MySQLAdminDAO implements AdminDAO {
 	 * @param admin
 	 */
 	public boolean insert(AdminDTO admin) {
-		// TODO - implement MySQLAminDAO.insert
+		// TODO - implement MySQLAdminDAO.insert
 		throw new UnsupportedOperationException();
 	}
 
@@ -22,7 +21,7 @@ public class MySQLAdminDAO implements AdminDAO {
 	 * @param admin
 	 */
 	public boolean update(AdminDTO admin) {
-		// TODO - implement MySQLAminDAO.update
+		// TODO - implement MySQLAdminDAO.update
 		throw new UnsupportedOperationException();
 	}
 
@@ -31,12 +30,12 @@ public class MySQLAdminDAO implements AdminDAO {
 	 * @param admin
 	 */
 	public boolean delete(AdminDTO admin) {
-		// TODO - implement MySQLAminDAO.delete
+		// TODO - implement MySQLAdminDAO.delete
 		throw new UnsupportedOperationException();
 	}
 
 	public List<AdminDTO> selectAll() {
-		// TODO - implement MySQLAminDAO.selectAll
+		// TODO - implement MySQLAdminDAO.selectAll
 		throw new UnsupportedOperationException();
 	}
 
@@ -45,7 +44,7 @@ public class MySQLAdminDAO implements AdminDAO {
 	 * @param admin
 	 */
 	public List<AdminDTO> selectBy(AdminDTO admin) {
-		// TODO - implement MySQLAminDAO.selectBy
+		// TODO - implement MySQLAdminDAO.selectBy
 		throw new UnsupportedOperationException();
 	}
 

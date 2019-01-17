@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
 
-import dto.ModelTelefonaDTO;
+import DAO.ModelTelefonaDAO;
+import DTO.ModelTelefonaDTO;
 
 import java.util.List;
-
-import dao.ModelTelefonaDAO;
 
 public class MySQLModelTelefonDAO implements ModelTelefonaDAO {
 

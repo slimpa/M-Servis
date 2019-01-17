@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
 
-import dto.DobavljacDTO;
+import DAO.DobavljacDAO;
+import DTO.DobavljacDTO;
 
 import java.util.List;
-
-import dao.DobavljacDAO;
 
 public class MySQLDobavljacDAO implements DobavljacDAO {
 

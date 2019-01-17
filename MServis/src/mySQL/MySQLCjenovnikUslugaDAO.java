@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
+
+import DAO.CjenovnikUslugaDAO;
+import DTO.CjenovnikUslugaDTO;
 
 import java.util.List;
-
-import dao.CjenovnikUslugaDAO;
-import dto.CjenovnikUslugaDTO;
-
 
 public class MySQLCjenovnikUslugaDAO implements CjenovnikUslugaDAO {
 

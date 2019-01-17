@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
 
-import dto.DodatnaOpremaDTO;
+import DAO.DodatnaOpremaDAO;
+import DTO.DodatnaOpremaDTO;
 
 import java.util.List;
-
-import dao.DodatnaOpremaDAO;
 
 public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 

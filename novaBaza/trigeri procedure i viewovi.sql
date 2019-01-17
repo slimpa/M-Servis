@@ -1,0 +1,2 @@
+create view svi_zaposleni as
+select osoba.IdOsoba, osoba.Ime, osoba.Prezime, osoba.KorisnickoIme, osoba.Lozinka from osoba inner join zaposleni where osoba.IdOsoba=zaposleni.IdZaposleni and osoba.Obrisano=0;

@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
 
-import dto.UgradjeniRezervniDioDTO;
+import DAO.UgradjeniRezervniDioDAO;
+import DTO.UgradjeniRezervniDioDTO;
 
 import java.util.List;
-
-import dao.UgradjeniRezervniDioDAO;
 
 public class MySQLUgradjeniRezervniDioDAO implements UgradjeniRezervniDioDAO {
 

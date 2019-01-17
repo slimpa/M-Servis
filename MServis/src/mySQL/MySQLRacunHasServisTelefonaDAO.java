@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
 
-import dto.RacunHasServisTelefonaDTO;
+import DAO.RacunHasServisTelefonaDAO;
+import DTO.RacunHasServisTelefonaDTO;
 
 import java.util.List;
-
-import dao.RacunHasServisTelefonaDAO;
 
 public class MySQLRacunHasServisTelefonaDAO implements RacunHasServisTelefonaDAO {
 

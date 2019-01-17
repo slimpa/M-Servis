@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
 
-import dto.ArtikalDTO;
+import DAO.ArtikalDAO;
+import DTO.ArtikalDTO;
 
 import java.util.List;
-
-import dao.ArtikalDAO;
 
 public class MySQLArtikalDAO implements ArtikalDAO {
 
@@ -47,12 +46,6 @@ public class MySQLArtikalDAO implements ArtikalDAO {
 	public List<ArtikalDTO> selectBy(ArtikalDTO artikal) {
 		// TODO - implement MySQLArtikalDAO.selectBy
 		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean update(ArtikalDAO artikal) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

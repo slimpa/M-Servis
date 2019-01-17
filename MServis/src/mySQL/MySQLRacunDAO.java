@@ -1,10 +1,9 @@
-package MySQL;
+package MYSQL;
 
-import dto.RacunDTO;
+import DAO.RacunDAO;
+import DTO.RacunDTO;
 
 import java.util.List;
-
-import dao.RacunDAO;
 
 public class MySQLRacunDAO implements RacunDAO {
 
