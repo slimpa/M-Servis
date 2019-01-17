@@ -9,96 +9,118 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
-    <Tab text="Nalozi zaposlenih">
+    <Tab fx:id="tabZaposleni" text="Nalozi zaposlenih">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="381.0" prefWidth="679.0">
                <children>
-                  <TableView layoutX="15.0" layoutY="20.0" prefHeight="269.0" prefWidth="655.0">
+                  <TableView fx:id="tableZaposleni" layoutX="15.0" layoutY="20.0" prefHeight="269.0" prefWidth="655.0">
                     <columns>
-                      <TableColumn prefWidth="107.0" text="Id zaposlenog" />
-                      <TableColumn prefWidth="137.0" text="Ime" />
-                        <TableColumn prefWidth="137.0" text="Prezime" />
-                        <TableColumn prefWidth="131.0" text="Broj telefona" />
-                        <TableColumn prefWidth="142.0" text="Radno mjesto" />
+                      <TableColumn prefWidth="89.0" text="Id zaposlenog" />
+                        <TableColumn prefWidth="101.0" text="Ime " />
+                        <TableColumn prefWidth="134.0" text="Prezime" />
+                        <TableColumn prefWidth="116.0" text="Korisničko ime" />
+                        <TableColumn prefWidth="103.0" text="Broj telefona" />
+                        <TableColumn prefWidth="111.0" text="Radno mjesto" />
                     </columns>
                   </TableView>
-                  <Button layoutX="15.0" layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Dodaj" />
-                  <Button layoutX="273.0" layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Izmijeni" />
-                  <Button layoutX="551.0" layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Obriši" />
+                  <Button fx:id="btnDodajZaposlenog" layoutX="15.0" layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Dodaj" />
+                  <Button fx:id="btnIzmijeniZaposlenog" layoutX="273.0" layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Izmijeni" />
+                  <Button fx:id="btnObrisiZaposlenog" layoutX="551.0" layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Obriši" />
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="Administratorski nalozi">
+    <Tab fx:id="tabAdmin" text="Administratorski nalozi">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="11.0" layoutY="18.0" prefHeight="273.0" prefWidth="658.0">
+                  <TableView fx:id="tableAdmin" layoutX="11.0" layoutY="18.0" prefHeight="273.0" prefWidth="658.0">
                     <columns>
-                      <TableColumn prefWidth="127.0" text="Id administratora" />
-                      <TableColumn prefWidth="104.0" text="Ime" />
-                        <TableColumn prefWidth="145.0" text="Prezime" />
-                        <TableColumn prefWidth="112.0" text="Broj telefona" />
-                        <TableColumn prefWidth="169.0" text="Naziv firme" />
+                      <TableColumn prefWidth="107.0" text="Id administratora" />
+                      <TableColumn prefWidth="89.0" text="Ime" />
+                        <TableColumn prefWidth="114.0" text="Prezime" />
+                        <TableColumn prefWidth="103.0" text="Broj telefona" />
+                        <TableColumn prefWidth="138.0" text="Naziv firme" />
+                        <TableColumn prefWidth="106.0" text="Korisničko ime" />
                     </columns>
                   </TableView>
-                  <Button layoutX="11.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" text="Dodaj" />
-                  <Button layoutX="276.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Izmijeni" />
-                  <Button layoutX="558.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="Obriši" />
+                  <Button fx:id="btnDodajAdmina" layoutX="11.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" text="Dodaj" />
+                  <Button fx:id="btnIzmijeniAdmina" layoutX="276.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Izmijeni" />
+                  <Button fx:id="btnObrisiAdmina" layoutX="558.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="Obriši" />
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab text="Proizvođač">
+      <Tab fx:id="tabProizvodjac" text="Proizvođač">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="679.0">
                <children>
-                  <TableView layoutX="14.0" layoutY="22.0" prefHeight="302.0" prefWidth="377.0">
+                  <TableView fx:id="tableProizvodjac" layoutX="14.0" layoutY="22.0" prefHeight="302.0" prefWidth="377.0">
                     <columns>
                       <TableColumn prefWidth="107.0" text="Id proizvodjača" />
                       <TableColumn prefWidth="313.0" text="Naziv" />
                     </columns>
                   </TableView>
-                  <Button layoutX="600.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Dodaj" />
-                  <Button layoutX="14.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Izmijeni" />
-                  <Button layoutX="271.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Obriši" />
+                  <Button fx:id="btnDodajProizvodjac" layoutX="600.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Dodaj" />
+                  <Button fx:id="btnIzmijeniProizvodjac" layoutX="14.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Izmijeni" />
+                  <Button fx:id="btnObrisiProizvodjac" layoutX="271.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Obriši" />
                   <Label layoutX="407.0" layoutY="22.0" text="Naziv proizvođača" />
-                  <TextField layoutX="407.0" layoutY="43.0" prefHeight="25.0" prefWidth="253.0" />
-                  <Button layoutX="407.0" layoutY="79.0" mnemonicParsing="false" text="Pretraži" />
+                  <TextField fx:id="tfProizvodjac" layoutX="407.0" layoutY="43.0" prefHeight="25.0" prefWidth="253.0" />
+                  <Button fx:id="btnPretraziProizvodjac" layoutX="407.0" layoutY="79.0" mnemonicParsing="false" text="Pretraži" />
                </children>
             </AnchorPane>
         </content>
       </Tab>
-      <Tab text="Servis">
+      <Tab fx:id="tabServis" text="Servis">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label layoutX="14.0" layoutY="24.0" text="Stanja uređaja " />
-                  <TableView layoutX="14.0" layoutY="126.0" prefHeight="199.0" prefWidth="267.0">
+                  <TableView fx:id="tableStanja" layoutX="14.0" layoutY="126.0" prefHeight="199.0" prefWidth="267.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Id stanja" />
                       <TableColumn prefWidth="191.0" text="Stanje" />
                     </columns>
                   </TableView>
-                  <TextField layoutX="14.0" layoutY="49.0" prefHeight="25.0" prefWidth="267.0" />
-                  <Button layoutX="14.0" layoutY="87.0" mnemonicParsing="false" text="Pretraži" />
-                  <Button layoutX="233.0" layoutY="87.0" mnemonicParsing="false" text="Dodaj" />
-                  <Button layoutX="16.0" layoutY="343.0" mnemonicParsing="false" text="Izmijeni" />
-                  <Button layoutX="231.0" layoutY="343.0" mnemonicParsing="false" text="Obriši" />
+                  <TextField fx:id="tfStanje" layoutX="14.0" layoutY="49.0" prefHeight="25.0" prefWidth="267.0" />
+                  <Button fx:id="btnPretraziStanje" layoutX="14.0" layoutY="87.0" mnemonicParsing="false" text="Pretraži" />
+                  <Button fx:id="btnDodajStanje" layoutX="233.0" layoutY="87.0" mnemonicParsing="false" text="Dodaj" />
+                  <Button fx:id="btnIzmijeniStanja" layoutX="16.0" layoutY="343.0" mnemonicParsing="false" text="Izmijeni" />
+                  <Button fx:id="btnObrisiStanja" layoutX="231.0" layoutY="343.0" mnemonicParsing="false" text="Obriši" />
                   <Label layoutX="340.0" layoutY="24.0" text="Cjenovnik servisa" />
-                  <TextField layoutX="340.0" layoutY="49.0" prefHeight="25.0" prefWidth="331.0" promptText="Usluga" />
-                  <Button layoutX="343.0" layoutY="126.0" mnemonicParsing="false" text="Pretraži" />
-                  <Button layoutX="621.0" layoutY="126.0" mnemonicParsing="false" text="Dodaj" />
-                  <TableView layoutX="340.0" layoutY="161.0" prefHeight="167.0" prefWidth="332.0">
+                  <TextField fx:id="tfUsluga" layoutX="340.0" layoutY="49.0" prefHeight="25.0" prefWidth="331.0" promptText="Usluga" />
+                  <Button fx:id="btnPretraziUsluge" layoutX="343.0" layoutY="126.0" mnemonicParsing="false" text="Pretraži" />
+                  <Button fx:id="btnDodajUslugu" layoutX="621.0" layoutY="126.0" mnemonicParsing="false" text="Dodaj" />
+                  <TableView fx:id="tableUsluga" layoutX="340.0" layoutY="161.0" prefHeight="167.0" prefWidth="332.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Id usluge" />
                       <TableColumn prefWidth="159.0" text="Usluga" />
                         <TableColumn prefWidth="97.0" text="Cijena" />
                     </columns>
                   </TableView>
-                  <Button layoutX="342.0" layoutY="343.0" mnemonicParsing="false" text="Izmijeni" />
-                  <Button layoutX="621.0" layoutY="343.0" mnemonicParsing="false" text="Obriši" />
-                  <TextField layoutX="340.0" layoutY="87.0" prefHeight="25.0" prefWidth="329.0" promptText="Cijena" />
+                  <Button fx:id="btnIzmijeniUsluga" layoutX="342.0" layoutY="343.0" mnemonicParsing="false" text="Izmijeni" />
+                  <Button fx:id="btnObrisiUsluga" layoutX="621.0" layoutY="343.0" mnemonicParsing="false" text="Obriši" />
+                  <TextField fx:id="tfCijena" layoutX="342.0" layoutY="87.0" prefHeight="25.0" prefWidth="329.0" promptText="Cijena" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Dodatna oprema">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="344.0">
+                    <columns>
+                      <TableColumn text="Id tipa" />
+                      <TableColumn minWidth="9.0" prefWidth="263.0" text="Tip dodatne opreme" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="399.0" layoutY="14.0" text="Tip dodatne opreme" />
+                  <TextField layoutX="399.0" layoutY="39.0" prefHeight="25.0" prefWidth="252.0" />
+                  <Button layoutX="399.0" layoutY="79.0" mnemonicParsing="false" text="Pretraži" />
+                  <Button layoutX="603.0" layoutY="79.0" mnemonicParsing="false" text="Dodaj" />
+                  <Button layoutX="399.0" layoutY="288.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Izmijeni" />
+                  <Button layoutX="401.0" layoutY="337.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Obriši" />
                </children>
             </AnchorPane>
         </content>
