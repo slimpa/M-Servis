@@ -28,7 +28,7 @@ git push origin baza
 
 Za povratak na master granu izvrsiti komandu 
 
-git checkout maaste
+git checkout master
 
 
 
