@@ -1,7 +1,7 @@
-package MYSQL;
+package mySQL;
 
-import DAO.RacunDAO;
-import DTO.RacunDTO;
+import dao.RacunDAO;
+import dto.RacunDTO;
 
 import java.util.List;
 

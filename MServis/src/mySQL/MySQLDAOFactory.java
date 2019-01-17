@@ -1,6 +1,30 @@
-package MYSQL;
+package mySQL;
 
-import DAO.*;
+import dao.ProizvodjacDAO;
+import dao.ZaposleniDAO;
+import dao.ServisTelefonaHasCjenovnikUslugaDAO;
+import dao.DAOFactory;
+import dao.DobavljacDAO;
+import dao.NarudzbaHasArtikalDAO;
+import dao.RacunHasArtikalDAO;
+import dao.TipDodatneOpremeDAO;
+import dao.RacunHasServisTelefonaDAO;
+import dao.RezervniDioDAO;
+import dao.KlijentDAO;
+import dao.ModelTelefonaDAO;
+import dao.ServisTelefonaDAO;
+import dao.CjenovnikUslugaDAO;
+import dao.CijenaDAO;
+import dao.OsobaDAO;
+import dao.UgradjeniRezervniDioDAO;
+import dao.StanjeTelefonaDAO;
+import dao.RacunDAO;
+import dao.IzvjestajDAO;
+import dao.NarudzbaDAO;
+import dao.AdminDAO;
+import dao.ArtikalDAO;
+import dao.DodatnaOpremaDAO;
+import dao.TelefonDAO;
 
 public class MySQLDAOFactory extends DAOFactory {
 

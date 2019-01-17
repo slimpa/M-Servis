@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.ProizvodjacDTO;
+import dto.ProizvodjacDTO;
 import java.util.List;
 
 public interface ProizvodjacDAO {

@@ -1,7 +1,7 @@
-package MYSQL;
+package mySQL;
 
-import DAO.RacunHasArtikalDAO;
-import DTO.RacunHasArtikalDTO;
+import dao.RacunHasArtikalDAO;
+import dto.RacunHasArtikalDTO;
 
 import java.util.List;
 

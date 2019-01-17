@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.StanjeTelefonaDTO;
+import dto.StanjeTelefonaDTO;
 import java.util.List;
 
 public interface StanjeTelefonaDAO {

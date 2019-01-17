@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 public abstract class DAOFactory {
 

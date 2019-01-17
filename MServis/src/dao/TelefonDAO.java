@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.TelefonDTO;
+import dto.TelefonDTO;
 
 import java.util.List;
 

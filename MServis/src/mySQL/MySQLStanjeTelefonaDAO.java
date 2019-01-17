@@ -1,7 +1,7 @@
-package MYSQL;
+package mySQL;
 
-import DAO.StanjeTelefonaDAO;
-import DTO.StanjeTelefonaDTO;
+import dao.StanjeTelefonaDAO;
+import dto.StanjeTelefonaDTO;
 
 import java.util.List;
 

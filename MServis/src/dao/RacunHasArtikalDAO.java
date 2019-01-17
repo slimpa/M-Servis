@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.RacunHasArtikalDTO;
+import dto.RacunHasArtikalDTO;
 import java.util.List;
 
 public interface RacunHasArtikalDAO {

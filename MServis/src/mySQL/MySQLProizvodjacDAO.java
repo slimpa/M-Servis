@@ -1,7 +1,7 @@
-package MYSQL;
+package mySQL;
 
-import DAO.ProizvodjacDAO;
-import DTO.ProizvodjacDTO;
+import dao.ProizvodjacDAO;
+import dto.ProizvodjacDTO;
 
 import java.util.List;
 

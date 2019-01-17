@@ -1,7 +1,7 @@
-package MYSQL;
+package mySQL;
 
-import DAO.CjenovnikUslugaDAO;
-import DTO.CjenovnikUslugaDTO;
+import dao.CjenovnikUslugaDAO;
+import dto.CjenovnikUslugaDTO;
 
 import java.util.List;
 

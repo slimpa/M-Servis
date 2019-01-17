@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.CijenaDTO;
+import dto.CijenaDTO;
 import java.util.List;
 
 public interface CijenaDAO {

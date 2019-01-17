@@ -1,4 +1,4 @@
-package DBU;
+package dbu;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

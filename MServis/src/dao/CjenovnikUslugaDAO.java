@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.CjenovnikUslugaDTO;
+import dto.CjenovnikUslugaDTO;
 import java.util.List;
 
 public interface CjenovnikUslugaDAO {

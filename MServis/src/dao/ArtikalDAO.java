@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.ArtikalDTO;
+import dto.ArtikalDTO;
 import java.util.List;
 
 public interface ArtikalDAO {

@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.IzvjestajDTO;
+import dto.IzvjestajDTO;
 
 import java.util.List;
 

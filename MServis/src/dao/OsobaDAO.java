@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.OsobaDTO;
+import dto.OsobaDTO;
 import java.util.List;
 
 public interface OsobaDAO {

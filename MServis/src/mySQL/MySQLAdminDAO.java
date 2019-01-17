@@ -1,7 +1,7 @@
-package MYSQL;
+package mySQL;
 
-import DAO.AdminDAO;
-import DTO.AdminDTO;
+import dao.AdminDAO;
+import dto.AdminDTO;
 
 import java.util.List;
 

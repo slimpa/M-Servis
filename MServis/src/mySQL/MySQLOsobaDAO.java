@@ -1,7 +1,7 @@
-package MYSQL;
+package mySQL;
 
-import DAO.OsobaDAO;
-import DTO.OsobaDTO;
+import dao.OsobaDAO;
+import dto.OsobaDTO;
 
 import java.util.List;
 

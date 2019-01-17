@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.ServisTelefonaDTO;
+import dto.ServisTelefonaDTO;
 import java.util.List;
 
 public interface ServisTelefonaDAO {

@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.NarudzbaDTO;
+import dto.NarudzbaDTO;
 import java.util.List;
 
 public interface NarudzbaDAO {

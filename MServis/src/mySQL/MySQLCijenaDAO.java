@@ -1,7 +1,7 @@
-package MYSQL;
+package mySQL;
 
-import DAO.CijenaDAO;
-import DTO.CijenaDTO;
+import dao.CijenaDAO;
+import dto.CijenaDTO;
 
 import java.util.List;
 

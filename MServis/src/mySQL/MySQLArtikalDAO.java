@@ -1,7 +1,7 @@
-package MYSQL;
+package mySQL;
 
-import DAO.ArtikalDAO;
-import DTO.ArtikalDTO;
+import dao.ArtikalDAO;
+import dto.ArtikalDTO;
 
 import java.util.List;
 

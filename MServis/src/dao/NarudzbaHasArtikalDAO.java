@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import DTO.NarudzbaHasArtikalDTO;
+import dto.NarudzbaHasArtikalDTO;
 
 import java.util.List;
 

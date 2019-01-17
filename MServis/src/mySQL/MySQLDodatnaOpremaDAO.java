@@ -1,7 +1,7 @@
-package MYSQL;
+package mySQL;
 
-import DAO.DodatnaOpremaDAO;
-import DTO.DodatnaOpremaDTO;
+import dao.DodatnaOpremaDAO;
+import dto.DodatnaOpremaDTO;
 
 import java.util.List;
 
