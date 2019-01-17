@@ -49,8 +49,8 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	public OsobaDAO getOsobaDAO() {
-		// TODO - implement MySQLDAOFactory.getOsobaDAO
-		throw new UnsupportedOperationException();
+		return new MySQLOsobaDAO();
+		
 	}
 
 	public ZaposleniDAO getZaposleniDAO() {

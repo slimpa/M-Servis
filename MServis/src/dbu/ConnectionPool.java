@@ -47,7 +47,7 @@ public class ConnectionPool {
 
 	private void readConfiguration() {
 		ResourceBundle bundle = PropertyResourceBundle
-				.getBundle("DBU.ConnectionPool");
+				.getBundle("dbu.ConnectionPool");
 		jdbcURL = bundle.getString("jdbcURL");
 		username = bundle.getString("username");
 		password = bundle.getString("password");
