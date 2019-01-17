@@ -1,4 +1,4 @@
-package mysqldao;
+package MySQL;
 
 import dto.NarudzbaDTO;
 

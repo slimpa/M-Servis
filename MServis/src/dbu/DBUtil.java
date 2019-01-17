@@ -1,79 +1,74 @@
-package DBU;
+package dbu;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBUtil {
 
-	private String jdbcURL;
-	private String username;
-	private String password;
+public class DBUtil{
+	
+	private static DBUtil instance;
 
-	/**
-	 * 
-	 * @param c
-	 * @param sql
-	 * @param retGenKeys
-	 * @param values
-	 */
-	public PreparedStatement prepareStatement(Connection c, String sql, boolean retGenKeys, Object values) {
-		// TODO - implement DBUtil.prepareStatement
-		throw new UnsupportedOperationException();
+	public static DBUtil getInstance() {
+		if (instance == null)
+			instance = new DBUtil();
+		return instance;
 	}
 
-	public Connection getConnection() {
-		// TODO - implement DBUtil.getConnection
-		throw new UnsupportedOperationException();
+	private DBUtil() {
 	}
 
-	/**
-	 * 
-	 * @param connection
-	 */
-	public void close(Connection connection) {
-		// TODO - implement DBUtil.close
-		throw new UnsupportedOperationException();
+	public void close(Connection conn) {
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
-	/**
-	 * 
-	 * @param statement
-	 */
-	public void close(Statement statement) {
-		// TODO - implement DBUtil.close
-		throw new UnsupportedOperationException();
+	public void close(Statement s) {
+		if (s != null) {
+			try {
+				s.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
-	/**
-	 * 
-	 * @param rs
-	 */
 	public void close(ResultSet rs) {
-		// TODO - implement DBUtil.close
-		throw new UnsupportedOperationException();
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
-	/**
-	 * 
-	 * @param rs
-	 * @param statement
-	 * @param connection
-	 */
-	public void close(ResultSet rs, Statement statement, Connection connection) {
-		// TODO - implement DBUtil.close
-		throw new UnsupportedOperationException();
+	public void close(Connection conn, Statement s) {
+		close(s);
+		close(conn);
 	}
 
-	/**
-	 * 
-	 * @param statement
-	 * @param connection
-	 */
-	public void close(Statement statement, Connection connection) {
-		// TODO - implement DBUtil.close
-		throw new UnsupportedOperationException();
+	public void close(Connection conn, ResultSet rs) {
+		close(rs);
+		close(conn);
 	}
 
+	public void close(Statement s, ResultSet rs) {
+		close(rs);
+		close(s);
+	}
+
+	public void close(Connection conn, Statement s, ResultSet rs) {
+		close(rs);
+		close(s);
+		close(conn);
+	}
 }
+
+

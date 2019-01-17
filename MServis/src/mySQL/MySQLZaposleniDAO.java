@@ -1,10 +1,16 @@
-package mysqldao;
+package MySQL;
 
 import dto.ZaposleniDTO;
 
 import java.util.List;
 
 import dao.ZaposleniDAO;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class MySQLZaposleniDAO implements ZaposleniDAO {
 
@@ -39,6 +45,7 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
 		// TODO - implement MySQLZaposleniDAO.selectAll
 		throw new UnsupportedOperationException();
 	}
+
 
 	/**
 	 * 
