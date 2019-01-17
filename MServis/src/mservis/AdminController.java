@@ -10,6 +10,8 @@ import dto.ProizvodjacDTO;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -134,19 +136,33 @@ public class AdminController implements Initializable{
     
     @FXML
     private Button btnObrisiTip;
+    
+    private ProizvodjacDAO proizvodjac = new MySQLDAOFactory().getProizvodjacDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
         ProizvodjacDAO proizvodjac = new MySQLDAOFactory().getProizvodjacDAO();
         List<ProizvodjacDTO> lista = proizvodjac.selectAll();
-        
-        if(lista != null){
-            colIdProizvodjaca.setCellValueFactory(new PropertyValueFactory<ProizvodjacDTO, Integer>("id"));
-            colNazivProizvodjaca.setCellValueFactory(new PropertyValueFactory<ProizvodjacDTO, String>("naziv"));
+        ObservableList<ProizvodjacDTO> listaProizvodjaca = FXCollections.observableArrayList(lista);
+        if(listaProizvodjaca != null){
+            colIdProizvodjaca.setCellValueFactory(new PropertyValueFactory<ProizvodjacDTO, Integer>("IdProizvodjac"));
+            colNazivProizvodjaca.setCellValueFactory(new PropertyValueFactory<ProizvodjacDTO, String>("Naziv"));
             
-            tableProizvodjac.getItems().setAll(lista);
+            tableProizvodjac.setItems(listaProizvodjaca);
         }
     }
     
-   
+    public void btnPretraziProizvodjacaHandler(ActionEvent e){
+       String naziv = tfProizvodjac.getText();
+       
+      List<ProizvodjacDTO> lista = proizvodjac.selectByName(naziv);
+        ObservableList<ProizvodjacDTO> listaProizvodjaca = FXCollections.observableArrayList(lista);
+        if(listaProizvodjaca != null){
+            colIdProizvodjaca.setCellValueFactory(new PropertyValueFactory<ProizvodjacDTO, Integer>("IdProizvodjac"));
+            colNazivProizvodjaca.setCellValueFactory(new PropertyValueFactory<ProizvodjacDTO, String>("Naziv"));
+            
+            tableProizvodjac.setItems(listaProizvodjaca);
+        }
+    }
 }

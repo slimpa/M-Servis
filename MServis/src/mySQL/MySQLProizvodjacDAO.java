@@ -137,7 +137,7 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = SQL_SELECT + " and Naziv like ?";
+		String query = SQL_SELECT + " and Naziv = ?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();

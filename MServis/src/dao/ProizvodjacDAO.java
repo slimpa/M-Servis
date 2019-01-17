@@ -10,5 +10,6 @@ public interface ProizvodjacDAO {
 	boolean delete(ProizvodjacDTO proizvodjac);
 	List<ProizvodjacDTO> selectAll();
 	List<ProizvodjacDTO> selectBy(ProizvodjacDTO proizvodjac);
+        List<ProizvodjacDTO> selectByName(String naziv);
 
 }
