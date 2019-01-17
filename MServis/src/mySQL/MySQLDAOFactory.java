@@ -54,8 +54,7 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	public ZaposleniDAO getZaposleniDAO() {
-		// TODO - implement MySQLDAOFactory.getZaposleniDAO
-		throw new UnsupportedOperationException();
+                return new MySQLZaposleniDAO();
 	}
 
 	public KlijentDAO getKlijentDAO() {
@@ -79,8 +78,7 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	public AdminDAO getAdminDAO() {
-		// TODO - implement MySQLDAOFactory.getAdminDAO
-		throw new UnsupportedOperationException();
+                return new MySQLAdminDAO();
 	}
 
 	public DobavljacDAO getDobavljacDAO() {

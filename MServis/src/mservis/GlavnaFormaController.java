@@ -43,6 +43,8 @@ public class GlavnaFormaController implements Initializable {
     private Button odjavaButton;
     @FXML
     private Button servisButton;
+    @FXML
+    private Label ime;
     
      public void btnRadSaDobavljacimaHandler(ActionEvent e){
         

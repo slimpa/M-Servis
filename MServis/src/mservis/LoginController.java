@@ -5,8 +5,13 @@
  */
 package mservis;
 
+import dao.AdminDAO;
+import dao.ZaposleniDAO;
+import dto.AdminDTO;
+import dto.ZaposleniDTO;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import mySQL.MySQLDAOFactory;
 
 /**
  *
@@ -44,9 +50,25 @@ public class LoginController implements Initializable {
     }    
     
     public void btnPrijavaHandler(ActionEvent e){
-        String username = usernameTF.getText();
-        String password = passwordPF.getText();
-        System.out.println(username + password);
+        boolean adminPrijava=false;
+        boolean zaposleniPrijava=false;
+        String korisnickoIme = usernameTF.getText();
+        String lozinka = passwordPF.getText();
+        
+        ZaposleniDAO zaposleniDao=new MySQLDAOFactory().getZaposleniDAO();
+        ZaposleniDTO zaposleni=zaposleniDao.selectZaposleni(new ZaposleniDTO(korisnickoIme,lozinka,null));
+        if(zaposleni!=null){
+             zaposleniPrijava=true;
+        }
+        
+        if(!zaposleniPrijava){
+        AdminDAO adminDao=new MySQLDAOFactory().getAdminDAO();
+        AdminDTO admin=adminDao.selectAdmin(new AdminDTO(korisnickoIme,lozinka,null));
+        if(admin!=null){
+            adminPrijava=true;
+        }
+        }
+        if(zaposleniPrijava){
         Stage stage = new Stage();
         Parent root2;
         try {
@@ -60,8 +82,25 @@ public class LoginController implements Initializable {
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         ((Stage) loginPane.getScene().getWindow()).close();
+        }
+       else if(adminPrijava){
+        Stage stage = new Stage();
+        Parent root2;
+        try {
+            root2 = FXMLLoader.load(getClass().getResource("Admin.fxml"));
+            Scene scene = new Scene(root2);
+            stage.setTitle("Admin forma");
+            stage.setScene(scene);
+            stage.show();
+         } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ((Stage) loginPane.getScene().getWindow()).close();  
+         }
+        else{
+            System.out.println("Pogresno ime ili sifra");
+        }
     }
    
 

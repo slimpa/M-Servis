@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="37.0" layoutY="36.0" text="Naziv" />
+            <Label layoutX="37.0" layoutY="117.0" text="Proizvođač" />
+            <Label layoutX="37.0" layoutY="200.0" text="Bar code" />
+            <Label layoutX="37.0" layoutY="152.0" text="Model" />
+            <TextField layoutX="118.0" layoutY="32.0" />
+            <Label layoutX="41.0" layoutY="81.0" text="Tip" />
+            <Label layoutX="38.0" layoutY="233.0" text="Boja" />
+            <Label layoutX="38.0" layoutY="269.0" text="Količina" />
+            <Label layoutX="38.0" layoutY="302.0" text="Cijena" />
+            <ComboBox layoutX="117.0" layoutY="77.0" prefWidth="150.0" />
+            <ComboBox layoutX="117.0" layoutY="122.0" prefWidth="150.0" />
+            <ComboBox layoutX="117.0" layoutY="157.0" prefWidth="150.0" />
+            <TextField layoutX="118.0" layoutY="196.0" />
+            <TextField layoutX="118.0" layoutY="265.0" />
+            <TextField layoutX="118.0" layoutY="307.0" />
+            <ComboBox layoutX="117.0" layoutY="229.0" prefWidth="150.0" />
+            <Button layoutX="338.0" layoutY="346.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Sačuvaj" />
+            <Button layoutX="477.0" layoutY="346.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Izađi" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

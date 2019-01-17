@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
@@ -15,6 +16,7 @@
             <Button layoutX="56.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnRadSaRacunimaHandler" prefHeight="25.0" prefWidth="130.0" text="Račun" />
             <Button fx:id="odjavaButton" layoutX="274.0" layoutY="329.0" mnemonicParsing="false" onAction="#odjavaButtonHandler" prefHeight="25.0" prefWidth="103.0" text="Odjava" />
             <Button fx:id="servisButton" layoutX="56.0" layoutY="304.0" mnemonicParsing="false" onAction="#btnServisHandler" prefHeight="25.0" prefWidth="130.0" text="Servis" />
+            <Label fx:id="ime" layoutX="286.0" layoutY="110.0" prefHeight="17.0" prefWidth="130.0" text="Ovdje ce biti ime" />
          </children>
       </Pane>
    </children>

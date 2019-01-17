@@ -5,17 +5,12 @@
  */
 package mservis;
 
-import dao.*;
-import dto.OsobaDTO;
-import java.util.ArrayList;
-import java.util.List;
-import mySQL.*;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import mySQL.MySQLOsobaDAO;
 
 /**
  *
@@ -42,14 +37,7 @@ public class MServis extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       // launch(args);
-       System.out.print("AAAA");
-        OsobaDAO osoba=new MySQLDAOFactory().getOsobaDAO();
-        List<OsobaDTO> lista=osoba.selectAll();
-        for(OsobaDTO o:lista){
-            System.out.println(o.idOsoba+" "+o.Ime);
-                    
-        }
+       launch(args);
     }
     
 }

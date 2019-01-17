@@ -10,5 +10,6 @@ public interface ZaposleniDAO {
 	boolean delete(ZaposleniDTO zaposleni);
 	List<ZaposleniDTO> selectAll();
 	List<ZaposleniDTO> selectBy(ZaposleniDTO zaposleni);
+        ZaposleniDTO selectZaposleni(ZaposleniDTO admin);
 
 }

@@ -56,7 +56,7 @@ public class MySQLOsobaDAO implements OsobaDAO {
 			}
 			else{
 				while(rs.next()){
-					retVal.add(new OsobaDTO(rs.getInt("IdOsoba"),rs.getString("Ime")));
+					//retVal.add(new OsobaDTO(rs.getInt("IdOsoba"),rs.getString("Ime")));
 				}
 			}
 		}catch (SQLException e) {

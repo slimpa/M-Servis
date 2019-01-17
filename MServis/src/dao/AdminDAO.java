@@ -10,5 +10,7 @@ public interface AdminDAO {
 	boolean delete(AdminDTO admin);
 	List<AdminDTO> selectAll();
 	List<AdminDTO> selectBy(AdminDTO admin);
+        AdminDTO selectAdmin(AdminDTO admin);
+        
 
 }
