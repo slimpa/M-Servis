@@ -175,7 +175,7 @@ public class GlavnaFormaController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        ime.setText(LoginController.getKorisnickoIme());
     }    
 
 }
