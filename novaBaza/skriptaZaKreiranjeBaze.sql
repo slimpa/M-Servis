@@ -169,7 +169,6 @@ CREATE TABLE IF NOT EXISTS `m:servis`.`ModelTelefona` (
   `NazivModela` VARCHAR(255) NOT NULL,
   `Slika` VARCHAR(255) NULL,
   `Specifikacija` VARCHAR(255) NOT NULL,
-  `BarKod` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`IdModelTelefona`),
   INDEX `fk_ModelTelefona_Artikal1_idx` (`IdModelTelefona` ASC) VISIBLE,
   CONSTRAINT `fk_ModelTelefona_Artikal1`
@@ -202,7 +201,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `m:servis`.`RezervniDio` (
   `IdRezervniDio` INT NOT NULL,
   `Opis` VARCHAR(255) NOT NULL,
-  `IdModelTelefona` INT NOT NULL,
+  `IdModelTelefona` INT NULL,
   PRIMARY KEY (`IdRezervniDio`),
   INDEX `fk_RezervniDio_ModelTelefona1_idx` (`IdModelTelefona` ASC) VISIBLE,
   CONSTRAINT `fk_RezervniDio_Artikal1`
@@ -233,9 +232,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `m:servis`.`DodatnaOprema` (
   `IdDodatnaOprema` INT NOT NULL,
-  `Boja` VARCHAR(255) NOT NULL,
+  `Boja` VARCHAR(255) NULL,
   `IdTipDodatneOpreme` INT NOT NULL,
-  `IdModelTelefona` INT NOT NULL,
+  `IdModelTelefona` INT NULL,
   PRIMARY KEY (`IdDodatnaOprema`),
   INDEX `fk_DodatnaOprema_TipDodatneOpreme1_idx` (`IdTipDodatneOpreme` ASC) VISIBLE,
   INDEX `fk_DodatnaOprema_ModelTelefona1_idx` (`IdModelTelefona` ASC) VISIBLE,
@@ -324,7 +323,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `m:servis`.`CijenovnikUsluga` (
   `IdCijenovnikUsluga` INT NOT NULL AUTO_INCREMENT,
   `Naziv` VARCHAR(255) NOT NULL,
-  `Kolicina` DECIMAL(10,2) NOT NULL,
+  `Cijena` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`IdCijenovnikUsluga`))
 ENGINE = InnoDB;
 
