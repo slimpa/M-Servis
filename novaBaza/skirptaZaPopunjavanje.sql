@@ -49,14 +49,14 @@ INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`
 INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Displej za HTC Desire 5', '7', '000000', '3', '0');
 
 
+INSERT INTO `m:servis`.`osoba` (`Ime`, `Prezime`, `BrojTelefona`, `Obrisano`) VALUES ('AdminIme', 'AdminPrezime', '111 111', '0');
+INSERT INTO `m:servis`.`osoba` (`Ime`, `Prezime`, `BrojTelefona`, `Obrisano`) VALUES ('ZaposleniIme', 'ZaposleniPrezime', '222 222', '0');
+INSERT INTO `m:servis`.`admin` (`IdAdmin`, `NazivFirme`, `KorisnickoIme`, `Lozinka`) VALUES ('1', 'ETF BL', 'admin', 'admin');
+INSERT INTO `m:servis`.`zaposleni` (`IdZaposleni`, `RadnoMjesto`, `KorisnickoIme`, `Lozinka`) VALUES ('2', 'Trgovac/Serviser', 'student', 'student');
 
 
 
-#ovde prvo insertujem u osobu pa onda na osnovu dobijenog autoincrement ID unesem u admin i zaposleni, tako da ne mora da radi i kod vas,morate da 
-# vidite koji id je uzet
-INSERT INTO `m:servis`.`osoba` (`Ime`, `Prezime`, `KorisnickoIme`, `Lozinka`, `BrojTelefona`, `Obrisano`) VALUES ('Test', 'Test', 'student', 'student', '111 111', '0');
-INSERT INTO `m:servis`.`osoba` (`Ime`, `Prezime`, `KorisnickoIme`, `Lozinka`, `BrojTelefona`, `Obrisano`) VALUES ('Test2', 'Test2', 'admin', 'admin', '222 222', '0');
-INSERT INTO `m:servis`.`zaposleni` (`IdZaposleni`, `RadnoMjesto`) VALUES ('1', 'Serviser/Trgovac');
-INSERT INTO `m:servis`.`admin` (`IdAdmin`, `NazivFirme`) VALUES ('2', 'ETF BL');
+
+
 
 

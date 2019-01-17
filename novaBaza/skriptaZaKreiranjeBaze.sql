@@ -21,8 +21,6 @@ CREATE TABLE IF NOT EXISTS `m:servis`.`Osoba` (
   `IdOsoba` INT NOT NULL AUTO_INCREMENT,
   `Ime` VARCHAR(255) NOT NULL,
   `Prezime` VARCHAR(255) NOT NULL,
-  `KorisnickoIme` VARCHAR(255) NOT NULL,
-  `Lozinka` VARCHAR(255) NOT NULL,
   `BrojTelefona` VARCHAR(255) NULL,
   `Obrisano` TINYINT NOT NULL,
   PRIMARY KEY (`IdOsoba`))
@@ -35,7 +33,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `m:servis`.`Admin` (
   `IdAdmin` INT NOT NULL,
   `NazivFirme` VARCHAR(255) NOT NULL,
+  `KorisnickoIme` VARCHAR(255) NOT NULL,
+  `Lozinka` VARCHAR(600) NOT NULL,
   PRIMARY KEY (`IdAdmin`),
+  UNIQUE INDEX `KorisnickoIme_UNIQUE` (`KorisnickoIme` ASC) VISIBLE,
   CONSTRAINT `fk_Admin_Osoba`
     FOREIGN KEY (`IdAdmin`)
     REFERENCES `m:servis`.`Osoba` (`IdOsoba`)
@@ -79,7 +80,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `m:servis`.`Zaposleni` (
   `IdZaposleni` INT NOT NULL,
   `RadnoMjesto` VARCHAR(255) NOT NULL,
+  `KorisnickoIme` VARCHAR(255) NOT NULL,
+  `Lozinka` VARCHAR(600) NOT NULL,
   PRIMARY KEY (`IdZaposleni`),
+  UNIQUE INDEX `KorisnickoIme_UNIQUE` (`KorisnickoIme` ASC) VISIBLE,
   CONSTRAINT `fk_Zaposleni_Osoba1`
     FOREIGN KEY (`IdZaposleni`)
     REFERENCES `m:servis`.`Osoba` (`IdOsoba`)
