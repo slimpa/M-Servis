@@ -31,24 +31,21 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 		
 		try {
                     
-                    if(this.selectByName(proizvodjac.getNaziv()) == null){
-                        System.out.println("novi");
+                    if(this.selectByName(proizvodjac.getNaziv()).isEmpty() && this.selectIfRemoved(proizvodjac.getNaziv()).isEmpty()){
+                       
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(SQL_INSERT);
 			ps.setString(1, proizvodjac.getNaziv());
                         ps.setInt(2, 0);
 			returnValue = ps.executeUpdate() == 1;
-                    } else{
-                  System.out.println("postojeci");
+                    } else if(!this.selectIfRemoved(proizvodjac.getNaziv()).isEmpty()){
                         conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(SQL_UPDATE + " Obrisano = ? where Naziv = ? and Obrisano = 1");
-                        ps.setInt(1, 0);
-                        ps.setString(2, proizvodjac.getNaziv());
-                        ps.setInt(3, 1);
+			ps = conn.prepareStatement(SQL_UPDATE + " Obrisano = 0 where Naziv = ?");
+                        ps.setString(1, proizvodjac.getNaziv());
 			returnValue = ps.executeUpdate() == 1;
                     }
 		} catch(SQLException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
                         return false;
 		} finally {
 			ConnectionPool.getInstance().checkIn(conn);
@@ -174,6 +171,36 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 		
 		return proizvodjaci;
 	}
+
+   
+    public List<ProizvodjacDTO> selectIfRemoved(String naziv) {
+        List<ProizvodjacDTO> proizvodjaci = new ArrayList<ProizvodjacDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "select * from proizvodjac where Obrisano = 1 and Naziv = ?";
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, naziv);
+			rs = ps.executeQuery();
+			
+			if(rs == null) return null;
+			else {
+				while(rs.next()) {
+					proizvodjaci.add(new ProizvodjacDTO(rs.getInt("IdProizvodjac"), rs.getString("Naziv")));
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+		
+		return proizvodjaci;
+    }
 
     @Override
     public List<ProizvodjacDTO> selectBy(ProizvodjacDTO proizvodjac) {

@@ -156,7 +156,7 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         popuniTabeluProizvodjaca();
-        tabelaProizvodjacaClickEvent();
+        tabelaProizvodjacaClick();
         popuniTabeluOpreme();
         tabelaDodatnaOpremaClick();
     }
@@ -179,16 +179,15 @@ public class AdminController implements Initializable {
     }
 
     public void btnDodajProizvodjacaHandler(ActionEvent e) {
-        String naziv = tfProizvodjac.getText();
+         String naziv = tfProizvodjac.getText();
 
         if (proizvodjacDao.insert(new ProizvodjacDTO(naziv))) {
-            System.out.println("Dodatno");
+            System.out.println("Dodato");
         } else {
             //ex.printStackTrace();
-          System.out.println("Greška");
+            System.out.println("Greska");
         }
         popuniTabeluProizvodjaca();
-        
         
     }
 
@@ -225,7 +224,7 @@ public class AdminController implements Initializable {
         }
     }
 
-    private TableRow<ProizvodjacDTO> tabelaProizvodjacaClickEvent() {
+    private TableRow<ProizvodjacDTO> tabelaProizvodjacaClick() {
         tableProizvodjac.setRowFactory(tv -> {
             TableRow<ProizvodjacDTO> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
