@@ -22,7 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mySQL.MySQLDAOFactory;
-import mySQL.MySQLProizvodjacDAO;
+
 
 /**
  *
@@ -141,21 +141,11 @@ public class AdminController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
-        ProizvodjacDAO proizvodjac = new MySQLDAOFactory().getProizvodjacDAO();
-        List<ProizvodjacDTO> lista = proizvodjac.selectAll();
-        ObservableList<ProizvodjacDTO> listaProizvodjaca = FXCollections.observableArrayList(lista);
-        if(listaProizvodjaca != null){
-            colIdProizvodjaca.setCellValueFactory(new PropertyValueFactory<ProizvodjacDTO, Integer>("IdProizvodjac"));
-            colNazivProizvodjaca.setCellValueFactory(new PropertyValueFactory<ProizvodjacDTO, String>("Naziv"));
-            
-            tableProizvodjac.setItems(listaProizvodjaca);
-        }
+       popuniTabelu();
     }
     
     public void btnPretraziProizvodjacaHandler(ActionEvent e){
-       String naziv = tfProizvodjac.getText();
-       
+      String naziv = tfProizvodjac.getText();
       List<ProizvodjacDTO> lista = proizvodjac.selectByName(naziv);
         ObservableList<ProizvodjacDTO> listaProizvodjaca = FXCollections.observableArrayList(lista);
         if(listaProizvodjaca != null){
@@ -165,4 +155,50 @@ public class AdminController implements Initializable{
             tableProizvodjac.setItems(listaProizvodjaca);
         }
     }
+    
+     public void btnDodajProizvodjacaHandler(ActionEvent e){
+         String naziv = tfProizvodjac.getText();
+         
+         if(proizvodjac.insert(new ProizvodjacDTO(naziv))){
+             System.out.println("Dodatno");
+         }
+         else{
+             //ex.printStackTrace();
+              System.out.println("Greska");
+         }
+         popuniTabelu();
+     }
+     public void btnObrisiProizvodjacaHandler(ActionEvent e){
+          ProizvodjacDTO pr=tableProizvodjac.getSelectionModel().getSelectedItem();
+          if(proizvodjac.delete(pr)){
+            System.out.println("Obrisano");
+         }
+         else{
+             System.out.println("Greska");
+         }
+          popuniTabelu();
+      }
+     public void btnIzmijeniProizvodjacaHandler(ActionEvent e){
+         String naziv = tfProizvodjac.getText();
+         ProizvodjacDTO stari=tableProizvodjac.getSelectionModel().getSelectedItem();
+         ProizvodjacDTO novi=new ProizvodjacDTO(stari.getIdProizvodjac(),naziv);
+          if(proizvodjac.update(novi)){
+            System.out.println("Izmijenjeno");
+         }
+         else{
+             System.out.println("Greska");
+         }
+          popuniTabelu();
+     }
+     
+     private void popuniTabelu(){
+          List<ProizvodjacDTO> lista = proizvodjac.selectAll();
+        ObservableList<ProizvodjacDTO> listaProizvodjaca = FXCollections.observableArrayList(lista);
+        if(listaProizvodjaca != null){
+            colIdProizvodjaca.setCellValueFactory(new PropertyValueFactory<ProizvodjacDTO, Integer>("IdProizvodjac"));
+            colNazivProizvodjaca.setCellValueFactory(new PropertyValueFactory<ProizvodjacDTO, String>("Naziv"));
+            
+            tableProizvodjac.setItems(listaProizvodjaca);
+     }
+}
 }

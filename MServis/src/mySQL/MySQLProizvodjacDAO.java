@@ -20,7 +20,7 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 	 * @param proizvodjac
 	 */
     
-        public static final String SQL_INSERT = "insert into proizvodjac values (?, ?, ?)";
+        public static final String SQL_INSERT = "INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES (?,?);";
 	public static final String SQL_SELECT = "select * from proizvodjac where Obrisano = 0";
 	public static final String SQL_UPDATE = "update proizvodjac set";
         
@@ -32,12 +32,12 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(SQL_INSERT);
-			ps.setInt(1, proizvodjac.getIdProizvodjac());
-			ps.setString(2, proizvodjac.getNaziv());
-                        ps.setInt(3, 0);
+			ps.setString(1, proizvodjac.getNaziv());
+                        ps.setInt(2, 0);
 			returnValue = ps.executeUpdate() == 1;
 		} catch(SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+                        return false;
 		} finally {
 			ConnectionPool.getInstance().checkIn(conn);
 			DBUtil.getInstance().close(ps);			
@@ -65,7 +65,8 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 			
 			returnValue = ps.executeUpdate() == 1;
 		} catch(SQLException e) {
-			e.printStackTrace();
+                        return false;
+			//e.printStackTrace();
 		} finally {
 			ConnectionPool.getInstance().checkIn(conn);
 			DBUtil.getInstance().close(ps);
@@ -82,7 +83,7 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		boolean returnValue = false;
-		String query = SQL_UPDATE + " Obrisano = 1 where IdProizvodjac = ? and Obrisano = 0";
+		String query = SQL_UPDATE + " Obrisano = 1 where IdProizvodjac = ?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -137,7 +138,7 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = SQL_SELECT + " and Naziv = ?";
+		String query = SQL_SELECT + " and Naziv=?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();

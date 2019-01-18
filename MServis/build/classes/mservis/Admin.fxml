@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane fx:id="adminPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="adminPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.AdminController">
   <tabs>
     <Tab fx:id="tabZaposleni" text="Nalozi zaposlenih">
       <content>
@@ -57,16 +57,16 @@
                <children>
                   <TableView fx:id="tableProizvodjac" layoutX="14.0" layoutY="22.0" prefHeight="302.0" prefWidth="377.0">
                     <columns>
-                      <TableColumn fx:id="colIdProizvodjaca" prefWidth="107.0" text="Id proizvodjača" />
+                      <TableColumn fx:id="colIdProizvodjaca" prefWidth="107.0" text="Id proizvođača" />
                       <TableColumn fx:id="colNazivProizvodjaca" prefWidth="313.0" text="Naziv" />
                     </columns>
                   </TableView>
-                  <Button fx:id="btnDodajProizvodjaca" layoutX="600.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Dodaj" />
-                  <Button fx:id="btnIzmijeniProizvodjaca" layoutX="14.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Izmijeni" />
-                  <Button fx:id="btnObrisiProizvodjaca" layoutX="271.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Obriši" />
+                  <Button fx:id="btnDodajProizvodjaca" layoutX="600.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" onAction="#btnDodajProizvodjacaHandler"  text="Dodaj" />
+                  <Button fx:id="btnIzmijeniProizvodjaca" layoutX="14.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" onAction="#btnIzmijeniProizvodjacaHandler"  text="Izmijeni" />
+                  <Button fx:id="btnObrisiProizvodjaca" layoutX="271.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" onAction="#btnObrisiProizvodjacaHandler"  text="Obriši" />
                   <Label layoutX="407.0" layoutY="22.0" text="Naziv proizvođača" />
                   <TextField fx:id="tfProizvodjac" layoutX="407.0" layoutY="43.0" prefHeight="25.0" prefWidth="253.0" />
-                  <Button fx:id="btnPretraziProizvodjaca" layoutX="407.0" layoutY="79.0" mnemonicParsing="false" text="Pretraži" />
+                  <Button fx:id="btnPretraziProizvodjaca" layoutX="407.0" layoutY="79.0" mnemonicParsing="false" onAction="#btnPretraziProizvodjacaHandler" text="Pretraži" />
                </children>
             </AnchorPane>
         </content>

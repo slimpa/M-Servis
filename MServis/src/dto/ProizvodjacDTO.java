@@ -10,6 +10,12 @@ public class ProizvodjacDTO {
         this.naziv = naziv;
     }
 
+    public ProizvodjacDTO(String naziv) {
+        this.naziv = naziv;
+    }
+    
+    
+
     public int getIdProizvodjac() {
         return idProizvodjac;
     }
