@@ -120,13 +120,11 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	public CjenovnikUslugaDAO getCjenovnikUslugaDAO() {
-		// TODO - implement MySQLDAOFactory.getCjenovnikUslugaDAO
-		throw new UnsupportedOperationException();
+		return new MySQLCjenovnikUslugaDAO();
 	}
 
 	public StanjeTelefonaDAO getStanjeTelefonaDAO() {
-		// TODO - implement MySQLDAOFactory.getStanjeTelefonaDAO
-		throw new UnsupportedOperationException();
+		return new MySQLStanjeTelefonaDAO();
 	}
 
 	public ServisTelefonaHasCjenovnikUslugaDAO getServisTelefonaHasCjenovnikUslugaDAO() {
