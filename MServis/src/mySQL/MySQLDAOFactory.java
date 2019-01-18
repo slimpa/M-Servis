@@ -116,8 +116,7 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	public TipDodatneOpremeDAO getTipDodatneOpremeDAO() {
-		// TODO - implement MySQLDAOFactory.getTipDodatneOpremeDAO
-		throw new UnsupportedOperationException();
+            return new MySQLTipDodatneOpremeDAO();
 	}
 
 	public CjenovnikUslugaDAO getCjenovnikUslugaDAO() {

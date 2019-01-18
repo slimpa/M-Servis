@@ -20,7 +20,7 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 	 * @param proizvodjac
 	 */
     
-        public static final String SQL_INSERT = "INSERT INTO `m:servis`.`proizvodjac` (`Naziv`,`Obrisano`) VALUES (?,?);";
+        public static final String SQL_INSERT = "insert into proizvodjac (`Naziv`,`Obrisano`) values (?,?);";
 	public static final String SQL_SELECT = "select * from proizvodjac where Obrisano = 0";
 	public static final String SQL_UPDATE = "update proizvodjac set";
         
@@ -30,11 +30,23 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 		boolean returnValue = false;
 		
 		try {
+                    
+                    if(this.selectByName(proizvodjac.getNaziv()) == null){
+                        System.out.println("novi");
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(SQL_INSERT);
 			ps.setString(1, proizvodjac.getNaziv());
                         ps.setInt(2, 0);
 			returnValue = ps.executeUpdate() == 1;
+                    } else{
+                  System.out.println("postojeci");
+                        conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(SQL_UPDATE + " Obrisano = ? where Naziv = ? and Obrisano = 1");
+                        ps.setInt(1, 0);
+                        ps.setString(2, proizvodjac.getNaziv());
+                        ps.setInt(3, 1);
+			returnValue = ps.executeUpdate() == 1;
+                    }
 		} catch(SQLException e) {
 			//e.printStackTrace();
                         return false;
@@ -115,6 +127,7 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 			
 			if(rs == null) return null;
 			else {
+                            
 				while(rs.next()) {
 					proizvodjaci.add(new ProizvodjacDTO(rs.getInt("IdProizvodjac"),rs.getString("Naziv")));
 				}
@@ -138,7 +151,7 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = SQL_SELECT + " and Naziv=?";
+		String query = SQL_SELECT + " and Naziv = ?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
