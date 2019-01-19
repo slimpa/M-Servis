@@ -26,6 +26,27 @@ public class AdminDTO extends OsobaDTO {
         this.lozinka = lozinka;
     }
 
+    public AdminDTO(String korisnicko, String hash, String ime, String prezime, String telefon, String firma) {
+        this.koriscnikoIme = korisnicko;
+        this.lozinka = hash;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.brojTelefona = telefon;
+        this.nazivFirme = firma;
+    }
+
+    public AdminDTO(String korisnickoIme) {
+        this.koriscnikoIme = korisnickoIme;
+    }
+
+    public AdminDTO(int idPrijavljenog, String ime, String prezime, String telefon, String firma) {
+        this.idOsoba = idPrijavljenog;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.brojTelefona = telefon;
+        this.nazivFirme = firma;
+    }
+
     public String getNazivFirme() {
         return nazivFirme;
     }

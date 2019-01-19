@@ -93,6 +93,7 @@ public class LoginController implements Initializable {
             ((Stage) loginPane.getScene().getWindow()).close();
         } else if (adminPrijava) {
             try {
+                AdminController.setPrijavljeniAdmin(korisnickoIme);
                 Stage stage = new Stage();
                 Parent root2;
                 root2 = FXMLLoader.load(getClass().getResource("Admin.fxml"));

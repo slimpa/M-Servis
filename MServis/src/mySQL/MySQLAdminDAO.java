@@ -18,37 +18,37 @@ public class MySQLAdminDAO implements AdminDAO {
 
     public static final String SQL_SELECT = "select * from admin";
     public static final String SQL_SELECT_ALL = "select * from svi_admini";
-    public static final String SQL_UPDATE = "update osoba set";
-    public static final String SQL_CALL_DODAJ_ADMINA="{call dodaj_admina(?,?,?,?,?,?)}";
+    public static final String SQL_UPDATE = "update admin set";
+    public static final String SQL_CALL_DODAJ_ADMINA = "{call dodaj_admina(?,?,?,?,?,?)}";
+    public static final String SQL_CALL_UPDATE_ADMIN = "{call izmijeni_admina(?, ?, ?, ?, ?)}";
+
     /**
      *
      * @param admin
      */
     public boolean insert(AdminDTO admin) {
-        Connection conn=null;
-		CallableStatement cs=null;
-		int flag=0;
-		try {
-			conn=ConnectionPool.getInstance().checkOut();
-			cs=conn.prepareCall(SQL_CALL_DODAJ_ADMINA);
-			cs.setString(1, admin.getIme());
-                        cs.setString(2, admin.getPrezime());
-                        cs.setString(3, admin.getKoriscnikoIme());
-                        cs.setString(4, admin.getLozinka());
-                        cs.setString(5, admin.getBrojTelefona());
-                        cs.setString(6, admin.getNazivFirme());
-			cs.execute();
-			
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-                        return false;
-		}
-		finally {
-			ConnectionPool.getInstance().checkIn(conn);
-			DBUtil.getInstance().close(cs);
-                }
-                return true;
+        Connection conn = null;
+        CallableStatement cs = null;
+        int flag = 0;
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            cs = conn.prepareCall(SQL_CALL_DODAJ_ADMINA);
+            cs.setString(1, admin.getIme());
+            cs.setString(2, admin.getPrezime());
+            cs.setString(3, admin.getKoriscnikoIme());
+            cs.setString(4, admin.getLozinka());
+            cs.setString(5, admin.getBrojTelefona());
+            cs.setString(6, admin.getNazivFirme());
+            cs.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(cs);
+        }
+        return true;
     }
 
     /**
@@ -56,7 +56,30 @@ public class MySQLAdminDAO implements AdminDAO {
      * @param admin
      */
     public boolean update(AdminDTO admin) {
-        throw new UnsupportedOperationException();
+        Connection conn = null;
+        CallableStatement cs = null;
+      
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            cs = conn.prepareCall(SQL_CALL_UPDATE_ADMIN);
+
+            cs.setString(1, admin.getIme());
+            cs.setString(2, admin.getPrezime());
+            cs.setString(3, admin.getBrojTelefona());
+            cs.setString(4, admin.getNazivFirme());
+            cs.setInt(5, admin.getIdOsoba());
+            
+            cs.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+            
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(cs);
+        }
+
+        return true;
     }
 
     /**
@@ -67,7 +90,7 @@ public class MySQLAdminDAO implements AdminDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         boolean returnValue = false;
-        String query = SQL_UPDATE + " Obrisano = 1 where IdOsoba = ?";
+        String query = "update osoba set Obrisano = 1 where IdOsoba = ?";
 
         try {
             conn = ConnectionPool.getInstance().checkOut();
@@ -133,7 +156,7 @@ public class MySQLAdminDAO implements AdminDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = SQL_SELECT + " where KorisnickoIme=?";
+        String query = SQL_SELECT_ALL + " where KorisnickoIme=?";
 
         try {
             conn = ConnectionPool.getInstance().checkOut();
@@ -145,7 +168,9 @@ public class MySQLAdminDAO implements AdminDAO {
                 return null;
             } else {
                 if (rs.next()) {
-                    retVal = new AdminDTO(rs.getInt("IdAdmin"), rs.getString("KorisnickoIme"), rs.getString("Lozinka"), rs.getString("NazivFirme"));
+                    retVal = new AdminDTO(rs.getInt("IdOsoba"), rs.getString("KorisnickoIme"), rs.getString("Lozinka"),
+                            rs.getString("Ime"), rs.getString("Prezime"), rs.getString("BrojTelefona"),
+                            rs.getString("NazivFirme"));
                 }
             }
 

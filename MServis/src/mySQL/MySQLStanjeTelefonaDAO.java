@@ -135,12 +135,12 @@ public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = SQL_SELECT + " and Stanje=?";
+        String query = SQL_SELECT + " and Stanje like ?";
 
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);
-            ps.setString(1, stanjeTelefona.getStanje());
+            ps.setString(1, stanjeTelefona.getStanje() + "%");
             rs = ps.executeQuery();
 
             if (rs == null) {

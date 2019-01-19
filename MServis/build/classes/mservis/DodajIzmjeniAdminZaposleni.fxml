@@ -17,7 +17,7 @@
       <TextField fx:id="tfTelefon" layoutX="14.0" layoutY="200.0" prefHeight="25.0" prefWidth="191.0" />
       <TextField fx:id="tfMjesto" layoutX="19.0" layoutY="288.0" prefHeight="25.0" prefWidth="191.0" />
       <TextField fx:id="tfFirma" layoutX="19.0" layoutY="365.0" prefHeight="25.0" prefWidth="191.0" />
-      <Button layoutX="373.0" layoutY="422.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" onAction="#btnDodajHandler" text="Sačuvaj" />
+      <Button fx:id="btnDodaj" layoutX="373.0" layoutY="422.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" onAction="#btnDodajHandler" text="Sačuvaj" />
       <Label layoutX="270.0" layoutY="14.0" text="Korisničko ime" />
       <TextField fx:id="tfKorisnickoIme" layoutX="270.0" layoutY="42.0" prefHeight="25.0" prefWidth="191.0" />
       <Label layoutX="270.0" layoutY="92.0" text="Lozinka" />

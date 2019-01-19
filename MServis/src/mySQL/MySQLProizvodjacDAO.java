@@ -31,7 +31,7 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 		
 		try {
                     
-                    if(this.selectByName(proizvodjac.getNaziv()).isEmpty() && this.selectIfRemoved(proizvodjac.getNaziv()).isEmpty()){
+                    if(this.selectBy(proizvodjac).isEmpty() && this.selectIfRemoved(proizvodjac.getNaziv()).isEmpty()){
                        
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(SQL_INSERT);
@@ -143,17 +143,17 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 	 * 
 	 * @param proizvodjac
 	 */
-	public List<ProizvodjacDTO> selectByName(String proizvodjac) {
+	public List<ProizvodjacDTO> selectBy(ProizvodjacDTO proizvodjac) {
 		List<ProizvodjacDTO> proizvodjaci = new ArrayList<ProizvodjacDTO>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = SQL_SELECT + " and Naziv = ?";
+		String query = SQL_SELECT + " and Naziv like ?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setString(1, proizvodjac);
+			ps.setString(1, proizvodjac.getNaziv() + "%");
 			rs = ps.executeQuery();
 			
 			if(rs == null) return null;
@@ -201,10 +201,4 @@ public class MySQLProizvodjacDAO implements ProizvodjacDAO {
 		
 		return proizvodjaci;
     }
-
-    @Override
-    public List<ProizvodjacDTO> selectBy(ProizvodjacDTO proizvodjac) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

@@ -19,6 +19,7 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
     public static final String SQL_SELECT_ALL = "select * from svi_zaposleni";
     public static final String SQL_UPDATE = "update osoba set";
     public static final String SQL_CALL_DODAJ_ZAPOSLENOG="{call dodaj_zaposlenog(?,?,?,?,?,?)}";
+    public static final String SQL_CALL_UPDATE_ZAPOSLENI = "{call izmijeni_zaposlenog(?, ?, ?, ?, ?)}";
 
     /**
      *
@@ -41,7 +42,7 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
 			
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
                         return false;
 		}
 		finally {
@@ -56,8 +57,30 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
      * @param zaposleni
      */
     public boolean update(ZaposleniDTO zaposleni) {
-        // TODO - implement MySQLZaposleniDAO.update
-        throw new UnsupportedOperationException();
+         Connection conn = null;
+        CallableStatement cs = null;
+      
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            cs = conn.prepareCall(SQL_CALL_UPDATE_ZAPOSLENI);
+
+            cs.setString(1, zaposleni.getIme());
+            cs.setString(2, zaposleni.getPrezime());
+            cs.setString(3, zaposleni.getBrojTelefona());
+            cs.setString(4, zaposleni.getRadnoMjesto());
+            cs.setInt(5, zaposleni.getIdOsoba());
+            
+            cs.execute();
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            return false;
+            
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(cs);
+        }
+
+        return true;
     }
 
     /**

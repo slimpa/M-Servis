@@ -139,12 +139,12 @@ public class MySQLCjenovnikUslugaDAO implements CjenovnikUslugaDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = SQL_SELECT + " and Naziv=?";
+        String query = SQL_SELECT + " and Naziv like ?";
 
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);
-            ps.setString(1, cjenovnikUsluga.getNaziv());
+            ps.setString(1, cjenovnikUsluga.getNaziv() + "%");
             rs = ps.executeQuery();
 
             if (rs == null) {

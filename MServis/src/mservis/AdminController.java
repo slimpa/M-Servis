@@ -199,6 +199,24 @@ public class AdminController implements Initializable {
     private TableColumn<ZaposleniDTO, String> colKorisnickoImez;
     @FXML
     private TableColumn<ZaposleniDTO, String> colRadno;
+    
+    @FXML
+    private TextField tfImeAdmin;
+    @FXML
+    private TextField tfPrezimeAdmin;
+    @FXML
+    private TextField tfTelefonAdmin;
+    @FXML
+    private TextField tfFirmaAdmin;
+    @FXML
+    private TextField tfKorisnickoAdmin;
+    @FXML
+    private TextField tfLozinkaAdmin;
+    @FXML
+    private Button btnSacuvajAdmin;
+    @FXML
+    private Button btnOdjava;
+    
 
     private ProizvodjacDAO proizvodjacDao = new MySQLDAOFactory().getProizvodjacDAO();
     private TipDodatneOpremeDAO dodatnaOpremaDao = new MySQLDAOFactory().getTipDodatneOpremeDAO();
@@ -206,6 +224,9 @@ public class AdminController implements Initializable {
     private CjenovnikUslugaDAO cjenovnikUslugaDao = new MySQLDAOFactory().getCjenovnikUslugaDAO();
     private AdminDAO adminDao = new MySQLDAOFactory().getAdminDAO();
     private ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
+    
+    private static String prijavljeniAdmin = "";
+    private static int idPrijavljenog = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -223,6 +244,8 @@ public class AdminController implements Initializable {
 
         popuniTabeluAdmina();
         popuniTabeluZaposlenih();
+       
+        popuniProfil();
     }
 
     public void btnPretraziProizvodjacaHandler(ActionEvent e) {
@@ -230,7 +253,7 @@ public class AdminController implements Initializable {
             popuniTabeluProizvodjaca();
         } else {
             String naziv = tfProizvodjac.getText();
-            List<ProizvodjacDTO> lista = proizvodjacDao.selectByName(naziv);
+            List<ProizvodjacDTO> lista = proizvodjacDao.selectBy(new ProizvodjacDTO(naziv));
 
             if (lista != null) {
                 ObservableList<ProizvodjacDTO> listaProizvodjaca = FXCollections.observableArrayList(lista);
@@ -554,7 +577,7 @@ public class AdminController implements Initializable {
 
             if (lista != null) {
                 ObservableList<CjenovnikUslugaDTO> cjenovnik = FXCollections.observableArrayList(lista);
-                colIdUsluge.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, Integer>("IdCijenovnikUsluga"));
+                colIdUsluge.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, Integer>("IdCjenovnikUsluga"));
                 colNazivUsluge.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, String>("Naziv"));
                 colCijenaUsluge.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, Double>("Cijena"));
                 tableUsluga.setItems(cjenovnik);
@@ -566,7 +589,7 @@ public class AdminController implements Initializable {
         List<CjenovnikUslugaDTO> lista = cjenovnikUslugaDao.selectAll();
         ObservableList<CjenovnikUslugaDTO> cjenovnik = FXCollections.observableArrayList(lista);
         if (cjenovnik != null) {
-            colIdUsluge.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, Integer>("IdCijenovnikUsluga"));
+            colIdUsluge.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, Integer>("idCjenovnikUsluga"));
             colNazivUsluge.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, String>("Naziv"));
             colCijenaUsluge.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, Double>("Cijena"));
             tableUsluga.setItems(cjenovnik);
@@ -575,9 +598,9 @@ public class AdminController implements Initializable {
 
     public void btnDodajUsluguHandler(ActionEvent e) {
         String naziv = tfUsluga.getText();
-        double cijena = Double.parseDouble(tfCijena.getText());
-
         if (!tfCijena.getText().isEmpty()) {
+            double cijena = Double.parseDouble(tfCijena.getText());
+
             if (cjenovnikUslugaDao.insert(new CjenovnikUslugaDTO(naziv, cijena))) {
                 popuniTabeluUsluga();
             } else {
@@ -622,21 +645,23 @@ public class AdminController implements Initializable {
 
     public void btnIzmijeniUsluguHandler(ActionEvent e) {
         String naziv = tfUsluga.getText();
-        Double cijena = Double.parseDouble(tfCijena.getText());
-        CjenovnikUslugaDTO stari = tableUsluga.getSelectionModel().getSelectedItem();
-        if (stari != null && !tfCijena.getText().isEmpty()) {
-            CjenovnikUslugaDTO novi = new CjenovnikUslugaDTO(stari.getIdCjenovnikUsluga(), naziv, cijena);
-            if (cjenovnikUslugaDao.update(novi)) {
-                popuniTabeluUsluga();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Greška!");
-                alert.setHeaderText(null);
-                alert.setContentText("Nije moguća izmjena!");
-                alert.showAndWait();
-            }
+        if (!tfCijena.getText().isEmpty()) {
+            Double cijena = Double.parseDouble(tfCijena.getText());
+            CjenovnikUslugaDTO stari = tableUsluga.getSelectionModel().getSelectedItem();
+            if (stari != null) {
+                CjenovnikUslugaDTO novi = new CjenovnikUslugaDTO(stari.getIdCjenovnikUsluga(), naziv, cijena);
+                if (cjenovnikUslugaDao.update(novi)) {
+                    popuniTabeluUsluga();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Greška!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Nije moguća izmjena!");
+                    alert.showAndWait();
+                }
 
-        } else if (naziv.isEmpty() || stari == null || tfCijena.getText().isEmpty()) {
+            }
+        } else if (naziv.isEmpty() || tfCijena.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
@@ -661,7 +686,7 @@ public class AdminController implements Initializable {
         return null;
     }
 
-    private void popuniTabeluAdmina() {
+    public void popuniTabeluAdmina() {
         List<AdminDTO> lista = adminDao.selectAll();
         ObservableList<AdminDTO> listaAdmina = FXCollections.observableArrayList(lista);
         if (listaAdmina != null) {
@@ -750,7 +775,10 @@ public class AdminController implements Initializable {
 
             stage.setTitle("Dodaj admina");
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
+
+            this.popuniTabeluAdmina();
+
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -769,7 +797,9 @@ public class AdminController implements Initializable {
 
             stage.setTitle("Dodaj zaposlenog");
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
+
+            this.popuniTabeluZaposlenih();
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -778,18 +808,22 @@ public class AdminController implements Initializable {
     public void btnIzmijeniAdminaHandler(ActionEvent e) {
         AdminDTO admin = tableAdmin.getSelectionModel().getSelectedItem();
         DodajIzmjeniAdminZaposleniController.setAdmin(true);
+        
         if (admin != null) {
             try {
-
+                DodajIzmjeniAdminZaposleniController.setOdabraniId(admin.getIdOsoba());
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
                 loader.load();
                 DodajIzmjeniAdminZaposleniController controller = loader.getController();
+                controller.setIzmjena(true);
                 controller.setTextFieldsAdmin(admin);
                 Parent p = loader.getRoot();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(p));
                 stage.showAndWait();
+
+                popuniTabeluAdmina();
             } catch (IOException ex) {
                 Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -805,18 +839,22 @@ public class AdminController implements Initializable {
     public void btnIzmijeniZaposlenogHandler(ActionEvent e) {
         ZaposleniDTO zaposleni = tableZaposleni.getSelectionModel().getSelectedItem();
         DodajIzmjeniAdminZaposleniController.setAdmin(false);
+       
         if (zaposleni != null) {
             try {
-
+                DodajIzmjeniAdminZaposleniController.setOdabraniId(zaposleni.getIdOsoba());    
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
                 loader.load();
                 DodajIzmjeniAdminZaposleniController controller = loader.getController();
                 controller.setTextFieldsZaposleni(zaposleni);
+                controller.setIzmjena(true);
                 Parent p = loader.getRoot();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(p));
                 stage.showAndWait();
+
+                popuniTabeluZaposlenih();
             } catch (IOException ex) {
                 Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -826,6 +864,62 @@ public class AdminController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Nije izabran korisnički nalog iz tabele!");
             alert.showAndWait();
+        }
+    }
+
+    public static void setPrijavljeniAdmin(String prijavljeniAdmin) {
+        AdminController.prijavljeniAdmin = prijavljeniAdmin;
+    }
+    
+    private void popuniProfil(){
+        AdminDTO admin = adminDao.selectAdmin(new AdminDTO(prijavljeniAdmin));
+        idPrijavljenog = admin.getIdOsoba();
+        tfImeAdmin.setText(admin.getIme());
+        tfPrezimeAdmin.setText(admin.getPrezime());
+        tfTelefonAdmin.setText(admin.getBrojTelefona());
+        tfFirmaAdmin.setText(admin.getNazivFirme());
+        tfKorisnickoAdmin.setText(admin.getKoriscnikoIme());
+        tfLozinkaAdmin.setText(admin.getLozinka());
+    }
+    
+    public void btnSacuvajAdminHandler(ActionEvent e){
+        AdminDTO admin = new AdminDTO(idPrijavljenog, tfImeAdmin.getText(), tfPrezimeAdmin.getText(), tfTelefonAdmin.getText(), tfFirmaAdmin.getText());
+        if (!adminDao.update(admin)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Greška!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Izmjena nije moguća!");
+                    alert.showAndWait();
+                } else {
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Obavještenje!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Uspješna izmjena!");
+                    alert.showAndWait();
+                    
+                    popuniTabeluAdmina();
+                }
+    }
+    
+    public void btnOdjavaHandler(ActionEvent e){
+        try {
+            Stage stage = new Stage();
+            Parent root2;
+
+            root2 = FXMLLoader.load(getClass().getResource("Login.fxml"));
+
+            Scene scene = new Scene(root2);
+
+            stage.setTitle("Prijavljivanje");
+            stage.setScene(scene);
+            
+            Stage s = (Stage) btnOdjava.getScene().getWindow();
+            s.close();
+            
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
