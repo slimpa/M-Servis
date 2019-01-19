@@ -4,6 +4,7 @@ import dao.ZaposleniDAO;
 import dbu.ConnectionPool;
 import dbu.DBUtil;
 import dto.ZaposleniDTO;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,14 +18,37 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
     public static final String SQL_SELECT = "select * from zaposleni";
     public static final String SQL_SELECT_ALL = "select * from svi_zaposleni";
     public static final String SQL_UPDATE = "update osoba set";
+    public static final String SQL_CALL_DODAJ_ZAPOSLENOG="{call dodaj_zaposlenog(?,?,?,?,?,?)}";
 
     /**
      *
      * @param zaposleni
      */
     public boolean insert(ZaposleniDTO zaposleni) {
-        // TODO - implement MySQLZaposleniDAO.insert
-        throw new UnsupportedOperationException();
+         Connection conn=null;
+		CallableStatement cs=null;
+		int flag=0;
+		try {
+			conn=ConnectionPool.getInstance().checkOut();
+			cs=conn.prepareCall(SQL_CALL_DODAJ_ZAPOSLENOG);
+			cs.setString(1, zaposleni.getIme());
+                        cs.setString(2, zaposleni.getPrezime());
+                        cs.setString(3, zaposleni.getKoriscnikoIme());
+                        cs.setString(4, zaposleni.getLozinka());
+                        cs.setString(5, zaposleni.getBrojTelefona());
+                        cs.setString(6, zaposleni.getRadnoMjesto());
+			cs.execute();
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+                        return false;
+		}
+		finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(cs);
+                }
+                return true;
     }
 
     /**
@@ -109,13 +133,12 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = SQL_SELECT + " where KorisnickoIme=? and Lozinka=?";
+        String query = SQL_SELECT + " where KorisnickoIme=?";
 
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);
             ps.setString(1, zaposleni.getKoriscnikoIme());
-            ps.setString(2, zaposleni.getLozinka());
             rs = ps.executeQuery();
 
             if (rs == null) {

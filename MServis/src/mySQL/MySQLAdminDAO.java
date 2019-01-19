@@ -4,6 +4,7 @@ import dao.AdminDAO;
 import dbu.ConnectionPool;
 import dbu.DBUtil;
 import dto.AdminDTO;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,14 +19,36 @@ public class MySQLAdminDAO implements AdminDAO {
     public static final String SQL_SELECT = "select * from admin";
     public static final String SQL_SELECT_ALL = "select * from svi_admini";
     public static final String SQL_UPDATE = "update osoba set";
-
+    public static final String SQL_CALL_DODAJ_ADMINA="{call dodaj_admina(?,?,?,?,?,?)}";
     /**
      *
      * @param admin
      */
     public boolean insert(AdminDTO admin) {
-        // TODO - implement MySQLAdminDAO.insert
-        throw new UnsupportedOperationException();
+        Connection conn=null;
+		CallableStatement cs=null;
+		int flag=0;
+		try {
+			conn=ConnectionPool.getInstance().checkOut();
+			cs=conn.prepareCall(SQL_CALL_DODAJ_ADMINA);
+			cs.setString(1, admin.getIme());
+                        cs.setString(2, admin.getPrezime());
+                        cs.setString(3, admin.getKoriscnikoIme());
+                        cs.setString(4, admin.getLozinka());
+                        cs.setString(5, admin.getBrojTelefona());
+                        cs.setString(6, admin.getNazivFirme());
+			cs.execute();
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+                        return false;
+		}
+		finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(cs);
+                }
+                return true;
     }
 
     /**
@@ -110,13 +133,12 @@ public class MySQLAdminDAO implements AdminDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = SQL_SELECT + " where KorisnickoIme=? and Lozinka=?";
+        String query = SQL_SELECT + " where KorisnickoIme=?";
 
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);
             ps.setString(1, admin.getKoriscnikoIme());
-            ps.setString(2, admin.getLozinka());
             rs = ps.executeQuery();
 
             if (rs == null) {

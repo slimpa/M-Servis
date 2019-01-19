@@ -60,16 +60,16 @@ public class LoginController implements Initializable {
         String lozinka = passwordPF.getText();
 
         ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
-        ZaposleniDTO zaposleni = zaposleniDao.selectZaposleni(new ZaposleniDTO(korisnickoIme, lozinka, null));
-        if (zaposleni != null) {
+        ZaposleniDTO zaposleni = zaposleniDao.selectZaposleni(new ZaposleniDTO(korisnickoIme, null, null));
+        if (zaposleni != null && zaposleni.getLozinka().equals(lozinka)) {
             zaposleniPrijava = true;
             korisnicko=zaposleni.getKoriscnikoIme();
         }
 
         if (!zaposleniPrijava) {
             AdminDAO adminDao = new MySQLDAOFactory().getAdminDAO();
-            AdminDTO admin = adminDao.selectAdmin(new AdminDTO(korisnickoIme, lozinka, null));
-            if (admin != null) {
+            AdminDTO admin = adminDao.selectAdmin(new AdminDTO(korisnickoIme, null, null));
+            if (admin != null && admin.getLozinka().equals(lozinka)) {
                 adminPrijava = true;
                 korisnicko=admin.getKoriscnikoIme();
             }

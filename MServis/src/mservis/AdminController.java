@@ -170,7 +170,7 @@ public class AdminController implements Initializable {
 
     @FXML
     private Button btnObrisiTip;
-    
+
     @FXML
     private TableView<AdminDTO> tableAdmin;
     @FXML
@@ -217,10 +217,10 @@ public class AdminController implements Initializable {
 
         popuniTabeluStanja();
         tabelaStanjaClick();
-        
+
         popuniTabeluUsluga();
         tabelaUslugaClick();
-        
+
         popuniTabeluAdmina();
         popuniTabeluZaposlenih();
     }
@@ -572,24 +572,24 @@ public class AdminController implements Initializable {
             tableUsluga.setItems(cjenovnik);
         }
     }
-    
+
     public void btnDodajUsluguHandler(ActionEvent e) {
         String naziv = tfUsluga.getText();
         double cijena = Double.parseDouble(tfCijena.getText());
 
-        if(!tfCijena.getText().isEmpty()){
-        if (cjenovnikUslugaDao.insert(new CjenovnikUslugaDTO(naziv, cijena))) {
-            popuniTabeluUsluga();
-        } else {
+        if (!tfCijena.getText().isEmpty()) {
+            if (cjenovnikUslugaDao.insert(new CjenovnikUslugaDTO(naziv, cijena))) {
+                popuniTabeluUsluga();
+            } else {
 
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška!");
+                alert.setHeaderText(null);
+                alert.setContentText("Dodavanje nije moguće!");
+                alert.showAndWait();
+            }
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Greška!");
-            alert.setHeaderText(null);
-            alert.setContentText("Dodavanje nije moguće!");
-            alert.showAndWait();
-        }
-        }else{
-             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Popuniti podatke o novoj usluzi!");
@@ -597,8 +597,8 @@ public class AdminController implements Initializable {
         }
 
     }
-    
-    public void btnObrisiUsluguHandler(ActionEvent e){
+
+    public void btnObrisiUsluguHandler(ActionEvent e) {
         CjenovnikUslugaDTO usluga = tableUsluga.getSelectionModel().getSelectedItem();
         if (usluga != null) {
             if (cjenovnikUslugaDao.delete(usluga)) {
@@ -619,8 +619,8 @@ public class AdminController implements Initializable {
         }
 
     }
-    
-    public void btnIzmijeniUsluguHandler(ActionEvent e){
+
+    public void btnIzmijeniUsluguHandler(ActionEvent e) {
         String naziv = tfUsluga.getText();
         Double cijena = Double.parseDouble(tfCijena.getText());
         CjenovnikUslugaDTO stari = tableUsluga.getSelectionModel().getSelectedItem();
@@ -635,7 +635,7 @@ public class AdminController implements Initializable {
                 alert.setContentText("Nije moguća izmjena!");
                 alert.showAndWait();
             }
-            
+
         } else if (naziv.isEmpty() || stari == null || tfCijena.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
@@ -644,7 +644,7 @@ public class AdminController implements Initializable {
             alert.showAndWait();
         }
     }
-    
+
     private TableRow<CjenovnikUslugaDTO> tabelaUslugaClick() {
         tableUsluga.setRowFactory(tv -> {
             TableRow<CjenovnikUslugaDTO> row = new TableRow<>();
@@ -660,8 +660,8 @@ public class AdminController implements Initializable {
         });
         return null;
     }
-    
-     private void popuniTabeluAdmina() {
+
+    private void popuniTabeluAdmina() {
         List<AdminDTO> lista = adminDao.selectAll();
         ObservableList<AdminDTO> listaAdmina = FXCollections.observableArrayList(lista);
         if (listaAdmina != null) {
@@ -694,83 +694,138 @@ public class AdminController implements Initializable {
     }
 
     public void btnObrisiAdminaHandler(ActionEvent e) {
-        AdminDTO tip = tableAdmin.getSelectionModel().getSelectedItem();
-        if (adminDao.delete(tip)) {
-            System.out.println("Obrisano");
+        AdminDTO adm = tableAdmin.getSelectionModel().getSelectedItem();
+        if (adm != null) {
+            if (adminDao.delete(adm)) {
+                System.out.println("Obrisano");
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška!");
+                alert.setHeaderText(null);
+                alert.setContentText("Brisanje naloga nije uspjelo!");
+                alert.showAndWait();
+            }
+            popuniTabeluAdmina();
         } else {
-            System.out.println("Greska");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Nije izabran korisnički nalog iz tabele!");
+            alert.showAndWait();
         }
-        popuniTabeluAdmina();
     }
 
     public void btnObrisiZaposlenogHandler(ActionEvent e) {
-        ZaposleniDTO tip = tableZaposleni.getSelectionModel().getSelectedItem();
-        if (zaposleniDao.delete(tip)) {
-            System.out.println("Obrisano");
+        ZaposleniDTO zap = tableZaposleni.getSelectionModel().getSelectedItem();
+        if (zap != null) {
+            if (zaposleniDao.delete(zap)) {
+                System.out.println("Obrisano");
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška!");
+                alert.setHeaderText(null);
+                alert.setContentText("Brisanje naloga nije uspjelo!");
+                alert.showAndWait();
+            }
+            popuniTabeluZaposlenih();
         } else {
-            System.out.println("Greska");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Nije izabran korisnički nalog iz tabele!");
+            alert.showAndWait();
         }
-        popuniTabeluZaposlenih();
     }
 
     public void btnDodajAdminaHandler(ActionEvent e) {
-        Parent root;
+        DodajIzmjeniAdminZaposleniController.setAdmin(true);
         try {
-            DodajIzmjeniAdminZaposleniController.setAdmin(true);
+
             Stage stage = new Stage();
-            root = FXMLLoader.load(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
-            Scene scene = new Scene(root);
-            stage.setTitle("Dodaj novog admina");
+            Parent root2;
+
+            root2 = FXMLLoader.load(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
+
+            Scene scene = new Scene(root2);
+
+            stage.setTitle("Dodaj admina");
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public void btnDodajZaposlenogHandler(ActionEvent e) {
-        Parent root;
+        DodajIzmjeniAdminZaposleniController.setAdmin(false);
         try {
-            DodajIzmjeniAdminZaposleniController.setAdmin(false);
+
             Stage stage = new Stage();
-            root = FXMLLoader.load(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
-            Scene scene = new Scene(root);
-            stage.setTitle("Dodaj novog zaposlenog");
+            Parent root2;
+
+            root2 = FXMLLoader.load(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
+
+            Scene scene = new Scene(root2);
+
+            stage.setTitle("Dodaj zaposlenog");
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void btnIzmijeniAdminaHandler(ActionEvent e) {
-        Parent root;
-        try {
-            DodajIzmjeniAdminZaposleniController.setAdmin(true);
-            Stage stage = new Stage();
-            root = FXMLLoader.load(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
-            Scene scene = new Scene(root);
-            stage.setTitle("Izmijeni admina");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        AdminDTO admin = tableAdmin.getSelectionModel().getSelectedItem();
+        DodajIzmjeniAdminZaposleniController.setAdmin(true);
+        if (admin != null) {
+            try {
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
+                loader.load();
+                DodajIzmjeniAdminZaposleniController controller = loader.getController();
+                controller.setTextFieldsAdmin(admin);
+                Parent p = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(p));
+                stage.showAndWait();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Nije izabran korisnički nalog iz tabele!");
+            alert.showAndWait();
         }
     }
 
     public void btnIzmijeniZaposlenogHandler(ActionEvent e) {
-        Parent root;
-        try {
-            DodajIzmjeniAdminZaposleniController.setAdmin(false);
-            Stage stage = new Stage();
-            root = FXMLLoader.load(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
-            Scene scene = new Scene(root);
-            stage.setTitle("Izmijeni zaposlenog");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        ZaposleniDTO zaposleni = tableZaposleni.getSelectionModel().getSelectedItem();
+        DodajIzmjeniAdminZaposleniController.setAdmin(false);
+        if (zaposleni != null) {
+            try {
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
+                loader.load();
+                DodajIzmjeniAdminZaposleniController controller = loader.getController();
+                controller.setTextFieldsZaposleni(zaposleni);
+                Parent p = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(p));
+                stage.showAndWait();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Nije izabran korisnički nalog iz tabele!");
+            alert.showAndWait();
         }
     }
 }
