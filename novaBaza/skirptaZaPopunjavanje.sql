@@ -41,6 +41,27 @@ INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES 
 INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Popravak tipki', '20.5','0');
 INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Zamjena stakla na ekranu', '10.99','0');
 
+INSERT INTO `m:servis`.`modeltelefona`(`IdModelTelefona`,`NazivModela`,`Slika`,`Specifikacija`) VALUES ('1','HTC desire 5','nema slike', 'prebrz');
+INSERT INTO `m:servis`.`modeltelefona`(`IdModelTelefona`,`NazivModela`,`Slika`,`Specifikacija`) VALUES ('1','Samsung S9+','nema slike', 'prebrz');
+
+INSERT INTO `m:servis`.`telefon`(`IdModeTelefona`,`SerijskiBroj`,`Boja`,`Obrisano`) VALUES ('1','1511111111','Crvena', '0');
+INSERT INTO `m:servis`.`telefon`(`IdModeTelefona`,`SerijskiBroj`,`Boja`,`Obrisano`) VALUES ('2','1522222222','Plava', '0');
+
+INSERT INTO `m:servis`.`rezervniDio` (`IdRezervniDio`,`Opis`,`IdModelTelefona`) VALUES ('5','Ekran','1');
+INSERT INTO `m:servis`.`rezervniDio` (`IdRezervniDio`,`Opis`,`IdModelTelefona`) VALUES ('6','Ekran','2');
+
+INSERT INTO `m:servis`.`dodatnaOprema` (`IdDodatnaOprema`,`Boja`,`IdTipDodatneOpreme`,`IdModelTelefona`) VALUES ('3','Crvena','1', '1');
+INSERT INTO `m:servis`.`dodatnaOprema` (`IdDodatnaOprema`,`Boja`,`IdTipDodatneOpreme`,`IdModelTelefona`) VALUES ('4','Bijela','3', '1');
+
+INSERT INTO `m:servis`.`cijena` (`IdArtikla`,`Cijena`, `DatumOd`, `DatumDo`,`TrenutnaCijena`) VALUES ('5','70.00','2018-09-08',NULL, '1');
+INSERT INTO `m:servis`.`cijena` (`IdArtikla`,`Cijena`, `DatumOd`, `DatumDo`,`TrenutnaCijena`) VALUES ('6','90.00','2018-09-08',NULL, '1');
+INSERT INTO `m:servis`.`cijena` (`IdArtikla`,`Cijena`, `DatumOd`, `DatumDo`,`TrenutnaCijena`) VALUES ('1','500.00','2018-09-08',NULL, '1');
+INSERT INTO `m:servis`.`cijena` (`IdArtikla`,`Cijena`, `DatumOd`, `DatumDo`,`TrenutnaCijena`) VALUES ('2','250.00','2018-09-08',NULL, '1');
+INSERT INTO `m:servis`.`cijena` (`IdArtikla`,`Cijena`, `DatumOd`, `DatumDo`,`TrenutnaCijena`) VALUES ('3','8.00','2018-09-08',NULL, '1');
+INSERT INTO `m:servis`.`cijena` (`IdArtikla`,`Cijena`, `DatumOd`, `DatumDo`,`TrenutnaCijena`) VALUES ('4','20.00','2018-09-08',NULL, '1');
+
+
+
 
 INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Telefon Samsung S9+', '1', '111000', '5', '0');
 INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Telefon Noika 3310', '2', '999999', '3', '0');

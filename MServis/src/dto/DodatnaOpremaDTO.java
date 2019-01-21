@@ -5,5 +5,123 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
 	private String Boja;
 	private int idModelTelefona;
 	private int idTipDodatneOpreme;
+        
+        private int idDodatnaOprema;
+        private String Naziv;
+        private String ModelTelefona;
+        private String TipOpreme;
+        private String Proizvodjac;
+        private String BarCode;
+
+    public DodatnaOpremaDTO(String Boja, int idTipDodatneOpreme, String Naziv, String ModelTelefona, String Proizvodjac, String BarCode, int Kolicina, int Cijena) {
+        this.Boja = Boja;
+        this.idTipDodatneOpreme = idTipDodatneOpreme;
+        this.Naziv = Naziv;
+        this.ModelTelefona = ModelTelefona;
+        this.Proizvodjac = Proizvodjac;
+        this.BarCode = BarCode;
+        this.Kolicina = Kolicina;
+        this.Cijena = Cijena;
+    }
+
+    public void setTipOpreme(String TipOpreme) {
+        this.TipOpreme = TipOpreme;
+    }
+
+    public String getTipOpreme() {
+        return TipOpreme;
+    }
+        private int Kolicina;
+        private int Cijena;
+
+    public DodatnaOpremaDTO(String Boja, int idDodatnaOprema, String Naziv, String ModelTelefona, String TipOpreme, int Kolicina, int Cijena) {
+        this.Boja = Boja;
+        this.idDodatnaOprema = idDodatnaOprema;
+        this.Naziv = Naziv;
+        this.ModelTelefona = ModelTelefona;
+        this.TipOpreme = TipOpreme;
+        this.Kolicina = Kolicina;
+        this.Cijena = Cijena;
+    }
+
+    public DodatnaOpremaDTO(String Boja, int idModelTelefona, int idTipDodatneOpreme, int idDodatnaOprema, String Naziv, String ModelTelefona, int Kolicina, int Cijena) {
+        this.Boja = Boja;
+        this.idModelTelefona = idModelTelefona;
+        this.idTipDodatneOpreme = idTipDodatneOpreme;
+        this.idDodatnaOprema = idDodatnaOprema;
+        this.Naziv = Naziv;
+        this.ModelTelefona = ModelTelefona;
+        this.Kolicina = Kolicina;
+        this.Cijena = Cijena;
+    }
+
+    public DodatnaOpremaDTO() {
+    }
+
+    public String getBoja() {
+        return Boja;
+    }
+
+    public int getIdModelTelefona() {
+        return idModelTelefona;
+    }
+
+    public int getIdTipDodatneOpreme() {
+        return idTipDodatneOpreme;
+    }
+
+    public int getIdDodatnaOprema() {
+        return idDodatnaOprema;
+    }
+
+    public String getNaziv() {
+        return Naziv;
+    }
+
+    public String getModelTelefona() {
+        return ModelTelefona;
+    }
+
+    public int getKolicina() {
+        return Kolicina;
+    }
+
+    public int getCijena() {
+        return Cijena;
+    }
+
+    public void setBoja(String Boja) {
+        this.Boja = Boja;
+    }
+
+    public void setIdModelTelefona(int idModelTelefona) {
+        this.idModelTelefona = idModelTelefona;
+    }
+
+    public void setIdTipDodatneOpreme(int idTipDodatneOpreme) {
+        this.idTipDodatneOpreme = idTipDodatneOpreme;
+    }
+
+    public void setIdDodatnaOprema(int idDodatnaOprema) {
+        this.idDodatnaOprema = idDodatnaOprema;
+    }
+
+    public void setNaziv(String Naziv) {
+        this.Naziv = Naziv;
+    }
+
+    public void setModelTelefona(String ModelTelefona) {
+        this.ModelTelefona = ModelTelefona;
+    }
+
+    public void setKolicina(int Kolicina) {
+        this.Kolicina = Kolicina;
+    }
+
+    public void setCijena(int Cijena) {
+        this.Cijena = Cijena;
+    }
+        
+        
 
 }
