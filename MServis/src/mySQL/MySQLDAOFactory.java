@@ -29,23 +29,19 @@ import dao.TelefonDAO;
 public class MySQLDAOFactory extends DAOFactory {
 
 	public ArtikalDAO getArtikalDAO() {
-		// TODO - implement MySQLDAOFactory.getArtikalDAO
-		throw new UnsupportedOperationException();
+		return new MySQLArtikalDAO();
 	}
 
 	public TelefonDAO getTelefonDAO() {
-		// TODO - implement MySQLDAOFactory.getTelefonDAO
-		throw new UnsupportedOperationException();
+		return new MySQLTelefonDAO();
 	}
 
 	public DodatnaOpremaDAO getDodatnaOpremaDAO() {
-		// TODO - implement MySQLDAOFactory.getDodatnaOpremaDAO
-		throw new UnsupportedOperationException();
+		return new MySQLDodatnaOpremaDAO();
 	}
 
 	public RezervniDioDAO getRezervniDioDAO() {
-		// TODO - implement MySQLDAOFactory.getRezervniDioDAO
-		throw new UnsupportedOperationException();
+		return new MySQLRezervniDioDAO();
 	}
 
 	public OsobaDAO getOsobaDAO() {
