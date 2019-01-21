@@ -62,3 +62,26 @@ in pBrojTelefona varchar(255), in pRadnoMjesto varchar(255), in pIdZaposleni int
     update zaposleni set RadnoMjesto = pRadnoMjesto where IdZaposleni = pIdZaposleni;
     end$$
 delimiter ;
+
+delimiter $$
+create procedure dodaj_klijenta(in pIme varchar(255), in pPrezime varchar(255), in pBrojTelefona varchar(255))
+	begin
+    insert into osoba(Ime, Prezime, BrojTelefona, Obrisano) values (pIme, pPrezime, pBrojTelefona, 0);
+    insert into klijent(IdKlijent) values(last_insert_id());
+	end$$
+delimiter ;
+
+create view svi_klijenti as select * from osoba inner join klijent on osoba.IdOsoba = klijent.IdKlijent where Obrisano = 0;
+
+delimiter $$
+create procedure dodaj_servis(in pOpisKvara varchar(255), in pSerijskiBrojTelefona varchar(255), in pIdStanjeTelefona int,
+in pIdZaposleni int, in pIdModelTelefona int)
+	begin
+    declare vIdKlijent int;
+	select max(IdKlijent) into vIdKlijent from klijent;
+    
+    insert into servistelefona(IdKlijent, OpisKvara, DatumPrijema, SerijskiBrojTelefona, IdStanjeTelefona, IdZaposleni, IdModelTelefona, TelefonPreuzet)
+    values (vIdKlijent, pOpisKvara, now(), pSerijskiBrojTelefona, pIdStanjeTelefona, pIdZaposleni, pIdModelTelefona, 0);
+    end$$
+delimiter ;
+
