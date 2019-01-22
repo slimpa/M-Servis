@@ -10,6 +10,6 @@ public interface TelefonDAO {
 	boolean update(TelefonDTO telefon);
 	boolean delete(TelefonDTO telefon);
 	List<TelefonDTO> selectAll();
-	List<TelefonDTO> selectBy(TelefonDTO telefon);
+	List<TelefonDTO> selectBy(String model);
 
 }

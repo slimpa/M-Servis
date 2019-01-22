@@ -9,6 +9,6 @@ public interface DodatnaOpremaDAO {
 	boolean update(DodatnaOpremaDTO dodatnaOprema);
 	boolean delete(DodatnaOpremaDTO dodatnaOprema);
 	List<DodatnaOpremaDTO> selectAll();
-	List<DodatnaOpremaDTO> selectBy(DodatnaOpremaDTO dodatnaOprema);
+	List<DodatnaOpremaDTO> selectBy(String naziv);
 
 }
