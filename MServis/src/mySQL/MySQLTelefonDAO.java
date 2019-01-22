@@ -79,9 +79,34 @@ public class MySQLTelefonDAO implements TelefonDAO {
 	 * 
 	 * @param telefon
 	 */
-	public List<TelefonDTO> selectBy(TelefonDTO telefon) {
-		// TODO - implement MySQLTelefonDAO.selectBy
-		throw new UnsupportedOperationException();
+	public List<TelefonDTO> selectBy(String model) {
+		List<TelefonDTO> telefoni = new ArrayList<TelefonDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = SQL_SELECT_DETAIL + " where NazivModela = ?";
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, model);
+			rs = ps.executeQuery();
+			
+			if(rs == null) return null;
+			else {
+				while(rs.next()) {
+					telefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"),rs.getString("Boja"),rs.getInt("IdModelTelefona"),
+                                        rs.getString("Naziv"),rs.getString("NazivModela"),rs.getString("Proizvodjac"),rs.getString("Specifikacija"),rs.getInt("Cijena")));
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+		
+		return telefoni;
 	}
 
 }

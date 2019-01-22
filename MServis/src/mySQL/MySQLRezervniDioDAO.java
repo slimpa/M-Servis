@@ -86,7 +86,7 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = SQL_SELECT_DETAIL + " and artikal.Naziv = ?";
+		String query = SQL_SELECT_DETAIL + " where Naziv = ?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();

@@ -98,9 +98,34 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 	 * 
 	 * @param dodatnaOprema
 	 */
-	public List<DodatnaOpremaDTO> selectBy(DodatnaOpremaDTO dodatnaOprema) {
-		// TODO - implement MySQLDodatnaOpremaDAO.selectBy
-		throw new UnsupportedOperationException();
+	public List<DodatnaOpremaDTO> selectBy(String naziv) {
+		List<DodatnaOpremaDTO> dodatnaOprema = new ArrayList<DodatnaOpremaDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = SQL_SELECT_DETAIL + " where Naziv = ?";
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, naziv);
+			rs = ps.executeQuery();
+			
+			if(rs == null) return null;
+			else {
+				while(rs.next()) {
+					dodatnaOprema.add(new DodatnaOpremaDTO(rs.getString("Boja"),rs.getInt("idDodatnaOprema"),rs.getString("Naziv"),
+                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getInt("Cijena")));
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+		
+		return dodatnaOprema;
 	}
 
 }

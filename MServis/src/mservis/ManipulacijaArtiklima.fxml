@@ -35,8 +35,8 @@
                         <Button layoutX="41.0" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="Dodaj " />
                         <Button layoutX="41.0" layoutY="121.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Obriši" />
                         <Button layoutX="41.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Dodaj na račun" />
-                        <TextField layoutX="334.0" layoutY="233.0" prefHeight="25.0" prefWidth="123.0" />
-                        <Button layoutX="41.0" layoutY="233.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Pretraga" />
+                        <TextField fx:id="tfTelefoniPretraga" layoutX="334.0" layoutY="233.0" prefHeight="25.0" prefWidth="123.0" />
+                        <Button fx:id="btnTelefonPretrazi" layoutX="41.0" layoutY="233.0" mnemonicParsing="false" onAction="#btnPretraziTelefoneHandler" prefHeight="25.0" prefWidth="151.0" text="Pretraga" />
                         <ComboBox layoutX="222.0" layoutY="233.0" prefHeight="25.0" prefWidth="94.0" />
                         <Button layoutX="222.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Prikaži račun" />
                      </children>
@@ -61,8 +61,8 @@
                         <Button fx:id="btnDodatnaOpremaDodaj" layoutX="34.0" layoutY="36.0" mnemonicParsing="false" onAction="#btnDodatnaOpremaDodajHandler" prefHeight="25.0" prefWidth="125.0" text="Dodaj" />
                         <Button layoutX="34.0" layoutY="83.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Izmjeni" />
                         <Button layoutX="34.0" layoutY="137.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Obriši" />
-                        <TextField layoutX="349.0" layoutY="230.0" />
-                        <Button layoutX="34.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Pretraga" />
+                        <TextField fx:id="tfPretragaDodatnaOprema" layoutX="349.0" layoutY="230.0" />
+                        <Button fx:id="btnDodatnaOpremaPretrazi" layoutX="34.0" layoutY="230.0" mnemonicParsing="false" onAction="#btnPretraziDodatnuOpremuHandler" prefHeight="25.0" prefWidth="122.0" text="Pretraga" />
                         <Button layoutX="34.0" layoutY="186.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" text="Dodaj na račun" />
                         <ComboBox layoutX="181.0" layoutY="230.0" prefWidth="150.0" />
                         <Button layoutX="181.0" layoutY="186.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Prikaži račun" />

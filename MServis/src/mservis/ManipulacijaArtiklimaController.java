@@ -95,6 +95,12 @@ public class ManipulacijaArtiklimaController implements Initializable {
     @FXML
     private TableColumn<TelefonDTO, Integer> colTelefonCijena;
     
+    @FXML 
+    private Button btnTelefonPretrazi;
+    
+    @FXML 
+    private TextField tfTelefoniPretraga;
+    
     @FXML
     private TableView<DodatnaOpremaDTO> tableDodatnaOprema;
     
@@ -122,7 +128,13 @@ public class ManipulacijaArtiklimaController implements Initializable {
     @FXML
     private Button btnDodatnaOpremaDodaj;
     
-    private RezervniDioDAO rezervniDio = new MySQLDAOFactory().getRezervniDioDAO();
+    @FXML
+    private Button btnDodatnaOpremaPretrazi;
+    
+    @FXML
+    private TextField tfPretragaDodatnaOprema;
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -186,7 +198,8 @@ public class ManipulacijaArtiklimaController implements Initializable {
     
     public void btnPretraziRezervneDijeloveHandler(ActionEvent e){
         String naziv = tfRezervniDio.getText();
-        System.out.println(naziv);
+        //System.out.println(naziv);
+        RezervniDioDAO rezervniDio = new MySQLDAOFactory().getRezervniDioDAO();
         List<RezervniDioDTO> lista = rezervniDio.selectBy(naziv);
         ObservableList<RezervniDioDTO> listaRezervnihDijelova = FXCollections.observableArrayList(lista);
         if(listaRezervnihDijelova != null){
@@ -197,6 +210,48 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colKolicina.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("kolicinaRezervnogdijela"));
             colCijena.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("Cijena"));
             tableRezervniDijelovi.setItems(listaRezervnihDijelova);
+        }
+    }
+    
+    public void btnPretraziTelefoneHandler(ActionEvent e){
+        String model = tfTelefoniPretraga.getText();
+        //System.out.println(model);
+        TelefonDAO telefoni = new MySQLDAOFactory().getTelefonDAO();
+        List<TelefonDTO> listaTelefona = telefoni.selectBy(model);
+        ObservableList<TelefonDTO> listaSvihTelefona = FXCollections.observableArrayList(listaTelefona);
+        
+        
+        if(listaSvihTelefona != null){
+            colTelefonIdTelefona.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Integer>("IdModelTelefona"));
+            colTelefonNaziv.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Naziv"));
+            colTelefonModel.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Model"));
+            colTelefonProizvodjac.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Proizvodjac"));
+            colTelefonBoja.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Boja"));
+            colTelefonSpecifikacija.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Specifikacija"));
+            colTelefonSerijskiBroj.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("SerijskiBroj"));
+            colTelefonCijena.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Integer>("Cijena"));
+            tableTelefoni.setItems(listaSvihTelefona);
+        }
+    }
+    
+    public void btnPretraziDodatnuOpremuHandler(ActionEvent e){
+        String naziv = tfPretragaDodatnaOprema.getText();
+        //System.out.println(naziv);
+        DodatnaOpremaDAO dodatnaOprema = new MySQLDAOFactory().getDodatnaOpremaDAO();
+        List<DodatnaOpremaDTO> listaDodatneOpreme = dodatnaOprema.selectBy(naziv);
+        ObservableList<DodatnaOpremaDTO> listaSveDodatneOpreme = FXCollections.observableArrayList(listaDodatneOpreme);
+        
+        
+        if(listaSveDodatneOpreme != null){
+            colDodatnaOpremaIdDodatneOpreme.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, Integer>("idDodatnaOprema"));
+            colDodatnaOpremaNaziv.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Naziv"));
+            colDodatnaOpremaTip.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("TipOpreme"));
+            colDodatnaOpremaBoja.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Boja"));
+            colDodatnaOpremaModelTelefona.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("ModelTelefona"));
+            colDodatnaOpremaKolicina.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Kolicina"));
+            colDodatnaOpremaCijena.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Cijena"));
+            
+            tableDodatnaOprema.setItems(listaSveDodatneOpreme);
         }
     }
     
@@ -215,4 +270,5 @@ public class ManipulacijaArtiklimaController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }
