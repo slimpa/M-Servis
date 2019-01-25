@@ -41,7 +41,14 @@ INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES 
 INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Popravak tipki', '20.5','0');
 INSERT INTO `m:servis`.`cijenovnikusluga` (`Naziv`, `Cijena`,`Obrisano`) VALUES ('Zamjena stakla na ekranu', '10.99','0');
 
-INSERT INTO `m:servis`.`modeltelefona`(`IdModelTelefona`,`NazivModela`,`Slika`,`Specifikacija`) VALUES ('1','HTC desire 5','nema slike', 'prebrz');
+INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Telefon Samsung S9+', '1', '111000', '5', '0');
+INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Telefon Noika 3310', '2', '999999', '3', '0');
+INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Maska 14', '1', '333333', '20', '0');
+INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Slusalice Sony', '8', '333213', '10', '0');
+INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Displej za HTC Desire 5', '7', '000000', '3', '0');
+INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Ekran', '1', '000001', '3', '0');
+
+INSERT INTO `m:servis`.`modeltelefona`(`IdModelTelefona`,`NazivModela`,`Slika`,`Specifikacija`) VALUES ('2','HTC desire 5','nema slike', 'prebrz');
 INSERT INTO `m:servis`.`modeltelefona`(`IdModelTelefona`,`NazivModela`,`Slika`,`Specifikacija`) VALUES ('1','Samsung S9+','nema slike', 'prebrz');
 
 INSERT INTO `m:servis`.`telefon`(`IdModeTelefona`,`SerijskiBroj`,`Boja`,`Obrisano`) VALUES ('1','1511111111','Crvena', '0');
@@ -63,11 +70,7 @@ INSERT INTO `m:servis`.`cijena` (`IdArtikla`,`Cijena`, `DatumOd`, `DatumDo`,`Tre
 
 
 
-INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Telefon Samsung S9+', '1', '111000', '5', '0');
-INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Telefon Noika 3310', '2', '999999', '3', '0');
-INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Maska 14', '1', '333333', '20', '0');
-INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Slusalice Sony', '8', '333213', '10', '0');
-INSERT INTO `m:servis`.`artikal` (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) VALUES ('Displej za HTC Desire 5', '7', '000000', '3', '0');
+
 
 
 INSERT INTO `m:servis`.`osoba` (`Ime`, `Prezime`, `BrojTelefona`, `Obrisano`) VALUES ('AdminIme', 'AdminPrezime', '111 111', '0');
