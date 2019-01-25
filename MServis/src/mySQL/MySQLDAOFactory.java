@@ -54,23 +54,19 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	public KlijentDAO getKlijentDAO() {
-		// TODO - implement MySQLDAOFactory.getKlijentDAO
-		throw new UnsupportedOperationException();
+		return new MySQLKlijentDAO();
 	}
 
 	public RacunDAO getRacunDAO() {
-		// TODO - implement MySQLDAOFactory.getRacunDAO
-		throw new UnsupportedOperationException();
+		return new MySQLRacunDAO();
 	}
 
 	public IzvjestajDAO getIzvjestajDAO() {
-		// TODO - implement MySQLDAOFactory.getIzvjestajDAO
-		throw new UnsupportedOperationException();
+		return new MySQLIzvjestajDAO();
 	}
 
 	public ServisTelefonaDAO getServisTelefonaDAO() {
-		// TODO - implement MySQLDAOFactory.getServisTelefonaDAO
-		throw new UnsupportedOperationException();
+            return new MySQLServisTelefonaDAO();
 	}
 
 	public AdminDAO getAdminDAO() {
@@ -78,8 +74,7 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	public DobavljacDAO getDobavljacDAO() {
-		// TODO - implement MySQLDAOFactory.getDobavljacDAO
-		throw new UnsupportedOperationException();
+		return new MySQLDobavljacDAO();
 	}
 
 	public ProizvodjacDAO getProizvodjacDAO() {
@@ -87,32 +82,27 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	public ModelTelefonaDAO getModelTelefonaDAO() {
-		// TODO - implement MySQLDAOFactory.getModelTelefonaDAO
-		throw new UnsupportedOperationException();
+		return new MySQLModelTelefonDAO();
 	}
 
 	public UgradjeniRezervniDioDAO getUgradjeniRezervniDioDAO() {
-		// TODO - implement MySQLDAOFactory.getUgradjeniRezervniDioDAO
-		throw new UnsupportedOperationException();
+		return new MySQLUgradjeniRezervniDioDAO();
 	}
 
 	public RacunHasArtikalDAO getRacunHasArtikalDAO() {
-		// TODO - implement MySQLDAOFactory.getRacunHasArtikalDAO
-		throw new UnsupportedOperationException();
+		return new MySQLRacunHasArtikalDAO();
 	}
 
 	public NarudzbaDAO getNarudzbaDAO() {
-		// TODO - implement MySQLDAOFactory.getNarudzbaDAO
-		throw new UnsupportedOperationException();
+		return new MySQLNarudzbaDAO();
 	}
 
 	public NarudzbaHasArtikalDAO getNarudzbaHasArtikalDAO() {
-		// TODO - implement MySQLDAOFactory.getNarudzbaHasArtikalDAO
-		throw new UnsupportedOperationException();
+		return new MySQLNarudzbaHasArtikalDAO();
 	}
 
 	public TipDodatneOpremeDAO getTipDodatneOpremeDAO() {
-            return new MySQLTipDodatneOpremeDAO();
+		return new MySQLTipDodatneOpremeDAO();
 	}
 
 	public CjenovnikUslugaDAO getCjenovnikUslugaDAO() {
@@ -124,18 +114,15 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	public ServisTelefonaHasCjenovnikUslugaDAO getServisTelefonaHasCjenovnikUslugaDAO() {
-		// TODO - implement MySQLDAOFactory.getServisTelefonaHasCjenovnikUslugaDAO
-		throw new UnsupportedOperationException();
+		return new MySQLServisTelefonaHasCjenovnikUslugaDAO();
 	}
 
 	public RacunHasServisTelefonaDAO getRacunHasServisTelefonaDAO() {
-		// TODO - implement MySQLDAOFactory.getRacunHasServisTelefonaDAO
-		throw new UnsupportedOperationException();
+		return new MySQLRacunHasServisTelefonaDAO();
 	}
 
 	public CijenaDAO getCijenaDAO() {
-		// TODO - implement MySQLDAOFactory.getCijenaDAO
-		throw new UnsupportedOperationException();
+		return new MySQLCijenaDAO();
 	}
 
 }
