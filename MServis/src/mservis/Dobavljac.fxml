@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.DobavljacController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.DobavljacController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="600.0">
+      <Pane prefHeight="600.0" prefWidth="1000.0">
          <children>
-            <TableView layoutX="14.0" layoutY="162.0" prefHeight="212.0" prefWidth="556.0">
+            <TableView fx:id="tableDOBAVLJACI" layoutX="25.0" layoutY="162.0" prefHeight="415.0" prefWidth="954.0">
               <columns>
-                <TableColumn prefWidth="101.0" text="Id dobavljača" />
-                <TableColumn prefWidth="101.0" text="Naziv" />
-                  <TableColumn prefWidth="104.0" text="Adresa" />
-                  <TableColumn prefWidth="103.0" text="Telefon" />
-                  <TableColumn prefWidth="146.0" text="E-mail" />
+                <TableColumn fx:id="columnID" prefWidth="119.0" text="Id dobavljača" />
+                <TableColumn fx:id="columnNAZIV" prefWidth="150.0" text="Naziv" />
+                  <TableColumn fx:id="columnADRESA" prefWidth="284.0" text="Adresa" />
+                  <TableColumn fx:id="columnTEL" prefWidth="188.0" text="Telefon" />
+                  <TableColumn fx:id="columnEMAIL" prefWidth="212.0" text="E-mail" />
               </columns>
             </TableView>
-            <Button layoutX="24.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Dodaj dobavljača" />
-            <Button layoutX="24.0" layoutY="67.0" mnemonicParsing="false" text="Izmjeni dobavljača" />
-            <Button layoutX="24.0" layoutY="111.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Obriši dobavljača" />
+            <Button fx:id="btnDODOAJ" layoutX="24.0" layoutY="22.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="25.0" prefWidth="114.0" text="DODAJ" />
+            <Button fx:id="btnIZMIJENI" layoutX="24.0" layoutY="67.0" mnemonicParsing="false" onAction="#btnIzmijeni" prefHeight="31.0" prefWidth="114.0" text="IZMIJENI" />
+            <Button fx:id="btnOBRISI" layoutX="24.0" layoutY="111.0" mnemonicParsing="false" onAction="#btnOBrisi" prefHeight="25.0" prefWidth="114.0" text="OBRIŠI" />
          </children>
       </Pane>
    </children>
