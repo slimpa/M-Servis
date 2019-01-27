@@ -24,6 +24,26 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
         this.Cijena = Cijena;
     }
 
+    public DodatnaOpremaDTO(String Boja, String Naziv, String ModelTelefona, String TipOpreme, String Proizvodjac, String BarCode, int Kolicina, int Cijena) {
+        this.Boja = Boja;
+        this.Naziv = Naziv;
+        this.ModelTelefona = ModelTelefona;
+        this.TipOpreme = TipOpreme;
+        this.Proizvodjac = Proizvodjac;
+        this.BarCode = BarCode;
+        this.Kolicina = Kolicina;
+        this.Cijena = Cijena;
+    }
+    
+
+    public DodatnaOpremaDTO(String Boja, String Naziv, String ModelTelefona, String TipOpreme, String Proizvodjac) {
+        this.Boja = Boja;
+        this.Naziv = Naziv;
+        this.ModelTelefona = ModelTelefona;
+        this.TipOpreme = TipOpreme;
+        this.Proizvodjac = Proizvodjac;
+    }
+
     public void setTipOpreme(String TipOpreme) {
         this.TipOpreme = TipOpreme;
     }

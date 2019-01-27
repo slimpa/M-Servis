@@ -1,19 +1,55 @@
 package mySQL;
 
 import dao.CijenaDAO;
+import dbu.ConnectionPool;
 import dto.CijenaDTO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import java.util.List;
+import dbu.*;
+
 
 public class MySQLCijenaDAO implements CijenaDAO {
 
+    
+        public static final String SQL_INSERT = "INSERT INTO `m:servis`.`cijena` (`IdArtikla`,`Cijena`, `DatumOd`, `DatumDo`,`TrenutnaCijena`) VALUES (?, ?, ?, ?, ?);";
+	public static final String SQL_SELECT = "select * from artikal";
+	public static final String SQL_UPDATE = "update proizvodjac set";
 	/**
 	 * 
 	 * @param cijena
 	 */
 	public boolean insert(CijenaDTO cijena) {
-		// TODO - implement MySQLCijenaDAO.insert
-		throw new UnsupportedOperationException();
+            Connection conn = null;
+            PreparedStatement ps = null;
+            boolean returnValue = false;
+
+            try {
+
+               //int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano
+
+                    conn = ConnectionPool.getInstance().checkOut();
+                    ps = conn.prepareStatement(SQL_INSERT);
+                    
+                    ps.setInt(1, cijena.getIdArtikal());
+                    ps.setInt(2, (int) cijena.getCijena());
+                    ps.setTimestamp(3, cijena.getDatumOd());
+                    ps.setTimestamp(4, null);
+                    ps.setInt(5, 1);
+                    
+                    returnValue = ps.executeUpdate() == 1;
+                
+            } catch(SQLException e) {
+                    e.printStackTrace();
+                    return false;
+            } finally {
+                    ConnectionPool.getInstance().checkIn(conn);
+                    DBUtil.getInstance().close(ps);			
+            }
+
+            return returnValue;
 	}
 
 	/**

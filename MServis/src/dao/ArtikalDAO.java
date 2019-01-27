@@ -10,5 +10,6 @@ public interface ArtikalDAO {
 	boolean delete(ArtikalDTO artikal);
 	List<ArtikalDTO> selectAll();
 	List<ArtikalDTO> selectBy(ArtikalDTO artikal);
+        Integer getLastId();
 
 }

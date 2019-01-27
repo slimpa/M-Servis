@@ -137,12 +137,12 @@ public class MySQLTipDodatneOpremeDAO implements TipDodatneOpremeDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = SQL_SELECT + " and TipOpreme like ?";
+		String query = SQL_SELECT + " and TipOpreme = ?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setString(1, tipDodatneOpreme.getTip() + "%");
+			ps.setString(1, tipDodatneOpreme.getTip());
 			rs = ps.executeQuery();
 			
 			if(rs == null) return null;

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import dbu.DBUtil;
+import java.sql.PreparedStatement;
 
 import java.util.List;
 
@@ -16,16 +17,43 @@ public class MySQLArtikalDAO implements ArtikalDAO {
 
     
     
-        public static final String SQL_INSERT = "insert into proizvodjac values (?, ?, ?)";
+        public static final String SQL_INSERT = "insert into artikal (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) values (?, ?, ?, ?, ?)";
 	public static final String SQL_SELECT = "select * from artikal";
 	public static final String SQL_UPDATE = "update proizvodjac set";
+        //int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano
 	/**
 	 * 
 	 * @param artikal
 	 */
 	public boolean insert(ArtikalDTO artikal) {
-		// TODO - implement MySQLArtikalDAO.insert
-		throw new UnsupportedOperationException();
+	    Connection conn = null;
+            PreparedStatement ps = null;
+            boolean returnValue = false;
+
+            try {
+
+               //int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano
+
+                    conn = ConnectionPool.getInstance().checkOut();
+                    ps = conn.prepareStatement(SQL_INSERT);
+                    
+                    ps.setString(1, artikal.getNaziv());
+                    ps.setInt(4, artikal.getKolicina());
+                    ps.setInt(2, artikal.getIdProizvodjac());
+                    ps.setString(3, artikal.getBarKod());
+                    ps.setInt(5, 0);
+                    
+                    returnValue = ps.executeUpdate() == 1;
+                
+            } catch(SQLException e) {
+                    e.printStackTrace();
+                    return false;
+            } finally {
+                    ConnectionPool.getInstance().checkIn(conn);
+                    DBUtil.getInstance().close(ps);			
+            }
+
+            return returnValue;
 	}
 
 	/**
@@ -83,5 +111,29 @@ public class MySQLArtikalDAO implements ArtikalDAO {
 		// TODO - implement MySQLArtikalDAO.selectBy
 		throw new UnsupportedOperationException();
 	}
+        
+        public Integer getLastId(){
+            Connection conn = null;
+            Statement stat = null;
+            ResultSet rs = null;
+            Integer lastId = null;
+
+            try {
+                    conn = ConnectionPool.getInstance().checkOut();
+                    stat = conn.createStatement();
+                    rs = stat.executeQuery("SELECT MAX(IdArtikal) FROM artikal;");
+                    if (rs.next()){
+                         lastId=rs.getInt(1);
+                    }
+                    
+            } catch(SQLException e) {
+                    e.printStackTrace();
+            } finally {
+                    ConnectionPool.getInstance().checkIn(conn);
+                    DBUtil.getInstance().close(stat);
+            }
+            System.out.println();
+            return lastId;
+        }
 
 }

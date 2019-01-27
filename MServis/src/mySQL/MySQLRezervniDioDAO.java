@@ -22,6 +22,7 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 	public static final String SQL_SELECT = "select * from rezervnidio";
 	public static final String SQL_UPDATE = "update proizvodjac set";
         public static final String SQL_SELECT_DETAIL = "select * from rezervni_dijelovi";
+         public static final String SQL_DELETE = "DELETE FROM `m:servis`.`rezervnidio` WHERE `IdRezervniDio`=?";
 	/**
 	 * 
 	 * @param rezervniDio
@@ -45,8 +46,38 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 	 * @param rezervniDio
 	 */
 	public boolean delete(RezervniDioDTO rezervniDio) {
-		// TODO - implement MySQLRezervniDioDAO.delete
-		throw new UnsupportedOperationException();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		boolean returnValue = false;
+                try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(SQL_DELETE);
+
+			ps.setInt(1, rezervniDio.getIdRezervniDio());
+			
+			returnValue = ps.executeUpdate() == 1;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+                
+                try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement("update artikal set Obrisano=1 where IdArtikal = ?");
+
+			ps.setInt(1, rezervniDio.getIdRezervniDio());
+			
+			returnValue = ps.executeUpdate() == 1;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+		
+		return returnValue;
 	}
 
 	public List<RezervniDioDTO> selectAll() {
@@ -86,12 +117,12 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = SQL_SELECT_DETAIL + " where Naziv = ?";
+		String query = SQL_SELECT_DETAIL + " where Naziv like ?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setString(1, naziv);
+			ps.setString(1, "%" + naziv + "%");
 			rs = ps.executeQuery();
 			
 			if(rs == null) return null;

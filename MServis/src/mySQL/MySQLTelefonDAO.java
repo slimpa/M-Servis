@@ -15,17 +15,38 @@ import java.util.List;
 public class MySQLTelefonDAO implements TelefonDAO {
 
     
-        public static final String SQL_INSERT = "insert into proizvodjac values (?, ?, ?)";
+        public static final String SQL_INSERT = "insert into telefon (`IdModeTelefona`,`SerijskiBroj`,`Boja`,`Obrisano`) values (?, ?, ?, ?)";
 	public static final String SQL_SELECT = "select * from rezervnidio";
 	public static final String SQL_UPDATE = "update proizvodjac set";
         public static final String SQL_SELECT_DETAIL = "select * from svi_telefoni";
+        public static final String SQL_DELETE = "DELETE FROM `m:servis`.`telefon` WHERE `IdModeTelefona`=?";
 	/**
 	 * 
 	 * @param telefon
 	 */
 	public boolean insert(TelefonDTO telefon) {
-		// TODO - implement MySQLTelefonDAO.insert
-		throw new UnsupportedOperationException();
+                Connection conn = null;
+		PreparedStatement ps = null;
+		boolean returnValue = false;
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(SQL_INSERT);
+			ps.setInt(1, telefon.getIdModelTelefona());
+			ps.setString(2, telefon.getSerijskiBroj());
+                        ps.setString(3, telefon.getBoja());
+                        ps.setInt(4, 0);
+                        
+                        
+			returnValue = ps.executeUpdate() == 1;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);			
+		}
+		
+		return returnValue;
 	}
 
 	/**
@@ -42,8 +63,38 @@ public class MySQLTelefonDAO implements TelefonDAO {
 	 * @param telefon
 	 */
 	public boolean delete(TelefonDTO telefon) {
-		// TODO - implement MySQLTelefonDAO.delete
-		throw new UnsupportedOperationException();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		boolean returnValue = false;
+                try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(SQL_DELETE);
+
+			ps.setInt(1, telefon.getIdModelTelefona());
+			
+			returnValue = ps.executeUpdate() == 1;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+                
+                try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement("update artikal set Obrisano=1 where IdArtikal = ?");
+
+			ps.setInt(1, telefon.getIdModelTelefona());
+			
+			returnValue = ps.executeUpdate() == 1;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+		
+		return returnValue;
 	}
 
 	public List<TelefonDTO> selectAll() {
@@ -84,12 +135,12 @@ public class MySQLTelefonDAO implements TelefonDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = SQL_SELECT_DETAIL + " where NazivModela = ?";
+		String query = SQL_SELECT_DETAIL + " where NazivModela like ?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setString(1, model);
+			ps.setString(1, "%" + model + "%");
 			rs = ps.executeQuery();
 			
 			if(rs == null) return null;
