@@ -18,9 +18,8 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
         
     
             
-        public static final String SQL_INSERT = "insert into proizvodjac values (?, ?, ?)";
+        public static final String SQL_INSERT = "INSERT INTO `m:servis`.`rezervniDio` (`IdRezervniDio`,`Opis`,`IdModelTelefona`) VALUES (?, ?, ?)";
 	public static final String SQL_SELECT = "select * from rezervnidio";
-	public static final String SQL_UPDATE = "update proizvodjac set";
         public static final String SQL_SELECT_DETAIL = "select * from rezervni_dijelovi";
          public static final String SQL_DELETE = "DELETE FROM `m:servis`.`rezervnidio` WHERE `IdRezervniDio`=?";
 	/**
@@ -28,8 +27,28 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 	 * @param rezervniDio
 	 */
 	public boolean insert(RezervniDioDTO rezervniDio) {
-		// TODO - implement MySQLRezervniDioDAO.insert
-		throw new UnsupportedOperationException();
+                Connection conn = null;
+		PreparedStatement ps = null;
+		boolean returnValue = false;
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(SQL_INSERT);
+			ps.setInt(1, rezervniDio.getIdRezervniDio());
+			ps.setString(2, rezervniDio.getOpis());
+                        ps.setInt(3, rezervniDio.getIdModelTelefona());
+                        
+                        
+                        
+			returnValue = ps.executeUpdate() == 1;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);			
+		}
+		
+		return returnValue;
 	}
 
 	/**
@@ -94,7 +113,7 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 			if(rs == null) return null;
 			else {
 				while(rs.next()) {
-					rezervniDijelovi.add(new RezervniDioDTO(rs.getInt("IdRezervniDio"),rs.getInt("IdModelTelefona"),rs.getString("Opis")));
+					rezervniDijelovi.add(new RezervniDioDTO(rs.getInt("IdRezervniDio"),rs.getInt("IdModelTelefona"),rs.getString("Opis"),rs.getString("Naziv"),rs.getInt("Kolicina"),rs.getInt("Cijena")));
                                         
 				}
 			}

@@ -17,7 +17,7 @@ public class MySQLTelefonDAO implements TelefonDAO {
     
         public static final String SQL_INSERT = "insert into telefon (`IdModeTelefona`,`SerijskiBroj`,`Boja`,`Obrisano`) values (?, ?, ?, ?)";
 	public static final String SQL_SELECT = "select * from rezervnidio";
-	public static final String SQL_UPDATE = "update proizvodjac set";
+	
         public static final String SQL_SELECT_DETAIL = "select * from svi_telefoni";
         public static final String SQL_DELETE = "DELETE FROM `m:servis`.`telefon` WHERE `IdModeTelefona`=?";
 	/**

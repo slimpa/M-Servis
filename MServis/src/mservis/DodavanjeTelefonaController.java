@@ -5,11 +5,20 @@
  */
 package mservis;
 
+import dao.ArtikalDAO;
+import dao.CijenaDAO;
+import dao.ModelTelefonaDAO;
 import dao.ProizvodjacDAO;
+import dao.TelefonDAO;
+import dto.ArtikalDTO;
+import dto.CijenaDTO;
+import dto.ModelTelefonaDTO;
 import dto.ProizvodjacDTO;
 import dto.TelefonDTO;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -83,7 +92,48 @@ public class DodavanjeTelefonaController implements Initializable{
     }
     
     public void btnSacuvajHandler(ActionEvent e){
+        String naziv = tfNaziv.getText();
+        String proizvodjac =  cbProizvodjac.getValue().toString();
+        String barKod = tfBarKod.getText(); 
+        String model = tfModel.getText();
+        String serijskiBroj =  tfSerijskiBroj.getText();
+        String boja = cbBoja.getValue().toString();
+        Integer cijena = Integer.parseInt(tfCijena.getText());
+        String specifikacija =  taSpecifikacija.getText();
+        Integer idModelaTelefona ;
         
+        
+        
+        
+        ProizvodjacDTO proizvodjacDTO = new ProizvodjacDTO(proizvodjac);
+        //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+        ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
+        List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
+        ArtikalDTO artikal = new ArtikalDTO(naziv,1,proizvodjaci.get(0).getIdProizvodjac(),barKod);
+        //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+        ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
+        artikalDAO.insert(artikal);
+        idModelaTelefona=artikalDAO.getLastId();
+        
+        ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(idModelaTelefona,specifikacija,"nema slike",model);//int idModeltelefona, String Specifikacija, String Slika, String NazivModela
+        //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+        ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
+        List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);
+        modelTelefonaDAO.insert(modelTelefonaDTO);
+        //imam naziv, proizvodjac,barkod,model
+        //String SerijskiBroj, String Boja, int idModelTelefona, String Naziv, String Model, String Proizvodjac, String Specifikacija, int Cijena
+        TelefonDTO telefonDTO = new TelefonDTO(serijskiBroj,boja,idModelaTelefona,naziv,model, proizvodjac,specifikacija,cijena);
+        TelefonDAO telefonDAO = new MySQLDAOFactory().getTelefonDAO();
+        telefonDAO.insert(telefonDTO);
+        
+
+        
+        CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
+        Date date= new Date();
+        long time = date.getTime();
+        Timestamp ts = new Timestamp(time);
+        CijenaDTO cijenaDTO = new CijenaDTO(artikalDAO.getLastId(),cijena,ts);
+        cijenaDAO.insert(cijenaDTO);
     }
     
     public void btnIzadjiHandler(ActionEvent e){

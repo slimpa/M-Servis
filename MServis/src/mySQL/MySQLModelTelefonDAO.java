@@ -16,7 +16,7 @@ public class MySQLModelTelefonDAO implements ModelTelefonaDAO {
     
         public static final String SQL_INSERT = "insert into modeltelefona (`IdModelTelefona`,`NazivModela`,`Slika`,`Specifikacija`) values (?,?,?,?);";
 	public static final String SQL_SELECT = "SELECT * FROM `m:servis`.modeltelefona";
-	public static final String SQL_UPDATE = "update proizvodjac set";
+
         public static final String SQL_DELETE = "DELETE FROM `m:servis`.`modeltelefona` WHERE `IdModelTelefona`=?";
 	/**
 	 * 

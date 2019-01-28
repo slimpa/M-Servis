@@ -16,8 +16,8 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
         
     
         public static final String SQL_INSERT_DODATNA_OPREMA = "insert into dodatnaoprema values (?, ?, ?, ?)";
-	public static final String SQL_SELECT = "select * from rezervnidio";
-	public static final String SQL_UPDATE = "update proizvodjac set";
+	public static final String SQL_SELECT = "select * from dodatnaoprema";
+	
         public static final String SQL_SELECT_DETAIL = "select * from dodatna_oprema";
         public static final String SQL_DELETE = "DELETE FROM `m:servis`.`dodatnaoprema` WHERE `IdDodatnaOprema`=?";
 	/**

@@ -9,6 +9,12 @@ public class ModelTelefonaDTO extends ArtikalDTO {
 	private int idModeltelefona;
 	private String Specifikacija;
 	private String Slika;
+
+    public ModelTelefonaDTO(int idModeltelefona, String Specifikacija, String NazivModela) {
+        this.idModeltelefona = idModeltelefona;
+        this.Specifikacija = Specifikacija;
+        this.NazivModela = NazivModela;
+    }
 	private String NazivModela;
 
     public ModelTelefonaDTO(int idModeltelefona, String Specifikacija, String Slika, String NazivModela) {
