@@ -1,6 +1,9 @@
 # M-Servis
 Projektni iz informacionih sistema
 
+Sve JAR fajlove u folderu lib treba ukljuciti u projekat!
+
+
 Uputstvo za GIT
 
 Kloniranje repozitorija:
