@@ -18,7 +18,7 @@ public class MySQLArtikalDAO implements ArtikalDAO {
     
     
         public static final String SQL_INSERT = "insert into artikal (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) values (?, ?, ?, ?, ?)";
-	public static final String SQL_SELECT = "select * from artikal";
+	 public static final String SQL_SELECT_ALL = "select * from artikal where Obrisano=0 order by Kolicina desc;";
 	public static final String SQL_UPDATE = "update proizvodjac set";
         //int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano
 	/**
@@ -83,7 +83,7 @@ public class MySQLArtikalDAO implements ArtikalDAO {
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			stat = conn.createStatement();
-			rs = stat.executeQuery(SQL_SELECT);
+			rs = stat.executeQuery(SQL_SELECT_ALL);
 			
 			if(rs == null) return null;
 			else {

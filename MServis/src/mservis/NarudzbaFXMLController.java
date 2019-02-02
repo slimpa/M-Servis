@@ -253,7 +253,7 @@ public class NarudzbaFXMLController implements Initializable {
     {
         Document document = new Document();
         try {
-            String ime="Narudzba/Narudzba"+IdN+".pdf";
+            String ime="Narudzbe/Narudzba"+IdN+".pdf";
             PdfWriter.getInstance(document, new FileOutputStream(ime));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(NarudzbaFXMLController.class.getName()).log(Level.SEVERE, null, ex);
@@ -261,7 +261,7 @@ public class NarudzbaFXMLController implements Initializable {
         document.open();
     
             try {
-              Image img = Image.getInstance("C:\\Users\\Korisnik\\Desktop\\M-Servis-master\\MServis\\Slike\\Logo.png");
+              Image img = Image.getInstance("resources/Logo.png");
               img.scaleAbsolute(250f, 200f);
               img.setAbsolutePosition(175f, 700f);
               document.add(img);

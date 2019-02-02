@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="aPANE" prefHeight="530.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.NarudzbaFXMLController">
+   <children>
+      <ComboBox fx:id="comboDOBAVLJACI" layoutX="25.0" layoutY="42.0" onAction="#insertNarudzbu" prefHeight="38.0" prefWidth="207.0" promptText="Dobavljači" />
+      <ComboBox fx:id="comboTIP" layoutX="25.0" layoutY="106.0" onAction="#dodajArtikle" prefHeight="38.0" prefWidth="207.0" promptText="Tip Artikla" />
+      <ComboBox fx:id="comboARTIKAL" layoutX="25.0" layoutY="173.0" prefHeight="38.0" prefWidth="207.0" promptText="Artikal" />
+      <TextField fx:id="tKOLICINA" layoutX="113.0" layoutY="243.0" prefHeight="38.0" prefWidth="119.0" promptText="količina" />
+      <Button fx:id="tDODAJ" layoutX="167.0" layoutY="312.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="38.0" prefWidth="68.0" text="DODAJ" />
+      <TableView fx:id="tabelaNARUDZBA" layoutX="276.0" layoutY="42.0" prefHeight="314.0" prefWidth="470.0">
+        <columns>
+          <TableColumn fx:id="columnID" prefWidth="82.0" text="Id Artikal" />
+          <TableColumn fx:id="columnARTIKAL" prefWidth="274.0" text="Artikal" />
+            <TableColumn fx:id="columnKOL" prefWidth="113.0" text="Količina" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnOBRISI" layoutX="681.0" layoutY="384.0" mnemonicParsing="false" onAction="#btnObrisi" prefHeight="38.0" prefWidth="65.0" text="OBRIŠI" />
+      <Button fx:id="btnKREIRAJ" layoutX="585.0" layoutY="471.0" mnemonicParsing="false" onAction="#btnKreiraj" prefHeight="38.0" prefWidth="161.0" text="KREIRAJ NARUDŽBU" />
+      <Button fx:id="btnODUSTANI" layoutX="25.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnOdustani" text="ODUSTANI" />
+   </children>
+</AnchorPane>

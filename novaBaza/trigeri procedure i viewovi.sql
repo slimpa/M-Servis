@@ -102,5 +102,15 @@ where modeltelefona.IdModelTelefona=telefon.IdModeTelefona  and modeltelefona.Id
 create view dodatna_oprema as
 select dodatnaoprema.IdDodatnaOprema, artikal.Naziv, tipdodatneopreme.TipOpreme, dodatnaoprema.Boja, modeltelefona.NazivModela, artikal.Kolicina, cijena.Cijena
 from dodatnaoprema natural join tipdodatneopreme natural join artikal natural join cijena natural join modeltelefona
-where dodatnaoprema.IdDodatnaOprema=artikal.IdArtikal and dodatnaoprema.IdTipDodatneOpreme= tipdodatneopreme.IdTipDodatneOpreme and artikal.IdArtikal=cijena.IdArtikla and modeltelefona.IdModelTelefona=dodatnaoprema.IdModelTelefona
+where dodatnaoprema.IdDodatnaOprema=artikal.IdArtikal and dodatnaoprema.IdTipDodatneOpreme= tipdodatneopreme.IdTipDodatneOpreme and artikal.IdArtikal=cijena.IdArtikla and modeltelefona.IdModelTelefona=dodatnaoprema.IdModelTelefona;
 
+
+Alter table Narudzba_has_Kolicina add column Kolicina int;
+
+create view dnevni_izvjestaj as
+select racun.IdRacun,date(racun.Vrijeme) as Datum, artikal.IdArtikal,artikal.Naziv, racun_has_artikal.Kolicina, cijena.Cijena
+from cijena inner join artikal  inner join racun_has_artikal inner join racun
+on cijena.IdArtikla=artikal.IdArtikal and artikal.IdArtikal=racun_has_artikal.IdArtikal and racun.IdRacun=racun_has_artikal.IdRacun
+where ((cijena.DatumDo is not null and cijena.DatumOd<racun.Vrijeme and cijena.DatumDo>racun.Vrijeme )
+ or (cijena.DatumOd<racun.Vrijeme and cijena.TrenutnaCijena=1)) and (date(racun.Vrijeme)=CURDATE())
+ order by Naziv;

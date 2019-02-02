@@ -8,12 +8,25 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="MServis.jar" size="88817" download="eager" />
+    <jar href="MServis.jar" size="150847" download="eager" />
+    <jar href="lib\bcprov-jdk15on-1.56.jar" size="3448507" download="eager" />
     <jar href="lib\c3p0-0.9.1-pre6.jar" size="531005" download="eager" />
+    <jar href="lib\c3p0-0.9.1-pre6_1.jar" size="531005" download="eager" />
+    <jar href="lib\commons-beanutils-1.9.0.jar" size="230951" download="eager" />
+    <jar href="lib\commons-collections-3.2.1.jar" size="575389" download="eager" />
+    <jar href="lib\commons-digester-2.1.jar" size="196768" download="eager" />
+    <jar href="lib\commons-logging-1.1.1.jar" size="60841" download="eager" />
+    <jar href="lib\commons-validator-1.6.jar" size="186077" download="eager" />
+    <jar href="lib\itext-pdfa-5.5.0.jar" size="54330" download="eager" />
+    <jar href="lib\itextpdf-5.5.13.jar" size="2320581" download="eager" />
+    <jar href="lib\jasperreports-6.0.0.jar" size="5144510" download="eager" />
+    <jar href="lib\jasperreports-fonts-6.0.0.jar" size="2478096" download="eager" />
+    <jar href="lib\jasperreports-javaflow-6.0.0.jar" size="5188992" download="eager" />
     <jar href="lib\javafx-dialogs-0.0.4.jar" size="118239" download="eager" />
     <jar href="lib\jboss-common-jdbc-wrapper-src.jar" size="35342" download="eager" />
     <jar href="lib\jboss-common-jdbc-wrapper.jar" size="50184" download="eager" />
     <jar href="lib\mysql-connector-java-8.0.13.jar" size="2132635" download="eager" />
+    <jar href="lib\pdfbox-2.0.13.jar" size="2544500" download="eager" />
     <jar href="lib\protobuf-java-3.6.1.jar" size="1421323" download="eager" />
     <jar href="lib\slf4j-api-1.6.1.jar" size="25496" download="eager" />
   </resources>

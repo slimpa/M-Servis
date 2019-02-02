@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.DodavanjeDodatneOpremeController">
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -16,20 +15,20 @@
             <Label layoutX="37.0" layoutY="117.0" text="Proizvođač" />
             <Label layoutX="37.0" layoutY="200.0" text="Bar code" />
             <Label layoutX="37.0" layoutY="152.0" text="Model" />
-            <TextField layoutX="118.0" layoutY="32.0" />
+            <TextField fx:id="tfNaziv" layoutX="118.0" layoutY="32.0" />
             <Label layoutX="41.0" layoutY="81.0" text="Tip" />
             <Label layoutX="38.0" layoutY="233.0" text="Boja" />
             <Label layoutX="38.0" layoutY="269.0" text="Količina" />
             <Label layoutX="38.0" layoutY="302.0" text="Cijena" />
-            <ComboBox layoutX="117.0" layoutY="77.0" prefWidth="150.0" />
-            <ComboBox layoutX="117.0" layoutY="122.0" prefWidth="150.0" />
-            <ComboBox layoutX="117.0" layoutY="157.0" prefWidth="150.0" />
-            <TextField layoutX="118.0" layoutY="196.0" />
-            <TextField layoutX="118.0" layoutY="265.0" />
-            <TextField layoutX="118.0" layoutY="307.0" />
-            <ComboBox layoutX="117.0" layoutY="229.0" prefWidth="150.0" />
-            <Button layoutX="338.0" layoutY="346.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Sačuvaj" />
-            <Button layoutX="477.0" layoutY="346.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Izađi" />
+            <ComboBox fx:id="cbTip" layoutX="117.0" layoutY="77.0" prefWidth="150.0" />
+            <ComboBox fx:id="cbProizvodjac" layoutX="117.0" layoutY="122.0" prefWidth="150.0" />
+            <ComboBox fx:id="cbModel" layoutX="117.0" layoutY="157.0" prefWidth="150.0" />
+            <TextField fx:id="tfBarKod" layoutX="118.0" layoutY="196.0" />
+            <TextField fx:id="tfKolicina" layoutX="118.0" layoutY="265.0" />
+            <TextField fx:id="tfCijena" layoutX="118.0" layoutY="307.0" />
+            <ComboBox fx:id="cbBoja" layoutX="117.0" layoutY="229.0" prefWidth="150.0" />
+            <Button fx:id="btnSacuvaj" layoutX="338.0" layoutY="346.0" mnemonicParsing="false" onAction="#btnSacuvajHandler" prefHeight="25.0" prefWidth="90.0" text="Sačuvaj" />
+            <Button fx:id="btnIzadji" layoutX="477.0" layoutY="346.0" mnemonicParsing="false" onAction="#btnIzadjiHandler" prefHeight="25.0" prefWidth="90.0" text="Izađi" />
          </children>
       </Pane>
    </children>

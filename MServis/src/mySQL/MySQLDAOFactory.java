@@ -23,6 +23,7 @@ import dao.IzvjestajDAO;
 import dao.NarudzbaDAO;
 import dao.AdminDAO;
 import dao.ArtikalDAO;
+import dao.DnevniIzvjestajDAO;
 import dao.DodatnaOpremaDAO;
 import dao.TelefonDAO;
 
@@ -35,6 +36,10 @@ public class MySQLDAOFactory extends DAOFactory {
 	public TelefonDAO getTelefonDAO() {
 		return new MySQLTelefonDAO();
 	}
+        
+        public DnevniIzvjestajDAO getDnevniIzvjestajDAO(){
+            return new MySQLDnevniIzvjestajDAO();
+        }
 
 	public DodatnaOpremaDAO getDodatnaOpremaDAO() {
 		return new MySQLDodatnaOpremaDAO();

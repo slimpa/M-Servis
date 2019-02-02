@@ -88,7 +88,7 @@ public class GlavnaFormaController implements Initializable {
         Stage stage = new Stage();
         Parent root2;
         try {
-            root2 = FXMLLoader.load(getClass().getResource("Narudzba.fxml"));
+            root2 = FXMLLoader.load(getClass().getResource("NarudzbaFXML.fxml"));
 
             Scene scene = new Scene(root2);
             
