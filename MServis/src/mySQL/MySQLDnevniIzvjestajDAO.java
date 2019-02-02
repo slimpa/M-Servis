@@ -25,22 +25,6 @@ public class MySQLDnevniIzvjestajDAO implements DnevniIzvjestajDAO {
     public static final String SQL_SELECT_ALL = "select * from dnevni_izvjestaj";
 
 
-
-    @Override
-    public boolean insert(DnevniIzvjestajDTO admin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean update(DnevniIzvjestajDTO admin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean delete(DnevniIzvjestajDTO admin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public List<DnevniIzvjestajDTO> selectAll() {
         List<DnevniIzvjestajDTO> artikli = new ArrayList<DnevniIzvjestajDTO>();
@@ -70,15 +54,4 @@ public class MySQLDnevniIzvjestajDAO implements DnevniIzvjestajDAO {
 
         return artikli;
     }
-
-    @Override
-    public List<DnevniIzvjestajDTO> selectBy(DnevniIzvjestajDTO admin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public DnevniIzvjestajDTO selectAdmin(DnevniIzvjestajDTO admin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

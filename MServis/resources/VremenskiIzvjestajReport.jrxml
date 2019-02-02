@@ -27,7 +27,7 @@
 					<textElement>
 						<font size="30" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Izvjestaj o prodaji]]></text>
+					<text><![CDATA[Izvještaj o prodaji]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="480" y="10" width="95" height="40" forecolor="#FFFFFF" uuid="cf379af5-3cd3-431d-9c65-217f6658924b"/>
@@ -85,7 +85,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Id racuna]]></text>
+				<text><![CDATA[Broj racuna]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="90" y="0" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0a629eb9-312a-4809-973a-a41f98edd477">
@@ -94,7 +94,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Id artikla]]></text>
+				<text><![CDATA[Šifra artikla]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="190" y="0" width="140" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="9d24421e-b38c-4f11-80e1-1dac4db65d81">
@@ -130,7 +130,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Datum racuna]]></text>
+				<text><![CDATA[Datum izdavanja]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

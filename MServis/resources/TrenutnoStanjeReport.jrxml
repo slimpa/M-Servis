@@ -62,7 +62,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Id artikla]]></text>
+				<text><![CDATA[Šifra artikla]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="130" y="0" width="148" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="624fa68f-4b66-456a-af15-66a99565a58f">
@@ -126,7 +126,7 @@
 				<textFieldExpression><![CDATA[$F{naziv}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="470" y="0" width="70" height="20" uuid="ee0f7761-c5f3-4173-8ad1-ad8f9961fb56">
+				<reportElement x="480" y="0" width="75" height="20" uuid="ee0f7761-c5f3-4173-8ad1-ad8f9961fb56">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="82f6e2b9-6614-4f2f-88a1-566c77447aa7"/>
 				</reportElement>
 				<textElement>

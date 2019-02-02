@@ -5,13 +5,14 @@
  */
 package dao;
 
-import dto.DnevniIzvjestajDTO;
+import dto.PeriodicniIzvjestajDTO;
+import java.sql.Date;
 import java.util.List;
 
 /**
  *
  * @author Nikola
  */
-public interface DnevniIzvjestajDAO {
-	List<DnevniIzvjestajDTO> selectAll();
+public interface PeriodicniIzvjestajDAO {
+    List<PeriodicniIzvjestajDTO> selectBetween(Date odDatum,Date doDatum);
 }

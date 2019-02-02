@@ -6,21 +6,21 @@
 package mservis;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
 import service.GeneratorIzvjestaja;
 
 /**
@@ -46,36 +46,65 @@ public class IzvjestajController implements Initializable {
     }
 
     public void btnKreirajIzvjestaj(ActionEvent e) {
+        Date datumOdSql = null;
+        Date datumDoSql = null;
         GeneratorIzvjestaja r = new GeneratorIzvjestaja();
-        File selectedDirectory=null;
-        String tip = cbTip.getSelectionModel().getSelectedItem().toString();
-        if (!tip.equals("Tip izvještaja")) {
-            DirectoryChooser chooser = new DirectoryChooser();
-            chooser.setTitle("Izaberite odredište izvještaja");
-            // File defaultDirectory = new File("c:/dev/javafx");
-            //  chooser.setInitialDirectory(defaultDirectory);
-            selectedDirectory = chooser.showDialog(null);
-            System.out.print(selectedDirectory.getAbsolutePath());
-            
-        }
-        try{
-        switch (tip) {
-            case "Trenutno stanje artikala":     
-                r.trenutnoStanje(selectedDirectory.getAbsolutePath());
-                break;
-            case "Dnevni izvještaj prodaje":
-                r.dnevniIzvjestaj(selectedDirectory.getAbsolutePath());
-                break;
-            case "Periodični izvještaj prodaje":
+        File selectedDirectory = null;
+        try {
+            String tip = cbTip.getSelectionModel().getSelectedItem().toString();
 
-                break;
-            default:
+            if (!tip.equals("Tip izvještaja")) {
+                if (tip.equals("Periodični izvještaj prodaje")) {
+                    LocalDate datumOd = pickerDatumOd.getValue();
+                    LocalDate datumDo = pickerDatumDo.getValue();
+                    datumOdSql = Date.valueOf(datumOd);
+                    datumDoSql = Date.valueOf(datumDo);
+                    if (datumOd.isAfter(datumDo) || datumOd.isAfter(LocalDate.now()) || datumDo.isAfter(LocalDate.now())) {
+                        throw new IllegalArgumentException();
+                    }
 
-                break;
-        }
-        }
-        catch(Exception e1){
-            e1.printStackTrace();
+                }
+
+                DirectoryChooser chooser = new DirectoryChooser();
+                chooser.setTitle("Izaberite odredište izvještaja");
+                selectedDirectory = chooser.showDialog(null);
+
+            }
+
+            switch (tip) {
+                case "Trenutno stanje artikala":
+                    r.trenutnoStanje(selectedDirectory.getAbsolutePath());
+                    break;
+                case "Dnevni izvještaj prodaje":
+                    r.dnevniIzvjestaj(selectedDirectory.getAbsolutePath());
+                    break;
+                case "Periodični izvještaj prodaje":
+                    r.periodicniIzvjestaj(selectedDirectory.getAbsolutePath(), datumOdSql, datumDoSql);
+                    break;
+                default:
+
+                    break;
+            }
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Obavještenje!");
+            alert.setHeaderText(null);
+            alert.setContentText("Izvještaj uspješno kreiran!");
+            alert.showAndWait();
+        } catch (NullPointerException e1) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Niste odabrali sve potrebne parametre za izvještaj!");
+            alert.showAndWait();
+            // e1.printStackTrace();
+        } catch (IllegalArgumentException e2) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Odabrani datum nije ispravan!");
+            alert.showAndWait();
+        } catch (JRException ex) {
+            Logger.getLogger(IzvjestajController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
