@@ -56,4 +56,10 @@ public class ModelTelefonaDTO extends ArtikalDTO {
         return NazivModela;
     }
 
+    @Override
+    public String toString() {
+        return NazivModela;
+    }
+
+    
 }

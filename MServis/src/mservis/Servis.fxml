@@ -13,19 +13,18 @@
       <Label layoutX="17.0" layoutY="28.0" text="Pretraga" />
       <TextField layoutX="76.0" layoutY="24.0" promptText="Id servisa" />
       <ComboBox layoutX="260.0" layoutY="24.0" prefWidth="150.0" promptText="Stanje uređaja" />
-      <Button layoutX="34.0" layoutY="427.0" mnemonicParsing="false" text="Dodaj uređaj" />
-      <Button layoutX="293.0" layoutY="427.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Izmjena" />
-      <TableView layoutX="23.0" layoutY="72.0" prefHeight="331.0" prefWidth="1101.0">
+      <Button layoutX="34.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnNoviServis" text="Novi servis" />
+      <Button layoutX="293.0" layoutY="427.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" onAction="#btnServisiraj" text="Servisiraj" />
+      <TableView layoutX="23.0" layoutY="76.0" prefHeight="331.0" prefWidth="1101.0">
         <columns>
           <TableColumn prefWidth="75.0" text="Id servisa" />
-          <TableColumn prefWidth="75.0" text="Id klijenta" />
-            <TableColumn prefWidth="105.0" text="Id zaposlenog" />
-            <TableColumn prefWidth="159.0" text="Model uređaja" />
-            <TableColumn prefWidth="113.0" text="Serijski broj " />
+          <TableColumn prefWidth="129.0" text="Klijent" />
+            <TableColumn prefWidth="123.0" text="Serviser" />
+            <TableColumn prefWidth="143.0" text="Model uređaja" />
+            <TableColumn prefWidth="137.0" text="Serijski broj " />
+            <TableColumn prefWidth="131.0" text="Opis kvara" />
+            <TableColumn prefWidth="248.0" text="Datum prijema" />
             <TableColumn prefWidth="114.0" text="Stanje uređaja" />
-            <TableColumn prefWidth="253.0" text="Opis kvara" />
-            <TableColumn prefWidth="109.0" text="Datum prijema" />
-            <TableColumn prefWidth="97.0" text="Uređaj preuzet" />
         </columns>
       </TableView>
    </children>
