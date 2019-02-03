@@ -12,4 +12,6 @@ public interface ZaposleniDAO {
 	List<ZaposleniDTO> selectBy(ZaposleniDTO zaposleni);
         ZaposleniDTO selectZaposleni(ZaposleniDTO admin);
 
+         public ZaposleniDTO selectFromSviZaposleni(ZaposleniDTO zaposleniDTO);
+
 }

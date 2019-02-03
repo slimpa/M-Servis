@@ -15,6 +15,11 @@ public class ServisTelefonaDTO {
 	private int idModelTelefona;
 	private String serijskiBrojTelefona;
 	private boolean telefonPreuzet;
+        
+        private String imePrezimeKlijent;
+        private String imePrezimeZaposleni;
+        private String nazivModela;
+        private String stanjeTelefona;
 
     public ServisTelefonaDTO(int idServisTelefona, int idKlijent, int idZaposleni, int idStanjeTelefona, String opisKvara, Date datumPrijema, int idModelTelefona, String serijskiBrojTelefona, boolean telefonPreuzet) {
         this.idServisTelefona = idServisTelefona;
@@ -109,6 +114,38 @@ public class ServisTelefonaDTO {
 
     public void setTelefonPreuzet(boolean telefonPreuzet) {
         this.telefonPreuzet = telefonPreuzet;
+    }
+
+    public String getImePrezimeKlijent() {
+        return imePrezimeKlijent;
+    }
+
+    public void setImePrezimeKlijent(String imePrezimeKlijent) {
+        this.imePrezimeKlijent = imePrezimeKlijent;
+    }
+
+    public String getImePrezimeZaposleni() {
+        return imePrezimeZaposleni;
+    }
+
+    public void setImePrezimeZaposleni(String imePrezimeZaposleni) {
+        this.imePrezimeZaposleni = imePrezimeZaposleni;
+    }
+
+    public String getNazivModela() {
+        return nazivModela;
+    }
+
+    public void setNazivModela(String nazivModela) {
+        this.nazivModela = nazivModela;
+    }
+
+    public String getStanjeTelefona() {
+        return stanjeTelefona;
+    }
+
+    public void setStanjeTelefona(String stanjeTelefona) {
+        this.stanjeTelefona = stanjeTelefona;
     }
         
         

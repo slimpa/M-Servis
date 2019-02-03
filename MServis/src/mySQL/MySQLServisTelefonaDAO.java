@@ -34,7 +34,7 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
             cs = conn.prepareCall(SQL_CALL_INSERT_SERVIS);
             cs.setString(1, servisTelefona.getOpisKvara());
             cs.setString(2, servisTelefona.getSerijskiBrojTelefona());
-            cs.setInt(3, servisTelefona.getIdStanjeTelefona());
+            cs.setInt(3, 1);
             cs.setInt(4, servisTelefona.getIdZaposleni());
             cs.setInt(5, servisTelefona.getIdModelTelefona());
             cs.execute();

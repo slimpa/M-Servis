@@ -86,10 +86,11 @@ public class ServisController implements Initializable {
     private ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
     private ModelTelefonaDAO modelDao = new MySQLDAOFactory().getModelTelefonaDAO();
     private StanjeTelefonaDAO stanjeDao = new MySQLDAOFactory().getStanjeTelefonaDAO();
+    private String zaposleniKorisnicko = LoginController.getKorisnickoIme();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //this.popuniTabeluServis();
+        this.popuniTabeluServis();
     }
     
     private void popuniTabeluServis(){
@@ -99,19 +100,17 @@ public class ServisController implements Initializable {
         
         for(ServisTelefonaDTO servis : lista){
                 KlijentDTO klijent = klijentDao.selectBy(new KlijentDTO(servis.getIdKlijent())).get(0);
-                klijent.setImePrezime(klijent.getIme(), klijent.getPrezime());
+                servis.setImePrezimeKlijent(klijent.getIme() + " " + klijent.getPrezime());
                 
-                ZaposleniDTO zaposleni = zaposleniDao.selectBy(new ZaposleniDTO(servis.getIdZaposleni())).get(0);
-                zaposleni.setImePrezime(zaposleni.getIme(), zaposleni.getPrezime());
+                ZaposleniDTO zaposleni = zaposleniDao.selectFromSviZaposleni(new ZaposleniDTO(servis.getIdZaposleni()));
+                servis.setImePrezimeZaposleni(zaposleni.getIme() + " " + zaposleni.getPrezime());
+              
                 
-                List<ModelTelefonaDTO> listaModela = modelDao.selectAll();
-                System.out.println(listaModela);
-//                int modelIndex = listaModela.indexOf(new ModelTelefonaDTO(servis.getIdModelTelefona()));
-//                ModelTelefonaDTO model = listaModela.get(modelIndex);
-//                model.setNaziv(model.getNaziv());
+                ModelTelefonaDTO model = modelDao.selectById(new ModelTelefonaDTO(servis.getIdModelTelefona())).get(0);
+                servis.setNazivModela(model.getNazivModela());
                 
-                StanjeTelefonaDTO stanje = stanjeDao.selectBy(new StanjeTelefonaDTO(servis.getIdStanjeTelefona())).get(0);
-                stanje.setStanje(stanje.getStanje());
+                StanjeTelefonaDTO stanje = stanjeDao.selectById(new StanjeTelefonaDTO(servis.getIdStanjeTelefona()));
+                servis.setStanjeTelefona(stanje.getStanje());
             }
             listaServisa = FXCollections.observableArrayList(lista);
         }
@@ -119,13 +118,13 @@ public class ServisController implements Initializable {
         if (listaServisa != null) {
             columnIdServisa.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, Integer>("IdServisTelefona"));
             
-            columnKlijent.setCellValueFactory(new PropertyValueFactory<KlijentDTO, String>("imePrezime"));
-            columnServiser.setCellValueFactory(new PropertyValueFactory<ZaposleniDTO, String>("imePrezime"));
-            columnModel.setCellValueFactory(new PropertyValueFactory<ModelTelefonaDTO, String>("NazivModela"));
+            columnKlijent.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("imePrezimeKlijent"));
+            columnServiser.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("imePrezimeZaposleni"));
+            columnModel.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("nazivModela"));
             columnSerijski.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("serijskiBrojTelefona"));
             columnOpis.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("opisKvara"));
             columnDatum.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("datumPrijema"));
-            columnStanje.setCellFactory(new PropertyValueFactory<StanjeTelefonaDTO, String>("stanje"));
+            columnStanje.setCellValueFactory(new PropertyValueFactory<StanjeTelefonaDTO, String>("stanjeTelefona"));
             
             tableServis.setItems(listaServisa);
         }
@@ -142,6 +141,8 @@ public class ServisController implements Initializable {
             stage.setTitle("Novi servis telefona");
             stage.setScene(scene);
             stage.showAndWait();
+            
+            this.popuniTabeluServis();
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }

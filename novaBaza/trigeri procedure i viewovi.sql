@@ -114,3 +114,4 @@ on cijena.IdArtikla=artikal.IdArtikal and artikal.IdArtikal=racun_has_artikal.Id
 where ((cijena.DatumDo is not null and cijena.DatumOd<racun.Vrijeme and cijena.DatumDo>racun.Vrijeme )
  or (cijena.DatumOd<racun.Vrijeme and cijena.TrenutnaCijena=1)) and (date(racun.Vrijeme)=CURDATE())
  order by Naziv;
+ 

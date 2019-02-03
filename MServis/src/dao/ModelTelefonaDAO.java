@@ -11,4 +11,6 @@ public interface ModelTelefonaDAO {
 	List<ModelTelefonaDTO> selectAll();
 	List<ModelTelefonaDTO> selectBy(ModelTelefonaDTO modelTelefona);
 
+        public List<ModelTelefonaDTO> selectById(ModelTelefonaDTO modelTelefonaDTO);
+
 }

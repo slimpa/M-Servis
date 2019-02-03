@@ -160,8 +160,8 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
                 return null;
             } else {
                 if (rs.next()) {
-                    lista.add(new ZaposleniDTO(rs.getInt("IdZaposleni"), rs.getString("KorisnickoIme"), rs.getString("Lozinka"), rs.getString("RadnoMjesto")));
-                }
+                   lista.add(new ZaposleniDTO(rs.getInt("IdZaposleni"), rs.getString("KorisnickoIme"), rs.getString("Lozinka"), rs.getString("RadnoMjesto")));
+                  }
             }
 
         } catch (SQLException e) {
@@ -196,6 +196,7 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
             } else {
                 if (rs.next()) {
                     retVal = new ZaposleniDTO(rs.getInt("IdZaposleni"), rs.getString("KorisnickoIme"), rs.getString("Lozinka"), rs.getString("RadnoMjesto"));
+                   
                 }
             }
 
@@ -209,4 +210,36 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
         return retVal;
     }
 
+    public ZaposleniDTO selectFromSviZaposleni(ZaposleniDTO zaposleni){
+        ZaposleniDTO retVal = null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = SQL_SELECT_ALL + " where IdOsoba=?";
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, zaposleni.getIdOsoba());
+            rs = ps.executeQuery();
+
+            if (rs == null) {
+                return null;
+            } else {
+                if (rs.next()) {
+                    retVal = new ZaposleniDTO(rs.getInt("IdOsoba"), rs.getString("KorisnickoIme"), rs.getString("RadnoMjesto"),
+                    rs.getString("Ime"), rs.getString("Prezime"), rs.getString("BrojTelefona"));
+                   
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return retVal;
+    }
 }

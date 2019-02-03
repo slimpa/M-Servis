@@ -5,12 +5,9 @@
         <group>
             <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/ServisController.java</file>
             <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/dto/ModelTelefonaDTO.java</file>
-            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/dto/ServisTelefonaDTO.java</file>
-            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/Servis.fxml</file>
-            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/dto/OsobaDTO.java</file>
-            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/dto/StanjeTelefonaDTO.java</file>
-            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/AdminController.java</file>
-            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mySQL/MySQLStanjeTelefonaDAO.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/GlavnaFormaController.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/dto/ZaposleniDTO.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mySQL/MySQLZaposleniDAO.java</file>
         </group>
     </open-files>
 </project-private>

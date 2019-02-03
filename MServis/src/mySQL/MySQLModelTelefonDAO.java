@@ -158,5 +158,38 @@ public class MySQLModelTelefonDAO implements ModelTelefonaDAO {
 		
 		return modeli;
 	}
+        
+        public List<ModelTelefonaDTO> selectById(ModelTelefonaDTO modelTelefona) {
+		List<ModelTelefonaDTO> modeli = new ArrayList<ModelTelefonaDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = SQL_SELECT + " where IdModelTelefona = ?";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+                        
+                        ps = conn.prepareStatement(query);
+                        ps.setInt(1, modelTelefona.getIdModeltelefona());
+			rs = ps.executeQuery();
+			
+			if(rs == null) return null;
+			else {
+                            
+				while(rs.next()) {
+					modeli.add(new ModelTelefonaDTO(rs.getInt("idModeltelefona"),rs.getString("Specifikacija"),rs.getString("Slika"),rs.getString("NazivModela")));
+                                        for(ModelTelefonaDTO mt : modeli){
+                                            System.out.println(mt.getNazivModela());
+                                        }
+                                }
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+		
+		return modeli;
+	}
 
 }

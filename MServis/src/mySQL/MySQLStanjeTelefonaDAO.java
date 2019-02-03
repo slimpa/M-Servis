@@ -162,6 +162,35 @@ public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
         return stanja;
     }
     
-    
+
+    public StanjeTelefonaDTO selectById(StanjeTelefonaDTO stanjeTelefona) {
+        List<StanjeTelefonaDTO> stanja = new ArrayList<StanjeTelefonaDTO>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = SQL_SELECT + " and IdStanjeTelefona = ?";
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, stanjeTelefona.getIdStanjeTelefona());
+            rs = ps.executeQuery();
+
+            if (rs == null) {
+                return null;
+            } else {
+                while (rs.next()) {
+                    stanja.add(new StanjeTelefonaDTO(rs.getInt("IdStanjeTelefona"), rs.getString("Stanje")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return stanja.get(0);
+    }
 
 }
