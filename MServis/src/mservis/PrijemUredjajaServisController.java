@@ -28,6 +28,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import mySQL.MySQLDAOFactory;
 
 
@@ -93,6 +94,9 @@ public class PrijemUredjajaServisController implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText("Uspješno dodavanje!");
                     alert.showAndWait();
+                    
+                    Stage stage = (Stage) btnDodaj.getScene().getWindow();
+                    stage.close();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Greška!");

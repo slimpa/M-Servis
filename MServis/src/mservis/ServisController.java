@@ -30,6 +30,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -44,43 +45,43 @@ import mySQL.MySQLDAOFactory;
  * @author Bojan
  */
 public class ServisController implements Initializable {
-    
+
     @FXML
     private Button btnPretraziServis;
-    
+
     @FXML
     private TextField tfIdServisa;
-    
+
     @FXML
     private ComboBox cbStanje;
-    
+
     @FXML
     private TableView<ServisTelefonaDTO> tableServis;
-    
+
     @FXML
     private TableColumn columnIdServisa;
-    
+
     @FXML
     private TableColumn columnKlijent;
-    
+
     @FXML
     private TableColumn columnServiser;
-    
+
     @FXML
     private TableColumn columnModel;
-    
+
     @FXML
     private TableColumn columnSerijski;
-    
+
     @FXML
     private TableColumn columnOpis;
-    
+
     @FXML
     private TableColumn columnDatum;
-    
+
     @FXML
     private TableColumn columnStanje;
-    
+
     private ServisTelefonaDAO servisDao = new MySQLDAOFactory().getServisTelefonaDAO();
     private KlijentDAO klijentDao = new MySQLDAOFactory().getKlijentDAO();
     private ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
@@ -92,32 +93,31 @@ public class ServisController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.popuniTabeluServis();
     }
-    
-    private void popuniTabeluServis(){
+
+    private void popuniTabeluServis() {
         List<ServisTelefonaDTO> lista = servisDao.selectAll();
         ObservableList<ServisTelefonaDTO> listaServisa = null;
-        if(lista != null){
-        
-        for(ServisTelefonaDTO servis : lista){
+        if (lista != null) {
+
+            for (ServisTelefonaDTO servis : lista) {
                 KlijentDTO klijent = klijentDao.selectBy(new KlijentDTO(servis.getIdKlijent())).get(0);
                 servis.setImePrezimeKlijent(klijent.getIme() + " " + klijent.getPrezime());
-                
+
                 ZaposleniDTO zaposleni = zaposleniDao.selectFromSviZaposleni(new ZaposleniDTO(servis.getIdZaposleni()));
                 servis.setImePrezimeZaposleni(zaposleni.getIme() + " " + zaposleni.getPrezime());
-              
-                
+
                 ModelTelefonaDTO model = modelDao.selectById(new ModelTelefonaDTO(servis.getIdModelTelefona())).get(0);
                 servis.setNazivModela(model.getNazivModela());
-                
+
                 StanjeTelefonaDTO stanje = stanjeDao.selectById(new StanjeTelefonaDTO(servis.getIdStanjeTelefona()));
                 servis.setStanjeTelefona(stanje.getStanje());
             }
             listaServisa = FXCollections.observableArrayList(lista);
         }
-        
+
         if (listaServisa != null) {
             columnIdServisa.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, Integer>("IdServisTelefona"));
-            
+
             columnKlijent.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("imePrezimeKlijent"));
             columnServiser.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("imePrezimeZaposleni"));
             columnModel.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("nazivModela"));
@@ -125,7 +125,7 @@ public class ServisController implements Initializable {
             columnOpis.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("opisKvara"));
             columnDatum.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("datumPrijema"));
             columnStanje.setCellValueFactory(new PropertyValueFactory<StanjeTelefonaDTO, String>("stanjeTelefona"));
-            
+
             tableServis.setItems(listaServisa);
         }
     }
@@ -141,28 +141,36 @@ public class ServisController implements Initializable {
             stage.setTitle("Novi servis telefona");
             stage.setScene(scene);
             stage.showAndWait();
-            
+
             this.popuniTabeluServis();
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-        public void btnServisiraj(ActionEvent e) {
-        //TREBA DIO ZA SELEKTOVANJE SERVISA IZ TABELE
-            
-        Stage stage = new Stage();
-        Parent root2;
-        try {
-            root2 = FXMLLoader.load(getClass().getResource("IzmjenaServis.fxml"));
 
-            Scene scene = new Scene(root2);
+    public void btnServisiraj(ActionEvent e) {
+        ServisTelefonaDTO servis = tableServis.getSelectionModel().getSelectedItem();
 
-            stage.setTitle("Servisiranje uređaja");
-            stage.setScene(scene);
-            stage.showAndWait();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        if (servis != null) {
+            try {
+                IzmjenaServisController.setIdModelTelefona(servis.getIdModelTelefona());
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("IzmjenaServis.fxml"));
+                loader.load();
+                IzmjenaServisController controller = loader.getController();
+                Parent p = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(p));
+                stage.showAndWait();
+            } catch (IOException ex) {
+                Logger.getLogger(ServisController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Nije odabran servis iz tabele!");
+            alert.showAndWait();
         }
     }
 

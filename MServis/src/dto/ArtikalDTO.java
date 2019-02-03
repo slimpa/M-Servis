@@ -19,6 +19,11 @@ public class ArtikalDTO {
         this.BarKod = BarKod;
     }
     
+    public ArtikalDTO(String naziv, int idArtikal){
+        this.Naziv = naziv;
+        this.idArtikal = idArtikal;
+    }
+    
     
     public ArtikalDTO(int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano) {
         this.idArtikal = idArtikal;

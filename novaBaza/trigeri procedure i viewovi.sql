@@ -115,3 +115,7 @@ where ((cijena.DatumDo is not null and cijena.DatumOd<racun.Vrijeme and cijena.D
  or (cijena.DatumOd<racun.Vrijeme and cijena.TrenutnaCijena=1)) and (date(racun.Vrijeme)=CURDATE())
  order by Naziv;
  
+ALTER TABLE artikal AUTO_INCREMENT = 5000;
+
+create view rezervni_dio_naziv as
+select rezervnidio.IdRezervniDio, artikal.Naziv, rezervnidio.IdModelTelefona from rezervnidio inner join artikal on rezervnidio.IdRezervniDio = artikal.IdArtikal;
