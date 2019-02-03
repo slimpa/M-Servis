@@ -105,7 +105,7 @@ from dodatnaoprema natural join tipdodatneopreme natural join artikal natural jo
 where dodatnaoprema.IdDodatnaOprema=artikal.IdArtikal and dodatnaoprema.IdTipDodatneOpreme= tipdodatneopreme.IdTipDodatneOpreme and artikal.IdArtikal=cijena.IdArtikla and modeltelefona.IdModelTelefona=dodatnaoprema.IdModelTelefona;
 
 
-Alter table Narudzba_has_Kolicina add column Kolicina int;
+Alter table narudzba_has_artikal add column Kolicina int;
 
 create view dnevni_izvjestaj as
 select racun.IdRacun,date(racun.Vrijeme) as Datum, artikal.IdArtikal,artikal.Naziv, racun_has_artikal.Kolicina, cijena.Cijena

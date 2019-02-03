@@ -10,4 +10,6 @@ public interface ServisTelefonaDAO {
 	boolean update(ServisTelefonaDTO servisTelefona);
 	List<ServisTelefonaDTO> selectBy(ServisTelefonaDTO servisTelefona);
 
+    public List<ServisTelefonaDTO> selectAll();
+
 }

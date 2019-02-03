@@ -6,5 +6,11 @@ public class KlijentDTO extends OsobaDTO {
         super(idOsoba, ime, prezime, brojTelefona);
     }
     
-    
+    public KlijentDTO(String ime, String prezime, String brojTelefona){
+        super(ime, prezime, brojTelefona);
+    }
+
+    public KlijentDTO(int idKlijent) {
+        super(idKlijent);
+    }
 }

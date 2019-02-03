@@ -4,6 +4,10 @@ public class StanjeTelefonaDTO {
 
     private int idStanjeTelefona;
     private String stanje;
+    
+    public StanjeTelefonaDTO(int idStanjeTelefona){
+        this.idStanjeTelefona = idStanjeTelefona;
+    }
 
     public StanjeTelefonaDTO(int idStanjeTelefona, String stanje) {
         this.idStanjeTelefona = idStanjeTelefona;

@@ -1,6 +1,8 @@
 package dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 public class ServisTelefonaDTO {
 
@@ -24,6 +26,17 @@ public class ServisTelefonaDTO {
         this.idModelTelefona = idModelTelefona;
         this.serijskiBrojTelefona = serijskiBrojTelefona;
         this.telefonPreuzet = telefonPreuzet;
+    }
+
+    public ServisTelefonaDTO(int idZaposlenog, int idStanje, String opis, LocalDateTime datum, int idModel, String serijski) {
+        this.idZaposleni = idZaposlenog;
+        this.idStanjeTelefona = idStanje;
+        this.opisKvara = opis;
+        long millis = datum.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli();
+        this.datumPrijema = new Date(millis);
+        this.idModelTelefona = idModel;
+        this.serijskiBrojTelefona = serijski;
+        
     }
 
     public int getIdServisTelefona() {

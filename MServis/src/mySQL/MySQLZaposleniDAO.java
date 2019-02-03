@@ -144,7 +144,34 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
      * @param zaposleni
      */
     public List<ZaposleniDTO> selectBy(ZaposleniDTO zaposleni) {
-        throw new UnsupportedOperationException();
+        List<ZaposleniDTO> lista = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = SQL_SELECT + " where IdZaposleni=?";
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, zaposleni.getIdOsoba());
+            rs = ps.executeQuery();
+
+            if (rs == null) {
+                return null;
+            } else {
+                if (rs.next()) {
+                    lista.add(new ZaposleniDTO(rs.getInt("IdZaposleni"), rs.getString("KorisnickoIme"), rs.getString("Lozinka"), rs.getString("RadnoMjesto")));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return lista;
     }
 
     /**

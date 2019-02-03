@@ -5,9 +5,19 @@
  */
 package mservis;
 
+import dao.KlijentDAO;
 import dao.ModelTelefonaDAO;
+import dao.ServisTelefonaDAO;
+import dao.StanjeTelefonaDAO;
+import dao.ZaposleniDAO;
+import dto.KlijentDTO;
 import dto.ModelTelefonaDTO;
+import dto.ServisTelefonaDTO;
+import dto.StanjeTelefonaDTO;
+import dto.ZaposleniDTO;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,10 +30,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import mySQL.MySQLDAOFactory;
 
-/**
- *
- * @author Bojan
- */
+
 public class PrijemUredjajaServisController implements Initializable {
 
     @FXML
@@ -43,6 +50,10 @@ public class PrijemUredjajaServisController implements Initializable {
 
     private ModelTelefonaDAO modelDao = new MySQLDAOFactory().getModelTelefonaDAO();
     private ArrayList<ModelTelefonaDTO> modeli;
+    private String zaposleni = LoginController.getKorisnickoIme();
+    private ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
+    private StanjeTelefonaDAO stanjeDao = new MySQLDAOFactory().getStanjeTelefonaDAO();
+    private ServisTelefonaDAO servisDao = new MySQLDAOFactory().getServisTelefonaDAO();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,14 +69,46 @@ public class PrijemUredjajaServisController implements Initializable {
         String serijski = tfSerijski.getText();
         if (cbModel.getSelectionModel().isEmpty() || ime.equals("") || prezime.equals("") || broj.equals("") || opis.equals("")
                 || serijski.equals("")) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste popunili sva obavezna polja!");
             alert.showAndWait();
-        }
-        else{
-        String model = cbModel.getSelectionModel().toString();
+        } else {
+            String model = cbModel.getSelectionModel().getSelectedItem().toString();
+            System.out.println(model);
+            int idZaposlenog = zaposleniDao.selectZaposleni(new ZaposleniDTO(zaposleni)).getIdOsoba();
+            int idStanje = stanjeDao.selectBy(new StanjeTelefonaDTO("Pokvaren")).get(0).getIdStanjeTelefona();
+            LocalDateTime datum = LocalDateTime.now();
+            int idModel = modelDao.selectBy(new ModelTelefonaDTO(model)).get(0).getIdModeltelefona();
+
+            KlijentDTO klijent = new KlijentDTO(ime, prezime, broj);
+            KlijentDAO klijentDao = new MySQLDAOFactory().getKlijentDAO();
+            if (klijentDao.insert(klijent)) {
+                ServisTelefonaDTO servis = new ServisTelefonaDTO(idZaposlenog, idStanje, opis, datum, idModel, serijski);
+
+                if (servisDao.insert(servis)) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Info");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Uspješno dodavanje!");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Greška!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Dodavanje nije moguće!");
+                    alert.showAndWait();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška!");
+                alert.setHeaderText(null);
+                alert.setContentText("Dodavanje nije moguće!");
+                alert.showAndWait();
+            }
+
         }
     }
+
 }

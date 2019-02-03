@@ -7,6 +7,7 @@ import dto.ServisTelefonaDTO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,13 +22,13 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
      * @param servisTelefona
      */
     private static final String SQL_CALL_INSERT_SERVIS = "{call dodaj_servis(?, ?, ?, ?, ?)}";
-    private static final String SQL_UPDATE_SERVIS = "update servistelefona set";
+    private static final String SQL_UPDATE = "update servistelefona set";
     private static final String SQL_SELECT_ALL = "select * from servistelefona";
-    
+
     public boolean insert(ServisTelefonaDTO servisTelefona) {
         Connection conn = null;
         CallableStatement cs = null;
-        int flag = 0;
+
         try {
             conn = ConnectionPool.getInstance().checkOut();
             cs = conn.prepareCall(SQL_CALL_INSERT_SERVIS);
@@ -53,7 +54,26 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
      * @param servisTelefona
      */
     public boolean delete(ServisTelefonaDTO servisTelefona) {
-        return true;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        boolean returnValue = false;
+        String query = SQL_UPDATE + " TelefonPreuzet = ? where IdServisTelefona = ?";
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, 0);
+            ps.setInt(2, servisTelefona.getIdServisTelefona());
+          
+            returnValue = ps.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return returnValue;
     }
 
     /**
@@ -63,11 +83,11 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
     public boolean update(ServisTelefonaDTO servisTelefona) {
         Connection conn = null;
         CallableStatement cs = null;
-      
+
         try {
             conn = ConnectionPool.getInstance().checkOut();
-            cs = conn.prepareCall(SQL_UPDATE_SERVIS + " OpisKvara = ?, SerijskiBrojTelefona = ?,"
-                    + " IdStanjeTelefona = ?, IdModelTelefona = ?");
+            cs = conn.prepareCall(SQL_UPDATE + " OpisKvara = ?, SerijskiBrojTelefona = ?,"
+                    + " IdStanjeTelefona = ?, IdModelTelefona = ? where IdServisTelefona = ?");
             cs.setString(1, servisTelefona.getOpisKvara());
             cs.setString(2, servisTelefona.getSerijskiBrojTelefona());
             cs.setInt(3, servisTelefona.getIdStanjeTelefona());
@@ -76,7 +96,7 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-            
+
         } finally {
             ConnectionPool.getInstance().checkIn(conn);
             DBUtil.getInstance().close(cs);

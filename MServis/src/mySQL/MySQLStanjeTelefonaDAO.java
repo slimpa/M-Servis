@@ -23,6 +23,8 @@ public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
     public static final String SQL_SELECT = "select * from stanjetelefona where Obrisano = 0";
     public static final String SQL_UPDATE = "update stanjetelefona set";
 
+    
+     
     public boolean insert(StanjeTelefonaDTO stanjeTelefona) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -159,5 +161,7 @@ public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
 
         return stanja;
     }
+    
+    
 
 }

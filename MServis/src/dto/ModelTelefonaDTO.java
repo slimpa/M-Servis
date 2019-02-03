@@ -2,20 +2,25 @@ package dto;
 
 public class ModelTelefonaDTO extends ArtikalDTO {
 
+    private int idModeltelefona;
+    private String Specifikacija;
+    private String Slika;
+    private String NazivModela;
+
     public ModelTelefonaDTO(String nazivModela) {
-        NazivModela = nazivModela;
+        this.NazivModela = nazivModela;
     }
 
-	private int idModeltelefona;
-	private String Specifikacija;
-	private String Slika;
+    public ModelTelefonaDTO(int idModela) {
+        this.idModeltelefona = idModela;
+    }
 
     public ModelTelefonaDTO(int idModeltelefona, String Specifikacija, String NazivModela) {
         this.idModeltelefona = idModeltelefona;
         this.Specifikacija = Specifikacija;
         this.NazivModela = NazivModela;
     }
-	private String NazivModela;
+
 
     public ModelTelefonaDTO(int idModeltelefona, String Specifikacija, String Slika, String NazivModela) {
         this.idModeltelefona = idModeltelefona;
@@ -61,5 +66,4 @@ public class ModelTelefonaDTO extends ArtikalDTO {
         return NazivModela;
     }
 
-    
 }

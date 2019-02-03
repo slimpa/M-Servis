@@ -6,6 +6,15 @@ public class OsobaDTO {
         protected String ime;
 	protected String prezime;
 	protected String brojTelefona;
+        protected String imePrezime;
+        
+        public String getImePrezime(){
+            return imePrezime;
+        }
+        
+        public void setImePrezime(String ime, String prezime){
+            this.imePrezime = ime + " " + prezime;
+        }
 
     public OsobaDTO() {
     }
@@ -16,6 +25,13 @@ public class OsobaDTO {
 
     public OsobaDTO(int idOsoba, String ime, String prezime, String brojTelefona) {
         this.idOsoba = idOsoba;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.brojTelefona = brojTelefona;
+    }
+    
+    public OsobaDTO(String ime, String prezime, String brojTelefona){
+    
         this.ime = ime;
         this.prezime = prezime;
         this.brojTelefona = brojTelefona;
