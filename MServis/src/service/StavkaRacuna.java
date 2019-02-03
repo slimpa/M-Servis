@@ -33,6 +33,31 @@ public class StavkaRacuna {
     public void setNazivStavke(String nazivStavke) {
         this.nazivStavke = nazivStavke;
     }
+
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final StavkaRacuna other = (StavkaRacuna) obj;
+        if (this.idStavke != other.idStavke) {
+            return false;
+        }
+        return true;
+    }
+
+
+
+
+    
     
     
 }

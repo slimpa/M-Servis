@@ -88,7 +88,19 @@ public class ServisController implements Initializable {
     private ModelTelefonaDAO modelDao = new MySQLDAOFactory().getModelTelefonaDAO();
     private StanjeTelefonaDAO stanjeDao = new MySQLDAOFactory().getStanjeTelefonaDAO();
     private String zaposleniKorisnicko = LoginController.getKorisnickoIme();
+    private static int idServisa;
+    private static int idModelTelefona;
 
+    public static int getIdServisa() {
+        return idServisa;
+    }
+
+    public static int getIdModelTelefona() {
+        return idModelTelefona;
+    }
+    
+    
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.popuniTabeluServis();
@@ -153,7 +165,8 @@ public class ServisController implements Initializable {
 
         if (servis != null) {
             try {
-                IzmjenaServisController.setIdModelTelefona(servis.getIdModelTelefona());
+                idServisa=servis.getIdServisTelefona();
+                idModelTelefona=servis.getIdModelTelefona();
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("IzmjenaServis.fxml"));
                 loader.load();

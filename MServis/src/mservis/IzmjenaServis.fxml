@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -29,7 +30,10 @@
           <TableColumn fx:id="columnNazivStavka" prefWidth="273.0" text="Naziv" />
         </columns>
       </TableView>
-      <Button fx:id="btnDodajUslugu" layoutX="370.0" layoutY="181.0" mnemonicParsing="false" text="&gt;&gt;" />
-      <Button fx:id="btnDodajDio" layoutX="370.0" layoutY="469.0" mnemonicParsing="false" text="&gt;&gt;" />
+      <Button fx:id="btnDodajUslugu" layoutX="370.0" layoutY="181.0" mnemonicParsing="false" onAction="#btnDodajUslugu" text="&gt;&gt;" />
+      <Button fx:id="btnDodajDio" layoutX="370.0" layoutY="469.0" mnemonicParsing="false" onAction="#btnDodajDio" text="&gt;&gt;" />
+      <ComboBox fx:id="cbNovoStanje" layoutX="497.0" layoutY="413.0" prefHeight="37.0" prefWidth="266.0" promptText="Stanje uređaja" />
+      <Button fx:id="btnPotvrdi" layoutX="768.0" layoutY="572.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="157.0" onAction="#btnPotvrdi" text="Potvrdi" />
+      <Button fx:id="btnObrisiStavku" layoutX="433.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" onAction="#btnObrisi" text="&lt;&lt;" />
    </children>
 </AnchorPane>
