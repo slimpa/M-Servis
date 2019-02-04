@@ -5,11 +5,20 @@
  */
 package mservis;
 
+import dao.ArtikalDAO;
+import dao.CijenaDAO;
 import dao.ModelTelefonaDAO;
+import dao.ProizvodjacDAO;
+import dao.RezervniDioDAO;
+import dto.ArtikalDTO;
+import dto.CijenaDTO;
 import dto.ModelTelefonaDTO;
+import dto.ProizvodjacDTO;
 import dto.RezervniDioDTO;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -17,8 +26,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import static mservis.ManipulacijaArtiklimaController.rezervniDioDTO;
 import static mservis.ManipulacijaArtiklimaController.vrijednost;
 import mySQL.MySQLDAOFactory;
@@ -44,6 +57,18 @@ public class DodavanjeRezervnogDijelaController implements Initializable{
     @FXML
     private TextField tfCijena;
     
+    @FXML
+    private ComboBox cbProizvodjac;
+    
+    @FXML
+    private TextField tfBarKod;
+    
+    @FXML
+    private Button btnSacuvaj;
+    
+    @FXML
+    private Button btnIzadji;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(vrijednost.equals("izmjeni")){
@@ -58,16 +83,75 @@ public class DodavanjeRezervnogDijelaController implements Initializable{
                 modeliTelefona.add(mt.getNazivModela());
             }
             
+            ProizvodjacDAO proizvodjacDAO=(new MySQLDAOFactory()).getProizvodjacDAO();
+            ObservableList<ProizvodjacDTO> proizvodjacList;
+            proizvodjacList=FXCollections.observableArrayList(proizvodjacDAO.selectAll());
+            List<String> naziviProizvodjaca = new ArrayList<String>();
+            for(ProizvodjacDTO dob : proizvodjacList){
+                naziviProizvodjaca.add(dob.getNaziv());
+            }
+
+            cbProizvodjac.getItems().addAll(naziviProizvodjaca);
             cbModelTelefona.getItems().addAll(modeliTelefona);
            
         }
     }
     
     public void btnIzadjiHandler(ActionEvent e){
-        
+        Stage stage = (Stage) btnIzadji.getScene().getWindow();
+        stage.close();
     }
     
     public void btnSacuvajHandler(ActionEvent e){
+        String naziv = tfNaziv.getText();
+        String modelTelefona =  cbModelTelefona.getValue().toString();
+        String opis = tfOpis.getText(); 
+        Integer kolicina = Integer.parseInt(tfKolicina.getText());
+        Integer cijena = Integer.parseInt(tfCijena.getText());
+        String proizvodjac =  cbProizvodjac.getValue().toString();
+        String barKod = tfBarKod.getText();
+        Integer idRezervniDio;
+        
+        ProizvodjacDTO proizvodjacDTO = new ProizvodjacDTO(proizvodjac);
+        //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+        ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
+        List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
+        ArtikalDTO artikal = new ArtikalDTO(naziv,1,proizvodjaci.get(0).getIdProizvodjac(),barKod);
+        //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+        ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
+        artikalDAO.insert(artikal);
+        idRezervniDio=artikalDAO.getLastId();
+        
+        ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(modelTelefona);
+        //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+        ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
+        List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);
+        
+        RezervniDioDTO rezervniDioDTO = new RezervniDioDTO(idRezervniDio,modeli.get(0).getIdModeltelefona(),opis);//getIdRezervniDio getOpis modelTelefona
+        //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+        RezervniDioDAO rezervniDioDAO = new MySQLDAOFactory().getRezervniDioDAO();
+        
+        rezervniDioDAO.insert(rezervniDioDTO);
+        //imam naziv, proizvodjac,barkod,model
+        
+
+        
+        CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
+        Date date= new Date();
+        long time = date.getTime();
+        Timestamp ts = new Timestamp(time);
+        CijenaDTO cijenaDTO = new CijenaDTO(artikalDAO.getLastId(),cijena,ts);
+        cijenaDAO.insert(cijenaDTO);
+        
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Informacija");
+        alert.setHeaderText(null);
+         alert.setContentText("Uspjesno dodano!");
+
+        alert.showAndWait();
+        
+        Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
+        stage.close();
         
     }
     public void popuniPolja(RezervniDioDTO rezervniDio){
@@ -75,6 +159,7 @@ public class DodavanjeRezervnogDijelaController implements Initializable{
         cbModelTelefona.setValue(rezervniDio.getIdModelTelefona());
         tfOpis.setText(rezervniDio.getOpis());
         tfKolicina.setText(Integer.toString(rezervniDio.getKolicina()));
-//        tfCijena.setText(Integer.toString(rezervniDio.getCijena()));
+        tfCijena.setText(Integer.toString(rezervniDio.getCijena()));
+        cbProizvodjac.setValue(rezervniDio.getProizvodjac());
     }
 }

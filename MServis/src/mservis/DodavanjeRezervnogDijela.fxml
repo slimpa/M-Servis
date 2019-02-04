@@ -22,7 +22,11 @@
             <ComboBox fx:id="cbModelTelefona" layoutX="176.0" layoutY="110.0" prefWidth="150.0" />
             <TextField fx:id="tfOpis" layoutX="177.0" layoutY="145.0" />
             <TextField fx:id="tfKolicina" layoutX="177.0" layoutY="178.0" />
-            <TextField layoutX="177.0" layoutY="209.0" />
+            <TextField fx:id="tfCijena" layoutX="177.0" layoutY="209.0" />
+            <ComboBox fx:id="cbProizvodjac" layoutX="176.0" layoutY="247.0" prefWidth="150.0" />
+            <Label layoutX="54.0" layoutY="251.0" text="Proizvodjač" />
+            <Label layoutX="54.0" layoutY="288.0" text="Bar code" />
+            <TextField fx:id="tfBarKod" layoutX="177.0" layoutY="284.0" />
          </children>
       </Pane>
    </children>
