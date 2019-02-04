@@ -7,10 +7,16 @@ package mservis;
 
 import dao.CjenovnikUslugaDAO;
 import dao.RezervniDioDAO;
+import dao.ServisTelefonaDAO;
+import dao.ServisTelefonaHasCjenovnikUslugaDAO;
 import dao.StanjeTelefonaDAO;
+import dao.UgradjeniRezervniDioDAO;
 import dto.CjenovnikUslugaDTO;
 import dto.RezervniDioDTO;
+import dto.ServisTelefonaDTO;
+import dto.ServisTelefonaHasCjenovnikUslugaDTO;
 import dto.StanjeTelefonaDTO;
+import dto.UgradjeniRezervniDioDTO;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +32,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import mySQL.MySQLDAOFactory;
+import mySQL.MySQLServisTelefonaDAO;
 import service.StavkaRacuna;
 
 /**
@@ -83,6 +91,11 @@ public class IzmjenaServisController implements Initializable {
     private int idModelTelefona;
     private int idServisa;
     private ArrayList<StavkaRacuna> stavkeServisa = new ArrayList<StavkaRacuna>();
+    private ServisTelefonaDAO servisDao = new MySQLDAOFactory().getServisTelefonaDAO();
+    private ArrayList<StanjeTelefonaDTO> stanja;
+    private UgradjeniRezervniDioDAO ugradjeniDioDao = new MySQLDAOFactory().getUgradjeniRezervniDioDAO();
+    private ServisTelefonaHasCjenovnikUslugaDAO cjenovnikDao = new MySQLDAOFactory().getServisTelefonaHasCjenovnikUslugaDAO();
+    private boolean naServisu = false;
 
     public int getIdModelTelefona() {
         return idModelTelefona;
@@ -102,15 +115,42 @@ public class IzmjenaServisController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.naServisu = ServisController.isNaServisu();
         this.idServisa = ServisController.getIdServisa();
         this.idModelTelefona = ServisController.getIdModelTelefona();
         this.popuniTabeluDijelova();
         this.popuniTabeluUsluga();
-        ArrayList<StanjeTelefonaDTO> stanja = (ArrayList<StanjeTelefonaDTO>) stanjeDao.selectAll();
+        stanja = (ArrayList<StanjeTelefonaDTO>) stanjeDao.selectAll();
         for (StanjeTelefonaDTO stanje : stanja) {
             cbNovoStanje.getItems().add(stanje.getStanje());
         }
+        this.popuniNaServisu();
+    }
+    
+    private void popuniNaServisu(){
+        btnObrisiStavku.setVisible(naServisu);
+        if (naServisu) {
+  
+            List<UgradjeniRezervniDioDTO> dijelovi = ugradjeniDioDao.selectBy(new UgradjeniRezervniDioDTO(idServisa));
+            List<ServisTelefonaHasCjenovnikUslugaDTO> usluge = cjenovnikDao.selectBy(new ServisTelefonaHasCjenovnikUslugaDTO(idServisa));
+            for (UgradjeniRezervniDioDTO dio : dijelovi) {
+                StavkaRacuna stavka = new StavkaRacuna(dio.getIdRezervniDio(), dio.getNazivDijela());
+                stavkeServisa.add(stavka);
+            }
 
+            for (ServisTelefonaHasCjenovnikUslugaDTO usluga : usluge) {
+                StavkaRacuna stavka = new StavkaRacuna(usluga.getIdCjenovnikUsluga(), usluga.getNazivUsluge());
+                stavkeServisa.add(stavka);
+            }
+
+            ObservableList<StavkaRacuna> listaStavki = FXCollections.observableArrayList(stavkeServisa);
+            if (stavkeServisa.size() >= 0) {
+                columnIdStavka.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, Integer>("idStavke"));
+                columnNazivStavka.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, String>("nazivStavke"));
+
+                tableStavke.setItems(listaStavki);
+            }
+        }
     }
 
     public void popuniTabeluDijelova() {
@@ -137,7 +177,7 @@ public class IzmjenaServisController implements Initializable {
 
     public void popuniTabeluStavkiServisa() {
         ObservableList<StavkaRacuna> listaStavki = FXCollections.observableArrayList(stavkeServisa);
-        if (stavkeServisa.size() > 0) {
+        if (stavkeServisa.size() >= 0) {
             columnIdStavka.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, Integer>("idStavke"));
             columnNazivStavka.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, String>("nazivStavke"));
 
@@ -209,16 +249,77 @@ public class IzmjenaServisController implements Initializable {
     }
 
     public void btnPotvrdi(ActionEvent e) {
-//MISLIM DA BI OVAKO TREBALO, A MOZDA I NE.
-//        Ako se izabere stanje Nemoguce popraviti onda samo treba uraditi update stanja i ignorisati izabrane stavke.
-//            
-//        Ako se izabere Popravljen, onda stavke treba insertovati u tabele UgradjeniRezervniDio i CjenovnikUsluga_has_Servis
-//        i treba postaviti stanje na Popravljen. Za telefone kojima je stanje popravljen treba zabraniti da se vise ulazi
-//        u formu za servisiranje jer se nema sta servisirati.
+        String stanje = (String) cbNovoStanje.getSelectionModel().getSelectedItem();
 
-//       Ako se izabere Na servisu , znaci treba omoguciti da se opet udje u ovu formu ali i prethodno ugradjene dijelove i
-//         usluge treba insertovati u bazu, ali ih i opet ucitati kad se izabere Servisiranje.
-                                    
+        int idStanja = 0;
+        for (StanjeTelefonaDTO s : stanja) {
+            if (s.getStanje().equals(stanje)) {
+                idStanja = s.getIdStanjeTelefona();
+            }
+
+        }
+
         
+        if ("Nemoguce popraviti".equals(stanje)) {
+            System.out.println("NEMOGUCe");
+            if (servisDao.updateStanje(new ServisTelefonaDTO(idServisa, idStanja))) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Info");
+                alert.setHeaderText(null);
+                alert.setContentText("Uspješno servisiranje!");
+                alert.showAndWait();
+
+                Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška!");
+                alert.setHeaderText(null);
+                alert.setContentText("Neuspješno servisiranje!");
+                alert.showAndWait();
+
+                Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
+                stage.close();
+            }
+        } else {
+            if (servisDao.updateStanje(new ServisTelefonaDTO(idServisa, idStanja))) {
+
+                for (StavkaRacuna stavka : stavkeServisa) {
+                    if (stavka.getIdStavke() > 5000) {
+                
+                        ugradjeniDioDao.insert(new UgradjeniRezervniDioDTO(stavka.getIdStavke(), idServisa));
+                    } else {
+                         System.out.println(stavka.getNazivStavke()+" usluga");
+                        cjenovnikDao.insert(new ServisTelefonaHasCjenovnikUslugaDTO(idServisa, stavka.getIdStavke()));
+                    }
+                }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Info");
+                alert.setHeaderText(null);
+                alert.setContentText("Uspješno servisiranje!");
+                alert.showAndWait();
+
+                Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
+                stage.close();
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška!");
+                alert.setHeaderText(null);
+                alert.setContentText("Neuspješno servisiranje!");
+                alert.showAndWait();
+
+            }
+        }
+
     }
+
+    public boolean isNaServisu() {
+        return naServisu;
+    }
+
+    public void setNaServisu(boolean naServisu) {
+        this.naServisu = naServisu;
+    }
+
 }

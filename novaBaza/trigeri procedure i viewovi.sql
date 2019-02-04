@@ -1,6 +1,6 @@
 create view svi_zaposleni as
 select osoba.IdOsoba, osoba.Ime, osoba.Prezime, zaposleni.KorisnickoIme, zaposleni.RadnoMjesto, osoba.BrojTelefona
-from osoba inner join zaposleni where osoba.IdOsoba=zaposleni.IdZaposleni and osoba.Obrisano=0;
+from osoba inner join zaposleni on osoba.IdOsoba=zaposleni.IdZaposleni where osoba.Obrisano=0;
 
 create view svi_admini as
 select osoba.IdOsoba, Ime, Prezime, KorisnickoIme, BrojTelefona, NazivFirme, Lozinka
@@ -119,3 +119,13 @@ ALTER TABLE artikal AUTO_INCREMENT = 5000;
 
 create view rezervni_dio_naziv as
 select rezervnidio.IdRezervniDio, artikal.Naziv, rezervnidio.IdModelTelefona from rezervnidio inner join artikal on rezervnidio.IdRezervniDio = artikal.IdArtikal;
+
+create view ugradjeni_dio_servis as
+select ugradjenirezervnidio.IdRezervniDio, ugradjenirezervnidio.IdServisTelefona, artikal.Naziv from
+ugradjenirezervnidio join artikal on ugradjenirezervnidio.IdRezervniDio = artikal.IdArtikal where Obrisano = 0;
+
+create view usluga_servis as
+select servistelefona_has_cijenovnikusluga.IdServisTelefona, servistelefona_has_cijenovnikusluga.IdCijenovnikUsluga, Naziv from
+servistelefona_has_cijenovnikusluga join cijenovnikusluga on servistelefona_has_cijenovnikusluga.IdCijenovnikUsluga = cijenovnikusluga.IdCijenovnikUsluga
+where Obrisano = 0;
+

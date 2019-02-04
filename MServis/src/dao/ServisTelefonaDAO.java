@@ -1,6 +1,7 @@
 package dao;
 
 import dto.ServisTelefonaDTO;
+import dto.StanjeTelefonaDTO;
 import java.util.List;
 
 public interface ServisTelefonaDAO {
@@ -11,5 +12,9 @@ public interface ServisTelefonaDAO {
 	List<ServisTelefonaDTO> selectBy(ServisTelefonaDTO servisTelefona);
 
     public List<ServisTelefonaDTO> selectAll();
+
+
+
+    public boolean updateStanje(ServisTelefonaDTO servisTelefonaDTO);
 
 }

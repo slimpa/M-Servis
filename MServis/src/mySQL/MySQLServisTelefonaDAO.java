@@ -4,6 +4,7 @@ import dao.ServisTelefonaDAO;
 import dbu.ConnectionPool;
 import dbu.DBUtil;
 import dto.ServisTelefonaDTO;
+import dto.StanjeTelefonaDTO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -92,6 +93,7 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
             cs.setString(2, servisTelefona.getSerijskiBrojTelefona());
             cs.setInt(3, servisTelefona.getIdStanjeTelefona());
             cs.setInt(4, servisTelefona.getIdModelTelefona());
+            cs.setInt(5, servisTelefona.getIdServisTelefona());
             cs.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -143,5 +145,31 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
         // TODO - implement MySQLServisTelefonaDAO.selectBy
         throw new UnsupportedOperationException();
     }
+    
+    public boolean updateStanje(ServisTelefonaDTO servisTelefona){
+        Connection conn = null;
+        CallableStatement cs = null;
 
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            cs = conn.prepareCall(SQL_UPDATE + " IdStanjeTelefona = ? where IdServisTelefona = ?");
+            cs.setInt(1, servisTelefona.getIdStanjeTelefona());
+            cs.setInt(2, servisTelefona.getIdServisTelefona());
+            cs.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(cs);
+        }
+
+        return true;
+    }
+
+
+   
+
+    
 }

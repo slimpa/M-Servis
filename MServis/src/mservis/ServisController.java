@@ -90,6 +90,7 @@ public class ServisController implements Initializable {
     private String zaposleniKorisnicko = LoginController.getKorisnickoIme();
     private static int idServisa;
     private static int idModelTelefona;
+    private static boolean naServisu = false;
 
     public static int getIdServisa() {
         return idServisa;
@@ -98,9 +99,7 @@ public class ServisController implements Initializable {
     public static int getIdModelTelefona() {
         return idModelTelefona;
     }
-    
-    
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.popuniTabeluServis();
@@ -124,6 +123,7 @@ public class ServisController implements Initializable {
                 StanjeTelefonaDTO stanje = stanjeDao.selectById(new StanjeTelefonaDTO(servis.getIdStanjeTelefona()));
                 servis.setStanjeTelefona(stanje.getStanje());
             }
+
             listaServisa = FXCollections.observableArrayList(lista);
         }
 
@@ -162,23 +162,54 @@ public class ServisController implements Initializable {
 
     public void btnServisiraj(ActionEvent e) {
         ServisTelefonaDTO servis = tableServis.getSelectionModel().getSelectedItem();
-
-        if (servis != null) {
+        List<StanjeTelefonaDTO> stanja = stanjeDao.selectAll();
+        int idPopravljenog = 0;
+        int idNaServisu = 0;
+        int idNemoguce = 0;
+        for (StanjeTelefonaDTO s : stanja) {
+            if ("Popravljen".equals(s.getStanje())) {
+                idPopravljenog = s.getIdStanjeTelefona();
+            } else if ("Na servisu".equals(s.getStanje())) {
+                idNaServisu = s.getIdStanjeTelefona();
+            } else if("Nemoguće popraviti".equals(s.getStanje())){
+                idNemoguce = s.getIdStanjeTelefona();
+            }
+        }
+        if (servis != null && servis.getIdStanjeTelefona() != idPopravljenog && servis.getIdStanjeTelefona() != idNemoguce) {
             try {
-                idServisa=servis.getIdServisTelefona();
-                idModelTelefona=servis.getIdModelTelefona();
+                idServisa = servis.getIdServisTelefona();
+                idModelTelefona = servis.getIdModelTelefona();
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("IzmjenaServis.fxml"));
                 loader.load();
                 IzmjenaServisController controller = loader.getController();
+                if (servis.getIdStanjeTelefona() == idNaServisu) {
+                    naServisu = true;
+                } else{
+                    naServisu = false;
+                }
                 Parent p = loader.getRoot();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(p));
                 stage.showAndWait();
+
+                this.popuniTabeluServis();
             } catch (IOException ex) {
                 Logger.getLogger(ServisController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
+        } else if (servis != null && servis.getIdStanjeTelefona() == idPopravljenog) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Telefon je popravljen, nemoguća izmjena!");
+            alert.showAndWait();
+        } else if (servis != null && servis.getIdStanjeTelefona() == idNemoguce){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Telefon je nemoguće popraviti!");
+            alert.showAndWait();
+        }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
@@ -187,4 +218,13 @@ public class ServisController implements Initializable {
         }
     }
 
+    public static boolean isNaServisu() {
+        return naServisu;
+    }
+
+    public static void setNaServisu(boolean naServisu) {
+        ServisController.naServisu = naServisu;
+    }
+
+    
 }

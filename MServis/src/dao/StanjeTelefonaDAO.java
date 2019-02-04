@@ -15,6 +15,6 @@ public interface StanjeTelefonaDAO {
 
     List<StanjeTelefonaDTO> selectBy(StanjeTelefonaDTO stanjeTelefona);
 
-    public StanjeTelefonaDTO selectById(StanjeTelefonaDTO stanjeTelefonaDTO);
+    public StanjeTelefonaDTO selectById(StanjeTelefonaDTO stanjeTelefona);
 
 }

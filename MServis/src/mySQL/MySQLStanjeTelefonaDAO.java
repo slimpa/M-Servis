@@ -163,6 +163,7 @@ public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
     }
     
 
+    @Override
     public StanjeTelefonaDTO selectById(StanjeTelefonaDTO stanjeTelefona) {
         List<StanjeTelefonaDTO> stanja = new ArrayList<StanjeTelefonaDTO>();
         Connection conn = null;
