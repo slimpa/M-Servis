@@ -22,6 +22,7 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 	public static final String SQL_SELECT = "select * from rezervnidio";
         public static final String SQL_SELECT_DETAIL = "select * from rezervni_dijelovi";
          public static final String SQL_DELETE = "DELETE FROM `m:servis`.`rezervnidio` WHERE `IdRezervniDio`=?";
+		 public static final String SQL_SELECT_NAZIV = "select * from rezervni_dio_naziv";
 	/**
 	 * 
 	 * @param rezervniDio
