@@ -10,9 +10,9 @@ public class TelefonDTO {
         private String Model;
         private String Proizvodjac;
         private String Specifikacija;
-        private int Cijena;
+        private double Cijena;
 
-    public TelefonDTO(String SerijskiBroj, String Boja, int idModelTelefona, String Naziv, String Model, String Proizvodjac, String Specifikacija, int Cijena) {
+    public TelefonDTO(String SerijskiBroj, String Boja, int idModelTelefona, String Naziv, String Model, String Proizvodjac, String Specifikacija, double Cijena) {
         this.SerijskiBroj = SerijskiBroj;
         this.Boja = Boja;
         this.idModelTelefona = idModelTelefona;
@@ -39,7 +39,7 @@ public class TelefonDTO {
         return Specifikacija;
     }
 
-    public int getCijena() {
+    public double getCijena() {
         return Cijena;
     }
 
@@ -59,7 +59,7 @@ public class TelefonDTO {
         this.Specifikacija = Specifikacija;
     }
 
-    public void setCijena(int Cijena) {
+    public void setCijena(double Cijena) {
         this.Cijena = Cijena;
     }
     

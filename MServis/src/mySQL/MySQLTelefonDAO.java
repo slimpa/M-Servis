@@ -112,7 +112,7 @@ public class MySQLTelefonDAO implements TelefonDAO {
 			else {
 				while(rs.next()) {
 					sviTelefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"),rs.getString("Boja"),rs.getInt("IdModelTelefona"),
-                                        rs.getString("Naziv"),rs.getString("NazivModela"),rs.getString("Proizvodjac"),rs.getString("Specifikacija"),rs.getInt("Cijena")));
+                                        rs.getString("Naziv"),rs.getString("NazivModela"),rs.getString("Proizvodjac"),rs.getString("Specifikacija"),rs.getDouble("Cijena")));
                                        
 				}
 			}
@@ -147,7 +147,7 @@ public class MySQLTelefonDAO implements TelefonDAO {
 			else {
 				while(rs.next()) {
 					telefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"),rs.getString("Boja"),rs.getInt("IdModelTelefona"),
-                                        rs.getString("Naziv"),rs.getString("NazivModela"),rs.getString("Proizvodjac"),rs.getString("Specifikacija"),rs.getInt("Cijena")));
+                                        rs.getString("Naziv"),rs.getString("NazivModela"),rs.getString("Proizvodjac"),rs.getString("Specifikacija"),rs.getDouble("Cijena")));
 				}
 			}
 		} catch(SQLException e) {

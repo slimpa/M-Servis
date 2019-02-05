@@ -112,7 +112,7 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 			else {
 				while(rs.next()) {
 					dodatnaOprema.add(new DodatnaOpremaDTO(rs.getString("Boja"),rs.getInt("idDodatnaOprema"),rs.getString("Naziv"),
-                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getInt("Cijena")));
+                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getDouble("Cijena")));
                                       
 				}
 			}
@@ -146,7 +146,7 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 			else {
 				while(rs.next()) {
 					dodatnaOprema.add(new DodatnaOpremaDTO(rs.getString("Boja"),rs.getInt("idDodatnaOprema"),rs.getString("Naziv"),
-                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getInt("Cijena")));
+                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getDouble("Cijena")));
 				}
 			}
 		} catch(SQLException e) {

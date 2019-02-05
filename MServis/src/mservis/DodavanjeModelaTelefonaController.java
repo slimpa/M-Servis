@@ -81,7 +81,7 @@ public class DodavanjeModelaTelefonaController implements Initializable{
         String naziv = tfNaziv.getText();
         String proizvodjac =  cbProizvodjac.getValue().toString();
         String barKod = tfBarKod.getText(); 
-        Integer cijena = Integer.parseInt(tfCijena.getText());
+        Double cijena = Double.parseDouble(tfCijena.getText());
         
         ProizvodjacDTO proizvodjacDTO = new ProizvodjacDTO(proizvodjac);
         //String Naziv, int Kolicina, int idProizvodjac, String BarKod

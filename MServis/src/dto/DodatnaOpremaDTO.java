@@ -13,7 +13,7 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
         private String Proizvodjac;
         private String BarCode;
 
-    public DodatnaOpremaDTO(String Boja, int idTipDodatneOpreme, String Naziv, String ModelTelefona, String Proizvodjac, String BarCode, int Kolicina, int Cijena) {
+    public DodatnaOpremaDTO(String Boja, int idTipDodatneOpreme, String Naziv, String ModelTelefona, String Proizvodjac, String BarCode, int Kolicina, double Cijena) {
         this.Boja = Boja;
         this.idTipDodatneOpreme = idTipDodatneOpreme;
         this.Naziv = Naziv;
@@ -24,7 +24,7 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
         this.Cijena = Cijena;
     }
 
-    public DodatnaOpremaDTO(String Boja, String Naziv, String ModelTelefona, String TipOpreme, String Proizvodjac, String BarCode, int Kolicina, int Cijena) {
+    public DodatnaOpremaDTO(String Boja, String Naziv, String ModelTelefona, String TipOpreme, String Proizvodjac, String BarCode, int Kolicina, double Cijena) {
         this.Boja = Boja;
         this.Naziv = Naziv;
         this.ModelTelefona = ModelTelefona;
@@ -52,9 +52,9 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
         return TipOpreme;
     }
         private int Kolicina;
-        private int Cijena;
+        private double Cijena;
 
-    public DodatnaOpremaDTO(String Boja, int idDodatnaOprema, String Naziv, String ModelTelefona, String TipOpreme, int Kolicina, int Cijena) {
+    public DodatnaOpremaDTO(String Boja, int idDodatnaOprema, String Naziv, String ModelTelefona, String TipOpreme, int Kolicina, double Cijena) {
         this.Boja = Boja;
         this.idDodatnaOprema = idDodatnaOprema;
         this.Naziv = Naziv;
@@ -64,7 +64,7 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
         this.Cijena = Cijena;
     }
 
-    public DodatnaOpremaDTO(String Boja, int idModelTelefona, int idTipDodatneOpreme, int idDodatnaOprema, String Naziv, String ModelTelefona, int Kolicina, int Cijena) {
+    public DodatnaOpremaDTO(String Boja, int idModelTelefona, int idTipDodatneOpreme, int idDodatnaOprema, String Naziv, String ModelTelefona, int Kolicina, double Cijena) {
         this.Boja = Boja;
         this.idModelTelefona = idModelTelefona;
         this.idTipDodatneOpreme = idTipDodatneOpreme;
@@ -106,7 +106,7 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
         return Kolicina;
     }
 
-    public int getCijena() {
+    public double getCijena() {
         return Cijena;
     }
 
@@ -138,7 +138,7 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
         this.Kolicina = Kolicina;
     }
 
-    public void setCijena(int Cijena) {
+    public void setCijena(double Cijena) {
         this.Cijena = Cijena;
     }
         

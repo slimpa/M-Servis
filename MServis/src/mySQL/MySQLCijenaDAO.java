@@ -34,7 +34,7 @@ public class MySQLCijenaDAO implements CijenaDAO {
                     ps = conn.prepareStatement(SQL_INSERT);
                     
                     ps.setInt(1, cijena.getIdArtikal());
-                    ps.setInt(2, (int) cijena.getCijena());
+                    ps.setDouble(2,  cijena.getCijena());
                     ps.setTimestamp(3, cijena.getDatumOd());
                     ps.setTimestamp(4, null);
                     ps.setInt(5, 1);

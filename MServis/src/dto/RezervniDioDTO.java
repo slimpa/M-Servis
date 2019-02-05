@@ -8,24 +8,15 @@ public class RezervniDioDTO extends ArtikalDTO {
         
         private String nazivRezervnogdijela;
         private int kolicinaRezervnogdijela;
-        private int cijena;
+        private double cijena;
         private String proizvodjac;
 
-    public RezervniDioDTO(int idModelTelefona) {
-
-        this.idModelTelefona = idModelTelefona;
-    }
-
+        
     public int getKolicinaRezervnogdijela() {
         return kolicinaRezervnogdijela;
     }
-    
-    public RezervniDioDTO(String naziv, int idRezervniDio){
-        super(naziv, idRezervniDio);
-        this.idRezervniDio = idRezervniDio;
-    }
 
-    public RezervniDioDTO(int idRezervniDio, int idModelTelefona, String Opis, String nazivRezervnogdijela, int kolicinaRezervnogdijela, int cijena, String proizvodjac) {
+    public RezervniDioDTO(int idRezervniDio, int idModelTelefona, String Opis, String nazivRezervnogdijela, int kolicinaRezervnogdijela, double cijena, String proizvodjac) {
         this.idRezervniDio = idRezervniDio;
         this.idModelTelefona = idModelTelefona;
         this.Opis = Opis;
@@ -47,7 +38,7 @@ public class RezervniDioDTO extends ArtikalDTO {
         this.kolicinaRezervnogdijela = kolicinaRezervnogdijela;
     }
 
-    public void setCijena(int cijena) {
+    public void setCijena(double cijena) {
         this.cijena = cijena;
     }
 
@@ -57,7 +48,7 @@ public class RezervniDioDTO extends ArtikalDTO {
         
 
     
-    public RezervniDioDTO(int idRezervniDio, int idModelTelefona, String Opis, String naziv, int kolicina, int cijena) {
+    public RezervniDioDTO(int idRezervniDio, int idModelTelefona, String Opis, String naziv, int kolicina, double cijena) {
         this.idRezervniDio = idRezervniDio;
         this.idModelTelefona = idModelTelefona;
         this.Opis = Opis;
@@ -70,7 +61,7 @@ public class RezervniDioDTO extends ArtikalDTO {
         return nazivRezervnogdijela;
     }
 
-    public int getCijena() {
+    public double getCijena() {
         return cijena;
     }
 

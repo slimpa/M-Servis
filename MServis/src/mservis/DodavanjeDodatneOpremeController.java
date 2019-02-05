@@ -140,7 +140,7 @@ public class DodavanjeDodatneOpremeController implements Initializable {
         String barKod = tfBarKod.getText(); 
         String boja = cbBoja.getValue().toString();
         Integer kolicina = Integer.parseInt(tfKolicina.getText());
-        Integer cijena = Integer.parseInt(tfCijena.getText());
+        Double cijena = Double.parseDouble(tfCijena.getText());
         
         ProizvodjacDTO proizvodjacDTO = new ProizvodjacDTO(proizvodjac);
         //String Naziv, int Kolicina, int idProizvodjac, String BarKod
@@ -202,7 +202,7 @@ public class DodavanjeDodatneOpremeController implements Initializable {
         tfBarKod.setText(dodatnaOprema.getBarKod());
         cbBoja.setValue(dodatnaOprema.getBoja());
         tfKolicina.setText(Integer.toString(dodatnaOprema.getKolicina()));
-        tfCijena.setText(Integer.toString(dodatnaOprema.getCijena()));
+        tfCijena.setText(Double.toString(dodatnaOprema.getCijena()));
     }
     
     public void btnDodajModelTelefonaHandler(){

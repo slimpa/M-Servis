@@ -117,7 +117,7 @@ public class DodavanjeRezervnogDijelaController implements Initializable{
         String modelTelefona =  cbModelTelefona.getValue().toString();
         String opis = tfOpis.getText(); 
         Integer kolicina = Integer.parseInt(tfKolicina.getText());
-        Integer cijena = Integer.parseInt(tfCijena.getText());
+        Double cijena = Double.parseDouble(tfCijena.getText());
         String proizvodjac =  cbProizvodjac.getValue().toString();
         String barKod = tfBarKod.getText();
         Integer idRezervniDio;
@@ -169,7 +169,7 @@ public class DodavanjeRezervnogDijelaController implements Initializable{
         cbModelTelefona.setValue(rezervniDio.getIdModelTelefona());
         tfOpis.setText(rezervniDio.getOpis());
         tfKolicina.setText(Integer.toString(rezervniDio.getKolicina()));
-        tfCijena.setText(Integer.toString(rezervniDio.getCijena()));
+        tfCijena.setText(Double.toString(rezervniDio.getCijena()));
         cbProizvodjac.setValue(rezervniDio.getProizvodjac());
     }
     
