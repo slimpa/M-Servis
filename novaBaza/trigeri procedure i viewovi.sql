@@ -88,7 +88,7 @@ delimiter ;
 
 create view rezervni_dijelovi as
 select IdRezervniDio, artikal.Naziv,rezervnidio.IdModelTelefona, Opis, artikal.Kolicina, cijena. cijena from rezervnidio natural join artikal natural join modeltelefona natural join cijena 
-where rezervnidio.IdRezervniDio=artikal.IdArtikal  and rezervnidio.IdRezervniDio=cijena.IdArtikla;
+where rezervnidio.IdRezervniDio=artikal.IdArtikal and rezervnidio.IdRezervniDio=cijena.IdArtikla;
 
 
 
@@ -118,7 +118,8 @@ where ((cijena.DatumDo is not null and cijena.DatumOd<racun.Vrijeme and cijena.D
 ALTER TABLE artikal AUTO_INCREMENT = 5000;
 
 create view rezervni_dio_naziv as
-select rezervnidio.IdRezervniDio, artikal.Naziv, rezervnidio.IdModelTelefona from rezervnidio inner join artikal on rezervnidio.IdRezervniDio = artikal.IdArtikal;
+select rezervnidio.IdRezervniDio, artikal.Naziv, rezervnidio.IdModelTelefona from rezervnidio inner join artikal on rezervnidio.IdRezervniDio = artikal.IdArtikal
+where artikal.kolicina >= 1 and Obrisano = 0;
 
 create view ugradjeni_dio_servis as
 select ugradjenirezervnidio.IdRezervniDio, ugradjenirezervnidio.IdServisTelefona, artikal.Naziv from
@@ -128,4 +129,3 @@ create view usluga_servis as
 select servistelefona_has_cijenovnikusluga.IdServisTelefona, servistelefona_has_cijenovnikusluga.IdCijenovnikUsluga, Naziv from
 servistelefona_has_cijenovnikusluga join cijenovnikusluga on servistelefona_has_cijenovnikusluga.IdCijenovnikUsluga = cijenovnikusluga.IdCijenovnikUsluga
 where Obrisano = 0;
-

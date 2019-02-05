@@ -124,13 +124,15 @@ public class IzmjenaServisController implements Initializable {
         for (StanjeTelefonaDTO stanje : stanja) {
             cbNovoStanje.getItems().add(stanje.getStanje());
         }
-        this.popuniNaServisu();
+        if (naServisu) {
+            this.popuniNaServisu();
+        }
     }
-    
-    private void popuniNaServisu(){
+
+    private void popuniNaServisu() {
         btnObrisiStavku.setVisible(naServisu);
         if (naServisu) {
-  
+
             List<UgradjeniRezervniDioDTO> dijelovi = ugradjeniDioDao.selectBy(new UgradjeniRezervniDioDTO(idServisa));
             List<ServisTelefonaHasCjenovnikUslugaDTO> usluge = cjenovnikDao.selectBy(new ServisTelefonaHasCjenovnikUslugaDTO(idServisa));
             for (UgradjeniRezervniDioDTO dio : dijelovi) {
@@ -250,68 +252,75 @@ public class IzmjenaServisController implements Initializable {
 
     public void btnPotvrdi(ActionEvent e) {
         String stanje = (String) cbNovoStanje.getSelectionModel().getSelectedItem();
+        if (stanje != null) {
 
-        int idStanja = 0;
-        for (StanjeTelefonaDTO s : stanja) {
-            if (s.getStanje().equals(stanje)) {
-                idStanja = s.getIdStanjeTelefona();
-            }
-
-        }
-
-        
-        if ("Nemoguce popraviti".equals(stanje)) {
-            System.out.println("NEMOGUCe");
-            if (servisDao.updateStanje(new ServisTelefonaDTO(idServisa, idStanja))) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Info");
-                alert.setHeaderText(null);
-                alert.setContentText("Uspješno servisiranje!");
-                alert.showAndWait();
-
-                Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
-                stage.close();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Greška!");
-                alert.setHeaderText(null);
-                alert.setContentText("Neuspješno servisiranje!");
-                alert.showAndWait();
-
-                Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
-                stage.close();
-            }
-        } else {
-            if (servisDao.updateStanje(new ServisTelefonaDTO(idServisa, idStanja))) {
-
-                for (StavkaRacuna stavka : stavkeServisa) {
-                    if (stavka.getIdStavke() > 5000) {
-                
-                        ugradjeniDioDao.insert(new UgradjeniRezervniDioDTO(stavka.getIdStavke(), idServisa));
-                    } else {
-                         System.out.println(stavka.getNazivStavke()+" usluga");
-                        cjenovnikDao.insert(new ServisTelefonaHasCjenovnikUslugaDTO(idServisa, stavka.getIdStavke()));
-                    }
+            int idStanja = 0;
+            for (StanjeTelefonaDTO s : stanja) {
+                if (s.getStanje().equals(stanje)) {
+                    idStanja = s.getIdStanjeTelefona();
                 }
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Info");
-                alert.setHeaderText(null);
-                alert.setContentText("Uspješno servisiranje!");
-                alert.showAndWait();
-
-                Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
-                stage.close();
-
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Greška!");
-                alert.setHeaderText(null);
-                alert.setContentText("Neuspješno servisiranje!");
-                alert.showAndWait();
 
             }
-        }
 
+            if ("Nemoguce popraviti".equals(stanje)) {
+
+                if (servisDao.updateStanje(new ServisTelefonaDTO(idServisa, idStanja))) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Info");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Uspješno servisiranje!");
+                    alert.showAndWait();
+
+                    Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
+                    stage.close();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Greška!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Neuspješno servisiranje!");
+                    alert.showAndWait();
+
+                    Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
+                    stage.close();
+                }
+            } else {
+                if (servisDao.updateStanje(new ServisTelefonaDTO(idServisa, idStanja))) {
+
+                    for (StavkaRacuna stavka : stavkeServisa) {
+                        if (stavka.getIdStavke() > 5000) {
+
+                            ugradjeniDioDao.insert(new UgradjeniRezervniDioDTO(stavka.getIdStavke(), idServisa));
+                        } else {
+
+                            cjenovnikDao.insert(new ServisTelefonaHasCjenovnikUslugaDTO(idServisa, stavka.getIdStavke()));
+                        }
+                    }
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Info");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Uspješno servisiranje!");
+                    alert.showAndWait();
+
+                    Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
+                    stage.close();
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Greška!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Neuspješno servisiranje!");
+                    alert.showAndWait();
+
+                }
+            }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Nije odabrano stanje telefona!");
+            alert.showAndWait();
+        }
     }
 
     public boolean isNaServisu() {
