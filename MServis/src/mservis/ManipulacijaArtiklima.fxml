@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -93,6 +94,27 @@
                         <ComboBox layoutX="192.0" layoutY="235.0" prefHeight="25.0" prefWidth="166.0" />
                         <Button layoutX="30.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" text="Dodaj na račun" />
                         <Button fx:id="btnRezervniDioPrikaziRacun" layoutX="193.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnRezervniDioPrikaziRacunHandler" prefHeight="25.0" prefWidth="165.0" text="Prikaži račun" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Račun">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="62.0" layoutY="52.0" prefHeight="340.0" prefWidth="502.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Id artikla" />
+                            <TableColumn prefWidth="246.0" text="Naziv artikla" />
+                              <TableColumn prefWidth="75.0" text="Količina" />
+                              <TableColumn prefWidth="101.0" text="Cijena" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="421.0" layoutY="478.0" mnemonicParsing="false" text="Obriši artikal" />
+                        <Button layoutX="530.0" layoutY="478.0" mnemonicParsing="false" text="Štampaj" />
+                        <Button layoutX="623.0" layoutY="478.0" mnemonicParsing="false" text="Izađi" />
+                        <Label layoutX="313.0" layoutY="410.0" text="Ukupna cijena" />
+                        <TextField layoutX="421.0" layoutY="406.0" />
                      </children>
                   </AnchorPane>
               </content>
