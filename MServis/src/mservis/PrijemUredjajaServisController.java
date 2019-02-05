@@ -30,6 +30,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mySQL.MySQLDAOFactory;
+import service.GeneratorIzvjestaja;
 
 
 public class PrijemUredjajaServisController implements Initializable {
@@ -111,6 +112,8 @@ public class PrijemUredjajaServisController implements Initializable {
                 alert.setContentText("Dodavanje nije moguće!");
                 alert.showAndWait();
             }
+            
+            
 
         }
     }

@@ -49,6 +49,14 @@ public class ServisTelefonaDTO {
         this.idStanjeTelefona = stanje;
     }
 
+    public ServisTelefonaDTO(int idServisa) {
+        this.idServisTelefona = idServisa;
+    }
+    
+    public ServisTelefonaDTO(StanjeTelefonaDTO stanje){
+        this.idStanjeTelefona = stanje.getIdStanjeTelefona();
+    }
+
     public int getIdServisTelefona() {
         return idServisTelefona;
     }

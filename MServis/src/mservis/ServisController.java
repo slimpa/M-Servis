@@ -8,15 +8,20 @@ package mservis;
 import dao.KlijentDAO;
 import dao.ModelTelefonaDAO;
 import dao.ServisTelefonaDAO;
+import dao.ServisTelefonaHasCjenovnikUslugaDAO;
 import dao.StanjeTelefonaDAO;
+import dao.UgradjeniRezervniDioDAO;
 import dao.ZaposleniDAO;
 import dto.KlijentDTO;
 import dto.ModelTelefonaDTO;
 import dto.ServisTelefonaDTO;
+import dto.ServisTelefonaHasCjenovnikUslugaDTO;
 import dto.StanjeTelefonaDTO;
+import dto.UgradjeniRezervniDioDTO;
 import dto.ZaposleniDTO;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -39,6 +44,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import mySQL.MySQLDAOFactory;
+import net.sf.jasperreports.engine.JRException;
+import service.GeneratorIzvjestaja;
+import service.StavkaServisa;
 
 /**
  *
@@ -82,6 +90,9 @@ public class ServisController implements Initializable {
     @FXML
     private TableColumn columnStanje;
 
+    @FXML
+    private Button btnPreuzimanje;
+
     private ServisTelefonaDAO servisDao = new MySQLDAOFactory().getServisTelefonaDAO();
     private KlijentDAO klijentDao = new MySQLDAOFactory().getKlijentDAO();
     private ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
@@ -91,6 +102,8 @@ public class ServisController implements Initializable {
     private static int idServisa;
     private static int idModelTelefona;
     private static boolean naServisu = false;
+    private static UgradjeniRezervniDioDAO ugradjeniDao = new MySQLDAOFactory().getUgradjeniRezervniDioDAO();
+    private static ServisTelefonaHasCjenovnikUslugaDAO uslugeDao = new MySQLDAOFactory().getServisTelefonaHasCjenovnikUslugaDAO();
 
     public static int getIdServisa() {
         return idServisa;
@@ -102,7 +115,24 @@ public class ServisController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.popuniComboStanja();
         this.popuniTabeluServis();
+    }
+
+    private void popuniComboStanja() {
+        List<StanjeTelefonaDTO> lista = stanjeDao.selectAll();
+        List<String> naziviStanja = new ArrayList<>();
+
+        if (lista != null) {
+            for (StanjeTelefonaDTO s : lista) {
+                naziviStanja.add(s.getStanje());
+            }
+
+            ObservableList<String> stanja = FXCollections.observableArrayList(naziviStanja);
+            cbStanje.setItems(stanja);
+
+        }
+
     }
 
     private void popuniTabeluServis() {
@@ -155,9 +185,24 @@ public class ServisController implements Initializable {
             stage.showAndWait();
 
             this.popuniTabeluServis();
+            this.generisiPotvrdu();
+
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void generisiPotvrdu() {
+        ObservableList<ServisTelefonaDTO> listaServisa = tableServis.getItems();
+        ServisTelefonaDTO servis = listaServisa.get(listaServisa.size() - 1);
+
+        GeneratorIzvjestaja gen = new GeneratorIzvjestaja();
+        try {
+            gen.potvrdaServis(servis.getIdServisTelefona(), servis.getSerijskiBrojTelefona(), servis.getNazivModela());
+        } catch (JRException ex) {
+            Logger.getLogger(ServisController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void btnServisiraj(ActionEvent e) {
@@ -171,7 +216,7 @@ public class ServisController implements Initializable {
                 idPopravljenog = s.getIdStanjeTelefona();
             } else if ("Na servisu".equals(s.getStanje())) {
                 idNaServisu = s.getIdStanjeTelefona();
-            } else if("Nemoguće popraviti".equals(s.getStanje())){
+            } else if ("Nemoguće popraviti".equals(s.getStanje())) {
                 idNemoguce = s.getIdStanjeTelefona();
             }
         }
@@ -185,7 +230,7 @@ public class ServisController implements Initializable {
                 IzmjenaServisController controller = loader.getController();
                 if (servis.getIdStanjeTelefona() == idNaServisu) {
                     naServisu = true;
-                } else{
+                } else {
                     naServisu = false;
                 }
                 Parent p = loader.getRoot();
@@ -203,13 +248,13 @@ public class ServisController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Telefon je popravljen, nemoguća izmjena!");
             alert.showAndWait();
-        } else if (servis != null && servis.getIdStanjeTelefona() == idNemoguce){
+        } else if (servis != null && servis.getIdStanjeTelefona() == idNemoguce) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Telefon je nemoguće popraviti!");
             alert.showAndWait();
-        }else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
@@ -226,5 +271,111 @@ public class ServisController implements Initializable {
         ServisController.naServisu = naServisu;
     }
 
-    
+    public void btnPretraziHandler(ActionEvent e) {
+        if ("".equals(tfIdServisa.getText()) && cbStanje.getSelectionModel().getSelectedItem() == null) {
+            this.popuniTabeluServis();
+
+        } else if (!"".equals(tfIdServisa.getText()) || cbStanje.getSelectionModel().getSelectedItem() != null) {
+
+            int idServisa = 0;
+            String stanje = "";
+            List<ServisTelefonaDTO> lista = new ArrayList<>();
+            StanjeTelefonaDTO stanjeDto = null;
+
+            if (!"".equals(tfIdServisa.getText())) {
+                idServisa = Integer.parseInt(tfIdServisa.getText());
+            }
+
+            if (cbStanje.getSelectionModel().getSelectedItem() != null) {
+                stanje = (String) cbStanje.getSelectionModel().getSelectedItem();
+                stanjeDto = stanjeDao.selectBy(new StanjeTelefonaDTO(stanje)).get(0);
+            }
+
+            if (idServisa != 0 && stanjeDto != null) {
+                lista = servisDao.selectBy(new ServisTelefonaDTO(idServisa, stanjeDto.getIdStanjeTelefona()));
+            } else if (idServisa != 0 && stanjeDto == null) {
+                lista = servisDao.selectById(new ServisTelefonaDTO(idServisa));
+            } else if (idServisa == 0 && stanjeDto != null) {
+                lista = servisDao.selectByStanje(new ServisTelefonaDTO(stanjeDto));
+            }
+            ObservableList<ServisTelefonaDTO> listaServisa = null;
+
+            if (lista != null) {
+                for (ServisTelefonaDTO servis : lista) {
+                    KlijentDTO klijent = klijentDao.selectBy(new KlijentDTO(servis.getIdKlijent())).get(0);
+                    servis.setImePrezimeKlijent(klijent.getIme() + " " + klijent.getPrezime());
+
+                    ZaposleniDTO zaposleni = zaposleniDao.selectFromSviZaposleni(new ZaposleniDTO(servis.getIdZaposleni()));
+                    servis.setImePrezimeZaposleni(zaposleni.getIme() + " " + zaposleni.getPrezime());
+
+                    ModelTelefonaDTO model = modelDao.selectById(new ModelTelefonaDTO(servis.getIdModelTelefona())).get(0);
+                    servis.setNazivModela(model.getNazivModela());
+
+                    StanjeTelefonaDTO stanjeTelefona = stanjeDao.selectById(new StanjeTelefonaDTO(servis.getIdStanjeTelefona()));
+                    servis.setStanjeTelefona(stanjeTelefona.getStanje());
+
+                }
+                listaServisa = FXCollections.observableArrayList(lista);
+            }
+
+            if (listaServisa != null) {
+
+                columnIdServisa.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, Integer>("IdServisTelefona"));
+
+                columnKlijent.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("imePrezimeKlijent"));
+                columnServiser.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("imePrezimeZaposleni"));
+                columnModel.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("nazivModela"));
+                columnSerijski.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("serijskiBrojTelefona"));
+                columnOpis.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("opisKvara"));
+                columnDatum.setCellValueFactory(new PropertyValueFactory<ServisTelefonaDTO, String>("datumPrijema"));
+                columnStanje.setCellValueFactory(new PropertyValueFactory<StanjeTelefonaDTO, String>("stanjeTelefona"));
+
+                tableServis.setItems(listaServisa);
+            }
+
+        }
+        cbStanje.setValue(null);
+    }
+
+    public void btnPreuzimanjeHandler(ActionEvent e) {
+        ServisTelefonaDTO servis = tableServis.getSelectionModel().getSelectedItem();
+        if (servis != null) {
+            List<UgradjeniRezervniDioDTO> dijelovi = ugradjeniDao.selectCijena(new UgradjeniRezervniDioDTO(servis.getIdServisTelefona()));
+            List<ServisTelefonaHasCjenovnikUslugaDTO> usluge = uslugeDao.selectCijena(new ServisTelefonaHasCjenovnikUslugaDTO(servis.getIdServisTelefona()));
+            List<StavkaServisa> stavke = new ArrayList<>();
+
+            for (UgradjeniRezervniDioDTO dio : dijelovi) {
+                stavke.add(new StavkaServisa(dio.getIdRezervniDio(), dio.getNazivDijela(), dio.getCijena()));
+            }
+
+            for (ServisTelefonaHasCjenovnikUslugaDTO usluga : usluge) {
+                stavke.add(new StavkaServisa(usluga.getIdCjenovnikUsluga(), usluga.getNazivUsluge(), usluga.getCijena()));
+            }
+           
+                
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("Racun.fxml"));
+                loader.load();
+                RacunController controller = loader.getController();
+                controller.popuniTabelu(stavke);
+                Parent p = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(p));
+                stage.showAndWait();
+                
+                this.popuniTabeluServis();
+            } catch (IOException ex) {
+                Logger.getLogger(ServisController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+            
+        } else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Nije odabran servis iz tabele!");
+            alert.showAndWait();
+        }
+    }
 }

@@ -11,4 +11,6 @@ public interface UgradjeniRezervniDioDAO {
 	List<UgradjeniRezervniDioDTO> selectAll();
 	List<UgradjeniRezervniDioDTO> selectBy(UgradjeniRezervniDioDTO ugradjeniRezervniDio);
 
+    public List<UgradjeniRezervniDioDTO> selectCijena(UgradjeniRezervniDioDTO ugradjeniRezervniDioDTO);
+
 }

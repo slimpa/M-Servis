@@ -11,4 +11,6 @@ public interface ServisTelefonaHasCjenovnikUslugaDAO {
 	List<ServisTelefonaHasCjenovnikUslugaDTO> selectAll();
 	List<ServisTelefonaHasCjenovnikUslugaDTO> selectBy(ServisTelefonaHasCjenovnikUslugaDTO servisCjenobnik);
 
+    public List<ServisTelefonaHasCjenovnikUslugaDTO> selectCijena(ServisTelefonaHasCjenovnikUslugaDTO servisTelefonaHasCjenovnikUslugaDTO);
+
 }

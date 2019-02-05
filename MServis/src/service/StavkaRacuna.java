@@ -5,35 +5,82 @@
  */
 package service;
 
+import java.util.Objects;
+
 /**
  *
- * @author Ivana
+ * @author Nikola
  */
 public class StavkaRacuna {
-    private int idStavke;
-    private String nazivStavke;
+    
+   private int idArtikla;
+   private String naziv;
+   private Double cijena;
+   private int kolicina;
+   private boolean telefon=false;
+   private String serijskiBroj;
 
-    public StavkaRacuna(int idStavke, String nazivStavke) {
-        this.idStavke = idStavke;
-        this.nazivStavke = nazivStavke;
+    public StavkaRacuna(int idArtikla, String naziv, Double cijena, int kolicina, boolean telefon, String serijskiBroj) {
+        this.idArtikla = idArtikla;
+        this.naziv = naziv;
+        this.cijena = cijena;
+        this.kolicina = kolicina;
+        this.telefon = telefon;
+        this.serijskiBroj = serijskiBroj;
     }
 
-    public int getIdStavke() {
-        return idStavke;
+    public int getIdArtikla() {
+        return idArtikla;
     }
 
-    public void setIdStavke(int idStavke) {
-        this.idStavke = idStavke;
+    public String getNaziv() {
+        return naziv;
     }
 
-    public String getNazivStavke() {
-        return nazivStavke;
+    public Double getCijena() {
+        return cijena;
     }
 
-    public void setNazivStavke(String nazivStavke) {
-        this.nazivStavke = nazivStavke;
+    public int getKolicina() {
+        return kolicina;
     }
 
+    public boolean isTelefon() {
+        return telefon;
+    }
+
+    public String getSerijskiBroj() {
+        return serijskiBroj;
+    }
+
+    public void setIdArtikla(int idArtikla) {
+        this.idArtikla = idArtikla;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+
+    public void setCijena(Double cijena) {
+        this.cijena = cijena;
+    }
+
+    public void setKolicina(int kolicina) {
+        this.kolicina = kolicina;
+    }
+
+    public void setTelefon(boolean telefon) {
+        this.telefon = telefon;
+    }
+
+    public void setSerijskiBroj(String serijskiBroj) {
+        this.serijskiBroj = serijskiBroj;
+    }
+
+    @Override
+    public String toString() {
+        return "StavkaRacuna{" + "idArtikla=" + idArtikla + ", naziv=" + naziv + ", cijena=" + cijena + ", kolicina=" + kolicina + ", telefon=" + telefon + ", serijskiBroj=" + serijskiBroj + '}';
+    }
 
 
     @Override
@@ -48,16 +95,14 @@ public class StavkaRacuna {
             return false;
         }
         final StavkaRacuna other = (StavkaRacuna) obj;
-        if (this.idStavke != other.idStavke) {
+        if (this.idArtikla != other.idArtikla) {
+            return false;
+        }
+        if (!Objects.equals(this.serijskiBroj, other.serijskiBroj)) {
             return false;
         }
         return true;
     }
-
-
-
-
-    
-    
+   
     
 }

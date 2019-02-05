@@ -126,7 +126,7 @@ public class DodavanjeRezervnogDijelaController implements Initializable{
         //String Naziv, int Kolicina, int idProizvodjac, String BarKod
         ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
         List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
-        ArtikalDTO artikal = new ArtikalDTO(naziv,1,proizvodjaci.get(0).getIdProizvodjac(),barKod);
+        ArtikalDTO artikal = new ArtikalDTO(naziv,kolicina,proizvodjaci.get(0).getIdProizvodjac(),barKod);
         //String Naziv, int Kolicina, int idProizvodjac, String BarKod
         ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
         artikalDAO.insert(artikal);

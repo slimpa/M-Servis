@@ -14,6 +14,7 @@ public class RezervniDioDTO extends ArtikalDTO {
     public RezervniDioDTO(int idModelTelefona) {
 
         this.idModelTelefona = idModelTelefona;
+       
     }
 
     public RezervniDioDTO(int idRezervniDio, int idModelTelefona, String Opis) {
@@ -45,6 +46,7 @@ public class RezervniDioDTO extends ArtikalDTO {
         this.Opis = Opis;
         this.nazivRezervnogdijela = nazivRezervnogdijela;
         this.kolicinaRezervnogdijela = kolicinaRezervnogdijela;
+        this.Kolicina=kolicinaRezervnogdijela;
         this.cijena = cijena;
         this.proizvodjac = proizvodjac;
     }
@@ -55,9 +57,10 @@ public class RezervniDioDTO extends ArtikalDTO {
         this.Opis = Opis;
         this.nazivRezervnogdijela = naziv;
         this.kolicinaRezervnogdijela = kolicina;
+        this.Kolicina=kolicinaRezervnogdijela;
         this.cijena = cijena;
     }
-
+    
     public String getProizvodjac() {
         return proizvodjac;
     }

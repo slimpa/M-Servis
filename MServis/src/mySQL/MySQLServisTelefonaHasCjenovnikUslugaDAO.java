@@ -20,6 +20,7 @@ public class MySQLServisTelefonaHasCjenovnikUslugaDAO implements ServisTelefonaH
      */
     private static final String SQL_INSERT = "insert into servistelefona_has_cijenovnikusluga(IdServisTelefona, IdCijenovnikUsluga) values (?, ?)";
     private static final String SQL_SELECT = "select * from usluga_servis";
+    private static final String SQL_SELECT_CIJENA = "select * from usluga_cijena";
 
     public boolean insert(ServisTelefonaHasCjenovnikUslugaDTO servisCjenovnik) {
         Connection conn = null;
@@ -112,6 +113,36 @@ public class MySQLServisTelefonaHasCjenovnikUslugaDAO implements ServisTelefonaH
             } else {
                 while (rs.next()) {
                     usluge.add(new ServisTelefonaHasCjenovnikUslugaDTO(rs.getInt("IdServisTelefona"), rs.getInt("IdCijenovnikUsluga"), rs.getString("Naziv")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return usluge;
+    }
+    
+    public List<ServisTelefonaHasCjenovnikUslugaDTO> selectCijena(ServisTelefonaHasCjenovnikUslugaDTO servisCjenovnik){
+        List<ServisTelefonaHasCjenovnikUslugaDTO> usluge = new ArrayList<ServisTelefonaHasCjenovnikUslugaDTO>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = SQL_SELECT_CIJENA + " where IdServisTelefona = ?";
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, servisCjenovnik.getIdServistelefona());
+            rs = ps.executeQuery();
+
+            if (rs == null) {
+                return null;
+            } else {
+                while (rs.next()) {
+                    usluge.add(new ServisTelefonaHasCjenovnikUslugaDTO(rs.getInt("IdServisTelefona"), rs.getInt("IdCijenovnikUsluga"), rs.getString("Naziv"), rs.getDouble("Cijena")));
                 }
             }
         } catch (SQLException e) {

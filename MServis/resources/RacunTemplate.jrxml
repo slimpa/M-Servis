@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RacunTemplate" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6686e8d1-7fcc-4cfc-bb88-660b8fbfa75b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="idRacun" class="java.lang.Integer"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="naziv" class="java.lang.String"/>
+	<field name="cijena" class="java.lang.Double"/>
+	<field name="kolicina" class="java.lang.Integer"/>
+	<field name="ukupno" class="java.lang.String"/>
+	<field name="ukupnaCijena" class="java.lang.Double"/>
+	<field name="pdv" class="java.lang.Double"/>
+	<variable name="ukupno1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{ukupno}]]></variableExpression>
+	</variable>
+	<variable name="pdv1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{pdv}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="171" splitType="Stretch">
+			<line>
+				<reportElement x="-20" y="40" width="612" height="1" uuid="a5fd2a5e-b974-4182-bb07-b338720fb26a"/>
+			</line>
+			<staticText>
+				<reportElement x="160" y="10" width="270" height="30" uuid="bab2c8f1-5fcd-47f1-824d-d87de32325de"/>
+				<textElement textAlignment="Center">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maloprodajni fiskalni racun]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="50" width="300" height="61" uuid="3cef9b1e-a265-41d5-a404-ca9b0d991473"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[M:Servis
+Prodaja i servis mobilnih telefona i opreme]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="130" width="100" height="30" uuid="310867a6-e11f-4e0a-a715-cb8cd3a8d58f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Broj racuna:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="120" width="612" height="1" uuid="09505e06-cc86-4e71-9190-c9be53fc0d91"/>
+			</line>
+			<line>
+				<reportElement x="-20" y="170" width="612" height="1" uuid="61dfa27f-e661-45fe-bf5e-9fe5a743c1f4"/>
+			</line>
+			<textField>
+				<reportElement x="130" y="130" width="100" height="30" uuid="d72b3a6a-d40e-4778-a99d-04b1ec93eed3"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idRacun}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="100" height="30" uuid="f6409065-a838-4f66-ad67-f2eebd0e68e7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="01074c5c-d05a-447d-9177-e2afbc194a03"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Šifra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="100" height="30" uuid="86349eb1-fff3-4c27-be66-f880917ea342">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2dc16414-3190-47af-9d5d-81bb65e36e86"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Naziv]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="100" height="30" uuid="dd54831d-ebec-4750-8b2e-793e6e188a98">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dd8605a3-0032-41d8-8181-f5fc659c1a68"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Cijena]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="100" height="30" uuid="4fe877f2-ae31-4ebe-9b90-9cc052bedf7e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="23da888f-8f4a-4f25-b773-60aee4b0fc96"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Kolicina]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="100" height="30" uuid="63ea249f-10ff-4dd0-b475-777c8152dbd1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="01074c5c-d05a-447d-9177-e2afbc194a03"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="0" width="140" height="30" uuid="6eb0430a-477e-45a7-b1e5-18bc5c164bbf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2dc16414-3190-47af-9d5d-81bb65e36e86"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{naziv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="100" height="30" uuid="7497b1bb-e046-48e2-ac88-70d85af0bf63">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dd8605a3-0032-41d8-8181-f5fc659c1a68"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cijena}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="100" height="30" uuid="a9a54f8a-63c6-4e9b-a5b8-cb1d884bf5e4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="23da888f-8f4a-4f25-b773-60aee4b0fc96"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kolicina}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="132" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="136" height="30" uuid="4610a1e6-09bc-4a6b-84f6-6f62a06ab636"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Ukupna cijena:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="50" width="100" height="30" uuid="a56daf47-5f28-47f9-b532-d2173b76ebf1"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[PDV(17%):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="10" width="190" height="30" uuid="231271cd-2698-493e-ab7a-938359643bb7"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ukupnaCijena}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="50" width="190" height="30" uuid="b3ccd547-d7cd-4973-88ab-5d546916b328"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pdv}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="10" width="100" height="30" uuid="77c32f7f-1fb2-49e7-8dbc-2fba31ac12fe"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[KM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="50" width="100" height="30" uuid="73b0a111-e092-4e1e-8e04-0d16fe6cf3d9"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[KM]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="0" width="612" height="1" uuid="f6163c7b-fa81-41b3-b6e9-26a28b9a7cc7"/>
+			</line>
+			<textField pattern="HH:mm:ss a">
+				<reportElement x="140" y="90" width="130" height="30" uuid="cf50d2c4-18aa-4905-bfc3-215e0abc0b9e"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMM d, yyyy">
+				<reportElement x="310" y="90" width="120" height="30" uuid="fc2f1afb-496a-471a-9710-fe9834d55888"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

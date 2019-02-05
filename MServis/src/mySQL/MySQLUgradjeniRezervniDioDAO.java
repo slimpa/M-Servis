@@ -21,6 +21,7 @@ public class MySQLUgradjeniRezervniDioDAO implements UgradjeniRezervniDioDAO {
      */
     private static final String SQL_INSERT = "insert into ugradjenirezervnidio(IdServisTelefona, IdRezervniDio) values (?, ?)";
     private static final String SQL_SELECT = "select * from ugradjeni_dio_servis";
+    private static final String SQL_SELECT_CIJENA = "select * from ugradjeni_dio_cijena";
 
     public boolean insert(UgradjeniRezervniDioDTO ugradjeniRezervniDio) {
         Connection conn = null;
@@ -124,6 +125,36 @@ public class MySQLUgradjeniRezervniDioDAO implements UgradjeniRezervniDioDAO {
 
         return dijelovi;
 
+    }
+    
+   public List<UgradjeniRezervniDioDTO> selectCijena(UgradjeniRezervniDioDTO ugradjeniRezervniDio){
+        List<UgradjeniRezervniDioDTO> dijelovi = new ArrayList<UgradjeniRezervniDioDTO>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = SQL_SELECT_CIJENA + " where IdServisTelefona = ?";
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, ugradjeniRezervniDio.getIdServisa());
+            rs = ps.executeQuery();
+
+            if (rs == null) {
+                return null;
+            } else {
+                while (rs.next()) {
+                    dijelovi.add(new UgradjeniRezervniDioDTO(rs.getInt("IdRezervniDio"), rs.getInt("IdServisTelefona"), rs.getString("Naziv"), rs.getDouble("Cijena")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return dijelovi;
     }
 
 }

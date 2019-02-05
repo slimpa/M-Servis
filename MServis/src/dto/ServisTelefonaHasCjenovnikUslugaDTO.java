@@ -5,6 +5,8 @@ public class ServisTelefonaHasCjenovnikUslugaDTO {
     private int idServistelefona;
     private int idCjenovnikUsluga;
     private String nazivUsluge;
+    private double cijena;
+    
 
     public ServisTelefonaHasCjenovnikUslugaDTO(int idServistelefona, int idCjenovnikUsluga, String nazivUsluge) {
         this.idServistelefona = idServistelefona;
@@ -15,6 +17,13 @@ public class ServisTelefonaHasCjenovnikUslugaDTO {
     public ServisTelefonaHasCjenovnikUslugaDTO(int idServisa) {
         this.idServistelefona = idServisa;
     }
+
+    public ServisTelefonaHasCjenovnikUslugaDTO(int idServis, int idUsluga, String naziv, double cijena) {
+        this.idCjenovnikUsluga = idUsluga;
+        this.idServistelefona = idServis;
+        this.nazivUsluge = naziv;
+        this.cijena = cijena;
+    }   
 
     public String getNazivUsluge() {
         return nazivUsluge;
@@ -47,4 +56,13 @@ public class ServisTelefonaHasCjenovnikUslugaDTO {
         this.idCjenovnikUsluga = idCjenovnikUsluga;
     }
 
+    public double getCijena() {
+        return cijena;
+    }
+
+    public void setCijena(double cijena) {
+        this.cijena = cijena;
+    }
+
+    
 }

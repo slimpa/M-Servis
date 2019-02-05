@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mySQL/MySQLUgradjeniRezervniDioDAO.java</file>
-            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/dto/RezervniDioDTO.java</file>
-            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/IzmjenaServisController.java</file>
+            <file>file:/C:/Users/Nikola/Desktop/M/M-Servis/MServis/src/dto/UgradjeniRezervniDioDTO.java</file>
+            <file>file:/C:/Users/Nikola/Desktop/M/M-Servis/MServis/src/mservis/ManipulacijaArtiklimaController.java</file>
+            <file>file:/C:/Users/Nikola/Desktop/M/M-Servis/MServis/src/mservis/ServisController.java</file>
+            <file>file:/C:/Users/Nikola/Desktop/M/M-Servis/MServis/src/mySQL/MySQLUgradjeniRezervniDioDAO.java</file>
         </group>
     </open-files>
 </project-private>

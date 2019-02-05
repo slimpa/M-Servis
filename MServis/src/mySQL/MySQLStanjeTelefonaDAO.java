@@ -193,5 +193,6 @@ public class MySQLStanjeTelefonaDAO implements StanjeTelefonaDAO {
 
         return stanja.get(0);
     }
-
+    
+    
 }

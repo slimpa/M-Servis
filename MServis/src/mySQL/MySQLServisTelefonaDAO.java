@@ -65,7 +65,7 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
             ps = conn.prepareStatement(query);
             ps.setInt(1, 0);
             ps.setInt(2, servisTelefona.getIdServisTelefona());
-          
+
             returnValue = ps.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,7 +116,7 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
         try {
             conn = ConnectionPool.getInstance().checkOut();
             stat = conn.createStatement();
-            rs = stat.executeQuery(SQL_SELECT_ALL);
+            rs = stat.executeQuery(SQL_SELECT_ALL + " where TelefonPreuzet = 0");
 
             if (rs == null) {
                 return null;
@@ -142,11 +142,39 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
      * @param servisTelefona
      */
     public List<ServisTelefonaDTO> selectBy(ServisTelefonaDTO servisTelefona) {
-        // TODO - implement MySQLServisTelefonaDAO.selectBy
-        throw new UnsupportedOperationException();
+        List<ServisTelefonaDTO> servisi = new ArrayList<ServisTelefonaDTO>();
+        Connection conn = null;
+        Statement stat = null;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+
+        try {
+           conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(SQL_SELECT_ALL + " where IdServisTelefona = ? and IdStanjeTelefona = ?");
+            ps.setInt(1, servisTelefona.getIdServisTelefona());
+            ps.setInt(2, servisTelefona.getIdStanjeTelefona());
+            rs = ps.executeQuery();
+
+            if (rs == null) {
+                return null;
+            } else {
+                while (rs.next()) {
+                    servisi.add(new ServisTelefonaDTO(rs.getInt("IdServisTelefona"), rs.getInt("IdKlijent"), rs.getInt("IdZaposleni"),
+                            rs.getInt("IdStanjeTelefona"), rs.getString("OpisKvara"), rs.getDate("DatumPrijema"),
+                            rs.getInt("IdModelTelefona"), rs.getString("SerijskiBrojTelefona"), rs.getBoolean("TelefonPreuzet")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(stat);
+        }
+
+        return servisi;
     }
-    
-    public boolean updateStanje(ServisTelefonaDTO servisTelefona){
+
+    public boolean updateStanje(ServisTelefonaDTO servisTelefona) {
         Connection conn = null;
         CallableStatement cs = null;
 
@@ -168,8 +196,68 @@ public class MySQLServisTelefonaDAO implements ServisTelefonaDAO {
         return true;
     }
 
+    public List<ServisTelefonaDTO> selectById(ServisTelefonaDTO servisTelefona) {
+        List<ServisTelefonaDTO> servisi = new ArrayList<ServisTelefonaDTO>();
+        Connection conn = null;
 
-   
+        ResultSet rs = null;
+        PreparedStatement ps = null;
 
-    
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(SQL_SELECT_ALL + " where IdServisTelefona = ?");
+            ps.setInt(1, servisTelefona.getIdServisTelefona());
+            rs = ps.executeQuery();
+
+            if (rs == null) {
+                return null;
+            } else {
+                while (rs.next()) {
+                    servisi.add(new ServisTelefonaDTO(rs.getInt("IdServisTelefona"), rs.getInt("IdKlijent"), rs.getInt("IdZaposleni"),
+                            rs.getInt("IdStanjeTelefona"), rs.getString("OpisKvara"), rs.getDate("DatumPrijema"),
+                            rs.getInt("IdModelTelefona"), rs.getString("SerijskiBrojTelefona"), rs.getBoolean("TelefonPreuzet")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return servisi;
+    }
+
+    public List<ServisTelefonaDTO> selectByStanje(ServisTelefonaDTO servisTelefona) {
+        List<ServisTelefonaDTO> servisi = new ArrayList<ServisTelefonaDTO>();
+        Connection conn = null;
+        Statement stat = null;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(SQL_SELECT_ALL + " where IdStanjeTelefona = ?");
+            ps.setInt(1, servisTelefona.getIdStanjeTelefona());
+            rs = ps.executeQuery();
+
+            if (rs == null) {
+                return null;
+            } else {
+                while (rs.next()) {
+                    servisi.add(new ServisTelefonaDTO(rs.getInt("IdServisTelefona"), rs.getInt("IdKlijent"), rs.getInt("IdZaposleni"),
+                            rs.getInt("IdStanjeTelefona"), rs.getString("OpisKvara"), rs.getDate("DatumPrijema"),
+                            rs.getInt("IdModelTelefona"), rs.getString("SerijskiBrojTelefona"), rs.getBoolean("TelefonPreuzet")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(stat);
+        }
+
+        return servisi;
+    }
+
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ServisPotvrda" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4d1d49eb-e100-4fea-86d2-3dd1d13143eb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="idServisa" class="java.lang.Integer"/>
+	<field name="modelTelefona" class="java.lang.String"/>
+	<field name="serijskiBroj" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="211" splitType="Stretch">
+			<staticText>
+				<reportElement x="160" y="14" width="280" height="50" uuid="e27b7f31-19bc-4059-bf09-1b54a2dc3318"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font size="19"/>
+				</textElement>
+				<text><![CDATA[Potvrda o prijemu uredjaja na servis]]></text>
+			</staticText>
+			<line>
+				<reportElement x="80" y="0" width="1" height="201" uuid="a77dad4b-40df-45c0-b5bd-ea8698cef6f5"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="420" y="180" width="140" height="30" uuid="71a33639-5a2e-4f44-a671-5511e44e1d43"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="11" width="60" height="169" uuid="cdbc5926-244a-4712-865c-2a3ecd40ba5e"/>
+				<textElement textAlignment="Center" rotation="Left">
+					<font size="37"/>
+				</textElement>
+				<text><![CDATA[M:Servis]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="110" width="130" height="30" uuid="b9bdd68f-ba8d-4eb8-aff2-208034134a40"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idServisa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="110" width="130" height="30" uuid="0a4338b6-6a96-410d-91e3-73f5cc70bf78"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modelTelefona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="110" width="130" height="30" uuid="1418f65d-92e3-4a87-8b6f-b64eb87bdfe0"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serijskiBroj}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="110" y="80" width="100" height="30" uuid="af1f0b3b-0e3f-4207-9bea-8048b9e918cd"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Šifra servisa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="80" width="100" height="30" uuid="39ca54ff-08fa-448a-bbab-f31e1ec64882"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Serijski broj:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="80" width="100" height="30" uuid="e82dd9c4-7f90-4b9c-b0ff-dba36958ba3c"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Model telefona:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="210" width="601" height="1" uuid="d93b5384-46ce-4e3a-b725-12c83b391c1e"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+</jasperReport>

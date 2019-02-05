@@ -35,7 +35,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import mySQL.MySQLDAOFactory;
 import mySQL.MySQLServisTelefonaDAO;
-import service.StavkaRacuna;
+import service.StavkaServisa;
 
 /**
  *
@@ -50,7 +50,7 @@ public class IzmjenaServisController implements Initializable {
     TableView<CjenovnikUslugaDTO> tableUsluge;
 
     @FXML
-    TableView<StavkaRacuna> tableStavke;
+    TableView<StavkaServisa> tableStavke;
 
     @FXML
     TableColumn columnIdUsluga;
@@ -90,7 +90,7 @@ public class IzmjenaServisController implements Initializable {
     private StanjeTelefonaDAO stanjeDao = new MySQLDAOFactory().getStanjeTelefonaDAO();
     private int idModelTelefona;
     private int idServisa;
-    private ArrayList<StavkaRacuna> stavkeServisa = new ArrayList<StavkaRacuna>();
+    private ArrayList<StavkaServisa> stavkeServisa = new ArrayList<StavkaServisa>();
     private ServisTelefonaDAO servisDao = new MySQLDAOFactory().getServisTelefonaDAO();
     private ArrayList<StanjeTelefonaDTO> stanja;
     private UgradjeniRezervniDioDAO ugradjeniDioDao = new MySQLDAOFactory().getUgradjeniRezervniDioDAO();
@@ -136,16 +136,16 @@ public class IzmjenaServisController implements Initializable {
             List<UgradjeniRezervniDioDTO> dijelovi = ugradjeniDioDao.selectBy(new UgradjeniRezervniDioDTO(idServisa));
             List<ServisTelefonaHasCjenovnikUslugaDTO> usluge = cjenovnikDao.selectBy(new ServisTelefonaHasCjenovnikUslugaDTO(idServisa));
             for (UgradjeniRezervniDioDTO dio : dijelovi) {
-                StavkaRacuna stavka = new StavkaRacuna(dio.getIdRezervniDio(), dio.getNazivDijela());
+                StavkaServisa stavka = new StavkaServisa(dio.getIdRezervniDio(), dio.getNazivDijela());
                 stavkeServisa.add(stavka);
             }
 
             for (ServisTelefonaHasCjenovnikUslugaDTO usluga : usluge) {
-                StavkaRacuna stavka = new StavkaRacuna(usluga.getIdCjenovnikUsluga(), usluga.getNazivUsluge());
+                StavkaServisa stavka = new StavkaServisa(usluga.getIdCjenovnikUsluga(), usluga.getNazivUsluge());
                 stavkeServisa.add(stavka);
             }
 
-            ObservableList<StavkaRacuna> listaStavki = FXCollections.observableArrayList(stavkeServisa);
+            ObservableList<StavkaServisa> listaStavki = FXCollections.observableArrayList(stavkeServisa);
             if (stavkeServisa.size() >= 0) {
                 columnIdStavka.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, Integer>("idStavke"));
                 columnNazivStavka.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, String>("nazivStavke"));
@@ -178,7 +178,7 @@ public class IzmjenaServisController implements Initializable {
     }
 
     public void popuniTabeluStavkiServisa() {
-        ObservableList<StavkaRacuna> listaStavki = FXCollections.observableArrayList(stavkeServisa);
+        ObservableList<StavkaServisa> listaStavki = FXCollections.observableArrayList(stavkeServisa);
         if (stavkeServisa.size() >= 0) {
             columnIdStavka.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, Integer>("idStavke"));
             columnNazivStavka.setCellValueFactory(new PropertyValueFactory<CjenovnikUslugaDTO, String>("nazivStavke"));
@@ -189,10 +189,9 @@ public class IzmjenaServisController implements Initializable {
 
     public void btnDodajDio(ActionEvent e) {
         RezervniDioDTO dio = tableDijelovi.getSelectionModel().getSelectedItem();
-       
-        
+
         if (dio != null) {
-            StavkaRacuna novaStavka = new StavkaRacuna(dio.getIdRezervniDio(), dio.getNaziv());
+            StavkaServisa novaStavka = new StavkaServisa(dio.getIdRezervniDio(), dio.getNaziv());
             if (stavkeServisa.contains(novaStavka)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Greška!");
@@ -216,7 +215,7 @@ public class IzmjenaServisController implements Initializable {
         CjenovnikUslugaDTO usluga = tableUsluge.getSelectionModel().getSelectedItem();
 
         if (usluga != null) {
-            StavkaRacuna novaStavka = new StavkaRacuna(usluga.getIdCjenovnikUsluga(), usluga.getNaziv());
+            StavkaServisa novaStavka = new StavkaServisa(usluga.getIdCjenovnikUsluga(), usluga.getNaziv());
             if (stavkeServisa.contains(novaStavka)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Greška!");
@@ -238,7 +237,7 @@ public class IzmjenaServisController implements Initializable {
     }
 
     public void btnObrisi(ActionEvent e) {
-        StavkaRacuna stavka = tableStavke.getSelectionModel().getSelectedItem();
+        StavkaServisa stavka = tableStavke.getSelectionModel().getSelectedItem();
         if (stavka != null) {
             stavkeServisa.remove(stavka);
             this.popuniTabeluStavkiServisa();
@@ -287,7 +286,7 @@ public class IzmjenaServisController implements Initializable {
             } else {
                 if (servisDao.updateStanje(new ServisTelefonaDTO(idServisa, idStanja))) {
 
-                    for (StavkaRacuna stavka : stavkeServisa) {
+                    for (StavkaServisa stavka : stavkeServisa) {
                         if (stavka.getIdStavke() > 5000) {
 
                             ugradjeniDioDao.insert(new UgradjeniRezervniDioDTO(stavka.getIdStavke(), idServisa));

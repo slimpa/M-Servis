@@ -104,7 +104,7 @@ select dodatnaoprema.IdDodatnaOprema, artikal.Naziv, tipdodatneopreme.TipOpreme,
 from dodatnaoprema natural join tipdodatneopreme natural join artikal natural join cijena natural join modeltelefona
 where dodatnaoprema.IdDodatnaOprema=artikal.IdArtikal and dodatnaoprema.IdTipDodatneOpreme= tipdodatneopreme.IdTipDodatneOpreme and artikal.IdArtikal=cijena.IdArtikla and modeltelefona.IdModelTelefona=dodatnaoprema.IdModelTelefona;
 
-
+#OBRISATI KAD SE POPRAVI BAZA
 Alter table narudzba_has_artikal add column Kolicina int;
 
 create view dnevni_izvjestaj as
@@ -129,3 +129,15 @@ create view usluga_servis as
 select servistelefona_has_cijenovnikusluga.IdServisTelefona, servistelefona_has_cijenovnikusluga.IdCijenovnikUsluga, Naziv from
 servistelefona_has_cijenovnikusluga join cijenovnikusluga on servistelefona_has_cijenovnikusluga.IdCijenovnikUsluga = cijenovnikusluga.IdCijenovnikUsluga
 where Obrisano = 0;
+
+
+create view ugradjeni_dio_cijena as
+select ugradjenirezervnidio.IdRezervniDio, ugradjenirezervnidio.IdServisTelefona, artikal.Naziv, cijena.Cijena
+from ugradjenirezervnidio join rezervnidio on ugradjenirezervnidio.IdRezervniDio = rezervnidio.IdRezervniDio
+join artikal on rezervnidio.IdRezervniDio = artikal.IdArtikal 
+join cijena on artikal.IdArtikal = cijena.IdArtikla 
+where cijena.TrenutnaCijena = 1;
+ 
+ create view usluga_cijena as select servistelefona_has_cijenovnikusluga.IdCijenovnikUsluga, cijenovnikusluga.Naziv,
+ servistelefona_has_cijenovnikusluga.IdServisTelefona, cijenovnikusluga.Cijena from cijenovnikusluga inner join
+ servistelefona_has_cijenovnikusluga on servistelefona_has_cijenovnikusluga.IdCijenovnikUsluga = cijenovnikusluga.IdCijenovnikUsluga;

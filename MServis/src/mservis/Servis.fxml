@@ -27,6 +27,7 @@
             <TableColumn fx:id="columnStanje" prefWidth="114.0" text="Stanje uređaja" />
         </columns>
       </TableView>
-      <Button fx:id="btnPretraziServis" layoutX="448.0" layoutY="24.0" mnemonicParsing="false" text="Pretraži" />
+      <Button fx:id="btnPretraziServis" layoutX="448.0" layoutY="24.0" mnemonicParsing="false" onAction="#btnPretraziHandler" text="Pretraži" />
+      <Button fx:id="btnPreuzimanje" layoutX="581.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnPreuzimanjeHandler" text="Preuzimanje uređaja" />
    </children>
 </AnchorPane>
