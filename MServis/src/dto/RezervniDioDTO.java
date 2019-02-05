@@ -1,27 +1,41 @@
 package dto;
 
 public class RezervniDioDTO extends ArtikalDTO {
-        
-        private int idRezervniDio;
-	private int idModelTelefona;
-	private String Opis;
-        
-        private String nazivRezervnogdijela;
-        private int kolicinaRezervnogdijela;
-        private double cijena;
-        private String proizvodjac;
+
+    private int idRezervniDio;
+    private int idModelTelefona;
+    private String Opis;
+
+    private String nazivRezervnogdijela;
+    private int kolicinaRezervnogdijela;
+    private double cijena;
+    private String proizvodjac;
 
     public RezervniDioDTO(int idModelTelefona) {
 
         this.idModelTelefona = idModelTelefona;
     }
 
-    public int getKolicinaRezervnogdijela() {
-        return kolicinaRezervnogdijela;
+    public RezervniDioDTO(int idRezervniDio, int idModelTelefona, String Opis) {
+        this.idRezervniDio = idRezervniDio;
+        this.idModelTelefona = idModelTelefona;
+        this.Opis = Opis;
     }
-    
-    public RezervniDioDTO(String naziv, int idRezervniDio){
-        super(naziv, idRezervniDio);
+
+    public RezervniDioDTO(int idModelTelefona, String Opis) {
+        this.idModelTelefona = idModelTelefona;
+        this.Opis = Opis;
+    }
+
+    public RezervniDioDTO(int idModelTelefona, String Opis, int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano) {
+        super(idArtikal, Naziv, Kolicina, idProizvodjac, BarKod, Obrisano);
+        this.idModelTelefona = idModelTelefona;
+        this.Opis = Opis;
+    }
+
+    public RezervniDioDTO(String naziv, int idRezervniDio) {
+        //  super(naziv, idRezervniDio);
+        this.Naziv = naziv;
         this.idRezervniDio = idRezervniDio;
     }
 
@@ -35,8 +49,21 @@ public class RezervniDioDTO extends ArtikalDTO {
         this.proizvodjac = proizvodjac;
     }
 
+    public RezervniDioDTO(int idRezervniDio, int idModelTelefona, String Opis, String naziv, int kolicina, double cijena) {
+        this.idRezervniDio = idRezervniDio;
+        this.idModelTelefona = idModelTelefona;
+        this.Opis = Opis;
+        this.nazivRezervnogdijela = naziv;
+        this.kolicinaRezervnogdijela = kolicina;
+        this.cijena = cijena;
+    }
+
     public String getProizvodjac() {
         return proizvodjac;
+    }
+
+    public int getKolicinaRezervnogdijela() {
+        return kolicinaRezervnogdijela;
     }
 
     public void setNazivRezervnogdijela(String nazivRezervnogdijela) {
@@ -54,17 +81,6 @@ public class RezervniDioDTO extends ArtikalDTO {
     public void setProizvodjac(String proizvodjac) {
         this.proizvodjac = proizvodjac;
     }
-        
-
-    
-    public RezervniDioDTO(int idRezervniDio, int idModelTelefona, String Opis, String naziv, int kolicina, double cijena) {
-        this.idRezervniDio = idRezervniDio;
-        this.idModelTelefona = idModelTelefona;
-        this.Opis = Opis;
-        this.nazivRezervnogdijela = naziv;
-        this.kolicinaRezervnogdijela = kolicina;
-        this.cijena = cijena;
-    }
 
     public String getNazivRezervnogdijela() {
         return nazivRezervnogdijela;
@@ -72,25 +88,6 @@ public class RezervniDioDTO extends ArtikalDTO {
 
     public double getCijena() {
         return cijena;
-    }
-
-
-
-    public RezervniDioDTO(int idRezervniDio, int idModelTelefona, String Opis) {
-        this.idRezervniDio = idRezervniDio;
-        this.idModelTelefona = idModelTelefona;
-        this.Opis = Opis;
-    }
-
-    public RezervniDioDTO(int idModelTelefona, String Opis) {
-        this.idModelTelefona = idModelTelefona;
-        this.Opis = Opis;
-    }
-
-    public RezervniDioDTO(int idModelTelefona, String Opis, int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano) {
-        super(idArtikal, Naziv, Kolicina, idProizvodjac, BarKod, Obrisano);
-        this.idModelTelefona = idModelTelefona;
-        this.Opis = Opis;
     }
 
     public void setIdModelTelefona(int idModelTelefona) {
@@ -132,7 +129,7 @@ public class RezervniDioDTO extends ArtikalDTO {
     public int getIdRezervniDio() {
         return idRezervniDio;
     }
-    
+
     public int getIdModelTelefona() {
         return idModelTelefona;
     }

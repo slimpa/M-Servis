@@ -189,9 +189,10 @@ public class IzmjenaServisController implements Initializable {
 
     public void btnDodajDio(ActionEvent e) {
         RezervniDioDTO dio = tableDijelovi.getSelectionModel().getSelectedItem();
-
+       
+        
         if (dio != null) {
-            StavkaRacuna novaStavka = new StavkaRacuna(dio.getIdArtikal(), dio.getNaziv());
+            StavkaRacuna novaStavka = new StavkaRacuna(dio.getIdRezervniDio(), dio.getNaziv());
             if (stavkeServisa.contains(novaStavka)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Greška!");

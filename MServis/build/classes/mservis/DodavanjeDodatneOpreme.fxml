@@ -14,7 +14,7 @@
             <Label layoutX="37.0" layoutY="36.0" text="Naziv" />
             <Label layoutX="37.0" layoutY="117.0" text="Proizvođač" />
             <Label layoutX="37.0" layoutY="200.0" text="Bar code" />
-            <Label layoutX="37.0" layoutY="152.0" text="Model" />
+            <Label layoutX="37.0" layoutY="161.0" text="Model" />
             <TextField fx:id="tfNaziv" layoutX="118.0" layoutY="32.0" />
             <Label layoutX="41.0" layoutY="81.0" text="Tip" />
             <Label layoutX="38.0" layoutY="233.0" text="Boja" />
@@ -29,6 +29,7 @@
             <ComboBox fx:id="cbBoja" layoutX="117.0" layoutY="229.0" prefWidth="150.0" />
             <Button fx:id="btnSacuvaj" layoutX="338.0" layoutY="346.0" mnemonicParsing="false" onAction="#btnSacuvajHandler" prefHeight="25.0" prefWidth="90.0" text="Sačuvaj" />
             <Button fx:id="btnIzadji" layoutX="477.0" layoutY="346.0" mnemonicParsing="false" onAction="#btnIzadjiHandler" prefHeight="25.0" prefWidth="90.0" text="Izađi" />
+            <Button fx:id="btnDodajModelTelefona" layoutX="300.0" layoutY="157.0" mnemonicParsing="false" onAction="#btnDodajModelTelefonaHandler" text="Dodaj novi model telefona" />
          </children>
       </Pane>
    </children>
