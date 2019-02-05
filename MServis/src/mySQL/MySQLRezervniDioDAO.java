@@ -188,5 +188,36 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 
             return rezervniDijelovi;
         }
+		
+	public List<RezervniDioDTO> selectByModel(RezervniDioDTO rezervniDio) {
+        List<RezervniDioDTO> rezervniDijelovi = new ArrayList<RezervniDioDTO>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = SQL_SELECT_NAZIV + " where IdModelTelefona = ?";
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, rezervniDio.getIdModelTelefona());
+            rs = ps.executeQuery();
+
+            if (rs == null) {
+                return null;
+            } else {
+                while (rs.next()) {
+                    rezervniDijelovi.add(new RezervniDioDTO(rs.getString("Naziv"), rs.getInt("IdRezervniDio")));
+                  
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return rezervniDijelovi;
+    }
 
 }
