@@ -10,5 +10,6 @@ public interface RacunDAO {
 	boolean delete(RacunDTO racun);
 	List<RacunDTO> selectAll();
 	List<RacunDTO> selectBy(RacunDTO racun);
+        int getId();
 
 }

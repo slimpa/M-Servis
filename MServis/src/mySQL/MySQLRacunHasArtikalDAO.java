@@ -1,19 +1,46 @@
 package mySQL;
 
 import dao.RacunHasArtikalDAO;
+import dbu.ConnectionPool;
+import dbu.DBUtil;
 import dto.RacunHasArtikalDTO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import java.util.List;
 
 public class MySQLRacunHasArtikalDAO implements RacunHasArtikalDAO {
 
+    
+    public static final String SQL_INSERT = "INSERT INTO `racun_has_artikal` (`IdRacun`, `IdArtikal`, `Kolicina`) VALUES (?,?,?);";
 	/**
 	 * 
 	 * @param racunArtikal
 	 */
 	public boolean insert(RacunHasArtikalDTO racunArtikal) {
-		// TODO - implement MySQLRacunHasArtikalDAO.insert
-		throw new UnsupportedOperationException();
+               Connection conn = null;
+        PreparedStatement ps = null;
+        boolean returnValue = false;
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(SQL_INSERT);
+
+            ps.setInt(1, racunArtikal.getIdRacun());
+            ps.setInt(2, racunArtikal.getIdArtikal());
+            ps.setInt(3, racunArtikal.getKolicina());
+            returnValue = ps.executeUpdate() == 1;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return returnValue;
 	}
 
 	/**

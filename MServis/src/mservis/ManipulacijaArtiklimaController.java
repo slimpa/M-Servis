@@ -5,16 +5,22 @@
  */
 package mservis;
 
-import dao.ArtikalDAO;
 import dao.DodatnaOpremaDAO;
+import dao.RacunDAO;
+import dao.RacunHasArtikalDAO;
 import dao.RezervniDioDAO;
 import dao.TelefonDAO;
-import dto.ArtikalDTO;
+import dao.ZaposleniDAO;
 import dto.DodatnaOpremaDTO;
+import dto.RacunDTO;
+import dto.RacunHasArtikalDTO;
 import dto.RezervniDioDTO;
+import dto.StanjeTelefonaDTO;
 import dto.TelefonDTO;
+import dto.ZaposleniDTO;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -210,10 +216,16 @@ public class ManipulacijaArtiklimaController implements Initializable {
     private TableColumn<StavkaRacuna, Integer> colKolicinaStavke;
 
     ArrayList<StavkaRacuna> racun;
+    RacunDAO racunDao = new MySQLDAOFactory().getRacunDAO();
+    RacunHasArtikalDAO racunArtikal=new MySQLDAOFactory().getRacunHasArtikalDAO();
+    private String zaposleni;
+    private ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
+    private int idZaposlenog;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        zaposleni = LoginController.getKorisnickoIme();
+        idZaposlenog = zaposleniDao.selectZaposleni(new ZaposleniDTO(zaposleni)).getIdOsoba();
         tfUkupno.setEditable(false);
         racun = new ArrayList<StavkaRacuna>();
 
@@ -564,9 +576,34 @@ public class ManipulacijaArtiklimaController implements Initializable {
     //    -------------------------------------------------------------------------------------------
 //     --------------------------------RAD SA RACUNIMAAAA-----------------------------------------------------------
 //     -------------------------------------------------------------------------------------------
+    
+    
     public void btnStampaj(ActionEvent e) {
-        for (StavkaRacuna s : racun) {
-            System.out.println(s);
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Štampanje maloprodajnog računa");
+        alert.setHeaderText("Ukupna cijena: "+tfUkupno.getText()+"KM");
+        alert.setContentText("Da li ste sigurni?");
+        ButtonType button1 = new ButtonType("Da");
+        ButtonType button2 = new ButtonType("Ne", ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(button1, button2);
+         Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == button1) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        if (racunDao.insert(new RacunDTO(0, timestamp, Double.parseDouble(tfUkupno.getText()), idZaposlenog))) {
+            int idNovogRacuna = racunDao.getId();
+            
+            for (StavkaRacuna s : racun) {
+              racunArtikal.insert(new RacunHasArtikalDTO(idNovogRacuna, s.getIdArtikla(), s.getKolicina()));
+            }
+            System.out.println("Plati paree");
+            racun.clear();
+            this.popuniTabeluRacun();
+        } else {
+            System.out.println("Greska prilikom kreiranja racuna");
+        }
+        }
+        else{
+            
         }
     }
 
@@ -664,7 +701,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
                         if (racun.contains(stavkaTmp)) {
                             racun.remove(stavkaTmp);
                             racun.add(stavkaTmp);
-                            tableRacun.refresh(); 
+                            tableRacun.refresh();
                             this.popuniTabeluRacun();
                         } else {
                             racun.add(stavkaTmp);

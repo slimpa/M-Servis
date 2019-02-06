@@ -25,6 +25,7 @@ public class MySQLArtikalDAO implements ArtikalDAO {
 	 * 
 	 * @param artikal
 	 */
+        @Override
 	public boolean insert(ArtikalDTO artikal) {
 	    Connection conn = null;
             PreparedStatement ps = null;
