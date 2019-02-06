@@ -168,8 +168,41 @@ public class GeneratorIzvjestaja {
             }
         }
     }
+    
+    public void racun(ArrayList<StavkaRacuna> listaStavki, double ukupnaCijena, double pdv) throws JRException {
 
-    public void racun(ArrayList<StavkaServisa> listaStavki, double ukupnaCijena, double pdv) throws JRException {
+        List<Map<String, ?>> dataSource = new ArrayList<Map<String, ?>>();
+        for (StavkaRacuna stavka : listaStavki) {
+            Map<String, Object> m = new HashMap<String, Object>();
+            m.put("id", stavka.getIdArtikla());
+            m.put("idRacun", stavka.getIdRacuna() );
+            m.put("naziv", stavka.getNaziv());
+            m.put("kolicina", stavka.getKolicina());
+            m.put("cijena", stavka.getCijena());
+            m.put("ukupnaCijena", ukupnaCijena);
+            m.put("pdv", pdv);
+            dataSource.add(m);
+        }
+        JRDataSource jrDataSource = new JRBeanCollectionDataSource(dataSource);
+        String sourceName = "resources/RacunTemplate.jrxml";
+
+        JasperReport report = JasperCompileManager.compileReport(sourceName);
+        JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrDataSource);
+        JRPdfExporter exporter = new JRPdfExporter();
+        ExporterInput exporterInput = new SimpleExporterInput(filledReport);
+        exporter.setExporterInput(exporterInput);
+
+        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput("Racuni" + File.separator + listaStavki.get(0).getIdRacuna() + "racun.pdf");
+        exporter.setExporterOutput(exporterOutput);
+        SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+        exporter.setConfiguration(configuration);
+        exporter.exportReport();
+
+        System.out.print("Uspjesno kreiran izvjestaj - Racun!");
+    }
+    
+
+    public void racunServisa(ArrayList<StavkaServisa> listaStavki, double ukupnaCijena, double pdv) throws JRException {
 
         List<Map<String, ?>> dataSource = new ArrayList<Map<String, ?>>();
         for (StavkaServisa stavka : listaStavki) {
@@ -192,7 +225,7 @@ public class GeneratorIzvjestaja {
         ExporterInput exporterInput = new SimpleExporterInput(filledReport);
         exporter.setExporterInput(exporterInput);
 
-        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput("Racun" + File.separator + listaStavki.get(0).getIdRacuna() + "racun.pdf");
+        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput("Racuni" + File.separator + listaStavki.get(0).getIdRacuna() + "racun.pdf");
         exporter.setExporterOutput(exporterOutput);
         SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
         exporter.setConfiguration(configuration);

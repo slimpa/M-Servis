@@ -19,6 +19,7 @@ public class StavkaRacuna {
    private int kolicina;
    private boolean telefon=false;
    private String serijskiBroj;
+     private int idRacuna;
 
     public StavkaRacuna(int idArtikla, String naziv, Double cijena, int kolicina, boolean telefon, String serijskiBroj) {
         this.idArtikla = idArtikla;
@@ -75,6 +76,14 @@ public class StavkaRacuna {
 
     public void setSerijskiBroj(String serijskiBroj) {
         this.serijskiBroj = serijskiBroj;
+    }
+    
+        public int getIdRacuna() {
+        return idRacuna;
+    }
+
+    public void setIdRacuna(int idRacuna) {
+        this.idRacuna = idRacuna;
     }
 
     @Override

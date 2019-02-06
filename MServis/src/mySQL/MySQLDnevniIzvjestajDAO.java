@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class MySQLDnevniIzvjestajDAO implements DnevniIzvjestajDAO {
 
-    public static final String SQL_SELECT_ALL = "select * from dnevni_izvjestaj";
+    public static final String SQL_SELECT_ALL = "select * from dnevni_izvjestaj order by IdRacun";
 
 
     @Override

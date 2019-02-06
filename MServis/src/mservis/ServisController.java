@@ -224,15 +224,17 @@ public class ServisController implements Initializable {
             try {
                 idServisa = servis.getIdServisTelefona();
                 idModelTelefona = servis.getIdModelTelefona();
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("IzmjenaServis.fxml"));
-                loader.load();
-                IzmjenaServisController controller = loader.getController();
                 if (servis.getIdStanjeTelefona() == idNaServisu) {
                     naServisu = true;
                 } else {
                     naServisu = false;
                 }
+                
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("IzmjenaServis.fxml"));
+                loader.load();
+                IzmjenaServisController controller = loader.getController();
+                
                 Parent p = loader.getRoot();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(p));
@@ -335,6 +337,7 @@ public class ServisController implements Initializable {
 
         }
         cbStanje.setValue(null);
+        tfIdServisa.setText("");
     }
 
     public void btnPreuzimanjeHandler(ActionEvent e) {
@@ -345,11 +348,11 @@ public class ServisController implements Initializable {
             List<StavkaServisa> stavke = new ArrayList<>();
 
             for (UgradjeniRezervniDioDTO dio : dijelovi) {
-                stavke.add(new StavkaServisa(dio.getIdRezervniDio(), dio.getNazivDijela(), dio.getCijena()));
+                stavke.add(new StavkaServisa(servis.getIdServisTelefona(), dio.getIdRezervniDio(), dio.getNazivDijela(), dio.getCijena()));
             }
 
             for (ServisTelefonaHasCjenovnikUslugaDTO usluga : usluge) {
-                stavke.add(new StavkaServisa(usluga.getIdCjenovnikUsluga(), usluga.getNazivUsluge(), usluga.getCijena()));
+                stavke.add(new StavkaServisa(servis.getIdServisTelefona(), usluga.getIdCjenovnikUsluga(), usluga.getNazivUsluge(), usluga.getCijena()));
             }
            
                 

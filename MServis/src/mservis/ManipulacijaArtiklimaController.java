@@ -48,6 +48,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import mySQL.MySQLDAOFactory;
+import net.sf.jasperreports.engine.JRException;
+import service.GeneratorIzvjestaja;
 import service.StavkaRacuna;
 
 /**
@@ -217,10 +219,11 @@ public class ManipulacijaArtiklimaController implements Initializable {
 
     ArrayList<StavkaRacuna> racun;
     RacunDAO racunDao = new MySQLDAOFactory().getRacunDAO();
-    RacunHasArtikalDAO racunArtikal=new MySQLDAOFactory().getRacunHasArtikalDAO();
+    RacunHasArtikalDAO racunArtikal = new MySQLDAOFactory().getRacunHasArtikalDAO();
     private String zaposleni;
     private ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
     private int idZaposlenog;
+       GeneratorIzvjestaja generator = new GeneratorIzvjestaja();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -576,34 +579,42 @@ public class ManipulacijaArtiklimaController implements Initializable {
     //    -------------------------------------------------------------------------------------------
 //     --------------------------------RAD SA RACUNIMAAAA-----------------------------------------------------------
 //     -------------------------------------------------------------------------------------------
-    
-    
     public void btnStampaj(ActionEvent e) {
-                Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Štampanje maloprodajnog računa");
-        alert.setHeaderText("Ukupna cijena: "+tfUkupno.getText()+"KM");
+        alert.setHeaderText("Ukupna cijena: " + tfUkupno.getText() + "KM");
         alert.setContentText("Da li ste sigurni?");
         ButtonType button1 = new ButtonType("Da");
         ButtonType button2 = new ButtonType("Ne", ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(button1, button2);
-         Optional<ButtonType> result = alert.showAndWait();
+        Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == button1) {
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        if (racunDao.insert(new RacunDTO(0, timestamp, Double.parseDouble(tfUkupno.getText()), idZaposlenog))) {
-            int idNovogRacuna = racunDao.getId();
-            
-            for (StavkaRacuna s : racun) {
-              racunArtikal.insert(new RacunHasArtikalDTO(idNovogRacuna, s.getIdArtikla(), s.getKolicina()));
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            if (racunDao.insert(new RacunDTO(0, timestamp, Double.parseDouble(tfUkupno.getText()), idZaposlenog))) {
+                int idNovogRacuna = racunDao.getId();
+
+                 racun.stream().map((s) -> {
+                    s.setIdRacuna(idNovogRacuna);
+                    return s;
+                }).forEachOrdered((s) -> {
+                    racunArtikal.insert(new RacunHasArtikalDTO(idNovogRacuna, s.getIdArtikla(), s.getKolicina()));
+                });
+                try {
+                    Double ukupnaCijena = Double.parseDouble(tfUkupno.getText());
+                    Double pdv = ukupnaCijena * 0.17;
+                    pdv = Math.round(pdv * 100) / 100.0d;
+                    ukupnaCijena = Math.round(ukupnaCijena * 100) / 100.0d;
+                    generator.racun(racun, ukupnaCijena, pdv);
+                } catch (JRException ex) {
+                    Logger.getLogger(ManipulacijaArtiklimaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                racun.clear();
+                this.popuniTabeluRacun();
+            } else {
+                System.out.println("Greska prilikom kreiranja racuna");
             }
-            System.out.println("Plati paree");
-            racun.clear();
-            this.popuniTabeluRacun();
         } else {
-            System.out.println("Greska prilikom kreiranja racuna");
-        }
-        }
-        else{
-            
+
         }
     }
 

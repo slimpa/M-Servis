@@ -137,11 +137,13 @@ public class IzmjenaServisController implements Initializable {
             List<ServisTelefonaHasCjenovnikUslugaDTO> usluge = cjenovnikDao.selectBy(new ServisTelefonaHasCjenovnikUslugaDTO(idServisa));
             for (UgradjeniRezervniDioDTO dio : dijelovi) {
                 StavkaServisa stavka = new StavkaServisa(dio.getIdRezervniDio(), dio.getNazivDijela());
+                stavka.setIdServisa(idServisa);
                 stavkeServisa.add(stavka);
             }
 
             for (ServisTelefonaHasCjenovnikUslugaDTO usluga : usluge) {
                 StavkaServisa stavka = new StavkaServisa(usluga.getIdCjenovnikUsluga(), usluga.getNazivUsluge());
+                stavka.setIdServisa(idServisa);
                 stavkeServisa.add(stavka);
             }
 

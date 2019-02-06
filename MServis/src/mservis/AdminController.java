@@ -822,7 +822,7 @@ public class AdminController implements Initializable {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(p));
                 stage.showAndWait();
-
+                tableAdmin.refresh();
                 popuniTabeluAdmina();
             } catch (IOException ex) {
                 Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
@@ -853,7 +853,7 @@ public class AdminController implements Initializable {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(p));
                 stage.showAndWait();
-
+                tableZaposleni.refresh();
                 popuniTabeluZaposlenih();
             } catch (IOException ex) {
                 Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
@@ -897,7 +897,7 @@ public class AdminController implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText("Uspješna izmjena!");
                     alert.showAndWait();
-                    
+                    tableAdmin.refresh();
                     popuniTabeluAdmina();
                 }
     }

@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nikola/Desktop/M/M-Servis/MServis/src/dto/RacunDTO.java</file>
-            <file>file:/C:/Users/Nikola/Desktop/M/M-Servis/MServis/src/mySQL/MySQLRacunHasArtikalDAO.java</file>
-            <file>file:/C:/Users/Nikola/Desktop/M/M-Servis/MServis/src/mservis/ManipulacijaArtiklimaController.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/RacunController.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/ManipulacijaArtiklima.fxml</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mySQL/MySQLDnevniIzvjestajDAO.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/ManipulacijaArtiklimaController.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/service/GeneratorIzvjestaja.java</file>
+            <file>file:/C:/Users/Ivana/Desktop/M-Servis/MServis/src/mservis/IzmjenaServisController.java</file>
         </group>
     </open-files>
 </project-private>

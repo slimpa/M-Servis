@@ -19,28 +19,28 @@ public class MySQLRacunHasArtikalDAO implements RacunHasArtikalDAO {
 	 * @param racunArtikal
 	 */
 	public boolean insert(RacunHasArtikalDTO racunArtikal) {
-               Connection conn = null;
-        PreparedStatement ps = null;
-        boolean returnValue = false;
+            Connection conn = null;
+            PreparedStatement ps = null;
+            boolean returnValue = false;
 
-        try {
-            conn = ConnectionPool.getInstance().checkOut();
-            ps = conn.prepareStatement(SQL_INSERT);
+            try {
+                conn = ConnectionPool.getInstance().checkOut();
+                ps = conn.prepareStatement(SQL_INSERT);
 
-            ps.setInt(1, racunArtikal.getIdRacun());
-            ps.setInt(2, racunArtikal.getIdArtikal());
-            ps.setInt(3, racunArtikal.getKolicina());
-            returnValue = ps.executeUpdate() == 1;
+                ps.setInt(1, racunArtikal.getIdRacun());
+                ps.setInt(2, racunArtikal.getIdArtikal());
+                ps.setInt(3, racunArtikal.getKolicina());
+                returnValue = ps.executeUpdate() == 1;
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            ConnectionPool.getInstance().checkIn(conn);
-            DBUtil.getInstance().close(ps);
-        }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            } finally {
+                ConnectionPool.getInstance().checkIn(conn);
+                DBUtil.getInstance().close(ps);
+            }
 
-        return returnValue;
+            return returnValue;
 	}
 
 	/**

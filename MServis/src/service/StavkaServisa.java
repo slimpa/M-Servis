@@ -10,6 +10,7 @@ package service;
  * @author Ivana
  */
 public class StavkaServisa {
+    private int idServisa;
     private int idStavke;
     private String nazivStavke;
     private int idRacuna;
@@ -25,6 +26,25 @@ public class StavkaServisa {
         this.nazivStavke = naziv;
         this.cijena = cijena;
     }
+
+    public StavkaServisa(int idServisa, int idStavke, String nazivStavke, double cijena) {
+        this.idServisa = idServisa;
+        this.idStavke = idStavke;
+        this.nazivStavke = nazivStavke;
+        this.cijena = cijena;
+    }
+    
+    
+
+    public int getIdServisa() {
+        return idServisa;
+    }
+
+    public void setIdServisa(int idServisa) {
+        this.idServisa = idServisa;
+    }
+    
+    
 
     public int getIdStavke() {
         return idStavke;
