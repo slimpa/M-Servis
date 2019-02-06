@@ -160,7 +160,14 @@ public class ServisTelefonaDTO {
     public void setStanjeTelefona(String stanjeTelefona) {
         this.stanjeTelefona = stanjeTelefona;
     }
-        
+
+    @Override
+    public String toString() {
+        return "ServisTelefonaDTO{" + "idServisTelefona=" + idServisTelefona + ", idKlijent=" + idKlijent + ", idZaposleni=" + idZaposleni + ", idStanjeTelefona=" + idStanjeTelefona + ", opisKvara=" + opisKvara + ", datumPrijema=" + datumPrijema + ", idModelTelefona=" + idModelTelefona + ", serijskiBrojTelefona=" + serijskiBrojTelefona + ", telefonPreuzet=" + telefonPreuzet + ", imePrezimeKlijent=" + imePrezimeKlijent + ", imePrezimeZaposleni=" + imePrezimeZaposleni + ", nazivModela=" + nazivModela + ", stanjeTelefona=" + stanjeTelefona + '}';
+    }
+      
+    
+    
         
 
 }

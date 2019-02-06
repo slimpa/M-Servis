@@ -25,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mySQL.MySQLDAOFactory;
@@ -53,6 +54,8 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
     private TextField tfMjesto;
     @FXML
     private Button btnDodaj;
+    @FXML
+    private Label lblLozinka;
 
     private static boolean admin = false;
     private boolean izmjena = false;
@@ -71,113 +74,132 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
             tfFirma.setEditable(false);
             tfFirma.setText("m:servis");
         }
+        if(AdminController.isIzmjena()){
+            tfLozinka.setVisible(false);
+            lblLozinka.setVisible(false);
+        }
     }
 
     public void btnDodajHandler() {
-        if (admin) {
-            String ime = tfIme.getText();
-            String prezime = tfPrezime.getText();
-            String korisnicko = tfKorisnickoIme.getText();
-            String lozinka = tfLozinka.getText();
-            String telefon = tfTelefon.getText();
-            String firma = tfFirma.getText();
-            AdminDTO adminNovi = new AdminDTO(odabraniId, korisnicko, this.getHash(lozinka), ime, prezime, telefon, firma);
-            AdminDTO adminProvjera = adminDao.selectAdmin(adminNovi);
-            if (adminProvjera != null && !izmjena) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Greška!");
-                alert.setHeaderText(null);
-                alert.setContentText("Korisničko ime postoji!");
-                alert.showAndWait();
-            } else if (izmjena) {
-                if (!adminDao.update(adminNovi)) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Greška!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Izmjena nije moguća!");
-                    alert.showAndWait();
-                } else {
+        String telefon = tfTelefon.getText();
+        String ime = tfIme.getText();
+        String prezime = tfPrezime.getText();
+        String korisnicko = tfKorisnickoIme.getText();
+        String lozinka = tfLozinka.getText();
+        String radnoMjesto = tfMjesto.getText();
+        String firma = tfFirma.getText();
+        if (telefon.equals("") || ime.equals("") || prezime.equals("") || korisnicko.equals("")
+                || radnoMjesto.equals("") || firma.equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Niste unijeli sve podatke!");
+            alert.showAndWait();
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Obavještenje!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Uspješna izmjena!");
-                    alert.showAndWait();
-                    
-                    Stage stage = (Stage) btnDodaj.getScene().getWindow();
-                    stage.close();
-
-                }
-            } else {
-                if (!adminDao.insert(adminNovi)) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Greška!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Dodavanje nije moguće!");
-                    alert.showAndWait();
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Obavještenje!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Uspješno dodavanje!");
-                    alert.showAndWait();
-
-                    Stage stage = (Stage) btnDodaj.getScene().getWindow();
-                    stage.close();
-                }
-
-            }
         } else {
-            String ime = tfIme.getText();
-            String prezime = tfPrezime.getText();
-            String korisnicko = tfKorisnickoIme.getText();
-            String lozinka = tfLozinka.getText();
-            String telefon = tfTelefon.getText();
-            String radnoMjesto = tfMjesto.getText();
-            ZaposleniDTO zaposleniNovi = new ZaposleniDTO(odabraniId, korisnicko, this.getHash(lozinka), radnoMjesto, ime, prezime, telefon);
-            ZaposleniDTO zaposleniProvjera = zaposleniDao.selectZaposleni(zaposleniNovi);
-            if (zaposleniProvjera != null && !izmjena) {
+            if (telefon.matches("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")) {
+                if (admin) {
+
+                    AdminDTO adminNovi = new AdminDTO(odabraniId, korisnicko, getHash(lozinka), ime, prezime, telefon, firma);
+                    AdminDTO adminProvjera = adminDao.selectAdmin(adminNovi);
+                    if (adminProvjera != null && !izmjena) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Greška!");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Korisničko ime postoji!");
+                        alert.showAndWait();
+                    } else if (izmjena) {
+                        if (!adminDao.update(adminNovi)) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Greška!");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Izmjena nije moguća!");
+                            alert.showAndWait();
+                        } else {
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Obavještenje!");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Uspješna izmjena!");
+                            alert.showAndWait();
+
+                            Stage stage = (Stage) btnDodaj.getScene().getWindow();
+                            stage.close();
+
+                        }
+                    } else {
+                        if (!adminDao.insert(adminNovi)) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Greška!");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Dodavanje nije moguće!");
+                            alert.showAndWait();
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Obavještenje!");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Uspješno dodavanje!");
+                            alert.showAndWait();
+
+                            Stage stage = (Stage) btnDodaj.getScene().getWindow();
+                            stage.close();
+                        }
+
+                    }
+                } else {
+
+                    ZaposleniDTO zaposleniNovi = new ZaposleniDTO(odabraniId, korisnicko, getHash(lozinka), radnoMjesto, ime, prezime, telefon);
+                    ZaposleniDTO zaposleniProvjera = zaposleniDao.selectZaposleni(zaposleniNovi);
+                    if (zaposleniProvjera != null && !izmjena) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Greška!");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Korisničko ime postoji!");
+                        alert.showAndWait();
+                    } else if (izmjena) {
+                        if (!zaposleniDao.update(zaposleniNovi)) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Greška!");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Izmjena nije moguća!");
+                            alert.showAndWait();
+                        } else {
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Obavještenje!");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Uspješna izmjena!");
+                            alert.showAndWait();
+
+                            Stage stage = (Stage) btnDodaj.getScene().getWindow();
+                            stage.close();
+
+                        }
+                    } else {
+                        if (!zaposleniDao.insert(zaposleniNovi)) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Greška!");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Dodavanje nije moguće!");
+                            alert.showAndWait();
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Obavještenje!");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Uspješno dodavanje!");
+                            alert.showAndWait();
+
+                            Stage stage = (Stage) btnDodaj.getScene().getWindow();
+                            stage.close();
+                        }
+                    }
+                }
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
-                alert.setContentText("Korisničko ime postoji!");
+                alert.setContentText("Broj telefona nije u odgovarajućem formatu!");
                 alert.showAndWait();
-            } else if (izmjena) {
-                if (!zaposleniDao.update(zaposleniNovi)) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Greška!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Izmjena nije moguća!");
-                    alert.showAndWait();
-                } else {
-
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Obavještenje!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Uspješna izmjena!");
-                    alert.showAndWait();
-
-                    Stage stage = (Stage) btnDodaj.getScene().getWindow();
-                    stage.close();
-
-                }
-            } else {
-                if (!zaposleniDao.insert(zaposleniNovi)) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Greška!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Dodavanje nije moguće!");
-                    alert.showAndWait();
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Obavještenje!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Uspješno dodavanje!");
-                    alert.showAndWait();
-
-                    Stage stage = (Stage) btnDodaj.getScene().getWindow();
-                    stage.close();
-                }
             }
         }
     }
@@ -198,7 +220,7 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
         this.tfMjesto.setText(zaposleni.getRadnoMjesto());
     }
 
-    private String getHash(String lozinka) {
+    public static String getHash(String lozinka) {
         String hash = "";
 
         MessageDigest digest;

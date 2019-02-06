@@ -20,7 +20,7 @@ public class MySQLAdminDAO implements AdminDAO {
     public static final String SQL_SELECT_ALL = "select * from svi_admini";
     public static final String SQL_UPDATE = "update admin set";
     public static final String SQL_CALL_DODAJ_ADMINA = "{call dodaj_admina(?,?,?,?,?,?)}";
-    public static final String SQL_CALL_UPDATE_ADMIN = "{call izmijeni_admina(?, ?, ?, ?, ?)}";
+    public static final String SQL_CALL_UPDATE_ADMIN = "{call izmijeni_admina(?,?,?,?,?,?)}";
 
     /**
      *
@@ -58,22 +58,23 @@ public class MySQLAdminDAO implements AdminDAO {
     public boolean update(AdminDTO admin) {
         Connection conn = null;
         CallableStatement cs = null;
-      
+
         try {
             conn = ConnectionPool.getInstance().checkOut();
             cs = conn.prepareCall(SQL_CALL_UPDATE_ADMIN);
 
             cs.setString(1, admin.getIme());
             cs.setString(2, admin.getPrezime());
-            cs.setString(3, admin.getBrojTelefona());
-            cs.setString(4, admin.getNazivFirme());
-            cs.setInt(5, admin.getIdOsoba());
-            
+            cs.setString(3, admin.getKoriscnikoIme());
+            cs.setString(4, admin.getBrojTelefona());
+            cs.setString(5, admin.getNazivFirme());
+            cs.setInt(6, admin.getIdOsoba());
+
             cs.execute();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-            
+
         } finally {
             ConnectionPool.getInstance().checkIn(conn);
             DBUtil.getInstance().close(cs);

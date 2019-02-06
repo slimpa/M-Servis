@@ -223,7 +223,8 @@ public class ManipulacijaArtiklimaController implements Initializable {
     private String zaposleni;
     private ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
     private int idZaposlenog;
-       GeneratorIzvjestaja generator = new GeneratorIzvjestaja();
+    GeneratorIzvjestaja generator = new GeneratorIzvjestaja();
+    private TelefonDAO telefonDao = new MySQLDAOFactory().getTelefonDAO();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -592,12 +593,15 @@ public class ManipulacijaArtiklimaController implements Initializable {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             if (racunDao.insert(new RacunDTO(0, timestamp, Double.parseDouble(tfUkupno.getText()), idZaposlenog))) {
                 int idNovogRacuna = racunDao.getId();
-
-                 racun.stream().map((s) -> {
+                ArrayList<TelefonDTO> telefon = new ArrayList<TelefonDTO>();
+                racun.stream().map((s) -> {
                     s.setIdRacuna(idNovogRacuna);
                     return s;
                 }).forEachOrdered((s) -> {
                     racunArtikal.insert(new RacunHasArtikalDTO(idNovogRacuna, s.getIdArtikla(), s.getKolicina()));
+                    if (s.isTelefon()) {
+                        telefon.add(new TelefonDTO(s.getSerijskiBroj(), s.getIdArtikla()));
+                    }
                 });
                 try {
                     Double ukupnaCijena = Double.parseDouble(tfUkupno.getText());
@@ -607,6 +611,9 @@ public class ManipulacijaArtiklimaController implements Initializable {
                     generator.racun(racun, ukupnaCijena, pdv);
                 } catch (JRException ex) {
                     Logger.getLogger(ManipulacijaArtiklimaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                for (TelefonDTO tel : telefon) {
+                    telefonDao.delete(tel);
                 }
                 racun.clear();
                 this.popuniTabeluRacun();

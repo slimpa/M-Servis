@@ -19,7 +19,7 @@ public class MySQLTelefonDAO implements TelefonDAO {
 	public static final String SQL_SELECT = "select * from rezervnidio";
 	
         public static final String SQL_SELECT_DETAIL = "select * from svi_telefoni";
-        public static final String SQL_DELETE = "DELETE FROM `m:servis`.`telefon` WHERE `IdModeTelefona`=?";
+        public static final String SQL_DELETE = "update telefon set Obrisano = 1 WHERE `IdModeTelefona`=? and SerijskiBroj = ?";
 	/**
 	 * 
 	 * @param telefon
@@ -71,7 +71,8 @@ public class MySQLTelefonDAO implements TelefonDAO {
 			ps = conn.prepareStatement(SQL_DELETE);
 
 			ps.setInt(1, telefon.getIdModelTelefona());
-			
+                        ps.setString(2, telefon.getSerijskiBroj());
+                        
 			returnValue = ps.executeUpdate() == 1;
 		} catch(SQLException e) {
 			e.printStackTrace();

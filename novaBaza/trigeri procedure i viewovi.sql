@@ -46,20 +46,19 @@ in pLozinka varchar(600), in pBrojTelefona varchar(255), in pRadnoMjesto varchar
 delimiter ;
 
 delimiter $$
-create procedure izmijeni_admina(in pIme varchar(255), in pPrezime varchar(255), 
-in pBrojTelefona varchar(255), in pFirma varchar(255), in pIdAdmin int)
+create procedure izmijeni_admina(in pIme varchar(255), in pPrezime varchar(255),  in pKorisnicko varchar(255), in pBrojTelefona varchar(255), in pFirma varchar(255), in pIdAdmin int)
 	begin
 	update osoba set Ime = pIme, Prezime = pPrezime, BrojTelefona = pBrojTelefona where IdOsoba = pIdAdmin;
-    update `m:servis`.`admin` set NazivFirme = pFirma where IdAdmin = pIdAdmin;
+    update `m:servis`.`admin` set NazivFirme = pFirma,KorisnickoIme=pKorisnicko where IdAdmin = pIdAdmin;
     end$$
 delimiter ;
 
 delimiter $$
-create procedure izmijeni_zaposlenog(in pIme varchar(255), in pPrezime varchar(255), 
+create procedure izmijeni_zaposlenog(in pIme varchar(255), in pPrezime varchar(255), in pKorisnicko varchar(255),
 in pBrojTelefona varchar(255), in pRadnoMjesto varchar(255), in pIdZaposleni int)
 	begin
 	update osoba set Ime = pIme, Prezime = pPrezime, BrojTelefona = pBrojTelefona where IdOsoba = pIdZaposleni;
-    update zaposleni set RadnoMjesto = pRadnoMjesto where IdZaposleni = pIdZaposleni;
+    update zaposleni set RadnoMjesto = pRadnoMjesto, KorisnickoIme=pKorisnicko where IdZaposleni = pIdZaposleni;
     end$$
 delimiter ;
 
@@ -141,3 +140,20 @@ where cijena.TrenutnaCijena = 1;
  create view usluga_cijena as select servistelefona_has_cijenovnikusluga.IdCijenovnikUsluga, cijenovnikusluga.Naziv,
  servistelefona_has_cijenovnikusluga.IdServisTelefona, cijenovnikusluga.Cijena from cijenovnikusluga inner join
  servistelefona_has_cijenovnikusluga on servistelefona_has_cijenovnikusluga.IdCijenovnikUsluga = cijenovnikusluga.IdCijenovnikUsluga;
+ 
+ 
+ 
+delimiter $$
+ CREATE TRIGGER umanjiKolicinuArtikla AFTER INSERT ON racun_has_artikal FOR EACH ROW update artikal
+    set Kolicina=Kolicina-new.Kolicina
+    where new.IdArtikal=IdArtikal
+delimiter ;
+
+
+delimiter $$
+create trigger preuzmiTelefon after insert on racun_has_servistelefona
+for each row
+	update servistelefona
+    set TelefonPreuzet=1
+    where new.IdServisTelefona=IdServisTelefona
+delimiter ;

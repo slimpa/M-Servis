@@ -141,6 +141,7 @@ public class ServisController implements Initializable {
         if (lista != null) {
 
             for (ServisTelefonaDTO servis : lista) {
+                
                 KlijentDTO klijent = klijentDao.selectBy(new KlijentDTO(servis.getIdKlijent())).get(0);
                 servis.setImePrezimeKlijent(klijent.getIme() + " " + klijent.getPrezime());
 

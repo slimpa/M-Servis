@@ -34,7 +34,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import mySQL.MySQLDAOFactory;
-import mySQL.MySQLRacunDAO;
 import net.sf.jasperreports.engine.JRException;
 import service.GeneratorIzvjestaja;
 import service.StavkaServisa;
@@ -134,14 +133,12 @@ public class RacunController implements Initializable {
                 for (StavkaServisa s : stavke) {
                     s.setIdRacuna(idNovogRacuna);
                     System.out.println(s.getIdRacuna());
-                    
-                    if(s.getIdStavke() > 5000){
+
+                    if (s.getIdStavke() > 5000) {
                         racunArtikal.insert(new RacunHasArtikalDTO(idNovogRacuna, s.getIdStavke(), 1));
                     }
                 }
 
-                
-                 
                 racunServis.insert(new RacunHasServisTelefonaDTO(idNovogRacuna, stavke.get(0).getIdServisa()));
 
                 GeneratorIzvjestaja gen = new GeneratorIzvjestaja();
@@ -149,7 +146,13 @@ public class RacunController implements Initializable {
                     gen.racunServisa((ArrayList<StavkaServisa>) stavke, Double.parseDouble(tfUkupnaCijena.getText()), pdv);
                 } catch (JRException ex) {
                     Logger.getLogger(RacunController.class.getName()).log(Level.SEVERE, null, ex);
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Greška!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Greška pri štampanju računa!");
                 }
+                Stage stage = (Stage) btnStampaj.getScene().getWindow();
+                stage.close();
             }
         } else {
             Alert alert = new Alert(AlertType.ERROR);

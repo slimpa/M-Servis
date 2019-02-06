@@ -34,6 +34,7 @@ public class ZaposleniDTO extends OsobaDTO {
     
     public ZaposleniDTO(int idZaposleni){
         super(idZaposleni);
+        
     }
 
     public ZaposleniDTO(int idZaposleni, String korisnickoIme, String radnoMjesto, String ime, String prezime, String brojTelefona) {

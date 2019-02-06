@@ -19,7 +19,7 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
     public static final String SQL_SELECT_ALL = "select * from svi_zaposleni";
     public static final String SQL_UPDATE = "update osoba set";
     public static final String SQL_CALL_DODAJ_ZAPOSLENOG="{call dodaj_zaposlenog(?,?,?,?,?,?)}";
-    public static final String SQL_CALL_UPDATE_ZAPOSLENI = "{call izmijeni_zaposlenog(?, ?, ?, ?, ?)}";
+    public static final String SQL_CALL_UPDATE_ZAPOSLENI = "{call izmijeni_zaposlenog(?, ?, ?, ?, ?, ?)}";
 
     /**
      *
@@ -66,13 +66,14 @@ public class MySQLZaposleniDAO implements ZaposleniDAO {
 
             cs.setString(1, zaposleni.getIme());
             cs.setString(2, zaposleni.getPrezime());
-            cs.setString(3, zaposleni.getBrojTelefona());
-            cs.setString(4, zaposleni.getRadnoMjesto());
-            cs.setInt(5, zaposleni.getIdOsoba());
+            cs.setString(3, zaposleni.getKoriscnikoIme());
+            cs.setString(4, zaposleni.getBrojTelefona());
+            cs.setString(5, zaposleni.getRadnoMjesto());
+            cs.setInt(6, zaposleni.getIdOsoba());
             
             cs.execute();
         } catch (SQLException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             return false;
             
         } finally {

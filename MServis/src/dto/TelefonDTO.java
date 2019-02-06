@@ -23,6 +23,11 @@ public class TelefonDTO {
         this.Cijena = Cijena;
     }
 
+    public TelefonDTO(String serijskiBroj, int idArtikla) {
+        this.SerijskiBroj = serijskiBroj;
+        this.idModelTelefona = idArtikla;
+    }
+
     public String getNaziv() {
         return Naziv;
     }

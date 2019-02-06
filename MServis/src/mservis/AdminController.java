@@ -763,6 +763,7 @@ public class AdminController implements Initializable {
     }
 
     public void btnDodajAdminaHandler(ActionEvent e) {
+        izmjena=false;
         DodajIzmjeniAdminZaposleniController.setAdmin(true);
         try {
 
@@ -785,6 +786,7 @@ public class AdminController implements Initializable {
     }
 
     public void btnDodajZaposlenogHandler(ActionEvent e) {
+        izmjena=false;
         DodajIzmjeniAdminZaposleniController.setAdmin(false);
         try {
 
@@ -806,6 +808,7 @@ public class AdminController implements Initializable {
     }
 
     public void btnIzmijeniAdminaHandler(ActionEvent e) {
+        izmjena=true;
         AdminDTO admin = tableAdmin.getSelectionModel().getSelectedItem();
         DodajIzmjeniAdminZaposleniController.setAdmin(true);
         
@@ -835,8 +838,9 @@ public class AdminController implements Initializable {
             alert.showAndWait();
         }
     }
-
+    
     public void btnIzmijeniZaposlenogHandler(ActionEvent e) {
+        izmjena=true;
         ZaposleniDTO zaposleni = tableZaposleni.getSelectionModel().getSelectedItem();
         DodajIzmjeniAdminZaposleniController.setAdmin(false);
        
@@ -922,4 +926,11 @@ public class AdminController implements Initializable {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    private static boolean izmjena=false;
+
+    public static boolean isIzmjena() {
+        return izmjena;
+    }
+    
 }

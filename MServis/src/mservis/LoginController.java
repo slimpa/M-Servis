@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -36,17 +37,19 @@ public class LoginController implements Initializable {
     @FXML
     private Button btnPrijava;
     @FXML
+    private Button btnUgasi;
+    @FXML
     private AnchorPane loginPane;
     @FXML
     private TextField usernameTF;
     @FXML
     private PasswordField passwordPF;
-    
+
     private static String korisnicko;
+
     public static String getKorisnickoIme() {
         return korisnicko;
     }
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -63,7 +66,7 @@ public class LoginController implements Initializable {
         ZaposleniDTO zaposleni = zaposleniDao.selectZaposleni(new ZaposleniDTO(korisnickoIme, null, null));
         if (zaposleni != null && zaposleni.getLozinka().equals(lozinka)) {
             zaposleniPrijava = true;
-            korisnicko=zaposleni.getKoriscnikoIme();
+            korisnicko = zaposleni.getKoriscnikoIme();
         }
 
         if (!zaposleniPrijava) {
@@ -71,12 +74,12 @@ public class LoginController implements Initializable {
             AdminDTO admin = adminDao.selectAdmin(new AdminDTO(korisnickoIme, null, null));
             if (admin != null && admin.getLozinka().equals(lozinka)) {
                 adminPrijava = true;
-                korisnicko=admin.getKoriscnikoIme();
+                korisnicko = admin.getKoriscnikoIme();
             }
         }
         if (zaposleniPrijava) {
             try {
-                
+
                 Stage stage = new Stage();
                 Parent root2;
 
@@ -106,8 +109,17 @@ public class LoginController implements Initializable {
             }
             ((Stage) loginPane.getScene().getWindow()).close();
         } else {
-            System.out.println("Pogresno ime ili sifra");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Pogrešno korisničko ime ili lozinka!");
+            alert.showAndWait();
         }
+    }
+
+    public void btnUgasi(ActionEvent e) {
+        Stage stage = (Stage) btnUgasi.getScene().getWindow();
+        stage.close();
     }
 
 }
