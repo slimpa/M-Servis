@@ -32,7 +32,7 @@ public class MySQLNarudzbaHasArtikalDAO implements NarudzbaHasArtikalDAO {
 			ps = conn.prepareStatement(SQL_INSERT);
                         ps.setInt(1,narudzbaArtikal.getIdNarudzba());
 			ps.setInt(2, narudzbaArtikal.getIdArtikal());
-                        ps.setInt(3,narudzbaArtikal.getKolicina());                       
+                        ps.setInt(3,narudzbaArtikal.getKolicina());   
                         returnValue=ps.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -44,19 +44,6 @@ public class MySQLNarudzbaHasArtikalDAO implements NarudzbaHasArtikalDAO {
 		return returnValue==1;
 	}
 
-	/**
-	 * 
-	 * @param narudzbaArtikal
-	 */
-	public boolean update(NarudzbaHasArtikalDTO narudzbaArtikal) {
-		// TODO - implement MySQLNarudzbaHasArtikalDAO.update
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param narudzbaArtikal
-	 */
 	public boolean delete(NarudzbaHasArtikalDTO narudzbaArtikal) {
 		boolean returnValue = false;
 		Connection conn = null;
@@ -104,13 +91,6 @@ public class MySQLNarudzbaHasArtikalDAO implements NarudzbaHasArtikalDAO {
 		return narudzbe;
 	}
 
-	/**
-	 * 
-	 * @param narudzbaArtikal
-	 */
-	public List<NarudzbaHasArtikalDTO> selectBy(NarudzbaHasArtikalDTO narudzbaArtikal) {
-		// TODO - implement MySQLNarudzbaHasArtikalDAO.selectBy
-		throw new UnsupportedOperationException();
-	}
+	
 
 }

@@ -9,6 +9,6 @@ public interface DobavljacDAO {
 	boolean update(DobavljacDTO dobavljac);
 	boolean delete(DobavljacDTO dobavljac);
 	List<DobavljacDTO> selectAll();
-	List<DobavljacDTO> selectBy(DobavljacDTO dobavljac);
+    List<DobavljacDTO> selectByName(String name);
 
 }

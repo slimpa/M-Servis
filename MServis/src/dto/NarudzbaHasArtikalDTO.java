@@ -7,8 +7,7 @@ public class NarudzbaHasArtikalDTO {
 	private int Kolicina;
         private String Naziv;
 
-    public NarudzbaHasArtikalDTO(int IdNarudzba, int IdArtikal, int Kolicina) {
-        this.IdNarudzba = IdNarudzba;
+    public NarudzbaHasArtikalDTO(int IdNarudzba, int IdArtikal, int Kolicina){
         this.IdArtikal = IdArtikal;
         this.Kolicina = Kolicina;
     }
@@ -56,7 +55,8 @@ public class NarudzbaHasArtikalDTO {
     public void setKolicina(int Kolicina) {
         this.Kolicina = Kolicina;
     }
-
+    
+    
     @Override
     public String toString() {
         return "NarudzbaHasArtikalDTO{" + "IdNarudzba=" + IdNarudzba + ", IdArtikal=" + IdArtikal + ", Kolicina=" + Kolicina + '}';

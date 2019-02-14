@@ -13,7 +13,7 @@
    <children>
       <Pane prefHeight="600.0" prefWidth="1000.0">
          <children>
-            <TableView fx:id="tableDOBAVLJACI" layoutX="25.0" layoutY="162.0" prefHeight="415.0" prefWidth="954.0">
+            <TableView fx:id="tableDOBAVLJACI" layoutX="25.0" layoutY="203.0" prefHeight="374.0" prefWidth="954.0">
               <columns>
                 <TableColumn fx:id="columnID" prefWidth="119.0" text="Id dobavljača" />
                 <TableColumn fx:id="columnNAZIV" prefWidth="150.0" text="Naziv" />
@@ -22,9 +22,11 @@
                   <TableColumn fx:id="columnEMAIL" prefWidth="212.0" text="E-mail" />
               </columns>
             </TableView>
-            <Button fx:id="btnDODOAJ" layoutX="24.0" layoutY="22.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="25.0" prefWidth="114.0" text="DODAJ" />
-            <Button fx:id="btnIZMIJENI" layoutX="24.0" layoutY="67.0" mnemonicParsing="false" onAction="#btnIzmijeni" prefHeight="31.0" prefWidth="114.0" text="IZMIJENI" />
-            <Button fx:id="btnOBRISI" layoutX="24.0" layoutY="111.0" mnemonicParsing="false" onAction="#btnOBrisi" prefHeight="25.0" prefWidth="114.0" text="OBRIŠI" />
+            <Button fx:id="btnDODOAJ" layoutX="24.0" layoutY="62.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="25.0" prefWidth="114.0" text="DODAJ" />
+            <Button fx:id="btnIZMIJENI" layoutX="24.0" layoutY="107.0" mnemonicParsing="false" onAction="#btnIzmijeni" prefHeight="31.0" prefWidth="114.0" text="IZMIJENI" />
+            <Button fx:id="btnOBRISI" layoutX="24.0" layoutY="154.0" mnemonicParsing="false" onAction="#btnOBrisi" prefHeight="25.0" prefWidth="114.0" text="OBRIŠI" />
+            <Button fx:id="btnPRETRAZI" layoutX="254.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnPretrazi" prefHeight="31.0" prefWidth="77.0" text="Pretraži" />
+            <TextField fx:id="tPRETRAZI" layoutX="24.0" layoutY="14.0" promptText="Naziv" />
          </children>
       </Pane>
    </children>

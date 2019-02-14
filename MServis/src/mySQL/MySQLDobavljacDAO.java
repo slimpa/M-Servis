@@ -127,13 +127,8 @@ public class MySQLDobavljacDAO implements DobavljacDAO {
 		}
 		return retVal;
 	
-	}
-	public List<DobavljacDTO> selectBy(DobavljacDTO dobavljac) {
-		// TODO - implement MySQLDobavljacDAO.selectBy
-		throw new UnsupportedOperationException();
-	}
-        
-        public List<DobavljacDTO> selectByName(String dobavljac) {
+	}   
+        public List<DobavljacDTO> selectByName(String name) {
 		List<DobavljacDTO> dobavljaci = new ArrayList<DobavljacDTO>();
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -143,7 +138,7 @@ public class MySQLDobavljacDAO implements DobavljacDAO {
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setString(1, dobavljac);
+			ps.setString(1, name);
 			rs = ps.executeQuery();
 			
 			if(rs == null) return null;

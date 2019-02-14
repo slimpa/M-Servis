@@ -18,7 +18,6 @@ public class MySQLNarudzbaDAO implements NarudzbaDAO {
 
 	public static final String SQL_SELECT_ALL="SELECT * from narudzba";
         public static final String SQL_INSERT = "INSERT INTO narudzba (DatumNarudzbe, IdDobavljac) VALUES (?, ?)";
-        public static final String SQL_UPDATE="UPDATE narudzba set DatumNarudzbe=?,IdDobavljac=? where IdNarudzba=?";
 	public static final String SQL_DELETE="DELETE FROM narudzba WHERE IdNarudzba=?";
                
         public boolean insert(NarudzbaDTO narudzba) {
@@ -42,19 +41,7 @@ public class MySQLNarudzbaDAO implements NarudzbaDAO {
 		return returnValue==1;
 	}
 
-	/**
-	 * 
-	 * @param narudzba
-	 */
-	public boolean update(NarudzbaDTO narudzba) {
-		// TODO - implement MySQLNarudzbaDAO.update
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param narudzba
-	 */
+	
 	public boolean delete(NarudzbaDTO narudzba) {
 		boolean returnValue = false;
 		Connection conn = null;
@@ -102,13 +89,6 @@ public class MySQLNarudzbaDAO implements NarudzbaDAO {
 		return narudzbe;
 	}
 
-	/**
-	 * 
-	 * @param narudzba
-	 */
-	public List<NarudzbaDTO> selectBy(NarudzbaDTO narudzba) {
-		// TODO - implement MySQLNarudzbaDAO.selectBy
-		throw new UnsupportedOperationException();
-	}
+
 
 }

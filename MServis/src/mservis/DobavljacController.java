@@ -7,8 +7,11 @@ package mservis;
 
 import dao.DobavljacDAO;
 import dto.DobavljacDTO;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +27,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static mservis.DodavanjeDobavljacaController.setDobavljacController;
@@ -55,6 +61,10 @@ public class DobavljacController implements Initializable {
     private TableColumn columnTEL;
     @FXML
     private TableColumn columnEMAIL;
+    @FXML
+    private Button btnPRETRAZI;
+    @FXML 
+    private TextField tPRETRAZI;
     ObservableList<DobavljacDTO> dobavljacLIST;
     public static DobavljacDTO dobavljacDTO;
     DobavljacDAO dobavljacDAO=(new MySQLDAOFactory()).getDobavljacDAO();
@@ -65,12 +75,12 @@ public class DobavljacController implements Initializable {
     {
         setDobavljacController(this);
        dobavljacLIST=FXCollections.observableArrayList(dobavljacDAO.selectAll());
+       tableDOBAVLJACI.setItems(dobavljacLIST);
        columnID.setCellValueFactory(new PropertyValueFactory<DobavljacDTO,Integer>("IdDobavljac"));
        columnNAZIV.setCellValueFactory(new PropertyValueFactory<DobavljacDTO,String>("Naziv"));
        columnADRESA.setCellValueFactory(new PropertyValueFactory<DobavljacDTO,String>("Adresa"));
        columnTEL.setCellValueFactory(new PropertyValueFactory<DobavljacDTO,String>("Telefon"));
        columnEMAIL.setCellValueFactory(new PropertyValueFactory<DobavljacDTO,String>("Email"));
-       tableDOBAVLJACI.setItems(dobavljacLIST);
     }    
     public void btnDodaj(ActionEvent actionEvent)
     {
@@ -79,6 +89,8 @@ public class DobavljacController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DodavanjeDobavljaca.fxml"));
             Parent root1=(Parent)loader.load();
             Stage stage=new Stage();
+            Image image = new Image(new FileInputStream("./resources/icon.png"));
+            stage.getIcons().add(image);
             stage.setTitle("Dodavanje");
             stage.setResizable(false);
             stage.setScene(new Scene(root1));
@@ -123,5 +135,22 @@ public class DobavljacController implements Initializable {
         dobavljacLIST.clear();
         dobavljacLIST.addAll(dobavljacDAO.selectAll());
         tableDOBAVLJACI.refresh();
+    }
+    
+    public void btnPretrazi(ActionEvent actionEvent)
+    {
+        if(tPRETRAZI.getText().isEmpty())
+            osvjezi();
+       else
+        {
+             List<DobavljacDTO> lista=new ArrayList<DobavljacDTO>();
+             lista.addAll(dobavljacDAO.selectByName(String.valueOf(tPRETRAZI.getText())));
+             if(lista.size()>0)
+             {
+                 dobavljacLIST.clear();
+                 dobavljacLIST.addAll(lista);
+                 tableDOBAVLJACI.refresh();
+             }  
+        }
     }
 }
