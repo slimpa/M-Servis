@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.DodavanjeTelefonaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.DodavanjeTelefonaController">
    <children>
       <Pane layoutX="1.0" layoutY="2.0" prefHeight="293.0" prefWidth="522.0">
          <children>
@@ -22,6 +22,8 @@
             <ComboBox fx:id="cbBoja" layoutX="138.0" layoutY="120.0" prefWidth="150.0" />
             <ComboBox fx:id="cbModel" layoutX="138.0" layoutY="44.0" prefWidth="150.0" />
             <Button fx:id="btnDodajModel" layoutX="308.0" layoutY="44.0" mnemonicParsing="false" onAction="#btnDodajModelHandler" text="Dodaj novi model" />
+            <Button fx:id="btnPromjeniCijenuModela" layoutX="308.0" layoutY="162.0" mnemonicParsing="false" onAction="#btnPromjeniCijenuModelaHandler" text="Promjeni cijenu modela" />
+            <TextField fx:id="tfCijena" layoutX="139.0" layoutY="162.0" />
          </children>
       </Pane>
    </children>

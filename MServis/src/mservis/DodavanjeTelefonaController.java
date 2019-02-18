@@ -68,6 +68,13 @@ public class DodavanjeTelefonaController implements Initializable{
     @FXML
     private Button btnDodajModel;
     
+    @FXML
+    private Button btnPromjeniCijenuModela;
+    
+    @FXML
+    private TextField tfCijena;
+   
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(vrijednost.equals("izmjeni")){
@@ -176,13 +183,13 @@ public class DodavanjeTelefonaController implements Initializable{
 
 
         cbBoja.getItems().addAll("Plava","Crvena","Bijela","Zlatna","Crna","Siva","Narandzasta","Zuta","Zelena");
-        
+        tfCijena.setText(Double.toString(telefon.getCijena()));
         cbModel.setValue(telefon.getModel());
         tfSerijskiBroj.setText(telefon.getSerijskiBroj());
         cbBoja.getSelectionModel().select(telefon.getBoja());
     }
     
-    public void btnDodajModelHandler(){
+    public void btnDodajModelHandler(ActionEvent e){
        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DodavanjeModelaTelefona.fxml"));
             Parent root1=(Parent)loader.load();
@@ -196,5 +203,17 @@ public class DodavanjeTelefonaController implements Initializable{
         } catch (IOException ex) {
             Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void btnPromjeniCijenuModelaHandler(ActionEvent e){
+        Double cijena = Double.parseDouble(tfCijena.getText());
+        Date date= new Date();
+        long time = date.getTime();
+        Timestamp ts = new Timestamp(time);
+        CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
+        CijenaDTO cs = new CijenaDTO(telefonDTO.getIdModelTelefona(),ts,true);
+        cijenaDAO.delete(cs);
+        CijenaDTO cijenaDTO = new CijenaDTO(telefonDTO.getIdModelTelefona(),cijena,ts);
+        cijenaDAO.insert(cijenaDTO);
     }
 }
