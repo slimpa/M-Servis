@@ -11,5 +11,7 @@ public interface TelefonDAO {
 	boolean delete(TelefonDTO telefon);
 	List<TelefonDTO> selectAll();
 	List<TelefonDTO> selectBy(String model);
+        List<TelefonDTO> selectByModel(String model);
+        List<TelefonDTO> selectBySerial(String model);
 
 }

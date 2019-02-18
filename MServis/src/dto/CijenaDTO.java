@@ -22,6 +22,18 @@ public class CijenaDTO {
         this.DatumOd = DatumOd;
     }
 
+    public CijenaDTO(int idArtikal, boolean TrenutnaCijena) {
+        this.idArtikal = idArtikal;
+        this.TrenutnaCijena = TrenutnaCijena;
+    }
+
+    public CijenaDTO(int idArtikal, Timestamp DatumDo, boolean TrenutnaCijena) {
+        this.idArtikal = idArtikal;
+        this.DatumDo = DatumDo;
+        this.TrenutnaCijena = TrenutnaCijena;
+    }
+    
+
     public CijenaDTO(int idCijene, int idArtikal, double Cijena, Timestamp DatumOd, Timestamp DatumDo, boolean TrenutnaCijena) {
         this.idCijene = idCijene;
         this.idArtikal = idArtikal;

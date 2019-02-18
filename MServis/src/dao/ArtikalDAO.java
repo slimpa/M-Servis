@@ -11,5 +11,5 @@ public interface ArtikalDAO {
 	List<ArtikalDTO> selectAll();
 	List<ArtikalDTO> selectBy(ArtikalDTO artikal);
         Integer getLastId();
-
+        boolean updateArtikal(ArtikalDTO artikal);
 }

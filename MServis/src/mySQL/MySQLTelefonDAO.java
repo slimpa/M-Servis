@@ -17,7 +17,7 @@ public class MySQLTelefonDAO implements TelefonDAO {
     
         public static final String SQL_INSERT = "insert into telefon (`IdModeTelefona`,`SerijskiBroj`,`Boja`,`Obrisano`) values (?, ?, ?, ?)";
 	public static final String SQL_SELECT = "select * from rezervnidio";
-	
+	public static final String SQL_UPDATE = "update telefon set SerijskiBroj=?, Boja=? where IdModeTelefona = ?";
         public static final String SQL_SELECT_DETAIL = "select * from svi_telefoni";
         public static final String SQL_DELETE = "update telefon set Obrisano = 1 WHERE `IdModeTelefona`=? and SerijskiBroj = ?";
 	/**
@@ -31,7 +31,7 @@ public class MySQLTelefonDAO implements TelefonDAO {
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(SQL_INSERT);
+                        ps = conn.prepareStatement(SQL_INSERT);
 			ps.setInt(1, telefon.getIdModelTelefona());
 			ps.setString(2, telefon.getSerijskiBroj());
                         ps.setString(3, telefon.getBoja());
@@ -54,8 +54,27 @@ public class MySQLTelefonDAO implements TelefonDAO {
 	 * @param telefon
 	 */
 	public boolean update(TelefonDTO telefon) {
-		// TODO - implement MySQLTelefonDAO.update
-		throw new UnsupportedOperationException();
+		
+            Connection conn = null;
+		PreparedStatement ps = null;
+		boolean returnValue = false;
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+                        ps = conn.prepareStatement(SQL_UPDATE);
+			ps.setInt(3, telefon.getIdModelTelefona());
+			ps.setString(1, telefon.getSerijskiBroj());
+                        ps.setString(2, telefon.getBoja());
+                        
+			returnValue = ps.executeUpdate() == 1;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);			
+		}
+		
+		return returnValue;
 	}
 
 	/**
@@ -136,7 +155,67 @@ public class MySQLTelefonDAO implements TelefonDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		String query = SQL_SELECT_DETAIL + " where Naziv like ?";
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, "%" + model + "%");
+			rs = ps.executeQuery();
+			
+			if(rs == null) return null;
+			else {
+				while(rs.next()) {
+					telefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"),rs.getString("Boja"),rs.getInt("IdModelTelefona"),
+                                        rs.getString("Naziv"),rs.getString("NazivModela"),rs.getString("Proizvodjac"),rs.getString("Specifikacija"),rs.getDouble("Cijena")));
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+		
+		return telefoni;
+	}
+        
+        public List<TelefonDTO> selectByModel(String model) {
+		List<TelefonDTO> telefoni = new ArrayList<TelefonDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		String query = SQL_SELECT_DETAIL + " where NazivModela like ?";
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, "%" + model + "%");
+			rs = ps.executeQuery();
+			
+			if(rs == null) return null;
+			else {
+				while(rs.next()) {
+					telefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"),rs.getString("Boja"),rs.getInt("IdModelTelefona"),
+                                        rs.getString("Naziv"),rs.getString("NazivModela"),rs.getString("Proizvodjac"),rs.getString("Specifikacija"),rs.getDouble("Cijena")));
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+		
+		return telefoni;
+	}
+        
+        public List<TelefonDTO> selectBySerial(String model) {
+		List<TelefonDTO> telefoni = new ArrayList<TelefonDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = SQL_SELECT_DETAIL + " where SerijskiBroj like ?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();

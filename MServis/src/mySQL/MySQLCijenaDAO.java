@@ -16,7 +16,9 @@ public class MySQLCijenaDAO implements CijenaDAO {
     
         public static final String SQL_INSERT = "INSERT INTO `m:servis`.`cijena` (`IdArtikla`,`Cijena`, `DatumOd`, `DatumDo`,`TrenutnaCijena`) VALUES (?, ?, ?, ?, ?);";
 	public static final String SQL_SELECT = "select * from artikal";
-	public static final String SQL_UPDATE = "update proizvodjac set";
+	public static final String SQL_UPDATE = "update cijena set";
+        public static final String SQL_DELETE = "update cijena set DatumDo= ?, TrenutnaCijena=? where IdArtikla =? and TrenutnaCijena=1";
+        
 	/**
 	 * 
 	 * @param cijena
@@ -66,8 +68,33 @@ public class MySQLCijenaDAO implements CijenaDAO {
 	 * @param cijena
 	 */
 	public boolean delete(CijenaDTO cijena) {
-		// TODO - implement MySQLCijenaDAO.delete
-		throw new UnsupportedOperationException();
+                Connection conn = null;
+                PreparedStatement ps = null;
+                boolean returnValue = false;
+
+                try {
+
+                   //int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano
+
+                        conn = ConnectionPool.getInstance().checkOut();
+                        ps = conn.prepareStatement(SQL_DELETE);
+
+                        ps.setInt(3, cijena.getIdArtikal());
+                        ps.setTimestamp(1,  cijena.getDatumDo());
+                        ps.setInt(2, 0);
+
+
+                        returnValue = ps.executeUpdate() == 1;
+
+                } catch(SQLException e) {
+                        e.printStackTrace();
+                        return false;
+                } finally {
+                        ConnectionPool.getInstance().checkIn(conn);
+                        DBUtil.getInstance().close(ps);			
+                }
+
+                return returnValue;
 	}
 
 	public List<CijenaDTO> selectAll() {

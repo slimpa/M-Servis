@@ -10,7 +10,8 @@ public class RezervniDioDTO extends ArtikalDTO {
     private int kolicinaRezervnogdijela;
     private double cijena;
     private String proizvodjac;
-
+    
+    
     public RezervniDioDTO(int idModelTelefona) {
 
         this.idModelTelefona = idModelTelefona;

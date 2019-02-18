@@ -19,6 +19,7 @@ public class MySQLArtikalDAO implements ArtikalDAO {
     
         public static final String SQL_INSERT = "insert into artikal (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) values (?, ?, ?, ?, ?)";
 	public static final String SQL_SELECT = "select * from artikal";
+        public static final String SQL_UPDATE_ARTIKAL = "update artikal set Naziv= ?, Kolicina =? ,IdProizvodjac = ? ,BarKod = ? where IdArtikal = ?";
 	public static final String SQL_UPDATE = "update artikal set kolicina=kolicina+1 where IdArtikal=?";
         //int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano
 	/**
@@ -56,7 +57,37 @@ public class MySQLArtikalDAO implements ArtikalDAO {
 
             return returnValue;
 	}
+        
+        public boolean updateArtikal(ArtikalDTO artikal) {
+	    Connection conn = null;
+            PreparedStatement ps = null;
+            boolean returnValue = false;
 
+            try {
+
+               //int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano
+
+                    conn = ConnectionPool.getInstance().checkOut();
+                    ps = conn.prepareStatement(SQL_UPDATE_ARTIKAL);
+                    
+                    ps.setString(1, artikal.getNaziv());
+                    ps.setInt(2, artikal.getKolicina());
+                    ps.setInt(3, artikal.getIdProizvodjac());
+                    ps.setString(4, artikal.getBarKod());
+                    ps.setInt(5, artikal.getIdArtikal());
+                    
+                    returnValue = ps.executeUpdate() == 1;
+                
+            } catch(SQLException e) {
+                    e.printStackTrace();
+                    return false;
+            } finally {
+                    ConnectionPool.getInstance().checkIn(conn);
+                    DBUtil.getInstance().close(ps);			
+            }
+
+            return returnValue;
+	}
 	/**
 	 * 
 	 * @param artikal

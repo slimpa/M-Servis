@@ -13,6 +13,10 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
         private String Proizvodjac;
         private String BarCode;
 
+    public String getBarCode() {
+        return this.BarCode;
+    }
+
     public DodatnaOpremaDTO(String Boja, int idTipDodatneOpreme, String Naziv, String ModelTelefona, String Proizvodjac, String BarCode, int Kolicina, double Cijena) {
         this.Boja = Boja;
         this.idTipDodatneOpreme = idTipDodatneOpreme;

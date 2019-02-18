@@ -91,45 +91,80 @@ public class DodavanjeTelefonaController implements Initializable{
     }
     
     public void btnSacuvajHandler(ActionEvent e){
+        if(vrijednost.equals("izmjeni")){
+            String model = cbModel.getValue().toString();
+            String serijskiBroj =  tfSerijskiBroj.getText();
+            String boja = cbBoja.getValue().toString();
+            
+            ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(model);
+            ModelTelefonaDAO modelTelefonaDAODAO=(new MySQLDAOFactory()).getModelTelefonaDAO();
+            ObservableList<ModelTelefonaDTO> modelTelefonaList;
+            modelTelefonaList=FXCollections.observableArrayList(modelTelefonaDAODAO.selectBy(modelTelefonaDTO));
+            List<String> modeliTelefona = new ArrayList<String>();
+            for(ModelTelefonaDTO mt : modelTelefonaList){
+                modeliTelefona.add(mt.getNazivModela());
+            }
+            
+            ArtikalDTO artikalDTO = new ArtikalDTO(modelTelefonaList.get(0).getIdModeltelefona());
+            ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
+            artikalDAO.update(artikalDTO);
+            
+            TelefonDTO telefonDTO = new TelefonDTO(serijskiBroj,boja,modelTelefonaList.get(0).getIdModeltelefona());
+            TelefonDAO telefonDAO = new MySQLDAOFactory().getTelefonDAO();
+            telefonDAO.update(telefonDTO);
+            
+            
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informacija");
+            alert.setHeaderText(null);
+            alert.setContentText("Uspjesno izmjenjeno!");
 
-        String model = cbModel.getValue().toString();
-        String serijskiBroj =  tfSerijskiBroj.getText();
-        String boja = cbBoja.getValue().toString();
-        Integer idModelaTelefona ;
-        
-        ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(model);
-        ModelTelefonaDAO modelTelefonaDAODAO=(new MySQLDAOFactory()).getModelTelefonaDAO();
-        ObservableList<ModelTelefonaDTO> modelTelefonaList;
-        modelTelefonaList=FXCollections.observableArrayList(modelTelefonaDAODAO.selectBy(modelTelefonaDTO));
-        List<String> modeliTelefona = new ArrayList<String>();
-        for(ModelTelefonaDTO mt : modelTelefonaList){
-            modeliTelefona.add(mt.getNazivModela());
+            alert.showAndWait();
+
+            Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
+            stage.close();
+            vrijednost= "nesto";
         }
-        
-        ArtikalDTO artikalDTO = new ArtikalDTO(modelTelefonaList.get(0).getIdModeltelefona());
-        ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
-        artikalDAO.update(artikalDTO);
-        
-        
+        else{
+            String model = cbModel.getValue().toString();
+            String serijskiBroj =  tfSerijskiBroj.getText();
+            String boja = cbBoja.getValue().toString();
+
+            ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(model);
+            ModelTelefonaDAO modelTelefonaDAODAO=(new MySQLDAOFactory()).getModelTelefonaDAO();
+            ObservableList<ModelTelefonaDTO> modelTelefonaList;
+            modelTelefonaList=FXCollections.observableArrayList(modelTelefonaDAODAO.selectBy(modelTelefonaDTO));
+            List<String> modeliTelefona = new ArrayList<String>();
+            for(ModelTelefonaDTO mt : modelTelefonaList){
+                modeliTelefona.add(mt.getNazivModela());
+            }
+
+            ArtikalDTO artikalDTO = new ArtikalDTO(modelTelefonaList.get(0).getIdModeltelefona());
+            ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
+            artikalDAO.update(artikalDTO);
 
 
-        TelefonDTO telefonDTO = new TelefonDTO(serijskiBroj,boja,modelTelefonaList.get(0).getIdModeltelefona());
-        TelefonDAO telefonDAO = new MySQLDAOFactory().getTelefonDAO();
-        telefonDAO.insert(telefonDTO);
-        
 
-        
-        
-        
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Informacija");
-        alert.setHeaderText(null);
-        alert.setContentText("Uspjesno dodano!");
 
-        alert.showAndWait();
-        
-        Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
-        stage.close();
+            TelefonDTO telefonDTO = new TelefonDTO(serijskiBroj,boja,modelTelefonaList.get(0).getIdModeltelefona());
+            TelefonDAO telefonDAO = new MySQLDAOFactory().getTelefonDAO();
+            telefonDAO.insert(telefonDTO);
+
+
+
+
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informacija");
+            alert.setHeaderText(null);
+            alert.setContentText("Uspjesno dodano!");
+
+            alert.showAndWait();
+
+            Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
+            stage.close();
+        }
     }
     
     public void btnIzadjiHandler(ActionEvent e){
@@ -139,9 +174,12 @@ public class DodavanjeTelefonaController implements Initializable{
     
     public void popuniPolja(TelefonDTO telefon){
 
+
+        cbBoja.getItems().addAll("Plava","Crvena","Bijela","Zlatna","Crna","Siva","Narandzasta","Zuta","Zelena");
+        
         cbModel.setValue(telefon.getModel());
         tfSerijskiBroj.setText(telefon.getSerijskiBroj());
-        cbBoja.setValue(telefon.getBoja());
+        cbBoja.getSelectionModel().select(telefon.getBoja());
     }
     
     public void btnDodajModelHandler(){

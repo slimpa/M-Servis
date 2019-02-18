@@ -18,7 +18,13 @@ public class ArtikalDTO {
         this.idProizvodjac = idProizvodjac;
         this.BarKod = BarKod;
     }
-    
+    public ArtikalDTO(int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod) {
+        this.idArtikal = idArtikal;
+        this.Naziv = Naziv;
+        this.Kolicina = Kolicina;
+        this.idProizvodjac = idProizvodjac;
+        this.BarKod = BarKod;
+    }
     
     public ArtikalDTO(int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano) {
         this.idArtikal = idArtikal;

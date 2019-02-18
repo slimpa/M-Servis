@@ -39,7 +39,7 @@
                         <Button fx:id="btnDodajTelefonNaRacun" layoutX="41.0" layoutY="173.0" mnemonicParsing="false" onAction="#btnTelefonNaRacun" prefHeight="25.0" prefWidth="151.0" text="Dodaj na račun" />
                         <TextField fx:id="tfTelefoniPretraga" layoutX="334.0" layoutY="233.0" prefHeight="25.0" prefWidth="123.0" />
                         <Button fx:id="btnTelefonPretrazi" layoutX="41.0" layoutY="233.0" mnemonicParsing="false" onAction="#btnPretraziTelefoneHandler" prefHeight="25.0" prefWidth="151.0" text="Pretraga" />
-                        <ComboBox layoutX="222.0" layoutY="233.0" prefHeight="25.0" prefWidth="94.0" />
+                        <ComboBox fx:id="cbTelefonPretraga" layoutX="222.0" layoutY="233.0" prefHeight="25.0" prefWidth="94.0" />
                         <Button fx:id="btnTelefonPrikaziRacun" layoutX="222.0" layoutY="173.0" mnemonicParsing="false" onAction="#btnTelefonPrikaziRacunHandler" prefHeight="25.0" prefWidth="116.0" text="Prikaži račun" />
                      </children>
                   </AnchorPane>
@@ -66,7 +66,7 @@
                         <TextField fx:id="tfPretragaDodatnaOprema" layoutX="349.0" layoutY="230.0" />
                         <Button fx:id="btnDodatnaOpremaPretrazi" layoutX="34.0" layoutY="230.0" mnemonicParsing="false" onAction="#btnPretraziDodatnuOpremuHandler" prefHeight="25.0" prefWidth="122.0" text="Pretraga" />
                         <Button fx:id="btnDodajOpremuNaRacun" layoutX="34.0" layoutY="186.0" mnemonicParsing="false" onAction="#btnOpremuNaRacun" prefHeight="25.0" prefWidth="124.0" text="Dodaj na račun" />
-                        <ComboBox layoutX="181.0" layoutY="230.0" prefWidth="150.0" />
+                        <ComboBox fx:id="cbDodatnaOpremaPretraga" layoutX="181.0" layoutY="230.0" prefWidth="150.0" />
                         <Button fx:id="btnDodatnaOpremaPrikaziRacun" layoutX="181.0" layoutY="186.0" mnemonicParsing="false" onAction="#btnDodatnaOpremaPrikaziRacunHandler" prefHeight="25.0" prefWidth="149.0" text="Prikaži račun" />
                      </children>
                   </AnchorPane>
@@ -92,7 +92,7 @@
                         <Button fx:id="btnRezervniDioObrisi" layoutX="30.0" layoutY="122.0" mnemonicParsing="false" onAction="#btnRezervniDioObrisiHandler" prefHeight="25.0" prefWidth="137.0" text="Obriši" />
                         <TextField fx:id="tfRezervniDio" layoutX="374.0" layoutY="235.0" prefHeight="25.0" prefWidth="168.0" />
                         <Button fx:id="btnRezervniDioPretraga" layoutX="30.0" layoutY="235.0" mnemonicParsing="false" onAction="#btnPretraziRezervneDijeloveHandler" prefHeight="25.0" prefWidth="133.0" text="Pretraga" />
-                        <ComboBox layoutX="192.0" layoutY="235.0" prefHeight="25.0" prefWidth="166.0" />
+                        <ComboBox fx:id="cbRezervniDijeloviPretraga" layoutX="192.0" layoutY="235.0" prefHeight="25.0" prefWidth="166.0" />
                         <Button fx:id="btnDodajRezervniDioNaRacun" layoutX="30.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnRezervniDioNaRacun" prefHeight="25.0" prefWidth="137.0" text="Dodaj na račun" />
                         <Button fx:id="btnRezervniDioPrikaziRacun" layoutX="193.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnRezervniDioPrikaziRacunHandler" prefHeight="25.0" prefWidth="165.0" text="Prikaži račun" />
                      </children>

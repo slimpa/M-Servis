@@ -10,5 +10,7 @@ public interface DodatnaOpremaDAO {
 	boolean delete(DodatnaOpremaDTO dodatnaOprema);
 	List<DodatnaOpremaDTO> selectAll();
 	List<DodatnaOpremaDTO> selectBy(String naziv);
+        List<DodatnaOpremaDTO> selectByTip(String naziv);
+        List<DodatnaOpremaDTO> selectByModel(String naziv);
 
 }

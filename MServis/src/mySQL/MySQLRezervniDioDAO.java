@@ -21,8 +21,9 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
         public static final String SQL_INSERT = "INSERT INTO `m:servis`.`rezervniDio` (`IdRezervniDio`,`Opis`,`IdModelTelefona`) VALUES (?, ?, ?)";
 	public static final String SQL_SELECT = "select * from rezervnidio";
         public static final String SQL_SELECT_DETAIL = "select * from rezervni_dijelovi";
-         public static final String SQL_DELETE = "DELETE FROM `m:servis`.`rezervnidio` WHERE `IdRezervniDio`=?";
-		 public static final String SQL_SELECT_NAZIV = "select * from rezervni_dio_naziv";
+        public static final String SQL_DELETE = "DELETE FROM `m:servis`.`rezervnidio` WHERE `IdRezervniDio`=?";
+        public static final String SQL_SELECT_NAZIV = "select * from rezervni_dio_naziv";
+        public static final String SQL_UPDATE = "update rezervnidio set Opis = ?, IdModelTelefona= ? where IdRezervniDio= ?";
 	/**
 	 * 
 	 * @param rezervniDio
@@ -57,8 +58,28 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 	 * @param rezervniDio
 	 */
 	public boolean update(RezervniDioDTO rezervniDio) {
-		// TODO - implement MySQLRezervniDioDAO.update
-		throw new UnsupportedOperationException();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		boolean returnValue = false;
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(SQL_UPDATE);
+			ps.setInt(3, rezervniDio.getIdRezervniDio());
+			ps.setString(1, rezervniDio.getOpis());
+                        ps.setInt(2, rezervniDio.getIdModelTelefona());
+                        
+                        
+                        
+			returnValue = ps.executeUpdate() == 1;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);			
+		}
+		
+		return returnValue;
 	}
 
 	/**

@@ -17,7 +17,7 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
     
         public static final String SQL_INSERT_DODATNA_OPREMA = "insert into dodatnaoprema values (?, ?, ?, ?)";
 	public static final String SQL_SELECT = "select * from dodatnaoprema";
-	
+	public static final String SQL_UPDATE = "update dodatnaoprema set Boja=?, IdTipDodatneOpreme= ?, IdModelTelefona= ? where IdDodatnaOprema=?";
         public static final String SQL_SELECT_DETAIL = "select * from dodatna_oprema";
         public static final String SQL_DELETE = "DELETE FROM `m:servis`.`dodatnaoprema` WHERE `IdDodatnaOprema`=?";
 	/**
@@ -54,8 +54,28 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 	 * @param dodatnaOprema
 	 */
 	public boolean update(DodatnaOpremaDTO dodatnaOprema) {
-		// TODO - implement MySQLDodatnaOpremaDAO.update
-		throw new UnsupportedOperationException();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		boolean returnValue = false;
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(SQL_UPDATE);
+			ps.setInt(4, dodatnaOprema.getIdDodatnaOprema());
+			ps.setString(1, dodatnaOprema.getBoja());
+                        ps.setInt(2, dodatnaOprema.getIdTipDodatneOpreme());
+                        ps.setInt(3, dodatnaOprema.getIdModelTelefona());
+                        
+                        System.out.println(dodatnaOprema.getIdDodatnaOprema()+ " " +dodatnaOprema.getBoja()+ " " + dodatnaOprema.getIdTipDodatneOpreme()  + " " +dodatnaOprema.getIdModelTelefona());
+			returnValue = ps.executeUpdate() == 1;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);			
+		}
+		
+		return returnValue;
 	}
 
 	/**
@@ -136,6 +156,65 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 		ResultSet rs = null;
 		String query = SQL_SELECT_DETAIL + " where Naziv like ?";
 		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, "%" + naziv + "%");
+			rs = ps.executeQuery();
+			
+			if(rs == null) return null;
+			else {
+				while(rs.next()) {
+					dodatnaOprema.add(new DodatnaOpremaDTO(rs.getString("Boja"),rs.getInt("idDodatnaOprema"),rs.getString("Naziv"),
+                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getDouble("Cijena")));
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+		
+		return dodatnaOprema;
+	}
+        
+        public List<DodatnaOpremaDTO> selectByTip(String naziv) {
+		List<DodatnaOpremaDTO> dodatnaOprema = new ArrayList<DodatnaOpremaDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = SQL_SELECT_DETAIL + " where TipOpreme like ?";
+		
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, "%" + naziv + "%");
+			rs = ps.executeQuery();
+			
+			if(rs == null) return null;
+			else {
+				while(rs.next()) {
+					dodatnaOprema.add(new DodatnaOpremaDTO(rs.getString("Boja"),rs.getInt("idDodatnaOprema"),rs.getString("Naziv"),
+                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getDouble("Cijena")));
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtil.getInstance().close(ps);
+		}
+		
+		return dodatnaOprema;
+	}
+        
+        public List<DodatnaOpremaDTO> selectByModel(String naziv) {
+		List<DodatnaOpremaDTO> dodatnaOprema = new ArrayList<DodatnaOpremaDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = SQL_SELECT_DETAIL + " where NazivModela like ?";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
