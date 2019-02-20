@@ -21,7 +21,7 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
         public static final String SQL_INSERT = "INSERT INTO `m:servis`.`rezervniDio` (`IdRezervniDio`,`Opis`,`IdModelTelefona`) VALUES (?, ?, ?)";
 	public static final String SQL_SELECT = "select * from rezervnidio";
         public static final String SQL_SELECT_DETAIL = "select * from rezervni_dijelovi";
-       // public static final String SQL_DELETE = "DELETE FROM `m:servis`.`rezervnidio` WHERE `IdRezervniDio`=?";
+        public static final String SQL_DELETE = "update artikal set Obrisano=1 where IdArtikal = ?";
         public static final String SQL_SELECT_NAZIV = "select * from rezervni_dio_naziv";
         public static final String SQL_UPDATE = "update rezervnidio set Opis = ?, IdModelTelefona= ? where IdRezervniDio= ?";
 	/**
@@ -93,7 +93,7 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
                 
                 try {
 			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement("update artikal set Obrisano=1 where IdArtikal = ?");
+			ps = conn.prepareStatement(SQL_DELETE);
 
 			ps.setInt(1, rezervniDio.getIdRezervniDio());
 			

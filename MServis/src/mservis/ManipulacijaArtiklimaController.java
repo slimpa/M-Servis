@@ -501,6 +501,12 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Niste odabrali artikal!");
+            alert.showAndWait();
         }
     }
 
@@ -509,6 +515,13 @@ public class ManipulacijaArtiklimaController implements Initializable {
         DodatnaOpremaDAO dodatnaOpremaDAO = (new MySQLDAOFactory()).getDodatnaOpremaDAO();
         if (dodatnaOpremaDTO != null) {
             dodatnaOpremaDAO.delete(dodatnaOpremaDTO);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Niste odabrali artikal!");
+            alert.showAndWait();
         }
         tableDodatnaOprema.getItems().removeAll();
 
@@ -528,54 +541,6 @@ public class ManipulacijaArtiklimaController implements Initializable {
             tableDodatnaOprema.setItems(listaSveDodatneOpreme);
         }
         tableDodatnaOprema.refresh();
-    }
-
-    public void btnDodatnaOpremaPrikaziRacunHandler(ActionEvent e) {
-        Stage stage = new Stage();
-        Parent root3;
-        try {
-            root3 = FXMLLoader.load(getClass().getResource("Racun.fxml"));
-
-            Scene scene = new Scene(root3);
-            scene.getStylesheets().add("dark-theme.css");
-            stage.setTitle("Racun");
-            stage.setScene(scene);
-            stage.showAndWait();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void btnRezervniDioPrikaziRacunHandler(ActionEvent e) {
-        Stage stage = new Stage();
-        Parent root3;
-        try {
-            root3 = FXMLLoader.load(getClass().getResource("Racun.fxml"));
-
-            Scene scene = new Scene(root3);
-            scene.getStylesheets().add("dark-theme.css");
-            stage.setTitle("Racun");
-            stage.setScene(scene);
-            stage.showAndWait();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void btnTelefonPrikaziRacunHandler(ActionEvent e) {
-        Stage stage = new Stage();
-        Parent root3;
-        try {
-            root3 = FXMLLoader.load(getClass().getResource("Racun.fxml"));
-
-            Scene scene = new Scene(root3);
-            scene.getStylesheets().add("dark-theme.css");
-            stage.setTitle("Racun");
-            stage.setScene(scene);
-            stage.showAndWait();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public void btnTelefonDodajHandler(ActionEvent e) {
@@ -620,6 +585,13 @@ public class ManipulacijaArtiklimaController implements Initializable {
             }
 
         }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Niste odabrali artikal!");
+            alert.showAndWait();
+        }
     }
 
     public void btnTelefonObrisiHandler(ActionEvent e) {
@@ -627,6 +599,13 @@ public class ManipulacijaArtiklimaController implements Initializable {
         TelefonDAO telefonDAO = (new MySQLDAOFactory()).getTelefonDAO();
         if (telefonDTO != null) {
             telefonDAO.delete(telefonDTO);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Niste odabrali artikal!");
+            alert.showAndWait();
         }
         tableTelefoni.getItems().removeAll();
 
@@ -691,6 +670,13 @@ public class ManipulacijaArtiklimaController implements Initializable {
             }
 
         }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Niste odabrali artikal!");
+            alert.showAndWait();
+        }
     }
 
     public void btnRezervniDioObrisiHandler(ActionEvent e) {
@@ -698,6 +684,13 @@ public class ManipulacijaArtiklimaController implements Initializable {
         RezervniDioDAO rezervniDioDAO = (new MySQLDAOFactory()).getRezervniDioDAO();
         if (rezervniDioDTO != null) {
             rezervniDioDAO.delete(rezervniDioDTO);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Niste odabrali artikal!");
+            alert.showAndWait();
         }
         tableRezervniDijelovi.getItems().removeAll();
 
@@ -775,7 +768,6 @@ public class ManipulacijaArtiklimaController implements Initializable {
             this.popuniTabeluRacun();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste izabrali artikal!");

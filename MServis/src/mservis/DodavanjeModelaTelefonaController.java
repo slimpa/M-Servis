@@ -76,54 +76,62 @@ public class DodavanjeModelaTelefonaController implements Initializable {
     }
 
     public void btnSacuvajHandler(ActionEvent e) {
-        String specifikacija = taSpecifikacija.getText();
-        String model = tfNazivModela.getText();
-        Integer idModelaTelefona;
-
-        String naziv = tfNaziv.getText();
-        String proizvodjac = cbProizvodjac.getValue().toString();
-        String barKod = tfBarKod.getText();
-        Double cijena = Double.parseDouble(tfCijena.getText());
-
-        ProizvodjacDTO proizvodjacDTO = new ProizvodjacDTO(proizvodjac);
-        //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-        ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
-        List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
-        ArtikalDTO artikal = new ArtikalDTO(naziv, 1, proizvodjaci.get(0).getIdProizvodjac(), barKod);
-        //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-        ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
-        artikalDAO.insert(artikal);
-        idModelaTelefona = artikalDAO.getLastId();
-
-        ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(idModelaTelefona, specifikacija, "nema slike", model);//int idModeltelefona, String Specifikacija, String Slika, String NazivModela
-        //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-        ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
-        List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);
-        if (modelTelefonaDAO.insert(modelTelefonaDTO)) {
-
-            CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
-            Date date = new Date();
-            long time = date.getTime();
-            Timestamp ts = new Timestamp(time);
-            CijenaDTO cijenaDTO = new CijenaDTO(artikalDAO.getLastId(), cijena, ts);
-            cijenaDAO.insert(cijenaDTO);
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("");
-            alert.setHeaderText(null);
-            alert.setContentText("Uspješno dodavanje!");
-            alert.showAndWait();
-
-            Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
-            stage.close();
-        } else {
+        if ("".equals(tfNaziv.getText()) || "".equals(taSpecifikacija.getText()) || "".equals(tfNazivModela.getText())
+                || "".equals(tfBarKod.getText()) || "".equals(tfCijena.getText()) || cbProizvodjac.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
-            alert.setContentText("Dodavanje modela nije moguće!");
+            alert.setContentText("Niste unijeli sve podatke!");
             alert.showAndWait();
-        }
+        } else {
+            String specifikacija = taSpecifikacija.getText();
+            String model = tfNazivModela.getText();
+            Integer idModelaTelefona;
 
+            String naziv = tfNaziv.getText();
+            String proizvodjac = cbProizvodjac.getValue().toString();
+            String barKod = tfBarKod.getText();
+            Double cijena = Double.parseDouble(tfCijena.getText());
+
+            ProizvodjacDTO proizvodjacDTO = new ProizvodjacDTO(proizvodjac);
+            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+            ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
+            List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
+            ArtikalDTO artikal = new ArtikalDTO(naziv, 1, proizvodjaci.get(0).getIdProizvodjac(), barKod);
+            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+            ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
+            artikalDAO.insert(artikal);
+            idModelaTelefona = artikalDAO.getLastId();
+
+            ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(idModelaTelefona, specifikacija, "nema slike", model);//int idModeltelefona, String Specifikacija, String Slika, String NazivModela
+            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+            ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
+            List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);
+            if (modelTelefonaDAO.insert(modelTelefonaDTO)) {
+
+                CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
+                Date date = new Date();
+                long time = date.getTime();
+                Timestamp ts = new Timestamp(time);
+                CijenaDTO cijenaDTO = new CijenaDTO(artikalDAO.getLastId(), cijena, ts);
+                cijenaDAO.insert(cijenaDTO);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText(null);
+                alert.setContentText("Uspješno dodavanje!");
+                alert.showAndWait();
+
+                Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška!");
+                alert.setHeaderText(null);
+                alert.setContentText("Dodavanje modela nije moguće!");
+                alert.showAndWait();
+            }
+        }
     }
 
     public void btnOtkaziHandler(ActionEvent e) {

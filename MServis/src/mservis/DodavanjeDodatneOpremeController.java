@@ -130,138 +130,146 @@ public class DodavanjeDodatneOpremeController implements Initializable {
     }
 
     public void btnSacuvajHandler(ActionEvent e) {
+        if ("".equals(tfNaziv.getText()) || "".equals(tfCijena.getText()) || "".equals(tfKolicina.getText()) || "".equals(tfBarKod.getText())
+                || cbProizvodjac.getSelectionModel().isEmpty() || cbModel.getSelectionModel().isEmpty() || cbBoja.getSelectionModel().isEmpty() || cbTip.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Niste unijeli sve podatke!");
+            alert.showAndWait();
+        } else {
+            if (vrijednost.equals("izmjeni")) {
 
-        if (vrijednost.equals("izmjeni")) {
+                String naziv = tfNaziv.getText();
+                String tip = cbTip.getValue().toString();
+                String proizvodjac = cbProizvodjac.getValue().toString();
+                String model = cbModel.getValue().toString();
+                String barKod = tfBarKod.getText();
+                String boja = cbBoja.getValue().toString();
+                Integer kolicina = Integer.parseInt(tfKolicina.getText());
+                Double cijena = Double.parseDouble(tfCijena.getText());
 
-            String naziv = tfNaziv.getText();
-            String tip = cbTip.getValue().toString();
-            String proizvodjac = cbProizvodjac.getValue().toString();
-            String model = cbModel.getValue().toString();
-            String barKod = tfBarKod.getText();
-            String boja = cbBoja.getValue().toString();
-            Integer kolicina = Integer.parseInt(tfKolicina.getText());
-            Double cijena = Double.parseDouble(tfCijena.getText());
+                ProizvodjacDTO proizvodjacDTO = new ProizvodjacDTO(proizvodjac);
+                //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+                ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
+                List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
+                ArtikalDTO artikal = new ArtikalDTO(id, naziv, kolicina, proizvodjaci.get(0).getIdProizvodjac(), barKod);
+                //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+                ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
+                artikalDAO.updateArtikal(artikal);
 
-            ProizvodjacDTO proizvodjacDTO = new ProizvodjacDTO(proizvodjac);
-            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-            ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
-            List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
-            ArtikalDTO artikal = new ArtikalDTO(id, naziv, kolicina, proizvodjaci.get(0).getIdProizvodjac(), barKod);
-            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-            ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
-            artikalDAO.updateArtikal(artikal);
+                DodatnaOpremaDAO doDAO = new MySQLDAOFactory().getDodatnaOpremaDAO();
+                DodatnaOpremaDTO dodatnaOprema = new DodatnaOpremaDTO(boja, naziv, model, tip, proizvodjac, barKod, kolicina, cijena);
+                //boja,naziv,model,tip,proizvodjac,barKod,kolicina,cijena
+                dodatnaOprema.setIdDodatnaOprema(id);
 
-            DodatnaOpremaDAO doDAO = new MySQLDAOFactory().getDodatnaOpremaDAO();
-            DodatnaOpremaDTO dodatnaOprema = new DodatnaOpremaDTO(boja, naziv, model, tip, proizvodjac, barKod, kolicina, cijena);
-            //boja,naziv,model,tip,proizvodjac,barKod,kolicina,cijena
-            dodatnaOprema.setIdDodatnaOprema(id);
+                ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(model);
+                //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+                ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
+                List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);
+                dodatnaOprema.setIdModelTelefona(modeli.get(0).getIdModeltelefona());
 
-            ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(model);
-            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-            ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
-            List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);
-            dodatnaOprema.setIdModelTelefona(modeli.get(0).getIdModeltelefona());
+                TipDodatneOpremeDTO tipDodatneOpremeDTO = new TipDodatneOpremeDTO(tip);
+                //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+                TipDodatneOpremeDAO tipDodatneOpremeDAO = new MySQLDAOFactory().getTipDodatneOpremeDAO();
+                List<TipDodatneOpremeDTO> tipovi = tipDodatneOpremeDAO.selectBy(tipDodatneOpremeDTO);
+                dodatnaOprema.setIdTipDodatneOpreme(tipovi.get(0).getIdTipDodatneOpreme());
+                if (doDAO.update(dodatnaOprema)) {
 
-            TipDodatneOpremeDTO tipDodatneOpremeDTO = new TipDodatneOpremeDTO(tip);
-            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-            TipDodatneOpremeDAO tipDodatneOpremeDAO = new MySQLDAOFactory().getTipDodatneOpremeDAO();
-            List<TipDodatneOpremeDTO> tipovi = tipDodatneOpremeDAO.selectBy(tipDodatneOpremeDTO);
-            dodatnaOprema.setIdTipDodatneOpreme(tipovi.get(0).getIdTipDodatneOpreme());
-            if (doDAO.update(dodatnaOprema)) {
+                    if (Double.parseDouble(tfCijena.getText()) != (dodatnaOpremaDTO.getCijena())) {
+                        System.out.println("IZMJENA CIJENE");
+                        Date date = new Date();
+                        long time = date.getTime();
+                        Timestamp ts = new Timestamp(time);
+                        CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
+                        CijenaDTO cs = new CijenaDTO(id, ts, true);
+                        cijenaDAO.delete(cs);
+                        CijenaDTO cijenaDTO = new CijenaDTO(id, cijena, ts);
+                        cijenaDAO.insert(cijenaDTO);
+                    }
 
-                if (Double.parseDouble(tfCijena.getText()) != (dodatnaOpremaDTO.getCijena())) {
-                    System.out.println("IZMJENA CIJENE");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Informacija");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Uspjesno izmjenjeno!");
+
+                    alert.showAndWait();
+
+                    Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
+                    stage.close();
+                    vrijednost = "nesto";
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Greška");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Izmjena neuspješna!");
+                }
+            } else {
+
+                String naziv = tfNaziv.getText();
+                String tip = cbTip.getValue().toString();
+                String proizvodjac = cbProizvodjac.getValue().toString();
+                String model = cbModel.getValue().toString();
+                String barKod = tfBarKod.getText();
+                String boja = cbBoja.getValue().toString();
+                Integer kolicina = Integer.parseInt(tfKolicina.getText());
+                Double cijena = Double.parseDouble(tfCijena.getText());
+
+                ProizvodjacDTO proizvodjacDTO = new ProizvodjacDTO(proizvodjac);
+                //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+                ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
+                List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
+                ArtikalDTO artikal = new ArtikalDTO(naziv, kolicina, proizvodjaci.get(0).getIdProizvodjac(), barKod);
+                //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+                ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
+                artikalDAO.insert(artikal);
+
+                DodatnaOpremaDAO doDAO = new MySQLDAOFactory().getDodatnaOpremaDAO();
+                DodatnaOpremaDTO dodatnaOprema = new DodatnaOpremaDTO(boja, naziv, model, tip, proizvodjac, barKod, kolicina, cijena);
+                //boja,naziv,model,tip,proizvodjac,barKod,kolicina,cijena
+                dodatnaOprema.setIdDodatnaOprema(artikalDAO.getLastId());
+
+                ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(model);
+                //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+                ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
+                List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);
+                dodatnaOprema.setIdModelTelefona(modeli.get(0).getIdModeltelefona());
+
+                TipDodatneOpremeDTO tipDodatneOpremeDTO = new TipDodatneOpremeDTO(tip);
+                //String Naziv, int Kolicina, int idProizvodjac, String BarKod
+                TipDodatneOpremeDAO tipDodatneOpremeDAO = new MySQLDAOFactory().getTipDodatneOpremeDAO();
+                List<TipDodatneOpremeDTO> tipovi = tipDodatneOpremeDAO.selectBy(tipDodatneOpremeDTO);
+                dodatnaOprema.setIdTipDodatneOpreme(tipovi.get(0).getIdTipDodatneOpreme());
+                if (doDAO.insert(dodatnaOprema)) {
+
+                    CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
                     Date date = new Date();
                     long time = date.getTime();
                     Timestamp ts = new Timestamp(time);
-                    CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
-                    CijenaDTO cs = new CijenaDTO(id, ts, true);
-                    cijenaDAO.delete(cs);
-                    CijenaDTO cijenaDTO = new CijenaDTO(id, cijena, ts);
+                    CijenaDTO cijenaDTO = new CijenaDTO(artikalDAO.getLastId(), cijena, ts);
                     cijenaDAO.insert(cijenaDTO);
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Informacija");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Uspjesno dodano!");
+
+                    alert.showAndWait();
+
+                    Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
+                    stage.close();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Greška");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Neuspješno dodavanje!");
+
+                    alert.showAndWait();
                 }
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Informacija");
-                alert.setHeaderText(null);
-                alert.setContentText("Uspjesno izmjenjeno!");
-
-                alert.showAndWait();
-
-                Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
-                stage.close();
-                vrijednost = "nesto";
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Greška");
-                alert.setHeaderText(null);
-                alert.setContentText("Izmjena neuspješna!");
-            }
-        } else {
-
-            String naziv = tfNaziv.getText();
-            String tip = cbTip.getValue().toString();
-            String proizvodjac = cbProizvodjac.getValue().toString();
-            String model = cbModel.getValue().toString();
-            String barKod = tfBarKod.getText();
-            String boja = cbBoja.getValue().toString();
-            Integer kolicina = Integer.parseInt(tfKolicina.getText());
-            Double cijena = Double.parseDouble(tfCijena.getText());
-
-            ProizvodjacDTO proizvodjacDTO = new ProizvodjacDTO(proizvodjac);
-            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-            ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
-            List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
-            ArtikalDTO artikal = new ArtikalDTO(naziv, kolicina, proizvodjaci.get(0).getIdProizvodjac(), barKod);
-            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-            ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
-            artikalDAO.insert(artikal);
-
-            DodatnaOpremaDAO doDAO = new MySQLDAOFactory().getDodatnaOpremaDAO();
-            DodatnaOpremaDTO dodatnaOprema = new DodatnaOpremaDTO(boja, naziv, model, tip, proizvodjac, barKod, kolicina, cijena);
-            //boja,naziv,model,tip,proizvodjac,barKod,kolicina,cijena
-            dodatnaOprema.setIdDodatnaOprema(artikalDAO.getLastId());
-
-            ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(model);
-            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-            ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
-            List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);
-            dodatnaOprema.setIdModelTelefona(modeli.get(0).getIdModeltelefona());
-
-            TipDodatneOpremeDTO tipDodatneOpremeDTO = new TipDodatneOpremeDTO(tip);
-            //String Naziv, int Kolicina, int idProizvodjac, String BarKod
-            TipDodatneOpremeDAO tipDodatneOpremeDAO = new MySQLDAOFactory().getTipDodatneOpremeDAO();
-            List<TipDodatneOpremeDTO> tipovi = tipDodatneOpremeDAO.selectBy(tipDodatneOpremeDTO);
-            dodatnaOprema.setIdTipDodatneOpreme(tipovi.get(0).getIdTipDodatneOpreme());
-            if (doDAO.insert(dodatnaOprema)) {
-
-                CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
-                Date date = new Date();
-                long time = date.getTime();
-                Timestamp ts = new Timestamp(time);
-                CijenaDTO cijenaDTO = new CijenaDTO(artikalDAO.getLastId(), cijena, ts);
-                cijenaDAO.insert(cijenaDTO);
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Informacija");
-                alert.setHeaderText(null);
-                alert.setContentText("Uspjesno dodano!");
-
-                alert.showAndWait();
-
-                Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
-                stage.close();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Greška");
-                alert.setHeaderText(null);
-                alert.setContentText("Neuspješno dodavanje!");
-
-                alert.showAndWait();
             }
 
         }
-
     }
 
     public void btnIzadjiHandler(ActionEvent e) {
@@ -332,7 +340,7 @@ public class DodavanjeDodatneOpremeController implements Initializable {
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-            
+
             ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();
             ObservableList<ModelTelefonaDTO> modelTelefonaList;
             modelTelefonaList = FXCollections.observableArrayList(modelTelefonaDAODAO.selectAll());
