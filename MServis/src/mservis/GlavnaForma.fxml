@@ -5,19 +5,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="glavnaFormaPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.GlavnaFormaController">
+<AnchorPane fx:id="glavnaFormaPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.GlavnaFormaController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="481.0">
+      <Pane prefHeight="361.0" prefWidth="481.0">
          <children>
-            <Button fx:id="dobavljaciButton" layoutX="56.0" layoutY="44.0" mnemonicParsing="false" onAction="#btnRadSaDobavljacimaHandler" prefHeight="25.0" prefWidth="130.0" text="Rad sa dobavljačima" />
-            <Button fx:id="izvjestajiButton" layoutX="56.0" layoutY="93.0" mnemonicParsing="false" onAction="#btnRadSaIzvjestajimaHandler" prefHeight="25.0" prefWidth="130.0" text="Izvještaji" />
-            <Button layoutX="56.0" layoutY="144.0" mnemonicParsing="false" onAction="#btnRadSaNarudzbamaHandler" prefHeight="25.0" prefWidth="130.0" text="Narudžba" />
-            <Button layoutX="56.0" layoutY="200.0" mnemonicParsing="false" onAction="#btnRadSaArtiklimaHandler" prefHeight="25.0" prefWidth="130.0" text="Rad sa artiklima" />
-            <Button layoutX="56.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnRadSaRacunimaHandler" prefHeight="25.0" prefWidth="130.0" text="Račun" />
-            <Button fx:id="odjavaButton" layoutX="274.0" layoutY="329.0" mnemonicParsing="false" onAction="#odjavaButtonHandler" prefHeight="25.0" prefWidth="103.0" text="Odjava" />
-            <Button fx:id="servisButton" layoutX="56.0" layoutY="304.0" mnemonicParsing="false" onAction="#btnServisHandler" prefHeight="25.0" prefWidth="130.0" text="Servis" />
-            <Label fx:id="ime" layoutX="286.0" layoutY="110.0" prefHeight="17.0" prefWidth="130.0" text="Ovdje ce biti ime" />
-            <Label layoutX="286.0" layoutY="69.0" prefHeight="17.0" prefWidth="130.0" text="Prijavljen  je:" />
+            <Button fx:id="dobavljaciButton" layoutX="296.0" layoutY="73.0" mnemonicParsing="false" onAction="#btnRadSaDobavljacimaHandler" prefHeight="34.0" prefWidth="130.0" text="Rad sa dobavljačima" />
+            <Button fx:id="izvjestajiButton" layoutX="32.0" layoutY="219.0" mnemonicParsing="false" onAction="#btnRadSaIzvjestajimaHandler" prefHeight="34.0" prefWidth="130.0" text="Izvještaji" />
+            <Button layoutX="296.0" layoutY="130.0" mnemonicParsing="false" onAction="#btnRadSaNarudzbamaHandler" prefHeight="34.0" prefWidth="130.0" text="Narudžba" />
+            <Button layoutX="32.0" layoutY="73.0" mnemonicParsing="false" onAction="#btnRadSaArtiklimaHandler" prefHeight="41.0" prefWidth="130.0" text="Rad sa artiklima" />
+            <Button fx:id="odjavaButton" layoutX="296.0" layoutY="297.0" mnemonicParsing="false" onAction="#odjavaButtonHandler" prefHeight="34.0" prefWidth="130.0" text="Odjava" />
+            <Button fx:id="servisButton" layoutX="32.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnServisHandler" prefHeight="34.0" prefWidth="130.0" text="Servis" />
+            <Label fx:id="ime" layoutX="326.0" layoutY="14.0" prefHeight="34.0" prefWidth="144.0" text="Ovdje ce biti ime" />
+            <Label layoutX="247.0" layoutY="14.0" prefHeight="34.0" prefWidth="77.0" text="Prijavljen  je:" />
          </children>
       </Pane>
    </children>

@@ -13,8 +13,8 @@
       <Label layoutX="17.0" layoutY="28.0" text="Pretraga" />
       <TextField fx:id="tfIdServisa" layoutX="76.0" layoutY="24.0" promptText="Id servisa" />
       <ComboBox fx:id="cbStanje" layoutX="260.0" layoutY="24.0" prefWidth="150.0" promptText="Stanje uređaja" />
-      <Button fx:id="btnDodaj" layoutX="34.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnNoviServis" text="Novi servis" />
-      <Button fx:id="btnServisiraj" layoutX="293.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnServisiraj" prefHeight="25.0" prefWidth="85.0" text="Servisiraj" />
+      <Button fx:id="btnDodaj" layoutX="34.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnNoviServis" prefHeight="25.0" prefWidth="105.0" text="Novi servis" />
+      <Button fx:id="btnServisiraj" layoutX="469.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnServisiraj" prefHeight="25.0" prefWidth="105.0" text="Servisiraj" />
       <TableView fx:id="tableServis" layoutX="23.0" layoutY="76.0" prefHeight="331.0" prefWidth="1101.0">
         <columns>
           <TableColumn fx:id="columnIdServisa" prefWidth="75.0" text="Id servisa" />
@@ -28,6 +28,6 @@
         </columns>
       </TableView>
       <Button fx:id="btnPretraziServis" layoutX="448.0" layoutY="24.0" mnemonicParsing="false" onAction="#btnPretraziHandler" text="Pretraži" />
-      <Button fx:id="btnPreuzimanje" layoutX="581.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnPreuzimanjeHandler" text="Preuzimanje uređaja" />
+      <Button fx:id="btnPreuzimanje" layoutX="984.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnPreuzimanjeHandler" text="Preuzimanje uređaja" />
    </children>
 </AnchorPane>

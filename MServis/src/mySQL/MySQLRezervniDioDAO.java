@@ -21,7 +21,7 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
         public static final String SQL_INSERT = "INSERT INTO `m:servis`.`rezervniDio` (`IdRezervniDio`,`Opis`,`IdModelTelefona`) VALUES (?, ?, ?)";
 	public static final String SQL_SELECT = "select * from rezervnidio";
         public static final String SQL_SELECT_DETAIL = "select * from rezervni_dijelovi";
-        public static final String SQL_DELETE = "DELETE FROM `m:servis`.`rezervnidio` WHERE `IdRezervniDio`=?";
+       // public static final String SQL_DELETE = "DELETE FROM `m:servis`.`rezervnidio` WHERE `IdRezervniDio`=?";
         public static final String SQL_SELECT_NAZIV = "select * from rezervni_dio_naziv";
         public static final String SQL_UPDATE = "update rezervnidio set Opis = ?, IdModelTelefona= ? where IdRezervniDio= ?";
 	/**
@@ -90,19 +90,6 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		boolean returnValue = false;
-                try {
-			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(SQL_DELETE);
-
-			ps.setInt(1, rezervniDio.getIdRezervniDio());
-			
-			returnValue = ps.executeUpdate() == 1;
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ConnectionPool.getInstance().checkIn(conn);
-			DBUtil.getInstance().close(ps);
-		}
                 
                 try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -135,7 +122,7 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 			if(rs == null) return null;
 			else {
 				while(rs.next()) {
-					rezervniDijelovi.add(new RezervniDioDTO(rs.getInt("IdRezervniDio"),rs.getInt("IdModelTelefona"),rs.getString("Opis"),rs.getString("Naziv"),rs.getInt("Kolicina"),rs.getDouble("Cijena")));
+					rezervniDijelovi.add(new RezervniDioDTO(rs.getInt("IdRezervniDio"),rs.getString("NazivModela"),rs.getString("Opis"),rs.getString("Naziv"),rs.getInt("Kolicina"),rs.getDouble("Cijena")));
                                         
 				}
 			}
@@ -197,7 +184,7 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
                     if(rs == null) return null;
                     else {
                             while(rs.next()) {
-                                    rezervniDijelovi.add(new RezervniDioDTO(rs.getInt("IdRezervniDio"),rs.getInt("IdModelTelefona"),rs.getString("Opis"),rs.getString("Naziv"),rs.getInt("Kolicina"),rs.getDouble("cijena")));
+                                    rezervniDijelovi.add(new RezervniDioDTO(rs.getInt("IdRezervniDio"),rs.getString("NazivModela"),rs.getString("Opis"),rs.getString("Naziv"),rs.getInt("Kolicina"),rs.getDouble("cijena")));
                                    
                             }
                     }
@@ -241,5 +228,37 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 
         return rezervniDijelovi;
     }
+        
+        public List<RezervniDioDTO> selectByModelName(RezervniDioDTO rezervniDio) {
+        List<RezervniDioDTO> rezervniDijelovi = new ArrayList<RezervniDioDTO>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = SQL_SELECT_DETAIL + " where NazivModela like ?";
 
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%" + rezervniDio.getNazivModela() + "%");
+            rs = ps.executeQuery();
+
+            if (rs == null) {
+                return null;
+            } else {
+                while (rs.next()) {
+                    rezervniDijelovi.add(new RezervniDioDTO(rs.getInt("IdRezervniDio"),rs.getString("NazivModela"),rs.getString("Opis"),rs.getString("Naziv"),rs.getInt("Kolicina"),rs.getDouble("cijena")));
+                  
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return rezervniDijelovi;
+    }
+        
+        
 }

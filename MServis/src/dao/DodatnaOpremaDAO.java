@@ -1,6 +1,7 @@
 package dao;
 
 import dto.DodatnaOpremaDTO;
+import dto.RezervniDioDTO;
 import java.util.List;
 
 public interface DodatnaOpremaDAO {
@@ -12,5 +13,5 @@ public interface DodatnaOpremaDAO {
 	List<DodatnaOpremaDTO> selectBy(String naziv);
         List<DodatnaOpremaDTO> selectByTip(String naziv);
         List<DodatnaOpremaDTO> selectByModel(String naziv);
-
+       
 }

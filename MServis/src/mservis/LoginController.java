@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -86,7 +87,7 @@ public class LoginController implements Initializable {
                 root2 = FXMLLoader.load(getClass().getResource("GlavnaForma.fxml"));
 
                 Scene scene = new Scene(root2);
-
+                scene.getStylesheets().add("dark-theme.css");
                 stage.setTitle("Glavna forma");
                 stage.setScene(scene);
                 stage.show();
@@ -101,6 +102,7 @@ public class LoginController implements Initializable {
                 Parent root2;
                 root2 = FXMLLoader.load(getClass().getResource("Admin.fxml"));
                 Scene scene = new Scene(root2);
+                scene.getStylesheets().add("dark-theme.css");
                 stage.setTitle("Admin forma");
                 stage.setScene(scene);
                 stage.show();
@@ -109,10 +111,11 @@ public class LoginController implements Initializable {
             }
             ((Stage) loginPane.getScene().getWindow()).close();
         } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Pogrešno korisničko ime ili lozinka!");
+
             alert.showAndWait();
         }
     }

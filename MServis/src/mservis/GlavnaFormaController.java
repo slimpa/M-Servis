@@ -54,7 +54,7 @@ public class GlavnaFormaController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("Dobavljac.fxml"));
 
             Scene scene = new Scene(root2);
-            
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dobavljaci");
             stage.setScene(scene);
             stage.showAndWait();
@@ -72,7 +72,7 @@ public class GlavnaFormaController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("Izvjestaj.fxml"));
 
             Scene scene = new Scene(root2);
-            
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Izvjestaji");
             stage.setScene(scene);
             stage.showAndWait();
@@ -91,7 +91,7 @@ public class GlavnaFormaController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("NarudzbaFXML.fxml"));
 
             Scene scene = new Scene(root2);
-            
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Narudzbe");
             stage.setScene(scene);
             stage.showAndWait();
@@ -109,7 +109,7 @@ public class GlavnaFormaController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("ManipulacijaArtiklima.fxml"));
 
             Scene scene = new Scene(root2);
-            
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Manipulacija artiklima");
             stage.setScene(scene);
             stage.showAndWait();
@@ -127,7 +127,7 @@ public class GlavnaFormaController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("Racun.fxml"));
 
             Scene scene = new Scene(root2);
-            
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Racunima");
             stage.setScene(scene);
             stage.showAndWait();
@@ -146,7 +146,7 @@ public class GlavnaFormaController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("Servis.fxml"));
 
             Scene scene = new Scene(root2);
-            
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Servis");
             stage.setScene(scene);
             stage.showAndWait();
@@ -163,7 +163,7 @@ public class GlavnaFormaController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
             Scene scene = new Scene(root2);
-            
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Login");
             stage.setScene(scene);
             stage.show();

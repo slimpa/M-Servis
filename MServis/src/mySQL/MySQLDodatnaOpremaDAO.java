@@ -19,7 +19,7 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 	public static final String SQL_SELECT = "select * from dodatnaoprema";
 	public static final String SQL_UPDATE = "update dodatnaoprema set Boja=?, IdTipDodatneOpreme= ?, IdModelTelefona= ? where IdDodatnaOprema=?";
         public static final String SQL_SELECT_DETAIL = "select * from dodatna_oprema";
-        public static final String SQL_DELETE = "DELETE FROM `m:servis`.`dodatnaoprema` WHERE `IdDodatnaOprema`=?";
+      //  public static final String SQL_DELETE = "DELETE FROM `m:servis`.`dodatnaoprema` WHERE `IdDodatnaOprema`=?";
 	/**
 	 * 
 	 * @param dodatnaOprema
@@ -86,19 +86,19 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		boolean returnValue = false;
-                try {
-			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(SQL_DELETE);
-
-			ps.setInt(1, dodatnaOprema.getIdDodatnaOprema());
-			
-			returnValue = ps.executeUpdate() == 1;
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ConnectionPool.getInstance().checkIn(conn);
-			DBUtil.getInstance().close(ps);
-		}
+//                try {
+//			conn = ConnectionPool.getInstance().checkOut();
+//			ps = conn.prepareStatement(SQL_DELETE);
+//
+//			ps.setInt(1, dodatnaOprema.getIdDodatnaOprema());
+//			
+//			returnValue = ps.executeUpdate() == 1;
+//		} catch(SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			ConnectionPool.getInstance().checkIn(conn);
+//			DBUtil.getInstance().close(ps);
+//		}
                 
                 try {
 			conn = ConnectionPool.getInstance().checkOut();

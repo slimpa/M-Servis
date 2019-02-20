@@ -30,7 +30,7 @@ public class MServis extends Application {
         root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         
         Scene scene = new Scene(root);
-        
+        scene.getStylesheets().add("dark-theme.css");
         stage.setTitle("Prijavljivanje");
         stage.setScene(scene);
         stage.show();

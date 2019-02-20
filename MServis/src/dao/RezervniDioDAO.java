@@ -18,4 +18,6 @@ public interface RezervniDioDAO {
     List<RezervniDioDTO> selectAllDetailed();
 
     public List<RezervniDioDTO> selectByModel(RezervniDioDTO rezervniDio);
+
+    public List<RezervniDioDTO> selectByModelName(RezervniDioDTO rezervniDioDTO);
 }

@@ -47,103 +47,63 @@ import mySQL.MySQLDAOFactory;
  *
  * @author Bojan
  */
-public class DodavanjeTelefonaController implements Initializable{
-   
-    
+public class DodavanjeTelefonaController implements Initializable {
+
     @FXML
     private TextField tfSerijskiBroj;
-    
+
     @FXML
     private ComboBox cbBoja;
-    
+
     @FXML
     private ComboBox cbModel;
-    
+
     @FXML
     private Button btnSacuvaj;
-    
+
     @FXML
     private Button btnIzadji;
-    
+
     @FXML
     private Button btnDodajModel;
-    
+
     @FXML
     private Button btnPromjeniCijenuModela;
-    
+
     @FXML
     private TextField tfCijena;
-   
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(vrijednost.equals("izmjeni")){
+        if (vrijednost.equals("izmjeni")) {
             popuniPolja(telefonDTO);
-        }
-        else{
+        } else {
 
-            
-            ModelTelefonaDAO modelTelefonaDAODAO=(new MySQLDAOFactory()).getModelTelefonaDAO();
+            ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();
             ObservableList<ModelTelefonaDTO> modelTelefonaList;
-            modelTelefonaList=FXCollections.observableArrayList(modelTelefonaDAODAO.selectAll());
+            modelTelefonaList = FXCollections.observableArrayList(modelTelefonaDAODAO.selectAll());
             List<String> modeliTelefona = new ArrayList<String>();
-            for(ModelTelefonaDTO mt : modelTelefonaList){
+            for (ModelTelefonaDTO mt : modelTelefonaList) {
                 modeliTelefona.add(mt.getNazivModela());
             }
-
 
             cbModel.getItems().addAll(modeliTelefona);
-            cbBoja.getItems().addAll("Plava","Crvena","Bijela","Zlatna","Crna","Siva","Narandzasta","Zuta","Zelena");
+            cbBoja.getItems().addAll("Plava", "Crvena", "Bijela", "Zlatna", "Crna", "Siva", "Narandzasta", "Zuta", "Zelena");
         }
     }
-    
-    public void btnSacuvajHandler(ActionEvent e){
-        if(vrijednost.equals("izmjeni")){
-            String model = cbModel.getValue().toString();
-            String serijskiBroj =  tfSerijskiBroj.getText();
-            String boja = cbBoja.getValue().toString();
-            
-            ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(model);
-            ModelTelefonaDAO modelTelefonaDAODAO=(new MySQLDAOFactory()).getModelTelefonaDAO();
-            ObservableList<ModelTelefonaDTO> modelTelefonaList;
-            modelTelefonaList=FXCollections.observableArrayList(modelTelefonaDAODAO.selectBy(modelTelefonaDTO));
-            List<String> modeliTelefona = new ArrayList<String>();
-            for(ModelTelefonaDTO mt : modelTelefonaList){
-                modeliTelefona.add(mt.getNazivModela());
-            }
-            
-            ArtikalDTO artikalDTO = new ArtikalDTO(modelTelefonaList.get(0).getIdModeltelefona());
-            ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
-            artikalDAO.update(artikalDTO);
-            
-            TelefonDTO telefonDTO = new TelefonDTO(serijskiBroj,boja,modelTelefonaList.get(0).getIdModeltelefona());
-            TelefonDAO telefonDAO = new MySQLDAOFactory().getTelefonDAO();
-            telefonDAO.update(telefonDTO);
-            
-            
-            
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Informacija");
-            alert.setHeaderText(null);
-            alert.setContentText("Uspjesno izmjenjeno!");
 
-            alert.showAndWait();
-
-            Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
-            stage.close();
-            vrijednost= "nesto";
-        }
-        else{
+    public void btnSacuvajHandler(ActionEvent e) {
+        if (vrijednost.equals("izmjeni")) {
             String model = cbModel.getValue().toString();
-            String serijskiBroj =  tfSerijskiBroj.getText();
+            String serijskiBroj = tfSerijskiBroj.getText();
             String boja = cbBoja.getValue().toString();
 
             ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(model);
-            ModelTelefonaDAO modelTelefonaDAODAO=(new MySQLDAOFactory()).getModelTelefonaDAO();
+            ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();
             ObservableList<ModelTelefonaDTO> modelTelefonaList;
-            modelTelefonaList=FXCollections.observableArrayList(modelTelefonaDAODAO.selectBy(modelTelefonaDTO));
+            modelTelefonaList = FXCollections.observableArrayList(modelTelefonaDAODAO.selectBy(modelTelefonaDTO));
             List<String> modeliTelefona = new ArrayList<String>();
-            for(ModelTelefonaDTO mt : modelTelefonaList){
+            for (ModelTelefonaDTO mt : modelTelefonaList) {
                 modeliTelefona.add(mt.getNazivModela());
             }
 
@@ -151,69 +111,117 @@ public class DodavanjeTelefonaController implements Initializable{
             ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
             artikalDAO.update(artikalDTO);
 
-
-
-
-            TelefonDTO telefonDTO = new TelefonDTO(serijskiBroj,boja,modelTelefonaList.get(0).getIdModeltelefona());
+            TelefonDTO telefonDTO = new TelefonDTO(serijskiBroj, boja, modelTelefonaList.get(0).getIdModeltelefona());
             TelefonDAO telefonDAO = new MySQLDAOFactory().getTelefonDAO();
-            telefonDAO.insert(telefonDTO);
+            if (telefonDAO.update(telefonDTO)) {
 
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informacija");
+                alert.setHeaderText(null);
+                alert.setContentText("Uspjesno izmjenjeno!");
 
+                Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
+                stage.close();
+                vrijednost = "nesto";
 
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška");
+                alert.setHeaderText(null);
+                alert.setContentText("Neuspješna izmjena!");
+            }
 
+        } else {
+            String model = cbModel.getValue().toString();
+            String serijskiBroj = tfSerijskiBroj.getText();
+            String boja = cbBoja.getValue().toString();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Informacija");
-            alert.setHeaderText(null);
-            alert.setContentText("Uspjesno dodano!");
+            ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(model);
+            ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();
+            ObservableList<ModelTelefonaDTO> modelTelefonaList;
+            modelTelefonaList = FXCollections.observableArrayList(modelTelefonaDAODAO.selectBy(modelTelefonaDTO));
+            List<String> modeliTelefona = new ArrayList<String>();
+            for (ModelTelefonaDTO mt : modelTelefonaList) {
+                modeliTelefona.add(mt.getNazivModela());
+            }
 
-            alert.showAndWait();
+            ArtikalDTO artikalDTO = new ArtikalDTO(modelTelefonaList.get(0).getIdModeltelefona());
+            ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
+            artikalDAO.update(artikalDTO);
 
-            Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
-            stage.close();
+            TelefonDTO telefonDTO = new TelefonDTO(serijskiBroj, boja, modelTelefonaList.get(0).getIdModeltelefona());
+            TelefonDAO telefonDAO = new MySQLDAOFactory().getTelefonDAO();
+            if (telefonDAO.insert(telefonDTO)) {
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informacija");
+                alert.setHeaderText(null);
+                alert.setContentText("Uspjesno dodano!");
+
+                alert.showAndWait();
+
+                Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Greška");
+                alert.setHeaderText(null);
+                alert.setContentText("Dodavanje neuspješno!");
+            }
         }
     }
-    
-    public void btnIzadjiHandler(ActionEvent e){
+
+    public void btnIzadjiHandler(ActionEvent e) {
         Stage stage = (Stage) btnIzadji.getScene().getWindow();
         stage.close();
     }
-    
-    public void popuniPolja(TelefonDTO telefon){
 
+    public void popuniPolja(TelefonDTO telefon) {
 
-        cbBoja.getItems().addAll("Plava","Crvena","Bijela","Zlatna","Crna","Siva","Narandzasta","Zuta","Zelena");
+        cbBoja.getItems().addAll("Plava", "Crvena", "Bijela", "Zlatna", "Crna", "Siva", "Narandzasta", "Zuta", "Zelena");
         tfCijena.setText(Double.toString(telefon.getCijena()));
         cbModel.setValue(telefon.getModel());
         tfSerijskiBroj.setText(telefon.getSerijskiBroj());
         cbBoja.getSelectionModel().select(telefon.getBoja());
     }
-    
-    public void btnDodajModelHandler(ActionEvent e){
-       try {
+
+    public void btnDodajModelHandler(ActionEvent e) {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DodavanjeModelaTelefona.fxml"));
-            Parent root1=(Parent)loader.load();
-            Stage stage=new Stage();
+            Parent root1 = (Parent) loader.load();
+            Stage stage = new Stage();
             stage.setTitle("Dodavanje modela telefona");
             stage.setResizable(false);
-
-            stage.setScene(new Scene(root1));
-            stage.initModality(Modality.APPLICATION_MODAL); 
+            Scene scene = new Scene(root1);
+            scene.getStylesheets().add("dark-theme.css");
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
+            
+            ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();
+            ObservableList<ModelTelefonaDTO> modelTelefonaList;
+            modelTelefonaList = FXCollections.observableArrayList(modelTelefonaDAODAO.selectAll());
+            List<String> modeliTelefona = new ArrayList<String>();
+            for (ModelTelefonaDTO mt : modelTelefonaList) {
+                modeliTelefona.add(mt.getNazivModela());
+            }
+
+            cbModel.getItems().addAll(modeliTelefona);
         } catch (IOException ex) {
             Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void btnPromjeniCijenuModelaHandler(ActionEvent e){
+
+    public void btnPromjeniCijenuModelaHandler(ActionEvent e) {
         Double cijena = Double.parseDouble(tfCijena.getText());
-        Date date= new Date();
+        Date date = new Date();
         long time = date.getTime();
         Timestamp ts = new Timestamp(time);
         CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
-        CijenaDTO cs = new CijenaDTO(telefonDTO.getIdModelTelefona(),ts,true);
+        CijenaDTO cs = new CijenaDTO(telefonDTO.getIdModelTelefona(), ts, true);
         cijenaDAO.delete(cs);
-        CijenaDTO cijenaDTO = new CijenaDTO(telefonDTO.getIdModelTelefona(),cijena,ts);
+        CijenaDTO cijenaDTO = new CijenaDTO(telefonDTO.getIdModelTelefona(), cijena, ts);
         cijenaDAO.insert(cijenaDTO);
     }
 }

@@ -86,7 +86,7 @@
                   <TextField fx:id="tfStanje" layoutX="14.0" layoutY="49.0" prefHeight="25.0" prefWidth="267.0" />
                   <Button fx:id="btnPretraziStanje" layoutX="14.0" layoutY="87.0" mnemonicParsing="false" onAction="#btnPretraziStanjaHandler" text="Pretraži" />
                   <Button fx:id="btnDodajStanje" layoutX="233.0" layoutY="87.0" mnemonicParsing="false" onAction="#btnDodajStanjeHandler" text="Dodaj" />
-                  <Button fx:id="btnIzmijeniStanje" layoutX="16.0" layoutY="343.0" mnemonicParsing="false" onAction="#btnIzmijeniStanjeHandler" text="Izmijeni" />
+                  <Button fx:id="btnIzmijeniStanje" layoutX="168.0" layoutY="87.0" mnemonicParsing="false" onAction="#btnIzmijeniStanjeHandler" text="Izmijeni" />
                   <Button fx:id="btnObrisiStanje" layoutX="231.0" layoutY="343.0" mnemonicParsing="false" onAction="#btnObrisiStanjeHandler" text="Obriši" />
                   <Label layoutX="340.0" layoutY="24.0" text="Cjenovnik servisa" />
                   <TextField fx:id="tfUsluga" layoutX="340.0" layoutY="49.0" prefHeight="25.0" prefWidth="331.0" promptText="Usluga" />
@@ -99,7 +99,7 @@
                         <TableColumn fx:id="colCijenaUsluge" prefWidth="97.0" text="Cijena" />
                     </columns>
                   </TableView>
-                  <Button fx:id="btnIzmijeniUslugu" layoutX="342.0" layoutY="343.0" mnemonicParsing="false" onAction="#btnIzmijeniUsluguHandler" text="Izmijeni" />
+                  <Button fx:id="btnIzmijeniUslugu" layoutX="557.0" layoutY="126.0" mnemonicParsing="false" onAction="#btnIzmijeniUsluguHandler" text="Izmijeni" />
                   <Button fx:id="btnObrisiUslugu" layoutX="621.0" layoutY="343.0" mnemonicParsing="false" onAction="#btnObrisiUsluguHandler" text="Obriši" />
                   <TextField fx:id="tfCijena" layoutX="342.0" layoutY="87.0" prefHeight="25.0" prefWidth="329.0" promptText="Cijena" />
                </children>
@@ -142,8 +142,8 @@
                   <TextField fx:id="tfFirmaAdmin" layoutX="20.0" layoutY="283.0" prefHeight="25.0" prefWidth="241.0" />
                   <TextField fx:id="tfKorisnickoAdmin" layoutX="403.0" layoutY="53.0" prefHeight="25.0" prefWidth="226.0" />
                   <TextField fx:id="tfLozinkaAdmin" layoutX="403.0" layoutY="125.0" prefHeight="25.0" prefWidth="226.0" />
-                  <Button fx:id="btnSacuvajAdmin" onAction="#btnSacuvajAdminHandler" layoutX="534.0" layoutY="283.0" mnemonicParsing="false" text="Sačuvaj izmjene" />
-                  <Button fx:id="btnOdjava" onAction="#btnOdjavaHandler" layoutX="584.0" layoutY="324.0" mnemonicParsing="false" text="Odjava" />
+                  <Button fx:id="btnSacuvajAdmin" layoutX="534.0" layoutY="283.0" mnemonicParsing="false" onAction="#btnSacuvajAdminHandler" text="Sačuvaj izmjene" />
+                  <Button fx:id="btnOdjava" layoutX="584.0" layoutY="324.0" mnemonicParsing="false" onAction="#btnOdjavaHandler" text="Odjava" />
                </children>
             </AnchorPane>
         </content>

@@ -10,7 +10,7 @@ public class RezervniDioDTO extends ArtikalDTO {
     private int kolicinaRezervnogdijela;
     private double cijena;
     private String proizvodjac;
-    
+    private String nazivModela;
     
     public RezervniDioDTO(int idModelTelefona) {
 
@@ -52,14 +52,28 @@ public class RezervniDioDTO extends ArtikalDTO {
         this.proizvodjac = proizvodjac;
     }
 
-    public RezervniDioDTO(int idRezervniDio, int idModelTelefona, String Opis, String naziv, int kolicina, double cijena) {
+    public RezervniDioDTO(int idRezervniDio, int idModela, String Opis, String naziv, int kolicina, double cijena) {
         this.idRezervniDio = idRezervniDio;
-        this.idModelTelefona = idModelTelefona;
+        this.idModelTelefona = idModela;
         this.Opis = Opis;
         this.nazivRezervnogdijela = naziv;
         this.kolicinaRezervnogdijela = kolicina;
         this.Kolicina=kolicinaRezervnogdijela;
         this.cijena = cijena;
+    }
+    
+    public RezervniDioDTO(int idRezervniDio, String nazivModela, String Opis, String naziv, int kolicina, double cijena) {
+        this.idRezervniDio = idRezervniDio;
+        this.nazivModela = nazivModela;
+        this.Opis = Opis;
+        this.nazivRezervnogdijela = naziv;
+        this.kolicinaRezervnogdijela = kolicina;
+        this.Kolicina=kolicinaRezervnogdijela;
+        this.cijena = cijena;
+    }
+
+    public RezervniDioDTO(String nazivModela) {
+        this.nazivModela = nazivModela;
     }
     
     public String getProizvodjac() {
@@ -165,5 +179,15 @@ public class RezervniDioDTO extends ArtikalDTO {
     public boolean isObrisano() {
         return Obrisano;
     }
+
+    public String getNazivModela() {
+        return nazivModela;
+    }
+
+    public void setNazivModela(String nazivModela) {
+        this.nazivModela = nazivModela;
+    }
+    
+    
 
 }

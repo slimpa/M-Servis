@@ -6,12 +6,14 @@
 package mservis;
 
 import dao.DodatnaOpremaDAO;
+import dao.ModelTelefonaDAO;
 import dao.RacunDAO;
 import dao.RacunHasArtikalDAO;
 import dao.RezervniDioDAO;
 import dao.TelefonDAO;
 import dao.ZaposleniDAO;
 import dto.DodatnaOpremaDTO;
+import dto.ModelTelefonaDTO;
 import dto.RacunDTO;
 import dto.RacunHasArtikalDTO;
 import dto.RezervniDioDTO;
@@ -97,7 +99,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
 
     @FXML
     private Button btnRezervniDioObrisi;
-    
+
     @FXML
     private ComboBox cbRezervniDijeloviPretraga;
 
@@ -106,7 +108,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
 
     @FXML
     private ComboBox cbTelefonPretraga;
-    
+
     @FXML
     private TableColumn<TelefonDTO, Integer> colTelefonIdTelefona;
 
@@ -184,7 +186,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
 
     @FXML
     private Button btnDodatnaOpremaPrikaziRacun;
-    
+
     @FXML
     private ComboBox cbDodatnaOpremaPretraga;
 
@@ -243,24 +245,98 @@ public class ManipulacijaArtiklimaController implements Initializable {
         tfUkupno.setEditable(false);
         racun = new ArrayList<StavkaRacuna>();
 
+        cbTelefonPretraga.getItems().addAll("Naziv", "Model", "Serijski broj");
+        cbTelefonPretraga.getSelectionModel().selectFirst();
+
+        cbDodatnaOpremaPretraga.getItems().addAll("Naziv", "Tip", "Model telefona");
+        cbDodatnaOpremaPretraga.getSelectionModel().selectFirst();
+
+        cbRezervniDijeloviPretraga.getItems().addAll("Naziv", "Model telefona");
+        cbRezervniDijeloviPretraga.getSelectionModel().selectFirst();
+
         //rezervni dijelovi
+//        RezervniDioDAO rezervniDio = new MySQLDAOFactory().getRezervniDioDAO();
+//        List<RezervniDioDTO> lista = rezervniDio.selectAllDetailed();
+//        ObservableList<RezervniDioDTO> listaRezervnihDijelova = FXCollections.observableArrayList(lista);
+//
+//        if (listaRezervnihDijelova != null) {
+//            colIdRezervniDio.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdRezervniDio"));
+//            colIdModelTelefona.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdModelTelefona"));
+//            colOpis.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("Opis"));
+//            colNaziv.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("nazivRezervnogdijela"));
+//            colKolicina.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("kolicinaRezervnogdijela"));
+//            colCijena.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Double>("Cijena"));
+//            tableRezervniDijelovi.setItems(listaRezervnihDijelova);
+//        }
+//        
+//        cbDodatnaOpremaPretraga.getItems().addAll("Naziv", "Tip", "Model telefona");
+//        cbDodatnaOpremaPretraga.getSelectionModel().selectFirst();
+        this.popuniTabeluRezervnihDijelova();
+        //telefoni
+//        TelefonDAO telefoni = new MySQLDAOFactory().getTelefonDAO();
+//        List<TelefonDTO> listaTelefona = telefoni.selectAll();
+//        ObservableList<TelefonDTO> listaSvihTelefona = FXCollections.observableArrayList(listaTelefona);
+//
+//        if (listaSvihTelefona != null) {
+//            colTelefonIdTelefona.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Integer>("IdModelTelefona"));
+//            colTelefonNaziv.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Naziv"));
+//            colTelefonModel.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Model"));
+//            colTelefonProizvodjac.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Proizvodjac"));
+//            colTelefonBoja.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Boja"));
+//            colTelefonSpecifikacija.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Specifikacija"));
+//            colTelefonSerijskiBroj.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("SerijskiBroj"));
+//            colTelefonCijena.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Double>("Cijena"));
+//            tableTelefoni.setItems(listaSvihTelefona);
+//        }
+//        
+//        cbTelefonPretraga.getItems().addAll("Naziv", "Model", "Serijski broj");
+//        cbTelefonPretraga.getSelectionModel().selectFirst();
+        this.popuniTabeluTelefona();
+
+        //dodatna oprema
+//        DodatnaOpremaDAO dodatnaOprema = new MySQLDAOFactory().getDodatnaOpremaDAO();
+//        List<DodatnaOpremaDTO> listaDodatneOpreme = dodatnaOprema.selectAll();
+//        ObservableList<DodatnaOpremaDTO> listaSveDodatneOpreme = FXCollections.observableArrayList(listaDodatneOpreme);
+//
+//        if (listaSveDodatneOpreme != null) {
+//            colDodatnaOpremaIdDodatneOpreme.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, Integer>("idDodatnaOprema"));
+//            colDodatnaOpremaNaziv.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Naziv"));
+//            colDodatnaOpremaTip.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("TipOpreme"));
+//            colDodatnaOpremaBoja.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Boja"));
+//            colDodatnaOpremaModelTelefona.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("ModelTelefona"));
+//            colDodatnaOpremaKolicina.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Kolicina"));
+//            colDodatnaOpremaCijena.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, Double>("Cijena"));
+//
+//            tableDodatnaOprema.setItems(listaSveDodatneOpreme);
+//        }
+//        
+//        cbRezervniDijeloviPretraga.getItems().addAll("Naziv", "Model telefona");
+//        cbRezervniDijeloviPretraga.getSelectionModel().selectFirst();
+        this.popuniTabeluDodatneOpreme();
+    }
+
+    private void popuniTabeluRezervnihDijelova() {
         RezervniDioDAO rezervniDio = new MySQLDAOFactory().getRezervniDioDAO();
         List<RezervniDioDTO> lista = rezervniDio.selectAllDetailed();
+
+        for (RezervniDioDTO dio : lista) {
+            System.out.println(dio.getNazivModela());
+        }
         ObservableList<RezervniDioDTO> listaRezervnihDijelova = FXCollections.observableArrayList(lista);
 
         if (listaRezervnihDijelova != null) {
             colIdRezervniDio.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdRezervniDio"));
-            colIdModelTelefona.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdModelTelefona"));
+            colIdModelTelefona.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("nazivModela"));
             colOpis.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("Opis"));
             colNaziv.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("nazivRezervnogdijela"));
             colKolicina.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("kolicinaRezervnogdijela"));
             colCijena.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Double>("Cijena"));
             tableRezervniDijelovi.setItems(listaRezervnihDijelova);
         }
-        
-        cbDodatnaOpremaPretraga.getItems().addAll("Naziv", "Tip", "Model telefona");
-        cbDodatnaOpremaPretraga.getSelectionModel().selectFirst();
-        //telefoni
+
+    }
+
+    private void popuniTabeluTelefona() {
         TelefonDAO telefoni = new MySQLDAOFactory().getTelefonDAO();
         List<TelefonDTO> listaTelefona = telefoni.selectAll();
         ObservableList<TelefonDTO> listaSvihTelefona = FXCollections.observableArrayList(listaTelefona);
@@ -276,11 +352,10 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colTelefonCijena.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Double>("Cijena"));
             tableTelefoni.setItems(listaSvihTelefona);
         }
-        
-        cbTelefonPretraga.getItems().addAll("Naziv", "Model", "Serijski broj");
-        cbTelefonPretraga.getSelectionModel().selectFirst();
 
-        //dodatna oprema
+    }
+
+    private void popuniTabeluDodatneOpreme() {
         DodatnaOpremaDAO dodatnaOprema = new MySQLDAOFactory().getDodatnaOpremaDAO();
         List<DodatnaOpremaDTO> listaDodatneOpreme = dodatnaOprema.selectAll();
         ObservableList<DodatnaOpremaDTO> listaSveDodatneOpreme = FXCollections.observableArrayList(listaDodatneOpreme);
@@ -296,9 +371,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
 
             tableDodatnaOprema.setItems(listaSveDodatneOpreme);
         }
-        
-        cbRezervniDijeloviPretraga.getItems().addAll("Naziv", "Model telefona");
-        cbRezervniDijeloviPretraga.getSelectionModel().selectFirst();
+
     }
 
     public void btnPretraziRezervneDijeloveHandler(ActionEvent e) {
@@ -307,22 +380,27 @@ public class ManipulacijaArtiklimaController implements Initializable {
         String pretraga = cbRezervniDijeloviPretraga.getValue().toString();
         RezervniDioDAO rezervniDio = new MySQLDAOFactory().getRezervniDioDAO();
         List<RezervniDioDTO> lista = new ArrayList<RezervniDioDTO>();
-        if(pretraga.equals("Naziv")){
-             lista = rezervniDio.selectBy(naziv);
+        if (!"".equals(naziv)) {
+            if (pretraga.equals("Naziv")) {
+                lista = rezervniDio.selectBy(naziv);
+            } else {
+                lista = rezervniDio.selectByModelName(new RezervniDioDTO(naziv));
+            }
+        } else {
+            this.popuniTabeluRezervnihDijelova();
         }
-        else {
-             lista = rezervniDio.selectByModel(new RezervniDioDTO(Integer.parseInt(pretraga)));
-        }
-        
-        ObservableList<RezervniDioDTO> listaRezervnihDijelova = FXCollections.observableArrayList(lista);
-        if (listaRezervnihDijelova != null) {
-            colIdRezervniDio.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdRezervniDio"));
-            colIdModelTelefona.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdModelTelefona"));
-            colOpis.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("Opis"));
-            colNaziv.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("nazivRezervnogdijela"));
-            colKolicina.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("kolicinaRezervnogdijela"));
-            colCijena.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Double>("Cijena"));
-            tableRezervniDijelovi.setItems(listaRezervnihDijelova);
+
+        if (lista.size() > 0) {
+            ObservableList<RezervniDioDTO> listaRezervnihDijelova = FXCollections.observableArrayList(lista);
+            if (listaRezervnihDijelova != null) {
+                colIdRezervniDio.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdRezervniDio"));
+                colIdModelTelefona.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("nazivModela"));
+                colOpis.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("Opis"));
+                colNaziv.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("nazivRezervnogdijela"));
+                colKolicina.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("kolicinaRezervnogdijela"));
+                colCijena.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Double>("Cijena"));
+                tableRezervniDijelovi.setItems(listaRezervnihDijelova);
+            }
         }
     }
 
@@ -331,14 +409,12 @@ public class ManipulacijaArtiklimaController implements Initializable {
         String pretraga = cbTelefonPretraga.getValue().toString();
         List<TelefonDTO> listaTelefona = new ArrayList<TelefonDTO>();
         TelefonDAO telefoni = new MySQLDAOFactory().getTelefonDAO();
-        if(pretraga.equals("Naziv")){
-             listaTelefona = telefoni.selectBy(model);
-        }
-        else if(pretraga.equals("Model")){
-             listaTelefona = telefoni.selectByModel(model);
-        }
-        else {
-             listaTelefona = telefoni.selectBySerial(model);
+        if (pretraga.equals("Naziv")) {
+            listaTelefona = telefoni.selectBy(model);
+        } else if (pretraga.equals("Model")) {
+            listaTelefona = telefoni.selectByModel(model);
+        } else {
+            listaTelefona = telefoni.selectBySerial(model);
         }
         ObservableList<TelefonDTO> listaSvihTelefona = FXCollections.observableArrayList(listaTelefona);
 
@@ -357,20 +433,18 @@ public class ManipulacijaArtiklimaController implements Initializable {
 
     public void btnPretraziDodatnuOpremuHandler(ActionEvent e) {
         String naziv = tfPretragaDodatnaOprema.getText();
-        
+
         String pretraga = cbDodatnaOpremaPretraga.getValue().toString();
         List<DodatnaOpremaDTO> listaDodatneOpreme = new ArrayList<DodatnaOpremaDTO>();
         DodatnaOpremaDAO dodatnaOprema = new MySQLDAOFactory().getDodatnaOpremaDAO();
-        if(pretraga.equals("Naziv")){
+        if (pretraga.equals("Naziv")) {
             listaDodatneOpreme = dodatnaOprema.selectBy(naziv);
-        }
-        else if(pretraga.equals("Tip")){
+        } else if (pretraga.equals("Tip")) {
             listaDodatneOpreme = dodatnaOprema.selectByTip(naziv);
-        }
-        else if(pretraga.equals("Model telefona")){
+        } else if (pretraga.equals("Model telefona")) {
             listaDodatneOpreme = dodatnaOprema.selectByModel(naziv);
         }
-        
+
         ObservableList<DodatnaOpremaDTO> listaSveDodatneOpreme = FXCollections.observableArrayList(listaDodatneOpreme);
 
         if (listaSveDodatneOpreme != null) {
@@ -394,10 +468,12 @@ public class ManipulacijaArtiklimaController implements Initializable {
             root3 = FXMLLoader.load(getClass().getResource("DodavanjeDodatneOpreme.fxml"));
 
             Scene scene = new Scene(root3);
-
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dodavanje dodatne opreme");
             stage.setScene(scene);
             stage.showAndWait();
+            this.popuniTabeluDodatneOpreme();
+            tableDodatnaOprema.refresh();
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -414,10 +490,13 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 Stage stage = new Stage();
                 stage.setTitle("Izmjena");
                 stage.setResizable(false);
-
-                stage.setScene(new Scene(root1));
+                Scene scene = new Scene(root1);
+                scene.getStylesheets().add("dark-theme.css");
+                stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();
+                this.popuniTabeluDodatneOpreme();
+                tableDodatnaOprema.refresh();
             } catch (IOException ex) {
                 Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -448,6 +527,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
 
             tableDodatnaOprema.setItems(listaSveDodatneOpreme);
         }
+        tableDodatnaOprema.refresh();
     }
 
     public void btnDodatnaOpremaPrikaziRacunHandler(ActionEvent e) {
@@ -457,7 +537,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             root3 = FXMLLoader.load(getClass().getResource("Racun.fxml"));
 
             Scene scene = new Scene(root3);
-
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Racun");
             stage.setScene(scene);
             stage.showAndWait();
@@ -473,7 +553,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             root3 = FXMLLoader.load(getClass().getResource("Racun.fxml"));
 
             Scene scene = new Scene(root3);
-
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Racun");
             stage.setScene(scene);
             stage.showAndWait();
@@ -489,7 +569,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             root3 = FXMLLoader.load(getClass().getResource("Racun.fxml"));
 
             Scene scene = new Scene(root3);
-
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Racun");
             stage.setScene(scene);
             stage.showAndWait();
@@ -506,10 +586,12 @@ public class ManipulacijaArtiklimaController implements Initializable {
             root3 = FXMLLoader.load(getClass().getResource("DodavanjeTelefona.fxml"));
 
             Scene scene = new Scene(root3);
-
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dodavanje telefona");
             stage.setScene(scene);
             stage.showAndWait();
+            this.popuniTabeluTelefona();
+            tableTelefoni.refresh();
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -525,10 +607,14 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 Stage stage = new Stage();
                 stage.setTitle("Izmjena");
                 stage.setResizable(false);
-
-                stage.setScene(new Scene(root1));
+                Scene scene = new Scene(root1);
+                scene.getStylesheets().add("dark-theme.css");
+                stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();
+
+                this.popuniTabeluTelefona();
+                tableTelefoni.refresh();
             } catch (IOException ex) {
                 Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -559,6 +645,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colTelefonCijena.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Double>("Cijena"));
             tableTelefoni.setItems(listaSvihTelefona);
         }
+        tableTelefoni.refresh();
     }
 
     public void btnRezervniDioDodajHandler(ActionEvent e) {
@@ -569,10 +656,13 @@ public class ManipulacijaArtiklimaController implements Initializable {
             root3 = FXMLLoader.load(getClass().getResource("DodavanjeRezervnogDijela.fxml"));
 
             Scene scene = new Scene(root3);
-
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dodavanje rezervnog dijela");
             stage.setScene(scene);
             stage.showAndWait();
+
+            this.popuniTabeluRezervnihDijelova();
+            tableRezervniDijelovi.refresh();
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -588,10 +678,14 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 Stage stage = new Stage();
                 stage.setTitle("Izmjena");
                 stage.setResizable(false);
-
-                stage.setScene(new Scene(root1));
+                Scene scene = new Scene(root1);
+                scene.getStylesheets().add("dark-theme.css");
+                stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();
+
+                this.popuniTabeluRezervnihDijelova();
+                tableRezervniDijelovi.refresh();
             } catch (IOException ex) {
                 Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -613,13 +707,14 @@ public class ManipulacijaArtiklimaController implements Initializable {
 
         if (listaRezervnihDijelova != null) {
             colIdRezervniDio.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdRezervniDio"));
-            colIdModelTelefona.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdModelTelefona"));
+            colIdModelTelefona.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("nazivModela"));
             colOpis.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("Opis"));
             colNaziv.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("nazivRezervnogdijela"));
             colKolicina.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("kolicinaRezervnogdijela"));
             colCijena.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Double>("Cijena"));
             tableRezervniDijelovi.setItems(listaRezervnihDijelova);
         }
+        tableRezervniDijelovi.refresh();
     }
 
     //    -------------------------------------------------------------------------------------------
@@ -662,6 +757,9 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 }
                 racun.clear();
                 this.popuniTabeluRacun();
+                this.popuniTabeluDodatneOpreme();
+                this.popuniTabeluRezervnihDijelova();
+                this.popuniTabeluTelefona();
             } else {
                 System.out.println("Greska prilikom kreiranja racuna");
             }

@@ -11,11 +11,11 @@
    <children>
       <Pane prefHeight="400.0" prefWidth="367.0">
          <children>
-            <Label layoutX="59.0" layoutY="160.0" text="Izvještaj od" />
-            <DatePicker fx:id="pickerDatumOd" layoutX="59.0" layoutY="188.0" />
-            <DatePicker fx:id="pickerDatumDo" layoutX="59.0" layoutY="248.0" />
-            <Label layoutX="59.0" layoutY="227.0" text="Izvještaj do" />
-            <Button fx:id="btnKreirajIzvjestaj" layoutX="59.0" layoutY="305.0" mnemonicParsing="false" onAction="#btnKreirajIzvjestaj" prefHeight="25.0" prefWidth="174.0" text="Kreiraj izvještaj" />
+            <Label layoutX="46.0" layoutY="150.0" text="Izvještaj od" />
+            <DatePicker fx:id="pickerDatumOd" layoutX="46.0" layoutY="188.0" prefHeight="25.0" prefWidth="201.0" />
+            <DatePicker fx:id="pickerDatumDo" layoutX="46.0" layoutY="268.0" prefHeight="25.0" prefWidth="201.0" />
+            <Label layoutX="46.0" layoutY="235.0" text="Izvještaj do" />
+            <Button fx:id="btnKreirajIzvjestaj" layoutX="207.0" layoutY="347.0" mnemonicParsing="false" onAction="#btnKreirajIzvjestaj" prefHeight="25.0" prefWidth="135.0" text="Kreiraj izvještaj" />
             <ComboBox fx:id="cbTip" layoutX="46.0" layoutY="69.0" onAction="#cbTip" prefHeight="43.0" prefWidth="201.0" promptText="Tip izvještaja" />
          </children>
       </Pane>

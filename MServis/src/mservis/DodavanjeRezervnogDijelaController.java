@@ -49,83 +49,82 @@ import mySQL.MySQLDAOFactory;
  *
  * @author Bojan
  */
-public class DodavanjeRezervnogDijelaController implements Initializable{
-    
+public class DodavanjeRezervnogDijelaController implements Initializable {
+
     @FXML
     private TextField tfNaziv;
-    
+
     @FXML
     private ComboBox cbModelTelefona;
-    
+
     @FXML
     private TextField tfOpis;
-    
+
     @FXML
     private TextField tfKolicina;
-    
+
     @FXML
     private TextField tfCijena;
-    
+
     @FXML
     private ComboBox cbProizvodjac;
-    
+
     @FXML
     private TextField tfBarKod;
-    
+
     @FXML
     private Button btnSacuvaj;
-    
+
     @FXML
     private Button btnIzadji;
-    
+
     @FXML
     private Button btnDodajModelTelefona;
-    
-    
+
     public Integer id;
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(vrijednost.equals("izmjeni")){
+        if (vrijednost.equals("izmjeni")) {
             popuniPolja(rezervniDioDTO);
-        }
-        else{
-            ModelTelefonaDAO modelTelefonaDAODAO=(new MySQLDAOFactory()).getModelTelefonaDAO();
+        } else {
+            ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();
             ObservableList<ModelTelefonaDTO> modelTelefonaList;
-            modelTelefonaList=FXCollections.observableArrayList(modelTelefonaDAODAO.selectAll());
+            modelTelefonaList = FXCollections.observableArrayList(modelTelefonaDAODAO.selectAll());
             List<String> modeliTelefona = new ArrayList<String>();
-            for(ModelTelefonaDTO mt : modelTelefonaList){
+            for (ModelTelefonaDTO mt : modelTelefonaList) {
                 modeliTelefona.add(mt.getNazivModela());
             }
-            
-            ProizvodjacDAO proizvodjacDAO=(new MySQLDAOFactory()).getProizvodjacDAO();
+
+            ProizvodjacDAO proizvodjacDAO = (new MySQLDAOFactory()).getProizvodjacDAO();
             ObservableList<ProizvodjacDTO> proizvodjacList;
-            proizvodjacList=FXCollections.observableArrayList(proizvodjacDAO.selectAll());
+            proizvodjacList = FXCollections.observableArrayList(proizvodjacDAO.selectAll());
             List<String> naziviProizvodjaca = new ArrayList<String>();
-            for(ProizvodjacDTO dob : proizvodjacList){
+            for (ProizvodjacDTO dob : proizvodjacList) {
                 naziviProizvodjaca.add(dob.getNaziv());
             }
 
-            cbProizvodjac.getItems().addAll(naziviProizvodjaca);
+            
             cbModelTelefona.getItems().addAll(modeliTelefona);
-           
+            cbProizvodjac.getItems().addAll(naziviProizvodjaca);
+
         }
     }
-    
-    public void btnIzadjiHandler(ActionEvent e){
+
+    public void btnIzadjiHandler(ActionEvent e) {
         Stage stage = (Stage) btnIzadji.getScene().getWindow();
         stage.close();
     }
-    
-    public void btnSacuvajHandler(ActionEvent e){
-        if(vrijednost.equals("izmjeni")){
-           
+
+    public void btnSacuvajHandler(ActionEvent e) {
+        if (vrijednost.equals("izmjeni")) {
+
             String naziv = tfNaziv.getText();
-            String modelTelefona =  cbModelTelefona.getValue().toString();
-            String opis = tfOpis.getText(); 
+            String modelTelefona = cbModelTelefona.getValue().toString();
+            String opis = tfOpis.getText();
             Integer kolicina = Integer.parseInt(tfKolicina.getText());
             Double cijena = Double.parseDouble(tfCijena.getText());
-            String proizvodjac =  cbProizvodjac.getValue().toString();
+            String proizvodjac = cbProizvodjac.getValue().toString();
             String barKod = tfBarKod.getText();
             Integer idRezervniDio;
 
@@ -133,55 +132,60 @@ public class DodavanjeRezervnogDijelaController implements Initializable{
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
             List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
-            ArtikalDTO artikal = new ArtikalDTO(id,naziv,kolicina,proizvodjaci.get(0).getIdProizvodjac(),barKod);
+            ArtikalDTO artikal = new ArtikalDTO(id, naziv, kolicina, proizvodjaci.get(0).getIdProizvodjac(), barKod);
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
             artikalDAO.update(artikal);
-            idRezervniDio=id;
+            idRezervniDio = id;
 
             ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(modelTelefona);
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
             List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);
-            
 
-            RezervniDioDTO rezervniDioDTO = new RezervniDioDTO(idRezervniDio,modeli.get(0).getIdModeltelefona(),opis);//getIdRezervniDio getOpis modelTelefona
+            RezervniDioDTO rezervniDioDTO = new RezervniDioDTO(idRezervniDio, modeli.get(0).getIdModeltelefona(), opis);//getIdRezervniDio getOpis modelTelefona
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             RezervniDioDAO rezervniDioDAO = new MySQLDAOFactory().getRezervniDioDAO();
 
-            rezervniDioDAO.update(rezervniDioDTO);
-            //imam naziv, proizvodjac,barkod,model
+            if (rezervniDioDAO.update(rezervniDioDTO)) {
+                //imam naziv, proizvodjac,barkod,model
 
-            if(Double.parseDouble(tfCijena.getText()) != (rezervniDioDTO.getCijena())){
-                Date date= new Date();
-                long time = date.getTime();
-                Timestamp ts = new Timestamp(time);
-                CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
-                CijenaDTO cs = new CijenaDTO(id,ts,true);
-                cijenaDAO.delete(cs);
-                CijenaDTO cijenaDTO = new CijenaDTO(id,cijena,ts);
-                cijenaDAO.insert(cijenaDTO);
+                if (Double.parseDouble(tfCijena.getText()) != (rezervniDioDTO.getCijena())) {
+                    Date date = new Date();
+                    long time = date.getTime();
+                    Timestamp ts = new Timestamp(time);
+                    CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
+                    CijenaDTO cs = new CijenaDTO(id, ts, true);
+                    cijenaDAO.delete(cs);
+                    CijenaDTO cijenaDTO = new CijenaDTO(id, cijena, ts);
+                    cijenaDAO.insert(cijenaDTO);
+                }
+
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Informacija");
+                alert.setHeaderText(null);
+                alert.setContentText("Uspjesno dodano!");
+
+                alert.showAndWait();
+
+                Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
+                stage.close();
+                vrijednost = "NESTO";
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška");
+                alert.setHeaderText(null);
+                alert.setContentText("Dodavanje neuspješno!");
+
+                alert.showAndWait();
             }
-
-
-
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Informacija");
-            alert.setHeaderText(null);
-            alert.setContentText("Uspjesno dodano!");
-
-            alert.showAndWait();
-
-            Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
-            stage.close();
-            vrijednost = "NESTO";
-        }else{
+        } else {
             String naziv = tfNaziv.getText();
-            String modelTelefona =  cbModelTelefona.getValue().toString();
-            String opis = tfOpis.getText(); 
+            String modelTelefona = cbModelTelefona.getValue().toString();
+            String opis = tfOpis.getText();
             Integer kolicina = Integer.parseInt(tfKolicina.getText());
             Double cijena = Double.parseDouble(tfCijena.getText());
-            String proizvodjac =  cbProizvodjac.getValue().toString();
+            String proizvodjac = cbProizvodjac.getValue().toString();
             String barKod = tfBarKod.getText();
             Integer idRezervniDio;
 
@@ -189,80 +193,83 @@ public class DodavanjeRezervnogDijelaController implements Initializable{
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
             List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
-            ArtikalDTO artikal = new ArtikalDTO(naziv,kolicina,proizvodjaci.get(0).getIdProizvodjac(),barKod);
+            ArtikalDTO artikal = new ArtikalDTO(naziv, kolicina, proizvodjaci.get(0).getIdProizvodjac(), barKod);
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
             artikalDAO.insert(artikal);
-            idRezervniDio=artikalDAO.getLastId();
+            idRezervniDio = artikalDAO.getLastId();
 
             ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(modelTelefona);
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
             List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);
 
-            RezervniDioDTO rezervniDioDTO = new RezervniDioDTO(idRezervniDio,modeli.get(0).getIdModeltelefona(),opis);//getIdRezervniDio getOpis modelTelefona
+            RezervniDioDTO rezervniDioDTO = new RezervniDioDTO(idRezervniDio, modeli.get(0).getIdModeltelefona(), opis);//getIdRezervniDio getOpis modelTelefona
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             RezervniDioDAO rezervniDioDAO = new MySQLDAOFactory().getRezervniDioDAO();
 
-            rezervniDioDAO.insert(rezervniDioDTO);
-            //imam naziv, proizvodjac,barkod,model
+            if (rezervniDioDAO.insert(rezervniDioDTO)) {
+                //imam naziv, proizvodjac,barkod,model
 
+                CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
+                Date date = new Date();
+                long time = date.getTime();
+                Timestamp ts = new Timestamp(time);
+                CijenaDTO cijenaDTO = new CijenaDTO(artikalDAO.getLastId(), cijena, ts);
+                cijenaDAO.insert(cijenaDTO);
 
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Informacija");
+                alert.setHeaderText(null);
+                alert.setContentText("Uspjesno dodano!");
 
-            CijenaDAO cijenaDAO = new MySQLDAOFactory().getCijenaDAO();
-            Date date= new Date();
-            long time = date.getTime();
-            Timestamp ts = new Timestamp(time);
-            CijenaDTO cijenaDTO = new CijenaDTO(artikalDAO.getLastId(),cijena,ts);
-            cijenaDAO.insert(cijenaDTO);
+                alert.showAndWait();
 
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Informacija");
-            alert.setHeaderText(null);
-             alert.setContentText("Uspjesno dodano!");
+                Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
+                stage.close();
+            } else {
+                    
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška");
+                alert.setHeaderText(null);
+                alert.setContentText("Izmjena neuspješna!");
 
-            alert.showAndWait();
-
-            Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
-            stage.close();
+                alert.showAndWait();
+            }
         }
     }
-    public void popuniPolja(RezervniDioDTO rezervniDio){
-        ProizvodjacDAO proizvodjacDAO=(new MySQLDAOFactory()).getProizvodjacDAO();
+
+    public void popuniPolja(RezervniDioDTO rezervniDio) {
+        ProizvodjacDAO proizvodjacDAO = (new MySQLDAOFactory()).getProizvodjacDAO();
         ObservableList<ProizvodjacDTO> proizvodjacList;
-        proizvodjacList=FXCollections.observableArrayList(proizvodjacDAO.selectAll());
+        proizvodjacList = FXCollections.observableArrayList(proizvodjacDAO.selectAll());
         List<String> naziviProizvodjaca = new ArrayList<String>();
-        for(ProizvodjacDTO dob : proizvodjacList){
+        for (ProizvodjacDTO dob : proizvodjacList) {
             naziviProizvodjaca.add(dob.getNaziv());
         }
 
-
-        ModelTelefonaDAO modelTelefonaDAODAO=(new MySQLDAOFactory()).getModelTelefonaDAO();
+        ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();
         ObservableList<ModelTelefonaDTO> modelTelefonaList;
-        modelTelefonaList=FXCollections.observableArrayList(modelTelefonaDAODAO.selectAll());
+        modelTelefonaList = FXCollections.observableArrayList(modelTelefonaDAODAO.selectAll());
         List<String> modeliTelefona = new ArrayList<String>();
-        for(ModelTelefonaDTO mt : modelTelefonaList){
+        for (ModelTelefonaDTO mt : modelTelefonaList) {
             modeliTelefona.add(mt.getNazivModela());
         }
-        
-        
-        ArtikalDAO artikalDAODAO=(new MySQLDAOFactory()).getArtikalDAO();
+
+        ArtikalDAO artikalDAODAO = (new MySQLDAOFactory()).getArtikalDAO();
         ObservableList<ArtikalDTO> artikalList;
-        artikalList=FXCollections.observableArrayList(artikalDAODAO.selectAll());
-        Map<Integer,String> artikliList = new HashMap<Integer,String>();
-        for(ArtikalDTO a : artikalList){
+        artikalList = FXCollections.observableArrayList(artikalDAODAO.selectAll());
+        Map<Integer, String> artikliList = new HashMap<Integer, String>();
+        for (ArtikalDTO a : artikalList) {
             artikliList.put(a.getIdArtikal(), a.getBarKod());
         }
-        
+
         String barkode = artikliList.get(rezervniDio.getIdRezervniDio());
-        id=rezervniDio.getIdRezervniDio();
-        
+        id = rezervniDio.getIdRezervniDio();
+
         cbProizvodjac.getItems().addAll(naziviProizvodjaca);
         cbModelTelefona.getItems().addAll(modeliTelefona);
-      
-        
 
-        
         tfNaziv.setText(rezervniDio.getNazivRezervnogdijela());
         cbModelTelefona.getSelectionModel().selectFirst();;
         tfOpis.setText(rezervniDio.getOpis());
@@ -271,18 +278,28 @@ public class DodavanjeRezervnogDijelaController implements Initializable{
         cbProizvodjac.getSelectionModel().selectFirst();
         tfBarKod.setText(barkode);
     }
-    
-    public void btnDodajModelTelefonaHandler(){
-       try {
+
+    public void btnDodajModelTelefonaHandler() {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DodavanjeModelaTelefona.fxml"));
-            Parent root1=(Parent)loader.load();
-            Stage stage=new Stage();
+            Parent root1 = (Parent) loader.load();
+            Stage stage = new Stage();
             stage.setTitle("Dodavanje modela telefona");
             stage.setResizable(false);
-
-            stage.setScene(new Scene(root1));
-            stage.initModality(Modality.APPLICATION_MODAL); 
+            Scene scene = new Scene(root1);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
+            
+            ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();
+            ObservableList<ModelTelefonaDTO> modelTelefonaList;
+            modelTelefonaList = FXCollections.observableArrayList(modelTelefonaDAODAO.selectAll());
+            List<String> modeliTelefona = new ArrayList<String>();
+            for (ModelTelefonaDTO mt : modelTelefonaList) {
+                modeliTelefona.add(mt.getNazivModela());
+            }
+            
+            cbModelTelefona.getItems().addAll(modeliTelefona);
         } catch (IOException ex) {
             Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
         }

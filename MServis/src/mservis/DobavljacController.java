@@ -93,7 +93,9 @@ public class DobavljacController implements Initializable {
             stage.getIcons().add(image);
             stage.setTitle("Dodavanje");
             stage.setResizable(false);
-            stage.setScene(new Scene(root1));
+            Scene scene = new Scene(root1);
+            scene.getStylesheets().add("dark-theme.css");
+            stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait(); 
         } catch (IOException ex) {
@@ -113,7 +115,9 @@ public class DobavljacController implements Initializable {
                 Stage stage=new Stage();
                 stage.setTitle("IZMJENA");
                 stage.setResizable(false);
-                stage.setScene(new Scene(root1));
+                Scene scene = new Scene(root1);
+                scene.getStylesheets().add("dark-theme.css");
+                stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL); 
                 stage.showAndWait();
             } catch (IOException ex) {

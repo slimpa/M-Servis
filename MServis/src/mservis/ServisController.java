@@ -180,7 +180,7 @@ public class ServisController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("PrijemUredjajaServis.fxml"));
 
             Scene scene = new Scene(root2);
-
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Novi servis telefona");
             stage.setScene(scene);
             stage.showAndWait();
@@ -238,7 +238,9 @@ public class ServisController implements Initializable {
                 
                 Parent p = loader.getRoot();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(p));
+                Scene scene = new Scene(p);
+                scene.getStylesheets().add("dark-theme.css");
+                stage.setScene(scene);
                 stage.showAndWait();
 
                 this.popuniTabeluServis();
@@ -365,7 +367,9 @@ public class ServisController implements Initializable {
                 controller.popuniTabelu(stavke);
                 Parent p = loader.getRoot();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(p));
+                Scene scene = new Scene(p);
+                scene.getStylesheets().add("dark-theme.css");
+                stage.setScene(scene);
                 stage.showAndWait();
                 
                 this.popuniTabeluServis();

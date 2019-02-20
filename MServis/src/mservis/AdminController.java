@@ -773,7 +773,7 @@ public class AdminController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
 
             Scene scene = new Scene(root2);
-
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dodaj admina");
             stage.setScene(scene);
             stage.showAndWait();
@@ -796,7 +796,7 @@ public class AdminController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("DodajIzmjeniAdminZaposleni.fxml"));
 
             Scene scene = new Scene(root2);
-
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dodaj zaposlenog");
             stage.setScene(scene);
             stage.showAndWait();
@@ -823,7 +823,9 @@ public class AdminController implements Initializable {
                 controller.setTextFieldsAdmin(admin);
                 Parent p = loader.getRoot();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(p));
+                Scene scene = new Scene(p);
+                scene.getStylesheets().add("dark-theme.css");
+                stage.setScene(scene);
                 stage.showAndWait();
                 tableAdmin.refresh();
                 popuniTabeluAdmina();
@@ -855,7 +857,9 @@ public class AdminController implements Initializable {
                 controller.setIzmjena(true);
                 Parent p = loader.getRoot();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(p));
+                Scene scene = new Scene(p);
+                scene.getStylesheets().add("dark-theme.css");
+                stage.setScene(scene);
                 stage.showAndWait();
                 tableZaposleni.refresh();
                 popuniTabeluZaposlenih();
@@ -914,7 +918,7 @@ public class AdminController implements Initializable {
             root2 = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
             Scene scene = new Scene(root2);
-
+            scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Prijavljivanje");
             stage.setScene(scene);
             

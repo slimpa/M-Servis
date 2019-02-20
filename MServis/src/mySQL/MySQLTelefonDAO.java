@@ -16,10 +16,10 @@ public class MySQLTelefonDAO implements TelefonDAO {
 
     
         public static final String SQL_INSERT = "insert into telefon (`IdModeTelefona`,`SerijskiBroj`,`Boja`,`Obrisano`) values (?, ?, ?, ?)";
-	public static final String SQL_SELECT = "select * from rezervnidio";
+	//public static final String SQL_SELECT = "select * from rezervnidio";
 	public static final String SQL_UPDATE = "update telefon set SerijskiBroj=?, Boja=? where IdModeTelefona = ?";
         public static final String SQL_SELECT_DETAIL = "select * from svi_telefoni";
-        public static final String SQL_DELETE = "update telefon set Obrisano = 1 WHERE `IdModeTelefona`=? and SerijskiBroj = ?";
+      //  public static final String SQL_DELETE = "update telefon set Obrisano = 1 WHERE `IdModeTelefona`=? and SerijskiBroj = ?";
 	/**
 	 * 
 	 * @param telefon
@@ -85,20 +85,20 @@ public class MySQLTelefonDAO implements TelefonDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		boolean returnValue = false;
-                try {
-			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(SQL_DELETE);
-
-			ps.setInt(1, telefon.getIdModelTelefona());
-                        ps.setString(2, telefon.getSerijskiBroj());
-                        
-			returnValue = ps.executeUpdate() == 1;
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ConnectionPool.getInstance().checkIn(conn);
-			DBUtil.getInstance().close(ps);
-		}
+//                try {
+//			conn = ConnectionPool.getInstance().checkOut();
+//			ps = conn.prepareStatement(SQL_DELETE);
+//
+//			ps.setInt(1, telefon.getIdModelTelefona());
+//                        ps.setString(2, telefon.getSerijskiBroj());
+//                        
+//			returnValue = ps.executeUpdate() == 1;
+//		} catch(SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			ConnectionPool.getInstance().checkIn(conn);
+//			DBUtil.getInstance().close(ps);
+//		}
                 
                 try {
 			conn = ConnectionPool.getInstance().checkOut();

@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.DobavljacController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.DobavljacController">
    <children>
-      <Pane prefHeight="600.0" prefWidth="1000.0">
+      <Pane layoutY="6.0" prefHeight="600.0" prefWidth="1000.0">
          <children>
-            <TableView fx:id="tableDOBAVLJACI" layoutX="25.0" layoutY="203.0" prefHeight="374.0" prefWidth="954.0">
+            <TableView fx:id="tableDOBAVLJACI" layoutX="23.0" layoutY="113.0" prefHeight="374.0" prefWidth="954.0">
               <columns>
                 <TableColumn fx:id="columnID" prefWidth="119.0" text="Id dobavljača" />
                 <TableColumn fx:id="columnNAZIV" prefWidth="150.0" text="Naziv" />
@@ -22,11 +20,11 @@
                   <TableColumn fx:id="columnEMAIL" prefWidth="212.0" text="E-mail" />
               </columns>
             </TableView>
-            <Button fx:id="btnDODOAJ" layoutX="24.0" layoutY="62.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="25.0" prefWidth="114.0" text="DODAJ" />
-            <Button fx:id="btnIZMIJENI" layoutX="24.0" layoutY="107.0" mnemonicParsing="false" onAction="#btnIzmijeni" prefHeight="31.0" prefWidth="114.0" text="IZMIJENI" />
-            <Button fx:id="btnOBRISI" layoutX="24.0" layoutY="154.0" mnemonicParsing="false" onAction="#btnOBrisi" prefHeight="25.0" prefWidth="114.0" text="OBRIŠI" />
-            <Button fx:id="btnPRETRAZI" layoutX="254.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnPretrazi" prefHeight="31.0" prefWidth="77.0" text="Pretraži" />
-            <TextField fx:id="tPRETRAZI" layoutX="24.0" layoutY="14.0" promptText="Naziv" />
+            <Button fx:id="btnDODOAJ" layoutX="863.0" layoutY="517.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="31.0" prefWidth="114.0" text="Dodaj" />
+            <Button fx:id="btnIZMIJENI" layoutX="443.0" layoutY="520.0" mnemonicParsing="false" onAction="#btnIzmijeni" prefHeight="31.0" prefWidth="114.0" text="Izmijeni" />
+            <Button fx:id="btnOBRISI" layoutX="41.0" layoutY="517.0" mnemonicParsing="false" onAction="#btnOBrisi" prefHeight="31.0" prefWidth="114.0" text="Obriši" />
+            <Button fx:id="btnPRETRAZI" layoutX="258.0" layoutY="39.0" mnemonicParsing="false" onAction="#btnPretrazi" prefHeight="25.0" prefWidth="77.0" text="Pretraži" />
+            <TextField fx:id="tPRETRAZI" layoutX="24.0" layoutY="39.0" prefHeight="25.0" prefWidth="216.0" promptText="Naziv" />
          </children>
       </Pane>
    </children>
