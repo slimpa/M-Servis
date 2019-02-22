@@ -1,6 +1,11 @@
 # M-Servis
 Projektni iz informacionih sistema
 ------------------------------------------------------------------------------------------------------------------------------------
+Bazu sam modifikovao! Trebate uraditi DROP svoje baze i onda izvrsiti skripte u sledecem redu:
+1.Skripta za kreiranje
+2.Skripta koja sadrzi trigere,poglede i procedure
+3.Skripta za popunjavanje
+
 Sve JAR fajlove u folderu lib treba ukljuciti u projekat!
 ------------------------------------------------------------------------------------------------------------------------------------
 
