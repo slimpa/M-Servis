@@ -172,7 +172,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `m:servis`.`ModelTelefona` (
   `IdModelTelefona` INT NOT NULL,
   `NazivModela` VARCHAR(255) NOT NULL,
-  `Slika` VARCHAR(255) NULL,
   `Specifikacija` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`IdModelTelefona`),
   INDEX `fk_ModelTelefona_Artikal1_idx` (`IdModelTelefona` ASC) VISIBLE,
@@ -286,6 +285,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `m:servis`.`Narudzba_has_Artikal` (
   `IdNarudzba` INT NOT NULL,
   `IdArtikal` INT NOT NULL,
+  `Kolicina` INT NOT NULL,
   PRIMARY KEY (`IdNarudzba`, `IdArtikal`),
   INDEX `fk_Narudzba_has_Artikal_Artikal1_idx` (`IdArtikal` ASC) VISIBLE,
   INDEX `fk_Narudzba_has_Artikal_Narudzba1_idx` (`IdNarudzba` ASC) VISIBLE,
@@ -299,18 +299,6 @@ CREATE TABLE IF NOT EXISTS `m:servis`.`Narudzba_has_Artikal` (
     REFERENCES `m:servis`.`Artikal` (`IdArtikal`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `m:servis`.`Izvjestaj`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `m:servis`.`Izvjestaj` (
-  `IdIzvjestaj` INT NOT NULL AUTO_INCREMENT,
-  `DatumIzdavanja` DATETIME NOT NULL,
-  `Opis` TEXT(1000) NULL,
-  `Putanja` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`IdIzvjestaj`))
 ENGINE = InnoDB;
 
 

@@ -81,39 +81,25 @@ public class MySQLTelefonDAO implements TelefonDAO {
      * @param telefon
      */
     public boolean delete(TelefonDTO telefon) {
-  Connection conn = null;
-		PreparedStatement ps = null;
-		boolean returnValue = false;
-                try {
-			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(SQL_DELETE);
+        Connection conn = null;
+        PreparedStatement ps = null;
+        boolean returnValue = false;
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(SQL_DELETE);
 
-			ps.setInt(1, telefon.getIdModelTelefona());
-                        ps.setString(2, telefon.getSerijskiBroj());
-                        
-			returnValue = ps.executeUpdate() == 1;
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ConnectionPool.getInstance().checkIn(conn);
-			DBUtil.getInstance().close(ps);
-		}
-                
-                try {
-			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement("update artikal set Obrisano=1 where IdArtikal = ?");
+            ps.setInt(1, telefon.getIdModelTelefona());
+            ps.setString(2, telefon.getSerijskiBroj());
 
-			ps.setInt(1, telefon.getIdModelTelefona());
-			
-			returnValue = ps.executeUpdate() == 1;
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ConnectionPool.getInstance().checkIn(conn);
-			DBUtil.getInstance().close(ps);
-		}
-		
-		return returnValue;
+            returnValue = ps.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtil.getInstance().close(ps);
+        }
+
+        return returnValue;
     }
 
     public List<TelefonDTO> selectAll() {
@@ -132,7 +118,7 @@ public class MySQLTelefonDAO implements TelefonDAO {
             } else {
                 while (rs.next()) {
                     sviTelefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"), rs.getString("Boja"), rs.getInt("IdModelTelefona"),
-                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"), 
+                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"),
                             rs.getString("Specifikacija"), rs.getDouble("Cijena"), rs.getString("BarKod")));
 
                 }
@@ -169,7 +155,7 @@ public class MySQLTelefonDAO implements TelefonDAO {
             } else {
                 while (rs.next()) {
                     telefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"), rs.getString("Boja"), rs.getInt("IdModelTelefona"),
-                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"), 
+                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"),
                             rs.getString("Specifikacija"), rs.getDouble("Cijena"), rs.getString("BarKod")));
                 }
             }
@@ -233,7 +219,7 @@ public class MySQLTelefonDAO implements TelefonDAO {
             } else {
                 while (rs.next()) {
                     telefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"), rs.getString("Boja"), rs.getInt("IdModelTelefona"),
-                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"), 
+                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"),
                             rs.getString("Specifikacija"), rs.getDouble("Cijena"), rs.getString("BarKod")));
                 }
             }

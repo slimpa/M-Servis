@@ -18,7 +18,7 @@ public class MySQLArtikalDAO implements ArtikalDAO {
     
     
         public static final String SQL_INSERT = "insert into artikal (`Naziv`, `IdProizvodjac`, `BarKod`, `Kolicina`, `Obrisano`) values (?, ?, ?, ?, ?)";
-	public static final String SQL_SELECT = "select * from artikal";
+	public static final String SQL_SELECT = "select * from artikal where Obrisano=0 order by Kolicina";
         public static final String SQL_UPDATE_ARTIKAL = "update artikal set Naziv= ?, Kolicina =? ,IdProizvodjac = ? ,BarKod = ? where IdArtikal = ?";
 	public static final String SQL_UPDATE = "update artikal set kolicina=kolicina+1 where IdArtikal=?";
         //int idArtikal, String Naziv, int Kolicina, int idProizvodjac, String BarKod, boolean Obrisano

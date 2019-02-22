@@ -97,13 +97,13 @@ public class DodavanjeModelaTelefonaController implements Initializable {
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             ProizvodjacDAO proizvodjacDAO = new MySQLDAOFactory().getProizvodjacDAO();
             List<ProizvodjacDTO> proizvodjaci = proizvodjacDAO.selectBy(proizvodjacDTO);
-            ArtikalDTO artikal = new ArtikalDTO(naziv, 1, proizvodjaci.get(0).getIdProizvodjac(), barKod);
+            ArtikalDTO artikal = new ArtikalDTO(naziv, 0, proizvodjaci.get(0).getIdProizvodjac(), barKod);
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             ArtikalDAO artikalDAO = new MySQLDAOFactory().getArtikalDAO();
             artikalDAO.insert(artikal);
             idModelaTelefona = artikalDAO.getLastId();
 
-            ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(idModelaTelefona, specifikacija, "nema slike", model);//int idModeltelefona, String Specifikacija, String Slika, String NazivModela
+            ModelTelefonaDTO modelTelefonaDTO = new ModelTelefonaDTO(idModelaTelefona, specifikacija, model);//int idModeltelefona, String Specifikacija, String NazivModela
             //String Naziv, int Kolicina, int idProizvodjac, String BarKod
             ModelTelefonaDAO modelTelefonaDAO = new MySQLDAOFactory().getModelTelefonaDAO();
             List<ModelTelefonaDTO> modeli = modelTelefonaDAO.selectBy(modelTelefonaDTO);

@@ -110,10 +110,6 @@ and dodatnaoprema.IdTipDodatneOpreme= tipdodatneopreme.IdTipDodatneOpreme and ar
 and modeltelefona.IdModelTelefona=dodatnaoprema.IdModelTelefona and cijena.TrenutnaCijena=1 and artikal.Obrisano=0;
 
 
-
-#OBRISATI KAD SE POPRAVI BAZA
-Alter table narudzba_has_artikal add column Kolicina int;
-
 create view dnevni_izvjestaj as
 select racun.IdRacun,date(racun.Vrijeme) as Datum, artikal.IdArtikal,artikal.Naziv, racun_has_artikal.Kolicina, cijena.Cijena
 from cijena inner join artikal  inner join racun_has_artikal inner join racun
@@ -151,6 +147,7 @@ where cijena.TrenutnaCijena = 1;
  
  
  
+#triger koji umanji kolicinu artikala kad se artikal kupi
 delimiter $$
  CREATE TRIGGER umanjiKolicinuArtikla AFTER INSERT ON racun_has_artikal FOR EACH ROW update artikal
     set Kolicina=Kolicina-new.Kolicina

@@ -68,17 +68,21 @@ public class LoginController implements Initializable {
 
         ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
         ZaposleniDTO zaposleni = zaposleniDao.selectZaposleni(new ZaposleniDTO(korisnickoIme, null, null));
-        if (zaposleni != null && zaposleni.getLozinka().equals(lozinka)) {
-            zaposleniPrijava = true;
-            korisnicko = zaposleni.getKoriscnikoIme();
+        if (zaposleni != null) {
+            if (zaposleni.getLozinka().equals(DodajIzmjeniAdminZaposleniController.getHash(lozinka))) {
+                zaposleniPrijava = true;
+                korisnicko = zaposleni.getKoriscnikoIme();
+            }
         }
 
         if (!zaposleniPrijava) {
             AdminDAO adminDao = new MySQLDAOFactory().getAdminDAO();
             AdminDTO admin = adminDao.selectAdmin(new AdminDTO(korisnickoIme, null, null));
-            if (admin != null && admin.getLozinka().equals(lozinka)) {
-                adminPrijava = true;
-                korisnicko = admin.getKoriscnikoIme();
+            if (admin != null) {
+                if (admin.getLozinka().equals(DodajIzmjeniAdminZaposleniController.getHash(lozinka))) {
+                    adminPrijava = true;
+                    korisnicko = admin.getKoriscnikoIme();
+                }
             }
         }
         if (zaposleniPrijava) {

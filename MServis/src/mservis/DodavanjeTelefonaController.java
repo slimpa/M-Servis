@@ -87,7 +87,7 @@ public class DodavanjeTelefonaController implements Initializable {
             }
 
             cbModel.getItems().addAll(modeliTelefona);
-            cbBoja.getItems().addAll("Plava", "Crvena", "Bijela", "Zlatna", "Crna", "Siva", "Narandzasta", "Zuta", "Zelena");
+            cbBoja.getItems().addAll("Crna", "Siva", "Bijela", "Srebrna", "Plava", "Crvena", "Zlatna", "Narandžasta", "žuta", "Zelena");
         }
     }
 

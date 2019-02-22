@@ -14,7 +14,7 @@ import java.util.List;
 public class MySQLModelTelefonDAO implements ModelTelefonaDAO {
 
     
-        public static final String SQL_INSERT = "insert into modeltelefona (`IdModelTelefona`,`NazivModela`,`Slika`,`Specifikacija`) values (?,?,?,?);";
+        public static final String SQL_INSERT = "insert into modeltelefona (`IdModelTelefona`,`NazivModela`,`Specifikacija`) values (?,?,?);";
 	public static final String SQL_SELECT = "SELECT * FROM `m:servis`.modeltelefona";
 
         public static final String SQL_DELETE = "DELETE FROM `m:servis`.`modeltelefona` WHERE `IdModelTelefona`=?";
@@ -32,8 +32,7 @@ public class MySQLModelTelefonDAO implements ModelTelefonaDAO {
 			ps = conn.prepareStatement(SQL_INSERT);
 			ps.setInt(1, modelTelefona.getIdModeltelefona());
 			ps.setString(2, modelTelefona.getNazivModela());
-                        ps.setString(3, modelTelefona.getSlika());
-                        ps.setString(4, modelTelefona.getSpecifikacija());
+                        ps.setString(3, modelTelefona.getSpecifikacija());
                         
 			returnValue = ps.executeUpdate() == 1;
 		} catch(SQLException e) {
@@ -109,7 +108,7 @@ public class MySQLModelTelefonDAO implements ModelTelefonaDAO {
 			else {
                             
 				while(rs.next()) {
-					modeli.add(new ModelTelefonaDTO(rs.getInt("idModeltelefona"),rs.getString("Specifikacija"),rs.getString("Slika"),rs.getString("NazivModela")));
+					modeli.add(new ModelTelefonaDTO(rs.getInt("idModeltelefona"),rs.getString("Specifikacija"),rs.getString("NazivModela")));
 				}
 			}
 		} catch(SQLException e) {
@@ -143,7 +142,7 @@ public class MySQLModelTelefonDAO implements ModelTelefonaDAO {
 			else {
                             
 				while(rs.next()) {
-					modeli.add(new ModelTelefonaDTO(rs.getInt("idModeltelefona"),rs.getString("Specifikacija"),rs.getString("Slika"),rs.getString("NazivModela")));
+					modeli.add(new ModelTelefonaDTO(rs.getInt("idModeltelefona"),rs.getString("Specifikacija"),rs.getString("NazivModela")));
                                         for(ModelTelefonaDTO mt : modeli){
                                             System.out.println(mt.getNazivModela());
                                         }
@@ -176,7 +175,7 @@ public class MySQLModelTelefonDAO implements ModelTelefonaDAO {
 			else {
                             
 				while(rs.next()) {
-					modeli.add(new ModelTelefonaDTO(rs.getInt("idModeltelefona"),rs.getString("Specifikacija"),rs.getString("Slika"),rs.getString("NazivModela")));
+					modeli.add(new ModelTelefonaDTO(rs.getInt("idModeltelefona"),rs.getString("Specifikacija"),rs.getString("NazivModela")));
                                         for(ModelTelefonaDTO mt : modeli){
                                             System.out.println(mt.getNazivModela());
                                         }

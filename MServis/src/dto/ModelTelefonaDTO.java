@@ -4,7 +4,6 @@ public class ModelTelefonaDTO extends ArtikalDTO {
 
     private int idModeltelefona;
     private String Specifikacija;
-    private String Slika;
     private String NazivModela;
 
     public ModelTelefonaDTO(String nazivModela) {
@@ -22,12 +21,6 @@ public class ModelTelefonaDTO extends ArtikalDTO {
     }
 
 
-    public ModelTelefonaDTO(int idModeltelefona, String Specifikacija, String Slika, String NazivModela) {
-        this.idModeltelefona = idModeltelefona;
-        this.Specifikacija = Specifikacija;
-        this.Slika = Slika;
-        this.NazivModela = NazivModela;
-    }
 
     public void setIdModeltelefona(int idModeltelefona) {
         this.idModeltelefona = idModeltelefona;
@@ -35,10 +28,6 @@ public class ModelTelefonaDTO extends ArtikalDTO {
 
     public void setSpecifikacija(String Specifikacija) {
         this.Specifikacija = Specifikacija;
-    }
-
-    public void setSlika(String Slika) {
-        this.Slika = Slika;
     }
 
     public void setNazivModela(String NazivModela) {
@@ -53,9 +42,6 @@ public class ModelTelefonaDTO extends ArtikalDTO {
         return Specifikacija;
     }
 
-    public String getSlika() {
-        return Slika;
-    }
 
     public String getNazivModela() {
         return NazivModela;

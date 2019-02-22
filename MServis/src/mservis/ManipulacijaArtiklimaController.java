@@ -5,6 +5,7 @@
  */
 package mservis;
 
+import dao.ArtikalDAO;
 import dao.DodatnaOpremaDAO;
 import dao.ModelTelefonaDAO;
 import dao.RacunDAO;
@@ -612,6 +613,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
         TelefonDAO telefonDAO = (new MySQLDAOFactory()).getTelefonDAO();
         if (telefonDTO != null) {
             telefonDAO.delete(telefonDTO);
+            
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
