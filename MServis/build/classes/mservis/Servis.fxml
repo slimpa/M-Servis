@@ -8,26 +8,26 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="1138.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.ServisController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="1276.0" stylesheets="@../dark-theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.ServisController">
    <children>
       <Label layoutX="17.0" layoutY="28.0" text="Pretraga" />
-      <TextField fx:id="tfIdServisa" layoutX="76.0" layoutY="24.0" promptText="Id servisa" />
-      <ComboBox fx:id="cbStanje" layoutX="260.0" layoutY="24.0" prefWidth="150.0" promptText="Stanje uređaja" />
-      <Button fx:id="btnDodaj" layoutX="34.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnNoviServis" prefHeight="25.0" prefWidth="105.0" text="Novi servis" />
-      <Button fx:id="btnServisiraj" layoutX="469.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnServisiraj" prefHeight="25.0" prefWidth="105.0" text="Servisiraj" />
-      <TableView fx:id="tableServis" layoutX="23.0" layoutY="76.0" prefHeight="331.0" prefWidth="1101.0">
+      <TextField fx:id="tfIdServisa" layoutX="95.0" layoutY="24.0" prefHeight="31.0" prefWidth="134.0" promptText="Id servisa" />
+      <ComboBox fx:id="cbStanje" layoutX="246.0" layoutY="24.0" prefHeight="31.0" prefWidth="164.0" promptText="Stanje uređaja" />
+      <Button fx:id="btnDodaj" layoutX="34.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnNoviServis" prefHeight="51.0" prefWidth="105.0" text="Novi servis" />
+      <Button fx:id="btnServisiraj" layoutX="586.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnServisiraj" prefHeight="51.0" prefWidth="105.0" text="Servisiraj" />
+      <TableView fx:id="tableServis" layoutX="23.0" layoutY="76.0" prefHeight="331.0" prefWidth="1241.0">
         <columns>
-          <TableColumn fx:id="columnIdServisa" prefWidth="75.0" text="Id servisa" />
-          <TableColumn fx:id="columnKlijent" prefWidth="129.0" text="Klijent" />
-            <TableColumn fx:id="columnServiser" prefWidth="123.0" text="Serviser" />
-            <TableColumn fx:id="columnModel" prefWidth="143.0" text="Model uređaja" />
-            <TableColumn fx:id="columnSerijski" prefWidth="137.0" text="Serijski broj " />
-            <TableColumn fx:id="columnOpis" prefWidth="131.0" text="Opis kvara" />
-            <TableColumn fx:id="columnDatum" prefWidth="248.0" text="Datum prijema" />
-            <TableColumn fx:id="columnStanje" prefWidth="114.0" text="Stanje uređaja" />
+          <TableColumn fx:id="columnIdServisa" prefWidth="64.00003051757812" text="Šifra" />
+          <TableColumn fx:id="columnKlijent" prefWidth="224.0" text="Klijent" />
+            <TableColumn fx:id="columnServiser" prefWidth="198.0" text="Serviser" />
+            <TableColumn fx:id="columnModel" prefWidth="163.0" text="Model uređaja" />
+            <TableColumn fx:id="columnSerijski" prefWidth="118.0" text="Serijski broj " />
+            <TableColumn fx:id="columnOpis" prefWidth="228.0" text="Opis kvara" />
+            <TableColumn fx:id="columnDatum" prefWidth="120.0" text="Datum prijema" />
+            <TableColumn fx:id="columnStanje" prefWidth="123.0" text="Stanje uređaja" />
         </columns>
       </TableView>
       <Button fx:id="btnPretraziServis" layoutX="448.0" layoutY="24.0" mnemonicParsing="false" onAction="#btnPretraziHandler" text="Pretraži" />
-      <Button fx:id="btnPreuzimanje" layoutX="984.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnPreuzimanjeHandler" text="Preuzimanje uređaja" />
+      <Button fx:id="btnPreuzimanje" layoutX="1050.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnPreuzimanjeHandler" prefHeight="51.0" prefWidth="164.0" text="Preuzimanje uređaja" />
    </children>
 </AnchorPane>

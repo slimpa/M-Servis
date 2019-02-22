@@ -5,17 +5,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="aPANE" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.DodavanjeDobavljacaController">
+<AnchorPane id="AnchorPane" fx:id="aPANE" prefHeight="464.0" prefWidth="760.0" stylesheets="@../dark-theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.DodavanjeDobavljacaController">
    <children>
-      <Label fx:id="lNAZIV" layoutX="25.0" layoutY="20.0" text="Naziv" />
-      <Label fx:id="lADRESA" layoutX="25.0" layoutY="100.0" text="Adresa" />
-      <Label fx:id="lTEL" layoutX="25.0" layoutY="180.0" text="Telefon" />
-      <Label fx:id="lEMAIL" layoutX="25.0" layoutY="260.0" text="E-mail" />
-      <TextField fx:id="tNAZIV" layoutX="25.0" layoutY="40.0" prefHeight="28.0" prefWidth="551.0" />
-      <TextField fx:id="tADRESA" layoutX="25.0" layoutY="120.0" prefHeight="28.0" prefWidth="551.0" />
-      <TextField fx:id="tTEL" layoutX="25.0" layoutY="200.0" prefHeight="28.0" prefWidth="551.0" />
-      <TextField fx:id="tEMAIL" layoutX="25.0" layoutY="280.0" prefHeight="28.0" prefWidth="551.0" />
-      <Button fx:id="btnOTKAZI" layoutX="30.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnOtkazi" prefHeight="37.0" prefWidth="90.0" text="Otkaži" />
-      <Button fx:id="btnPOTVRDI" layoutX="486.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnPotvrdi" prefHeight="37.0" prefWidth="90.0" text="Potvrdi" />
+      <Label fx:id="lNAZIV" layoutX="105.0" layoutY="21.0" text="Naziv" />
+      <Label fx:id="lADRESA" layoutX="105.0" layoutY="101.0" text="Adresa" />
+      <Label fx:id="lTEL" layoutX="105.0" layoutY="181.0" text="Telefon" />
+      <Label fx:id="lEMAIL" layoutX="105.0" layoutY="261.0" text="E-mail" />
+      <TextField fx:id="tNAZIV" layoutX="105.0" layoutY="41.0" prefHeight="28.0" prefWidth="551.0" />
+      <TextField fx:id="tADRESA" layoutX="105.0" layoutY="121.0" prefHeight="28.0" prefWidth="551.0" />
+      <TextField fx:id="tTEL" layoutX="105.0" layoutY="201.0" prefHeight="28.0" prefWidth="551.0" />
+      <TextField fx:id="tEMAIL" layoutX="105.0" layoutY="281.0" prefHeight="28.0" prefWidth="551.0" />
+      <Button fx:id="btnOTKAZI" layoutX="46.0" layoutY="358.0" mnemonicParsing="false" onAction="#btnOtkazi" prefHeight="65.0" prefWidth="118.0" text="Otkaži" />
+      <Button fx:id="btnPOTVRDI" layoutX="601.0" layoutY="358.0" mnemonicParsing="false" onAction="#btnPotvrdi" prefHeight="65.0" prefWidth="110.0" text="Potvrdi" />
    </children>
 </AnchorPane>

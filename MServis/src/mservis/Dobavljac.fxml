@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.DobavljacController">
    <children>
-      <Pane layoutY="6.0" prefHeight="600.0" prefWidth="1000.0">
+      <Pane layoutY="6.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../dark-theme.css">
          <children>
             <TableView fx:id="tableDOBAVLJACI" layoutX="23.0" layoutY="113.0" prefHeight="374.0" prefWidth="954.0">
               <columns>

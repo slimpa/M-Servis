@@ -88,7 +88,7 @@ delimiter ;
 
 
 create view svi_telefoni as
-select modeltelefona.IdModelTelefona, artikal.Naziv, modeltelefona.NazivModela, proizvodjac.Naziv as Proizvodjac,
+select artikal.BarKod, modeltelefona.IdModelTelefona, artikal.Naziv, modeltelefona.NazivModela, proizvodjac.Naziv as Proizvodjac,
 telefon.Boja, modeltelefona.Specifikacija, telefon.SerijskiBroj, cijena.Cijena, telefon.Obrisano
 from telefon inner join modeltelefona inner join artikal inner join cijena inner join proizvodjac
 on modeltelefona.IdModelTelefona=telefon.IdModeTelefona  and modeltelefona.IdModelTelefona=artikal.IdArtikal 
@@ -96,14 +96,14 @@ and modeltelefona.IdModelTelefona=cijena.IdArtikla and artikal.IdProizvodjac=pro
 where cijena.TrenutnaCijena=1 and telefon.Obrisano=0 ;
 
 create view rezervni_dijelovi as
-select IdRezervniDio, artikal.Naziv,rezervnidio.IdModelTelefona, modeltelefona.NazivModela as NazivModela, 
+select artikal.BarKod, IdRezervniDio, artikal.Naziv,rezervnidio.IdModelTelefona, modeltelefona.NazivModela as NazivModela, 
 Opis, artikal.Kolicina, cijena. cijena from rezervnidio natural join artikal natural join modeltelefona 
 natural join cijena 
 where rezervnidio.IdRezervniDio=artikal.IdArtikal and rezervnidio.IdRezervniDio=cijena.IdArtikla 
 and cijena.TrenutnaCijena=1 and artikal.Obrisano=0;
 
 create view dodatna_oprema as
-select dodatnaoprema.IdDodatnaOprema, artikal.Naziv, tipdodatneopreme.TipOpreme, dodatnaoprema.Boja, modeltelefona.NazivModela, artikal.Kolicina, cijena.Cijena
+select artikal.BarKod, dodatnaoprema.IdDodatnaOprema, artikal.Naziv, tipdodatneopreme.TipOpreme, dodatnaoprema.Boja, modeltelefona.NazivModela, artikal.Kolicina, cijena.Cijena
 from dodatnaoprema natural join tipdodatneopreme natural join artikal natural join cijena natural join modeltelefona
 where dodatnaoprema.IdDodatnaOprema=artikal.IdArtikal 
 and dodatnaoprema.IdTipDodatneOpreme= tipdodatneopreme.IdTipDodatneOpreme and artikal.IdArtikal=cijena.IdArtikla 

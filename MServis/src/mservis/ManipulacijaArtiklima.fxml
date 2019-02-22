@@ -8,63 +8,63 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.ManipulacijaArtiklimaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.ManipulacijaArtiklimaController">
    <children>
-      <TabPane layoutX="-8.0" layoutY="-6.0" prefHeight="584.0" prefWidth="747.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="-8.0" layoutY="-6.0" prefHeight="612.0" prefWidth="1251.0" stylesheets="@../dark-theme.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabTelefoni" text="Telefon">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="555.0" prefWidth="726.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="582.0" prefWidth="1251.0">
                      <children>
-                        <TableView fx:id="tableTelefoni" layoutX="14.0" layoutY="210.0" prefHeight="262.0" prefWidth="722.0">
+                        <TableView fx:id="tableTelefoni" layoutX="16.0" layoutY="187.0" prefHeight="288.0" prefWidth="1220.0">
                           <columns>
-                            <TableColumn fx:id="colTelefonIdTelefona" prefWidth="75.0" text="Id telefona" />
-                            <TableColumn fx:id="colTelefonNaziv" prefWidth="75.0" text="Naziv" />
-                              <TableColumn fx:id="colTelefonModel" prefWidth="75.0" text="Model" />
-                              <TableColumn fx:id="colTelefonProizvodjac" prefWidth="75.0" text="Proizvođač" />
-                              <TableColumn fx:id="colTelefonBoja" prefWidth="75.0" text="Boja" />
-                              <TableColumn fx:id="colTelefonSpecifikacija" prefWidth="75.0" text="Specifikacija" />
-                              <TableColumn fx:id="colTelefonSerijskiBroj" prefWidth="144.0" text="Serijski broj" />
-                              <TableColumn fx:id="colTelefonCijena" prefWidth="115.0" text="Cijena" />
+                            <TableColumn fx:id="colTelefonIdTelefona" prefWidth="75.0" text="Šifra" />
+                            <TableColumn fx:id="colTelefonNaziv" prefWidth="260.0" text="Naziv" />
+                              <TableColumn fx:id="colTelefonModel" minWidth="0.999969482421875" prefWidth="126.00001525878906" text="Model" />
+                              <TableColumn fx:id="colTelefonProizvodjac" prefWidth="124.0" text="Proizvođač" />
+                              <TableColumn fx:id="colTelefonBoja" prefWidth="87.0" text="Boja" />
+                              <TableColumn fx:id="colTelefonSpecifikacija" prefWidth="226.0" text="Specifikacija" />
+                              <TableColumn fx:id="colTelefonSerijskiBroj" prefWidth="130.0" text="Serijski broj" />
+                              <TableColumn fx:id="colTelefonCijena" prefWidth="78.0" text="Cijena" />
+                              <TableColumn fx:id="colBarkodTelefon" prefWidth="111.0" text="Bar kod" />
                           </columns>
                         </TableView>
-                        <ImageView fitHeight="251.0" fitWidth="263.0" layoutX="470.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button fx:id="btnTelefonIzmjeni" layoutX="42.0" layoutY="149.0" mnemonicParsing="false" onAction="#btnTelefonIzmjeniHandler" prefHeight="25.0" prefWidth="153.0" text="Izmijeni" />
-                        <Button fx:id="btnTelefonDodaj" layoutX="41.0" layoutY="97.0" mnemonicParsing="false" onAction="#btnTelefonDodajHandler" prefHeight="25.0" prefWidth="154.0" text="Dodaj " />
-                        <Button fx:id="btnTelefonObrisi" layoutX="581.0" layoutY="149.0" mnemonicParsing="false" onAction="#btnTelefonObrisiHandler" prefHeight="25.0" prefWidth="153.0" text="Obriši" />
-                        <Button fx:id="btnDodajTelefonNaRacun" layoutX="582.0" layoutY="491.0" mnemonicParsing="false" onAction="#btnTelefonNaRacun" prefHeight="25.0" prefWidth="151.0" text="Dodaj na račun" />
+                        <Button fx:id="btnTelefonIzmjeni" layoutX="42.0" layoutY="141.0" mnemonicParsing="false" onAction="#btnTelefonIzmjeniHandler" prefHeight="35.0" prefWidth="153.0" text="Izmijeni" />
+                        <Button fx:id="btnTelefonDodaj" layoutX="41.0" layoutY="80.0" mnemonicParsing="false" onAction="#btnTelefonDodajHandler" prefHeight="29.0" prefWidth="154.0" text="Dodaj " />
+                        <Button fx:id="btnTelefonObrisi" layoutX="1081.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnTelefonObrisiHandler" prefHeight="39.0" prefWidth="153.0" text="Obriši" />
                         <TextField fx:id="tfTelefoniPretraga" layoutX="182.0" layoutY="27.0" prefHeight="25.0" prefWidth="123.0" />
-                        <Button fx:id="btnTelefonPretrazi" layoutX="336.0" layoutY="27.0" mnemonicParsing="false" onAction="#btnPretraziTelefoneHandler" prefHeight="25.0" prefWidth="136.0" text="Pretraga" />
+                        <Button fx:id="btnTelefonPretrazi" layoutX="336.0" layoutY="27.0" mnemonicParsing="false" onAction="#btnPretraziTelefoneHandler" prefHeight="25.0" prefWidth="136.0" text="Pretraži" />
                         <ComboBox fx:id="cbTelefonPretraga" layoutX="41.0" layoutY="27.0" prefHeight="25.0" prefWidth="113.0" />
+                        <Button fx:id="btnDodajTelefonNaRacun" layoutX="1061.0" layoutY="512.0" mnemonicParsing="false" onAction="#btnTelefonNaRacun" prefHeight="41.0" prefWidth="166.0" stylesheets="@../dark-theme.css" text="Dodaj na račun" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
           <Tab text="Dodatna oprema">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="954.0" prefWidth="1289.0">
                      <children>
-                        <TableView fx:id="tableDodatnaOprema" layoutX="13.0" layoutY="219.0" prefHeight="251.0" prefWidth="721.0">
+                        <TableView fx:id="tableDodatnaOprema" layoutX="14.0" layoutY="206.0" prefHeight="277.0" prefWidth="1228.0">
                           <columns>
-                            <TableColumn fx:id="colDodatnaOpremaIdDodatneOpreme" prefWidth="151.0" text="Id Dodatne opreme" />
-                            <TableColumn fx:id="colDodatnaOpremaNaziv" prefWidth="106.0" text="Naziv" />
-                              <TableColumn fx:id="colDodatnaOpremaTip" prefWidth="68.0" text="Tip" />
-                              <TableColumn fx:id="colDodatnaOpremaBoja" prefWidth="64.0" text="Boja" />
-                              <TableColumn fx:id="colDodatnaOpremaModelTelefona" prefWidth="134.0" text="Model Telefona" />
-                              <TableColumn fx:id="colDodatnaOpremaKolicina" prefWidth="110.0" text="Količina" />
-                              <TableColumn fx:id="colDodatnaOpremaCijena" prefWidth="85.0" text="Cijena" />
+                            <TableColumn fx:id="colDodatnaOpremaIdDodatneOpreme" prefWidth="152.99998474121094" text="Šifra" />
+                            <TableColumn fx:id="colDodatnaOpremaNaziv" prefWidth="184.0" text="Naziv" />
+                              <TableColumn fx:id="colDodatnaOpremaTip" prefWidth="212.0" text="Tip" />
+                              <TableColumn fx:id="colDodatnaOpremaBoja" prefWidth="112.0" text="Boja" />
+                              <TableColumn fx:id="colDodatnaOpremaModelTelefona" prefWidth="225.0" text="Model Telefona" />
+                              <TableColumn fx:id="colDodatnaOpremaKolicina" prefWidth="104.0" text="Količina" />
+                              <TableColumn fx:id="colDodatnaOpremaCijena" prefWidth="89.0" text="Cijena" />
+                              <TableColumn fx:id="colBarkodDodatna" prefWidth="146.0" text="Bar kod" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btnDodatnaOpremaDodaj" layoutX="34.0" layoutY="96.0" mnemonicParsing="false" onAction="#btnDodatnaOpremaDodajHandler" prefHeight="25.0" prefWidth="149.0" text="Dodaj" />
-                        <Button fx:id="btnDodatnaOpremaIzmjeni" layoutX="34.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnDodatnaOpremaIzmjeniHandler" prefHeight="25.0" prefWidth="148.0" text="Izmijeni" />
-                        <Button fx:id="btnDodatnaOpremaObrisi" layoutX="611.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnDodatnaOpremaObrisiHandler" prefHeight="25.0" prefWidth="123.0" text="Obriši" />
+                        <Button fx:id="btnDodatnaOpremaDodaj" layoutX="33.0" layoutY="84.0" mnemonicParsing="false" onAction="#btnDodatnaOpremaDodajHandler" prefHeight="39.0" prefWidth="183.0" text="Dodaj" />
+                        <Button fx:id="btnDodatnaOpremaIzmjeni" layoutX="33.0" layoutY="152.0" mnemonicParsing="false" onAction="#btnDodatnaOpremaIzmjeniHandler" prefHeight="38.0" prefWidth="182.0" text="Izmijeni" />
+                        <Button fx:id="btnDodatnaOpremaObrisi" layoutX="1035.0" layoutY="150.0" mnemonicParsing="false" onAction="#btnDodatnaOpremaObrisiHandler" prefHeight="42.0" prefWidth="198.0" text="Obriši" />
                         <TextField fx:id="tfPretragaDodatnaOprema" layoutX="205.0" layoutY="28.0" />
-                        <Button fx:id="btnDodatnaOpremaPretrazi" layoutX="396.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnPretraziDodatnuOpremuHandler" prefHeight="25.0" prefWidth="122.0" text="Pretraga" />
-                        <Button fx:id="btnDodajOpremuNaRacun" layoutX="611.0" layoutY="500.0" mnemonicParsing="false" onAction="#btnOpremuNaRacun" prefHeight="25.0" prefWidth="124.0" text="Dodaj na račun" />
+                        <Button fx:id="btnDodatnaOpremaPretrazi" layoutX="396.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnPretraziDodatnuOpremuHandler" prefHeight="25.0" prefWidth="122.0" text="Pretraži" />
+                        <Button fx:id="btnDodajOpremuNaRacun" layoutX="1030.0" layoutY="507.0" mnemonicParsing="false" onAction="#btnOpremuNaRacun" prefHeight="50.0" prefWidth="208.0" text="Dodaj na račun" />
                         <ComboBox fx:id="cbDodatnaOpremaPretraga" layoutX="34.0" layoutY="28.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
@@ -74,45 +74,45 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableRezervniDijelovi" layoutX="11.0" layoutY="201.0" prefHeight="259.0" prefWidth="725.0">
+                        <TableView fx:id="tableRezervniDijelovi" layoutX="30.0" layoutY="107.0" prefHeight="410.0" prefWidth="904.0">
                           <columns>
-                            <TableColumn fx:id="colIdRezervniDio" prefWidth="118.0" text="Id Rezervni dio" />
-                            <TableColumn fx:id="colNaziv" prefWidth="129.0" text="Naziv" />
-                              <TableColumn fx:id="colIdModelTelefona" prefWidth="120.0" text="Model telefona" />
-                              <TableColumn fx:id="colOpis" prefWidth="106.0" text="Opis" />
-                              <TableColumn fx:id="colKolicina" minWidth="0.0" prefWidth="144.0" text="Količina" />
-                              <TableColumn fx:id="colCijena" prefWidth="107.0" text="Cijena" />
-                              <TableColumn fx:id="colIdRezervniDio1" prefWidth="118.0" text="Id Rezervni dio" />
+                            <TableColumn fx:id="colIdRezervniDio" prefWidth="88.99999237060547" text="Šifra" />
+                            <TableColumn fx:id="colNaziv" prefWidth="157.99996948242188" text="Naziv" />
+                              <TableColumn fx:id="colIdModelTelefona" prefWidth="145.00003051757812" text="Model telefona" />
+                              <TableColumn fx:id="colOpis" prefWidth="204.0" text="Opis" />
+                              <TableColumn fx:id="colKolicina" minWidth="0.0" prefWidth="89.0" text="Količina" />
+                              <TableColumn fx:id="colCijena" prefWidth="93.0" text="Cijena" />
+                              <TableColumn fx:id="colBarkodRezervni" prefWidth="125.0" text="Bar kod" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btnRezervniDioDodaj" layoutX="31.0" layoutY="98.0" mnemonicParsing="false" onAction="#btnRezervniDioDodajHandler" prefHeight="25.0" prefWidth="164.0" text="Dodaj" />
-                        <Button fx:id="btnRezervniDioIzmjeni" layoutX="31.0" layoutY="150.0" mnemonicParsing="false" onAction="#btnRezervniDioIzmjeniHandler" prefHeight="25.0" prefWidth="162.0" text="Izmijeni" />
-                        <Button fx:id="btnRezervniDioObrisi" layoutX="585.0" layoutY="150.0" mnemonicParsing="false" onAction="#btnRezervniDioObrisiHandler" prefHeight="25.0" prefWidth="137.0" text="Obriši" />
+                        <Button fx:id="btnRezervniDioDodaj" layoutX="982.0" layoutY="144.0" mnemonicParsing="false" onAction="#btnRezervniDioDodajHandler" prefHeight="69.0" prefWidth="207.0" text="Dodaj" />
+                        <Button fx:id="btnRezervniDioIzmjeni" layoutX="985.0" layoutY="279.0" mnemonicParsing="false" onAction="#btnRezervniDioIzmjeniHandler" prefHeight="66.0" prefWidth="202.0" text="Izmijeni" />
+                        <Button fx:id="btnRezervniDioObrisi" layoutX="984.0" layoutY="416.0" mnemonicParsing="false" onAction="#btnRezervniDioObrisiHandler" prefHeight="68.0" prefWidth="204.0" text="Obriši" />
                         <TextField fx:id="tfRezervniDio" layoutX="225.0" layoutY="32.0" prefHeight="25.0" prefWidth="168.0" />
-                        <Button fx:id="btnRezervniDioPretraga" layoutX="431.0" layoutY="32.0" mnemonicParsing="false" onAction="#btnPretraziRezervneDijeloveHandler" prefHeight="25.0" prefWidth="133.0" text="Pretraga" />
+                        <Button fx:id="btnRezervniDioPretraga" layoutX="431.0" layoutY="32.0" mnemonicParsing="false" onAction="#btnPretraziRezervneDijeloveHandler" prefHeight="25.0" prefWidth="133.0" text="Pretraži" />
                         <ComboBox fx:id="cbRezervniDijeloviPretraga" layoutX="30.0" layoutY="32.0" prefHeight="25.0" prefWidth="166.0" />
-                        <Button fx:id="btnDodajRezervniDioNaRacun" layoutX="596.0" layoutY="488.0" mnemonicParsing="false" onAction="#btnRezervniDioNaRacun" prefHeight="25.0" prefWidth="137.0" text="Dodaj na račun" />
+                        <Button fx:id="btnDodajRezervniDioNaRacun" layoutX="745.0" layoutY="688.0" mnemonicParsing="false" onAction="#btnRezervniDioNaRacun" prefHeight="67.0" prefWidth="170.0" text="Dodaj na račun" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
             <Tab text="Račun">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="605.0" prefWidth="1209.0">
                      <children>
-                        <TableView fx:id="tableRacun" layoutX="62.0" layoutY="21.0" prefHeight="453.0" prefWidth="466.0">
+                        <TableView fx:id="tableRacun" layoutX="35.0" layoutY="21.0" prefHeight="453.0" prefWidth="665.0">
                           <columns>
                             <TableColumn fx:id="colIdStavke" prefWidth="75.0" text="Šifra" />
-                            <TableColumn fx:id="colNazivStavke" prefWidth="205.0" text="Naziv artikla" />
-                              <TableColumn fx:id="colKolicinaStavke" minWidth="0.0" prefWidth="90.0" text="Količina" />
-                              <TableColumn fx:id="colCijenaStavke" prefWidth="95.0" text="Cijena (KM)" />
+                            <TableColumn fx:id="colNazivStavke" prefWidth="272.0" text="Naziv artikla" />
+                              <TableColumn fx:id="colKolicinaStavke" minWidth="0.0" prefWidth="151.0" text="Količina" />
+                              <TableColumn fx:id="colCijenaStavke" prefWidth="139.0" text="Cijena (KM)" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btnObrisiStavku" layoutX="594.0" layoutY="253.0" mnemonicParsing="false" onAction="#btnObrisiStavku" prefHeight="60.0" prefWidth="131.0" text="Obriši artikal" />
-                        <Button fx:id="btnStampaj" layoutX="594.0" layoutY="186.0" mnemonicParsing="false" onAction="#btnStampaj" prefHeight="56.0" prefWidth="132.0" text="Štampaj" />
-                        <Button fx:id="btnOtkazi" layoutX="594.0" layoutY="326.0" mnemonicParsing="false" onAction="#btnOtkazi" prefHeight="60.0" prefWidth="132.0" text="Otkaži" />
-                        <Label layoutX="271.0" layoutY="498.0" text="Ukupna cijena" />
-                        <TextField fx:id="tfUkupno" layoutX="353.0" layoutY="492.0">
+                        <Button fx:id="btnObrisiStavku" layoutX="845.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnObrisiStavku" prefHeight="84.0" prefWidth="317.0" text="Obriši artikal" />
+                        <Button fx:id="btnStampaj" layoutX="847.0" layoutY="87.0" mnemonicParsing="false" onAction="#btnStampaj" prefHeight="83.0" prefWidth="313.0" text="Štampaj" />
+                        <Button fx:id="btnOtkazi" layoutX="845.0" layoutY="350.0" mnemonicParsing="false" onAction="#btnOtkazi" prefHeight="80.0" prefWidth="314.0" text="Otkaži" />
+                        <Label layoutX="359.0" layoutY="499.0" text="Ukupna cijena" />
+                        <TextField fx:id="tfUkupno" layoutX="485.0" layoutY="492.0" prefHeight="31.0" prefWidth="214.0">
                            <font>
                               <Font size="14.0" />
                            </font></TextField>

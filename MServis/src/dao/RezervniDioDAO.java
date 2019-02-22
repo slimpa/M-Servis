@@ -20,4 +20,6 @@ public interface RezervniDioDAO {
     public List<RezervniDioDTO> selectByModel(RezervniDioDTO rezervniDio);
 
     public List<RezervniDioDTO> selectByModelName(RezervniDioDTO rezervniDioDTO);
+
+    public List<RezervniDioDTO> selectServis(RezervniDioDTO rezervniDioDTO);
 }

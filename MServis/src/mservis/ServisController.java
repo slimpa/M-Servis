@@ -104,7 +104,8 @@ public class ServisController implements Initializable {
     private static boolean naServisu = false;
     private static UgradjeniRezervniDioDAO ugradjeniDao = new MySQLDAOFactory().getUgradjeniRezervniDioDAO();
     private static ServisTelefonaHasCjenovnikUslugaDAO uslugeDao = new MySQLDAOFactory().getServisTelefonaHasCjenovnikUslugaDAO();
-
+    private static boolean uspjesno = false;
+    
     public static int getIdServisa() {
         return idServisa;
     }
@@ -115,6 +116,7 @@ public class ServisController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        tfIdServisa.setText("Id servisa");
         this.popuniComboStanja();
         this.popuniTabeluServis();
     }
@@ -186,7 +188,11 @@ public class ServisController implements Initializable {
             stage.showAndWait();
 
             this.popuniTabeluServis();
-            this.generisiPotvrdu();
+            if(uspjesno) {
+                this.generisiPotvrdu();
+            }
+            uspjesno = false;
+            
 
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -364,6 +370,7 @@ public class ServisController implements Initializable {
                 loader.setLocation(getClass().getResource("Racun.fxml"));
                 loader.load();
                 RacunController controller = loader.getController();
+                controller.setIdServisa(servis.getIdServisTelefona());
                 controller.popuniTabelu(stavke);
                 Parent p = loader.getRoot();
                 Stage stage = new Stage();
@@ -386,4 +393,14 @@ public class ServisController implements Initializable {
             alert.showAndWait();
         }
     }
+
+    public static boolean isUspjesno() {
+        return uspjesno;
+    }
+
+    public static void setUspjesno(boolean uspjesno) {
+        ServisController.uspjesno = uspjesno;
+    }
+    
+    
 }

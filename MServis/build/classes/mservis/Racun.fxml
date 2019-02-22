@@ -8,21 +8,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.RacunController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.RacunController">
    <children>
-      <Pane prefHeight="384.0" prefWidth="495.0">
+      <Pane prefHeight="527.0" prefWidth="748.0" stylesheets="@../dark-theme.css">
          <children>
-            <Button fx:id="btnStampaj" layoutX="195.0" layoutY="327.0" mnemonicParsing="false" onAction="#btnStampajHandler" prefHeight="25.0" prefWidth="106.0" text="Štampaj" />
-            <TableView fx:id="tableRacun" layoutX="24.0" layoutY="25.0" prefHeight="255.0" prefWidth="442.0">
+            <Button fx:id="btnStampaj" layoutX="549.0" layoutY="208.0" mnemonicParsing="false" onAction="#btnStampajHandler" prefHeight="67.0" prefWidth="168.0" text="Štampaj" />
+            <TableView fx:id="tableRacun" layoutX="24.0" layoutY="25.0" prefHeight="365.0" prefWidth="483.0">
               <columns>
                 <TableColumn fx:id="colId" prefWidth="101.0" text="Šifra" />
-                <TableColumn fx:id="colNaziv" prefWidth="225.0" text="Naziv" />
-                  <TableColumn fx:id="colCijena" prefWidth="115.0" text="Cijena" />
+                <TableColumn fx:id="colNaziv" prefWidth="280.0" text="Naziv" />
+                  <TableColumn fx:id="colCijena" prefWidth="100.0" text="Cijena" />
               </columns>
             </TableView>
-            <Button fx:id="btnIzadji" layoutX="360.0" layoutY="327.0" mnemonicParsing="false" onAction="#btnIzadjiHandler" prefHeight="25.0" prefWidth="106.0" text="Izađi" />
-            <Label layoutX="273.0" layoutY="293.0" text="Ukupna cijena" />
-            <TextField fx:id="tfUkupnaCijena" editable="false" layoutX="360.0" layoutY="289.0" prefHeight="25.0" prefWidth="106.0" />
+            <Button fx:id="btnIzadji" layoutX="549.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnIzadjiHandler" prefHeight="67.0" prefWidth="168.0" text="Izađi" />
+            <Label layoutX="276.0" layoutY="429.0" text="Ukupna cijena" />
+            <TextField fx:id="tfUkupnaCijena" editable="false" layoutX="401.0" layoutY="424.0" prefHeight="25.0" prefWidth="106.0" />
          </children>
       </Pane>
    </children>

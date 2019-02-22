@@ -47,6 +47,15 @@ public class AdminDTO extends OsobaDTO {
         this.nazivFirme = firma;
     }
 
+    public AdminDTO(int idPrijavljenog, String ime, String prezime, String telefon, String firma, String korisnickoIme) {
+        this.idOsoba = idPrijavljenog;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.brojTelefona = telefon;
+        this.nazivFirme = firma;
+        this.koriscnikoIme = korisnickoIme;
+    }
+
     public String getNazivFirme() {
         return nazivFirme;
     }

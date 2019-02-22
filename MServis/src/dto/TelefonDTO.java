@@ -11,6 +11,7 @@ public class TelefonDTO {
         private String Proizvodjac;
         private String Specifikacija;
         private double Cijena;
+        private String BarKod;
 
     public TelefonDTO(String SerijskiBroj, String Boja, int idModelTelefona, String Naziv, String Model, String Proizvodjac, String Specifikacija, double Cijena) {
         this.SerijskiBroj = SerijskiBroj;
@@ -21,6 +22,22 @@ public class TelefonDTO {
         this.Proizvodjac = Proizvodjac;
         this.Specifikacija = Specifikacija;
         this.Cijena = Cijena;
+    }
+    
+    
+     public TelefonDTO(String SerijskiBroj, String Boja, int idModelTelefona, String Naziv, String Model, 
+             String Proizvodjac, String Specifikacija, double Cijena, String barkod) {
+       
+        this.SerijskiBroj = SerijskiBroj;
+        this.Boja = Boja;
+        this.idModelTelefona = idModelTelefona;
+        this.Naziv = Naziv;
+        this.Model = Model;
+        this.Proizvodjac = Proizvodjac;
+        this.Specifikacija = Specifikacija;
+        this.Cijena = Cijena;
+        this.BarKod = barkod;
+        
     }
 
     public TelefonDTO(String serijskiBroj, int idArtikla) {
@@ -100,5 +117,15 @@ public class TelefonDTO {
     public void setIdModelTelefona(int idModelTelefona) {
         this.idModelTelefona = idModelTelefona;
     }
+
+    public String getBarKod() {
+        return BarKod;
+    }
+
+    public void setBarKod(String BarKod) {
+        this.BarKod = BarKod;
+    }
+    
+    
     
 }

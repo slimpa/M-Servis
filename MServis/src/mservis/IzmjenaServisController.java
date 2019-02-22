@@ -158,7 +158,7 @@ public class IzmjenaServisController implements Initializable {
     }
 
     public void popuniTabeluDijelova() {
-        List<RezervniDioDTO> lista = rezervniDioDao.selectByModel(new RezervniDioDTO(idModelTelefona));
+        List<RezervniDioDTO> lista = rezervniDioDao.selectServis(new RezervniDioDTO(idModelTelefona));
         ObservableList<RezervniDioDTO> listaDijelova = FXCollections.observableArrayList(lista);
         if (listaDijelova != null) {
             columnIdDio.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("idRezervniDio"));

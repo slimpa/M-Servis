@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -175,7 +176,10 @@ public class GlavnaFormaController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         ime.setText(LoginController.getKorisnickoIme());
     }    
+
+    
 
 }

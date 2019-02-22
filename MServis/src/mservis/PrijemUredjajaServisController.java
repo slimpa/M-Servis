@@ -96,6 +96,7 @@ public class PrijemUredjajaServisController implements Initializable {
                     alert.setContentText("Uspješno dodavanje!");
                     alert.showAndWait();
                     
+                    ServisController.setUspjesno(true);
                     Stage stage = (Stage) btnDodaj.getScene().getWindow();
                     stage.close();
                 } else {
@@ -117,5 +118,8 @@ public class PrijemUredjajaServisController implements Initializable {
 
         }
     }
+    
+    
+    
 
 }

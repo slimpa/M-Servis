@@ -6,13 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="loginPane" prefHeight="240.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.LoginController">
+<AnchorPane id="AnchorPane" fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../dark-theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.LoginController">
    <children>
-      <Label layoutX="40.0" layoutY="78.0" prefHeight="17.0" prefWidth="104.0" text="Korisničko ime" />
-      <Label layoutX="40.0" layoutY="120.0" prefHeight="17.0" prefWidth="62.0" text="Lozinka" />
-      <TextField fx:id="usernameTF" layoutX="136.0" layoutY="74.0" prefHeight="25.0" prefWidth="205.0" text="student" />
-      <PasswordField fx:id="passwordPF" layoutX="136.0" layoutY="116.0" prefHeight="25.0" prefWidth="205.0" text="student" />
-      <Button fx:id="btnUgasi" layoutX="34.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnUgasi" prefHeight="25.0" prefWidth="117.0" text="Izlaz" />
-      <Button fx:id="btnPrijava" layoutX="232.0" layoutY="182.0" mnemonicParsing="false" onAction="#btnPrijavaHandler" prefHeight="25.0" prefWidth="117.0" text="Prijava" />
+      <Label layoutX="271.0" layoutY="105.0" prefHeight="17.0" prefWidth="104.0" text="Korisničko ime" textAlignment="CENTER" />
+      <Label layoutX="295.0" layoutY="230.0" prefHeight="21.0" prefWidth="57.0" text="Lozinka" textAlignment="CENTER" />
+      <TextField fx:id="usernameTF" layoutX="188.0" layoutY="137.0" prefHeight="31.0" prefWidth="270.0" text="student" />
+      <PasswordField fx:id="passwordPF" layoutX="184.0" layoutY="269.0" prefHeight="31.0" prefWidth="270.0" style="-fx-background-color: #9b9b9b; -fx-border-color: #565656; -fx-border-width: 2pt;" text="student" />
+      <Button fx:id="btnUgasi" cancelButton="true" layoutX="94.0" layoutY="372.0" mnemonicParsing="false" onAction="#btnUgasi" prefHeight="58.0" prefWidth="145.0" text="Izlaz" textAlignment="CENTER" />
+      <Button fx:id="btnPrijava" defaultButton="true" layoutX="423.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnPrijavaHandler" prefHeight="58.0" prefWidth="145.0" text="Prijava" />
    </children>
 </AnchorPane>

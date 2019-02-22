@@ -888,10 +888,12 @@ public class AdminController implements Initializable {
         tfFirmaAdmin.setText(admin.getNazivFirme());
         tfKorisnickoAdmin.setText(admin.getKoriscnikoIme());
         tfLozinkaAdmin.setText(admin.getLozinka());
+        tfLozinkaAdmin.setEditable(false);
     }
     
     public void btnSacuvajAdminHandler(ActionEvent e){
-        AdminDTO admin = new AdminDTO(idPrijavljenog, tfImeAdmin.getText(), tfPrezimeAdmin.getText(), tfTelefonAdmin.getText(), tfFirmaAdmin.getText());
+        AdminDTO admin = new AdminDTO(idPrijavljenog, tfImeAdmin.getText(), tfPrezimeAdmin.getText(), 
+                tfTelefonAdmin.getText(), tfFirmaAdmin.getText(), tfKorisnickoAdmin.getText());
         if (!adminDao.update(admin)) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Greška!");

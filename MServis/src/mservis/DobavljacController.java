@@ -23,6 +23,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -35,7 +36,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static mservis.DodavanjeDobavljacaController.setDobavljacController;
 import mySQL.MySQLDAOFactory;
-
 
 /**
  *
@@ -63,32 +63,31 @@ public class DobavljacController implements Initializable {
     private TableColumn columnEMAIL;
     @FXML
     private Button btnPRETRAZI;
-    @FXML 
+    @FXML
     private TextField tPRETRAZI;
     ObservableList<DobavljacDTO> dobavljacLIST;
     public static DobavljacDTO dobavljacDTO;
-    DobavljacDAO dobavljacDAO=(new MySQLDAOFactory()).getDobavljacDAO();
+    DobavljacDAO dobavljacDAO = (new MySQLDAOFactory()).getDobavljacDAO();
     public static String vrijednost;
-     
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) 
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         setDobavljacController(this);
-       dobavljacLIST=FXCollections.observableArrayList(dobavljacDAO.selectAll());
-       tableDOBAVLJACI.setItems(dobavljacLIST);
-       columnID.setCellValueFactory(new PropertyValueFactory<DobavljacDTO,Integer>("IdDobavljac"));
-       columnNAZIV.setCellValueFactory(new PropertyValueFactory<DobavljacDTO,String>("Naziv"));
-       columnADRESA.setCellValueFactory(new PropertyValueFactory<DobavljacDTO,String>("Adresa"));
-       columnTEL.setCellValueFactory(new PropertyValueFactory<DobavljacDTO,String>("Telefon"));
-       columnEMAIL.setCellValueFactory(new PropertyValueFactory<DobavljacDTO,String>("Email"));
-    }    
-    public void btnDodaj(ActionEvent actionEvent)
-    {
-        vrijednost="DODAJ";
+        dobavljacLIST = FXCollections.observableArrayList(dobavljacDAO.selectAll());
+        tableDOBAVLJACI.setItems(dobavljacLIST);
+        columnID.setCellValueFactory(new PropertyValueFactory<DobavljacDTO, Integer>("IdDobavljac"));
+        columnNAZIV.setCellValueFactory(new PropertyValueFactory<DobavljacDTO, String>("Naziv"));
+        columnADRESA.setCellValueFactory(new PropertyValueFactory<DobavljacDTO, String>("Adresa"));
+        columnTEL.setCellValueFactory(new PropertyValueFactory<DobavljacDTO, String>("Telefon"));
+        columnEMAIL.setCellValueFactory(new PropertyValueFactory<DobavljacDTO, String>("Email"));
+    }
+
+    public void btnDodaj(ActionEvent actionEvent) {
+        vrijednost = "DODAJ";
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DodavanjeDobavljaca.fxml"));
-            Parent root1=(Parent)loader.load();
-            Stage stage=new Stage();
+            Parent root1 = (Parent) loader.load();
+            Stage stage = new Stage();
             Image image = new Image(new FileInputStream("./resources/icon.png"));
             stage.getIcons().add(image);
             stage.setTitle("Dodavanje");
@@ -97,64 +96,72 @@ public class DobavljacController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait(); 
+            stage.showAndWait();
         } catch (IOException ex) {
             Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void btnIzmijeni(ActionEvent actionEvent)
-    {
-        vrijednost="IZMIJENI";
-        dobavljacDTO=tableDOBAVLJACI.getSelectionModel().getSelectedItem();
-        if(dobavljacDTO!=null)
-        {
+
+    public void btnIzmijeni(ActionEvent actionEvent) {
+        vrijednost = "IZMIJENI";
+        dobavljacDTO = tableDOBAVLJACI.getSelectionModel().getSelectedItem();
+        if (dobavljacDTO != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("DodavanjeDobavljaca.fxml"));
-                Parent root1=(Parent)loader.load();
-                Stage stage=new Stage();
+                Parent root1 = (Parent) loader.load();
+                Stage stage = new Stage();
                 stage.setTitle("IZMJENA");
                 stage.setResizable(false);
                 Scene scene = new Scene(root1);
                 scene.getStylesheets().add("dark-theme.css");
                 stage.setScene(scene);
-                stage.initModality(Modality.APPLICATION_MODAL); 
+                stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();
             } catch (IOException ex) {
                 Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
-         }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Nije odabrana stavka iz tabele!");
+            alert.showAndWait();
+        }
     }
-    public void btnOBrisi()
-    {
-         dobavljacDTO=tableDOBAVLJACI.getSelectionModel().getSelectedItem();
-        if(dobavljacDTO!=null)
+
+    public void btnOBrisi() {
+        dobavljacDTO = tableDOBAVLJACI.getSelectionModel().getSelectedItem();
+        if (dobavljacDTO != null) {
             dobavljacDAO.delete(dobavljacDTO);
-        tableDOBAVLJACI.getItems().remove(dobavljacDTO);
-        osvjezi();
+            tableDOBAVLJACI.getItems().remove(dobavljacDTO);
+            osvjezi();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška!");
+            alert.setHeaderText(null);
+            alert.setContentText("Nije odabrana stavka iz tabele!");
+            alert.showAndWait();
+        }
     }
-    public void osvjezi()
-    {
+
+    public void osvjezi() {
         dobavljacLIST.clear();
         dobavljacLIST.addAll(dobavljacDAO.selectAll());
         tableDOBAVLJACI.refresh();
     }
-    
-    public void btnPretrazi(ActionEvent actionEvent)
-    {
-        if(tPRETRAZI.getText().isEmpty())
+
+    public void btnPretrazi(ActionEvent actionEvent) {
+        if (tPRETRAZI.getText().isEmpty()) {
             osvjezi();
-       else
-        {
-             List<DobavljacDTO> lista=new ArrayList<DobavljacDTO>();
-             lista.addAll(dobavljacDAO.selectByName(String.valueOf(tPRETRAZI.getText())));
-             if(lista.size()>0)
-             {
-                 dobavljacLIST.clear();
-                 dobavljacLIST.addAll(lista);
-                 tableDOBAVLJACI.refresh();
-             }  
+        } else {
+            List<DobavljacDTO> lista = new ArrayList<DobavljacDTO>();
+            lista.addAll(dobavljacDAO.selectByName(String.valueOf(tPRETRAZI.getText())));
+            if (lista.size() > 0) {
+                dobavljacLIST.clear();
+                dobavljacLIST.addAll(lista);
+                tableDOBAVLJACI.refresh();
+            }
         }
     }
 }

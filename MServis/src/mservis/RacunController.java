@@ -75,6 +75,7 @@ public class RacunController implements Initializable {
     private ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
     private RacunHasServisTelefonaDAO racunServis = new MySQLDAOFactory().getRacunHasServisTelefonaDAO();
     private RacunHasArtikalDAO racunArtikal = new MySQLDAOFactory().getRacunHasArtikalDAO();
+    private int idServisa = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -153,6 +154,16 @@ public class RacunController implements Initializable {
                 }
                 Stage stage = (Stage) btnStampaj.getScene().getWindow();
                 stage.close();
+            } else {
+                racunServis.insert(new RacunHasServisTelefonaDTO(idNovogRacuna, idServisa));
+
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText(null);
+                alert.setContentText("Telefon preuzet!");
+                
+                Stage stage = (Stage) btnStampaj.getScene().getWindow();
+                stage.close();
             }
         } else {
             Alert alert = new Alert(AlertType.ERROR);
@@ -163,5 +174,15 @@ public class RacunController implements Initializable {
             alert.showAndWait();
         }
     }
+
+    public int getIdServisa() {
+        return idServisa;
+    }
+
+    public void setIdServisa(int idServisa) {
+        this.idServisa = idServisa;
+    }
+    
+    
 
 }

@@ -192,6 +192,15 @@ public class ManipulacijaArtiklimaController implements Initializable {
 
     @FXML
     private TextField tfPretragaDodatnaOprema;
+    
+    @FXML
+    private TableColumn<TelefonDTO, String> colBarkodTelefon;
+    
+    @FXML
+    private TableColumn<DodatnaOpremaDTO, String> colBarkodDodatna;
+    
+    @FXML
+    private TableColumn<RezervniDioDTO, String> colBarkodRezervni;
 
     public static String vrijednost = "nijeBitno";
 
@@ -319,9 +328,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
         RezervniDioDAO rezervniDio = new MySQLDAOFactory().getRezervniDioDAO();
         List<RezervniDioDTO> lista = rezervniDio.selectAllDetailed();
 
-        for (RezervniDioDTO dio : lista) {
-            System.out.println(dio.getNazivModela());
-        }
+      
         ObservableList<RezervniDioDTO> listaRezervnihDijelova = FXCollections.observableArrayList(lista);
 
         if (listaRezervnihDijelova != null) {
@@ -331,6 +338,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colNaziv.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("nazivRezervnogdijela"));
             colKolicina.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("kolicinaRezervnogdijela"));
             colCijena.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Double>("Cijena"));
+            colBarkodRezervni.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("BarKod"));
             tableRezervniDijelovi.setItems(listaRezervnihDijelova);
         }
 
@@ -340,6 +348,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
         TelefonDAO telefoni = new MySQLDAOFactory().getTelefonDAO();
         List<TelefonDTO> listaTelefona = telefoni.selectAll();
         ObservableList<TelefonDTO> listaSvihTelefona = FXCollections.observableArrayList(listaTelefona);
+       
 
         if (listaSvihTelefona != null) {
             colTelefonIdTelefona.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Integer>("IdModelTelefona"));
@@ -350,6 +359,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colTelefonSpecifikacija.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Specifikacija"));
             colTelefonSerijskiBroj.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("SerijskiBroj"));
             colTelefonCijena.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Double>("Cijena"));
+            colBarkodTelefon.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("BarKod"));
             tableTelefoni.setItems(listaSvihTelefona);
         }
 
@@ -368,6 +378,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colDodatnaOpremaModelTelefona.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("ModelTelefona"));
             colDodatnaOpremaKolicina.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Kolicina"));
             colDodatnaOpremaCijena.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, Double>("Cijena"));
+            colBarkodDodatna.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("BarKod"));
 
             tableDodatnaOprema.setItems(listaSveDodatneOpreme);
         }
@@ -399,6 +410,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 colNaziv.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("nazivRezervnogdijela"));
                 colKolicina.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("kolicinaRezervnogdijela"));
                 colCijena.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Double>("Cijena"));
+                colBarkodRezervni.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("BarKod"));
                 tableRezervniDijelovi.setItems(listaRezervnihDijelova);
             }
         }
@@ -427,6 +439,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colTelefonSpecifikacija.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Specifikacija"));
             colTelefonSerijskiBroj.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("SerijskiBroj"));
             colTelefonCijena.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Double>("Cijena"));
+            colBarkodTelefon.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("BarKod"));
             tableTelefoni.setItems(listaSvihTelefona);
         }
     }
@@ -455,7 +468,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colDodatnaOpremaModelTelefona.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("ModelTelefona"));
             colDodatnaOpremaKolicina.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Kolicina"));
             colDodatnaOpremaCijena.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, Double>("Cijena"));
-
+            colBarkodDodatna.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("BarKod"));
             tableDodatnaOprema.setItems(listaSveDodatneOpreme);
         }
     }
@@ -537,7 +550,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colDodatnaOpremaModelTelefona.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("ModelTelefona"));
             colDodatnaOpremaKolicina.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Kolicina"));
             colDodatnaOpremaCijena.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, Double>("Cijena"));
-
+            colBarkodDodatna.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("BarKod"));
             tableDodatnaOprema.setItems(listaSveDodatneOpreme);
         }
         tableDodatnaOprema.refresh();
@@ -622,6 +635,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colTelefonSpecifikacija.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Specifikacija"));
             colTelefonSerijskiBroj.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("SerijskiBroj"));
             colTelefonCijena.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Double>("Cijena"));
+            colBarkodTelefon.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("BarKod"));
             tableTelefoni.setItems(listaSvihTelefona);
         }
         tableTelefoni.refresh();
@@ -705,6 +719,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             colNaziv.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("nazivRezervnogdijela"));
             colKolicina.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("kolicinaRezervnogdijela"));
             colCijena.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Double>("Cijena"));
+            colBarkodRezervni.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("BarKod"));
             tableRezervniDijelovi.setItems(listaRezervnihDijelova);
         }
         tableRezervniDijelovi.refresh();

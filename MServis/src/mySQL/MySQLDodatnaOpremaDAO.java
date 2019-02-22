@@ -132,7 +132,8 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 			else {
 				while(rs.next()) {
 					dodatnaOprema.add(new DodatnaOpremaDTO(rs.getString("Boja"),rs.getInt("idDodatnaOprema"),rs.getString("Naziv"),
-                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getDouble("Cijena")));
+                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),
+                                                rs.getDouble("Cijena"), rs.getString("BarKod")));
                                       
 				}
 			}
@@ -166,7 +167,8 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 			else {
 				while(rs.next()) {
 					dodatnaOprema.add(new DodatnaOpremaDTO(rs.getString("Boja"),rs.getInt("idDodatnaOprema"),rs.getString("Naziv"),
-                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getDouble("Cijena")));
+                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),
+                                                rs.getDouble("Cijena"), rs.getString("BarKod")));
 				}
 			}
 		} catch(SQLException e) {
@@ -196,7 +198,8 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 			else {
 				while(rs.next()) {
 					dodatnaOprema.add(new DodatnaOpremaDTO(rs.getString("Boja"),rs.getInt("idDodatnaOprema"),rs.getString("Naziv"),
-                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getDouble("Cijena")));
+                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),
+                                                rs.getDouble("Cijena"), rs.getString("BarKod")));
 				}
 			}
 		} catch(SQLException e) {
@@ -225,7 +228,8 @@ public class MySQLDodatnaOpremaDAO implements DodatnaOpremaDAO {
 			else {
 				while(rs.next()) {
 					dodatnaOprema.add(new DodatnaOpremaDTO(rs.getString("Boja"),rs.getInt("idDodatnaOprema"),rs.getString("Naziv"),
-                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),rs.getDouble("Cijena")));
+                                        rs.getString("NazivModela"),rs.getString("TipOpreme"),rs.getInt("Kolicina"),
+                                                rs.getDouble("Cijena"), rs.getString("BarKod")));
 				}
 			}
 		} catch(SQLException e) {

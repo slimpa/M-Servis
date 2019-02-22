@@ -16,7 +16,7 @@ public class MySQLTelefonDAO implements TelefonDAO {
 
     public static final String SQL_INSERT = "insert into telefon (`IdModeTelefona`,`SerijskiBroj`,`Boja`,`Obrisano`) values (?, ?, ?, ?)";
     //public static final String SQL_SELECT = "select * from rezervnidio";
-    public static final String SQL_UPDATE = "update telefon set SerijskiBroj=?, Boja=? where IdModeTelefona = ?";
+    public static final String SQL_UPDATE = "update telefon set Boja=? where IdModeTelefona = ? and SerijskiBroj = ?";
     public static final String SQL_SELECT_DETAIL = "select * from svi_telefoni";
     public static final String SQL_DELETE = "update telefon set Obrisano = 1 WHERE `IdModeTelefona`=? and SerijskiBroj = ?";
 
@@ -61,9 +61,9 @@ public class MySQLTelefonDAO implements TelefonDAO {
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(SQL_UPDATE);
-            ps.setInt(3, telefon.getIdModelTelefona());
-            ps.setString(1, telefon.getSerijskiBroj());
-            ps.setString(2, telefon.getBoja());
+            ps.setInt(2, telefon.getIdModelTelefona());
+            ps.setString(3, telefon.getSerijskiBroj());
+            ps.setString(1, telefon.getBoja());
 
             returnValue = ps.executeUpdate() == 1;
         } catch (SQLException e) {
@@ -132,7 +132,8 @@ public class MySQLTelefonDAO implements TelefonDAO {
             } else {
                 while (rs.next()) {
                     sviTelefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"), rs.getString("Boja"), rs.getInt("IdModelTelefona"),
-                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"), rs.getString("Specifikacija"), rs.getDouble("Cijena")));
+                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"), 
+                            rs.getString("Specifikacija"), rs.getDouble("Cijena"), rs.getString("BarKod")));
 
                 }
             }
@@ -168,7 +169,8 @@ public class MySQLTelefonDAO implements TelefonDAO {
             } else {
                 while (rs.next()) {
                     telefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"), rs.getString("Boja"), rs.getInt("IdModelTelefona"),
-                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"), rs.getString("Specifikacija"), rs.getDouble("Cijena")));
+                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"), 
+                            rs.getString("Specifikacija"), rs.getDouble("Cijena"), rs.getString("BarKod")));
                 }
             }
         } catch (SQLException e) {
@@ -199,7 +201,8 @@ public class MySQLTelefonDAO implements TelefonDAO {
             } else {
                 while (rs.next()) {
                     telefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"), rs.getString("Boja"), rs.getInt("IdModelTelefona"),
-                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"), rs.getString("Specifikacija"), rs.getDouble("Cijena")));
+                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"),
+                            rs.getString("Specifikacija"), rs.getDouble("Cijena"), rs.getString("BarKod")));
                 }
             }
         } catch (SQLException e) {
@@ -230,7 +233,8 @@ public class MySQLTelefonDAO implements TelefonDAO {
             } else {
                 while (rs.next()) {
                     telefoni.add(new TelefonDTO(rs.getString("SerijskiBroj"), rs.getString("Boja"), rs.getInt("IdModelTelefona"),
-                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"), rs.getString("Specifikacija"), rs.getDouble("Cijena")));
+                            rs.getString("Naziv"), rs.getString("NazivModela"), rs.getString("Proizvodjac"), 
+                            rs.getString("Specifikacija"), rs.getDouble("Cijena"), rs.getString("BarKod")));
                 }
             }
         } catch (SQLException e) {

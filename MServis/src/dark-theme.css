@@ -28,6 +28,7 @@
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
     -fx-font-size: 11pt;
+    -fx-font-weight: bold;
 }
 
 .button:hover, .button:focused{
@@ -45,12 +46,23 @@
     -fx-background-color: -fx-primarytext;
 }
 
+.text-area
+{
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-size : 11pt;
+    -jfx-focus-color: -fx-secondary;
+    -fx-text-fill: derive(#ffff5b, 20%);
+}
+
 .label
 {
     -fx-text-fill: -fx-secondary;
     -fx-font-size: 11pt;
+    -fx-font-weight: bold;
     
 }
+
+/*Combo box*/
 
 .combo-box
 {
@@ -59,9 +71,21 @@
     -fx-background-color: -fx-primarytext;
 }
 
-.combo-box .list-cell
+.combo-box:hover
 {
+    -fx-background-color: -fx-secondary;
+}
+
+.combo-box-popup .list-view .list-cell
+{
+    -fx-background-color: -fx-primarytext;
     
+}
+
+.combo-box-popup .list-view .list-cell:hover
+{
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-secondary;
 }
 
 /*Login Screen Specific*/

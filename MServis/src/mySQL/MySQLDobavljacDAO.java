@@ -133,12 +133,12 @@ public class MySQLDobavljacDAO implements DobavljacDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = SQL_SELECT_ALL + " and Naziv=?";
+		String query = SQL_SELECT_ALL + " and Naziv like ?";
 		
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setString(1, name);
+			ps.setString(1, name + "%");
 			rs = ps.executeQuery();
 			
 			if(rs == null) return null;

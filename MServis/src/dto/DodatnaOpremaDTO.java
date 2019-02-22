@@ -11,11 +11,18 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
         private String ModelTelefona;
         private String TipOpreme;
         private String Proizvodjac;
-        private String BarCode;
+        private String BarKod;
 
-    public String getBarCode() {
-        return this.BarCode;
+
+    public String getBarKod() {
+        return BarKod;
     }
+
+    public void setBarKod(String BarKod) {
+        this.BarKod = BarKod;
+    }
+    
+    
 
     public DodatnaOpremaDTO(String Boja, int idTipDodatneOpreme, String Naziv, String ModelTelefona, String Proizvodjac, String BarCode, int Kolicina, double Cijena) {
         this.Boja = Boja;
@@ -23,18 +30,31 @@ public class DodatnaOpremaDTO extends ArtikalDTO {
         this.Naziv = Naziv;
         this.ModelTelefona = ModelTelefona;
         this.Proizvodjac = Proizvodjac;
-        this.BarCode = BarCode;
+        this.BarKod = BarCode;
         this.Kolicina = Kolicina;
         this.Cijena = Cijena;
     }
 
+
+    public DodatnaOpremaDTO(String boja, int idDodatnaOprema, String naziv, String nazivModela,
+            String TipOpreme, int kolicina, double cijena, String barkod){
+        
+        this.Boja = boja;
+        this.idDodatnaOprema = idDodatnaOprema;
+        this.Naziv = naziv;
+        this.ModelTelefona = nazivModela;
+        this.TipOpreme = TipOpreme;
+        this.Kolicina = kolicina;
+        this.Cijena = cijena;
+        this.BarKod = barkod;
+    }
     public DodatnaOpremaDTO(String Boja, String Naziv, String ModelTelefona, String TipOpreme, String Proizvodjac, String BarCode, int Kolicina, double Cijena) {
         this.Boja = Boja;
         this.Naziv = Naziv;
         this.ModelTelefona = ModelTelefona;
         this.TipOpreme = TipOpreme;
         this.Proizvodjac = Proizvodjac;
-        this.BarCode = BarCode;
+        this.BarKod = BarCode;
         this.Kolicina = Kolicina;
         this.Cijena = Cijena;
     }
