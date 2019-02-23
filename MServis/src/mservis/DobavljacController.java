@@ -92,8 +92,6 @@ public class DobavljacController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DodavanjeDobavljaca.fxml"));
             Parent root1 = (Parent) loader.load();
             Stage stage = new Stage();
-            Image image = new Image(new FileInputStream("./resources/icon.png"));
-            stage.getIcons().add(image);
             stage.setTitle("Dodavanje");
             stage.setResizable(false);
             Scene scene = new Scene(root1);

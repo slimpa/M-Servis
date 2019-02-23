@@ -112,6 +112,7 @@ public class NarudzbaFXMLController implements Initializable {
     NarudzbaHasArtikalDAO narudzbaHasArtikalDAO = (new MySQLDAOFactory()).getNarudzbaHasArtikalDAO();
     public NarudzbaHasArtikalDTO narudzbaHasArtikalDTO;
     public int IdN = 0;
+    public int id=0;
     public String dobavljac;
 
     @Override
@@ -137,20 +138,21 @@ public class NarudzbaFXMLController implements Initializable {
     }
 
     public void insertNarudzbu(ActionEvent avtionEvent) {
-        while (comboDOBAVLJACI.getValue() == null) {
-            comboDOBAVLJACI.getValue();
-        }
+        while(comboDOBAVLJACI.getValue()==null);
+        if(!(comboDOBAVLJACI.getSelectionModel().isEmpty()))
+        {
+        System.out.println("DOB"+String.valueOf(comboDOBAVLJACI.getValue()));
         dobavljac = String.valueOf(comboDOBAVLJACI.getValue());
         comboDOBAVLJACI.setDisable(true);
         comboTIP.setDisable(false);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        int id = 0;
         for (DobavljacDTO d : dobavljacLIST) {
             if (String.valueOf(comboDOBAVLJACI.getValue()) == d.getNaziv()) {
                 id = d.getIdDobavljac();
             }
-            System.out.println("id=" + id);
         }
+        if(id!=0)
+        {
         narudzbaDTO.setDatumNarudzbe(timestamp);
         narudzbaDTO.setIdDobavljac(id);
         System.out.println(narudzbaDAO.insert(narudzbaDTO));
@@ -162,13 +164,12 @@ public class NarudzbaFXMLController implements Initializable {
         narudzbaDTO.setIdNarudzba(IdN);
         System.out.println("mysqlID" + IdN);
         comboTIP.setFocusTraversable(false);
+        }
+        }
     }
 
     public void dodajArtikle(ActionEvent actionEvent) {
-        while (comboTIP.getValue() == null) {
-            comboTIP.getValue();
-        }
-
+        while (comboTIP.getValue()==null);
         comboARTIKAL.getItems().clear();
         comboARTIKAL.setDisable(false);
         if (comboTIP.getValue().equals("Telefon")) {
@@ -234,10 +235,13 @@ public class NarudzbaFXMLController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Podaci nisu ispravno unijeti.");
             alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
+            Stage stage=(Stage)alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new javafx.scene.image.Image("file:resources" + File.separator + "icon.png"));
             alert.showAndWait();
 
         }
         tKOLICINA.clear();
+        comboARTIKAL.getSelectionModel().clearSelection();
     }
 
     public void btnObrisi(ActionEvent actionEvent) {
@@ -320,15 +324,16 @@ public class NarudzbaFXMLController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Podaci nisu ispravno unijeti.");
+            Stage stage=(Stage)alert.getDialogPane().getScene().getWindow();
             alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
     }
 
-    public void btnOdustani(ActionEvent actionEvent) {
-        if (IdN > 0) {
-            /*
+    public void btnOtkazi(ActionEvent actionEvent) {
+        if (id >0 && IdN > 0) 
+        {    
         List<NarudzbaHasArtikalDTO> pom=new ArrayList<>(); 
         pom=narudzbaHasArtikalDAO.selectAll();
         for(NarudzbaHasArtikalDTO n : pom)
@@ -337,7 +342,7 @@ public class NarudzbaFXMLController implements Initializable {
                 narudzbaHasArtikalDAO.delete(n);
         }
         System.out.println(narudzbaDTO.getIdNarudzba());
-             */
+            
             narudzbaDAO.delete(narudzbaDTO);
             System.out.println("Obrisana:" + narudzbaDTO.getIdNarudzba());
         }
@@ -452,6 +457,7 @@ public class NarudzbaFXMLController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("");
             alert.setHeaderText(null);
+            Stage stage=(Stage)alert.getDialogPane().getScene().getWindow();
             alert.setContentText("Narudžba uspješno poslata!");
             alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
