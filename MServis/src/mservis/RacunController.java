@@ -151,6 +151,8 @@ public class RacunController implements Initializable {
                     alert.setTitle("Greška!");
                     alert.setHeaderText(null);
                     alert.setContentText("Greška pri štampanju računa!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
+                    alert.showAndWait();
                 }
                 Stage stage = (Stage) btnStampaj.getScene().getWindow();
                 stage.close();
@@ -161,7 +163,8 @@ public class RacunController implements Initializable {
                 alert.setTitle("");
                 alert.setHeaderText(null);
                 alert.setContentText("Telefon preuzet!");
-                
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
+                alert.showAndWait();
                 Stage stage = (Stage) btnStampaj.getScene().getWindow();
                 stage.close();
             }
@@ -170,7 +173,7 @@ public class RacunController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Greška pri štampanju računa!");
-
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }

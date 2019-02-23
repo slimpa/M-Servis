@@ -19,6 +19,7 @@ import dto.ServisTelefonaHasCjenovnikUslugaDTO;
 import dto.StanjeTelefonaDTO;
 import dto.UgradjeniRezervniDioDTO;
 import dto.ZaposleniDTO;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -42,7 +43,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import mySQL.MySQLDAOFactory;
 import net.sf.jasperreports.engine.JRException;
 import service.GeneratorIzvjestaja;
@@ -93,6 +96,9 @@ public class ServisController implements Initializable {
     @FXML
     private Button btnPreuzimanje;
 
+    @FXML
+    private Button btnIzadji;
+
     private ServisTelefonaDAO servisDao = new MySQLDAOFactory().getServisTelefonaDAO();
     private KlijentDAO klijentDao = new MySQLDAOFactory().getKlijentDAO();
     private ZaposleniDAO zaposleniDao = new MySQLDAOFactory().getZaposleniDAO();
@@ -105,7 +111,7 @@ public class ServisController implements Initializable {
     private static UgradjeniRezervniDioDAO ugradjeniDao = new MySQLDAOFactory().getUgradjeniRezervniDioDAO();
     private static ServisTelefonaHasCjenovnikUslugaDAO uslugeDao = new MySQLDAOFactory().getServisTelefonaHasCjenovnikUslugaDAO();
     private static boolean uspjesno = false;
-    
+
     public static int getIdServisa() {
         return idServisa;
     }
@@ -143,7 +149,7 @@ public class ServisController implements Initializable {
         if (lista != null) {
 
             for (ServisTelefonaDTO servis : lista) {
-                
+
                 KlijentDTO klijent = klijentDao.selectBy(new KlijentDTO(servis.getIdKlijent())).get(0);
                 servis.setImePrezimeKlijent(klijent.getIme() + " " + klijent.getPrezime());
 
@@ -185,14 +191,16 @@ public class ServisController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Novi servis telefona");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
 
             this.popuniTabeluServis();
-            if(uspjesno) {
+            if (uspjesno) {
                 this.generisiPotvrdu();
             }
             uspjesno = false;
-            
 
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -236,17 +244,20 @@ public class ServisController implements Initializable {
                 } else {
                     naServisu = false;
                 }
-                
+
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("IzmjenaServis.fxml"));
                 loader.load();
                 IzmjenaServisController controller = loader.getController();
-                
+
                 Parent p = loader.getRoot();
                 Stage stage = new Stage();
                 Scene scene = new Scene(p);
                 scene.getStylesheets().add("dark-theme.css");
                 stage.setScene(scene);
+                stage.setResizable(false);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
                 stage.showAndWait();
 
                 this.popuniTabeluServis();
@@ -258,18 +269,21 @@ public class ServisController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Telefon je popravljen, nemoguća izmjena!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } else if (servis != null && servis.getIdStanjeTelefona() == idNemoguce) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Telefon je nemoguće popraviti!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije odabran servis iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -363,8 +377,7 @@ public class ServisController implements Initializable {
             for (ServisTelefonaHasCjenovnikUslugaDTO usluga : usluge) {
                 stavke.add(new StavkaServisa(servis.getIdServisTelefona(), usluga.getIdCjenovnikUsluga(), usluga.getNazivUsluge(), usluga.getCijena()));
             }
-           
-                
+
             try {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("Racun.fxml"));
@@ -377,19 +390,22 @@ public class ServisController implements Initializable {
                 Scene scene = new Scene(p);
                 scene.getStylesheets().add("dark-theme.css");
                 stage.setScene(scene);
+                stage.setResizable(false);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
                 stage.showAndWait();
-                
+
                 this.popuniTabeluServis();
             } catch (IOException ex) {
                 Logger.getLogger(ServisController.class.getName()).log(Level.SEVERE, null, ex);
             }
-                
-            
-        } else{
+
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije odabran servis iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -401,6 +417,10 @@ public class ServisController implements Initializable {
     public static void setUspjesno(boolean uspjesno) {
         ServisController.uspjesno = uspjesno;
     }
-    
-    
+
+    public void btnIzadji(ActionEvent e) {
+        Stage stage = (Stage) btnIzadji.getScene().getWindow();
+        stage.close();
+    }
+
 }

@@ -12,19 +12,19 @@
    <children>
       <Pane layoutX="1.0" layoutY="2.0" prefHeight="480.0" prefWidth="640.0" stylesheets="@../dark-theme.css">
          <children>
-            <Label layoutX="45.0" layoutY="48.0" text="Model" />
-            <Label layoutX="34.0" layoutY="122.0" text="Serijski broj" />
+            <Label layoutX="45.0" layoutY="50.0" text="Model" />
+            <Label layoutX="34.0" layoutY="125.0" text="Serijski broj" />
             <ImageView fitHeight="178.0" fitWidth="200.0" layoutX="393.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField fx:id="tfSerijskiBroj" layoutX="141.0" layoutY="118.0" prefHeight="31.0" prefWidth="150.0" />
-            <Button fx:id="btnSacuvaj" layoutX="493.0" layoutY="382.0" mnemonicParsing="false" onAction="#btnSacuvajHandler" prefHeight="49.0" prefWidth="115.0" text="Sačuvaj" />
-            <Button fx:id="btnIzadji" layoutX="45.0" layoutY="382.0" mnemonicParsing="false" onAction="#btnIzadjiHandler" prefHeight="49.0" prefWidth="130.0" text="Otkaži" />
-            <Label layoutX="45.0" layoutY="211.0" text="Boja" />
-            <ComboBox fx:id="cbBoja" layoutX="138.0" layoutY="207.0" prefWidth="150.0" />
-            <ComboBox fx:id="cbModel" layoutX="138.0" layoutY="44.0" prefWidth="150.0" />
-            <Button fx:id="btnDodajModel" layoutX="307.0" layoutY="44.0" mnemonicParsing="false" onAction="#btnDodajModelHandler" prefHeight="33.0" prefWidth="213.0" text="Dodaj novi model" />
-            <Button fx:id="btnPromjeniCijenuModela" layoutX="310.0" layoutY="288.0" mnemonicParsing="false" onAction="#btnPromjeniCijenuModelaHandler" prefHeight="33.0" prefWidth="200.0" text="Promjeni cijenu modela" />
-            <TextField fx:id="tfCijena" layoutX="138.0" layoutY="289.0" prefHeight="31.0" prefWidth="150.0" />
-            <Label layoutX="45.0" layoutY="293.0" text="Cijena" />
+            <TextField fx:id="tfSerijskiBroj" layoutX="141.0" layoutY="125.0" prefHeight="30.0" prefWidth="150.0" />
+            <Button fx:id="btnSacuvaj" layoutX="470.0" layoutY="382.0" mnemonicParsing="false" onAction="#btnSacuvajHandler" prefHeight="50.0" prefWidth="100.0" text="Sačuvaj" />
+            <Button fx:id="btnIzadji" layoutX="65.0" layoutY="382.0" mnemonicParsing="false" onAction="#btnIzadjiHandler" prefHeight="50.0" prefWidth="100.0" text="Otkaži" />
+            <Label layoutX="45.0" layoutY="200.0" text="Boja" />
+            <ComboBox fx:id="cbBoja" layoutX="138.0" layoutY="200.0" prefHeight="30.0" prefWidth="150.0" />
+            <ComboBox fx:id="cbModel" layoutX="138.0" layoutY="50.0" prefHeight="30.0" prefWidth="150.0" />
+            <Button fx:id="btnDodajModel" layoutX="307.0" layoutY="50.0" mnemonicParsing="false" onAction="#btnDodajModelHandler" prefHeight="30.0" prefWidth="210.0" text="Dodaj novi model" />
+            <Button fx:id="btnPromjeniCijenuModela" layoutX="310.0" layoutY="275.0" mnemonicParsing="false" onAction="#btnPromjeniCijenuModelaHandler" prefHeight="30.0" prefWidth="210.0" text="Promjeni cijenu modela" />
+            <TextField fx:id="tfCijena" layoutX="138.0" layoutY="275.0" prefHeight="30.0" prefWidth="150.0" />
+            <Label layoutX="45.0" layoutY="275.0" text="Cijena" />
          </children>
       </Pane>
    </children>

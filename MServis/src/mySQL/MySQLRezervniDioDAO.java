@@ -157,9 +157,8 @@ public class MySQLRezervniDioDAO implements RezervniDioDAO {
 			if(rs == null) return null;
 			else {
 				while(rs.next()) {
-					rezervniDijelovi.add(new RezervniDioDTO(rs.getInt("IdRezervniDio"),
-                                                rs.getInt("IdModelTelefona"),rs.getString("Opis"),rs.getString("Naziv"),
-                                                rs.getInt("Kolicina"),rs.getDouble("cijena"), rs.getString("BarKod")));
+					rezervniDijelovi.add(new RezervniDioDTO(rs.getInt("IdRezervniDio"),rs.getString("NazivModela"),rs.getString("Opis"),
+                                            rs.getString("Naziv"),rs.getInt("Kolicina"),rs.getDouble("cijena"), rs.getString("BarKod")));
 				}
 			}
 		} catch(SQLException e) {

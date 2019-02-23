@@ -82,6 +82,7 @@ public class DodavanjeModelaTelefonaController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste unijeli sve podatke!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } else {
             String specifikacija = taSpecifikacija.getText();
@@ -120,6 +121,7 @@ public class DodavanjeModelaTelefonaController implements Initializable {
                 alert.setTitle("");
                 alert.setHeaderText(null);
                 alert.setContentText("Uspješno dodavanje!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
 
                 Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
@@ -129,6 +131,7 @@ public class DodavanjeModelaTelefonaController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Dodavanje modela nije moguće!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
         }

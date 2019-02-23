@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import service.GeneratorIzvjestaja;
 
@@ -37,6 +38,8 @@ public class IzvjestajController implements Initializable {
     private DatePicker pickerDatumDo;
     @FXML
     private ComboBox cbTip;
+    @FXML
+    private Button btnOtkazi;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -85,16 +88,18 @@ public class IzvjestajController implements Initializable {
 
                     break;
             }
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Obavještenje!");
             alert.setHeaderText(null);
             alert.setContentText("Izvještaj uspješno kreiran!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } catch (NullPointerException e1) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste odabrali sve potrebne parametre za izvještaj!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
             // e1.printStackTrace();
         } catch (IllegalArgumentException e2) {
@@ -102,6 +107,7 @@ public class IzvjestajController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Odabrani datum nije ispravan!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } catch (JRException ex) {
             Logger.getLogger(IzvjestajController.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,6 +124,11 @@ public class IzvjestajController implements Initializable {
             pickerDatumDo.setDisable(true);
         }
 
+    }
+
+    public void btnOtkazi(ActionEvent e) {
+        Stage stage = (Stage) btnOtkazi.getScene().getWindow();
+        stage.close();
     }
 
 }

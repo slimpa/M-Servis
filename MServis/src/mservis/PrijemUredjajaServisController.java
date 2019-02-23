@@ -32,7 +32,6 @@ import javafx.stage.Stage;
 import mySQL.MySQLDAOFactory;
 import service.GeneratorIzvjestaja;
 
-
 public class PrijemUredjajaServisController implements Initializable {
 
     @FXML
@@ -49,6 +48,8 @@ public class PrijemUredjajaServisController implements Initializable {
     private ComboBox cbModel;
     @FXML
     private Button btnDodaj;
+    @FXML
+    private Button btnIzadji;
 
     private ModelTelefonaDAO modelDao = new MySQLDAOFactory().getModelTelefonaDAO();
     private ArrayList<ModelTelefonaDTO> modeli;
@@ -75,6 +76,7 @@ public class PrijemUredjajaServisController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste popunili sva obavezna polja!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } else {
             String model = cbModel.getSelectionModel().getSelectedItem().toString();
@@ -94,8 +96,9 @@ public class PrijemUredjajaServisController implements Initializable {
                     alert.setTitle("Info");
                     alert.setHeaderText(null);
                     alert.setContentText("Uspješno dodavanje!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
-                    
+
                     ServisController.setUspjesno(true);
                     Stage stage = (Stage) btnDodaj.getScene().getWindow();
                     stage.close();
@@ -104,6 +107,7 @@ public class PrijemUredjajaServisController implements Initializable {
                     alert.setTitle("Greška!");
                     alert.setHeaderText(null);
                     alert.setContentText("Dodavanje nije moguće!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
                 }
             } else {
@@ -111,15 +115,16 @@ public class PrijemUredjajaServisController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Dodavanje nije moguće!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
-            
-            
 
         }
     }
-    
-    
-    
+
+    public void btnIzadji(ActionEvent e) {
+        Stage stage = (Stage) btnIzadji.getScene().getWindow();
+        stage.close();
+    }
 
 }

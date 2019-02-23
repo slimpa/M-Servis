@@ -19,6 +19,7 @@ import dto.DodatnaOpremaDTO;
 import dto.ModelTelefonaDTO;
 import dto.ProizvodjacDTO;
 import dto.TipDodatneOpremeDTO;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -45,8 +46,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import static mservis.ManipulacijaArtiklimaController.dodatnaOpremaDTO;
 import mySQL.MySQLDAOFactory;
 import static mservis.ManipulacijaArtiklimaController.vrijednost;
@@ -136,6 +139,7 @@ public class DodavanjeDodatneOpremeController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste unijeli sve podatke!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } else {
             if (vrijednost.equals("izmjeni")) {
@@ -192,7 +196,7 @@ public class DodavanjeDodatneOpremeController implements Initializable {
                     alert.setTitle("Informacija");
                     alert.setHeaderText(null);
                     alert.setContentText("Uspjesno izmjenjeno!");
-
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
 
                     Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
@@ -203,6 +207,8 @@ public class DodavanjeDodatneOpremeController implements Initializable {
                     alert.setTitle("Greška");
                     alert.setHeaderText(null);
                     alert.setContentText("Izmjena neuspješna!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
+                    alert.showAndWait();
                 }
             } else {
 
@@ -253,7 +259,7 @@ public class DodavanjeDodatneOpremeController implements Initializable {
                     alert.setTitle("Informacija");
                     alert.setHeaderText(null);
                     alert.setContentText("Uspjesno dodano!");
-
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
 
                     Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
@@ -263,7 +269,7 @@ public class DodavanjeDodatneOpremeController implements Initializable {
                     alert.setTitle("Greška");
                     alert.setHeaderText(null);
                     alert.setContentText("Neuspješno dodavanje!");
-
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
                 }
 
@@ -335,10 +341,13 @@ public class DodavanjeDodatneOpremeController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Dodavanje modela telefona");
             stage.setResizable(false);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             Scene scene = new Scene(root1);
             scene.getStylesheets().add("dark-theme.css");
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setResizable(false);
             stage.showAndWait();
 
             ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();

@@ -30,10 +30,11 @@
           <TableColumn fx:id="columnNazivStavka" prefWidth="273.0" text="Naziv" />
         </columns>
       </TableView>
-      <Button fx:id="btnDodajUslugu" layoutX="375.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnDodajUslugu" prefHeight="45.0" prefWidth="76.0" text="&gt;&gt;" />
-      <Button fx:id="btnDodajDio" layoutX="373.0" layoutY="482.0" mnemonicParsing="false" onAction="#btnDodajDio" prefHeight="45.0" prefWidth="70.0" text="&gt;&gt;" />
+      <Button fx:id="btnDodajUslugu" layoutX="375.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnDodajUslugu" prefHeight="45.0" prefWidth="75.0" text="&gt;&gt;" />
+      <Button fx:id="btnDodajDio" layoutX="375.0" layoutY="472.0" mnemonicParsing="false" onAction="#btnDodajDio" prefHeight="45.0" prefWidth="75.0" text="&gt;&gt;" />
       <ComboBox fx:id="cbNovoStanje" layoutX="497.0" layoutY="413.0" prefHeight="37.0" prefWidth="349.0" promptText="Stanje uređaja" />
-      <Button fx:id="btnPotvrdi" layoutX="689.0" layoutY="576.0" mnemonicParsing="false" onAction="#btnPotvrdi" prefHeight="52.0" prefWidth="157.0" text="Potvrdi" />
-      <Button fx:id="btnObrisiStavku" layoutX="408.0" layoutY="343.0" mnemonicParsing="false" onAction="#btnObrisi" prefHeight="45.0" prefWidth="70.0" text="&lt;&lt;" />
+      <Button fx:id="btnPotvrdi" layoutX="689.0" layoutY="595.0" mnemonicParsing="false" onAction="#btnPotvrdi" prefHeight="21.0" prefWidth="157.0" text="Potvrdi" />
+      <Button fx:id="btnObrisiStavku" layoutX="375.0" layoutY="304.0" mnemonicParsing="false" onAction="#btnObrisi" prefHeight="45.0" prefWidth="75.0" text="&lt;&lt;" />
+      <Button fx:id="btnOtkazi" layoutX="689.0" layoutY="543.0" mnemonicParsing="false" onAction="#btnOtkazi" prefHeight="21.0" prefWidth="157.0" text="Otkaži" />
    </children>
 </AnchorPane>

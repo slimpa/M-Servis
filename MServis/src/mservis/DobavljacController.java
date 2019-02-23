@@ -7,6 +7,7 @@ package mservis;
 
 import dao.DobavljacDAO;
 import dto.DobavljacDTO;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -34,6 +35,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import static mservis.DodavanjeDobavljacaController.setDobavljacController;
 import mySQL.MySQLDAOFactory;
 
@@ -65,6 +67,8 @@ public class DobavljacController implements Initializable {
     private Button btnPRETRAZI;
     @FXML
     private TextField tPRETRAZI;
+    @FXML
+    private Button btnIzadji;
     ObservableList<DobavljacDTO> dobavljacLIST;
     public static DobavljacDTO dobavljacDTO;
     DobavljacDAO dobavljacDAO = (new MySQLDAOFactory()).getDobavljacDAO();
@@ -96,6 +100,8 @@ public class DobavljacController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.showAndWait();
         } catch (IOException ex) {
             Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,6 +122,8 @@ public class DobavljacController implements Initializable {
                 scene.getStylesheets().add("dark-theme.css");
                 stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
                 stage.showAndWait();
             } catch (IOException ex) {
                 Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,6 +134,7 @@ public class DobavljacController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije odabrana stavka iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -141,6 +150,7 @@ public class DobavljacController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije odabrana stavka iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -163,5 +173,10 @@ public class DobavljacController implements Initializable {
                 tableDOBAVLJACI.refresh();
             }
         }
+    }
+    
+    public void btnIzadji(ActionEvent e){
+         Stage stage = (Stage) btnIzadji.getScene().getWindow();
+         stage.close();
     }
 }

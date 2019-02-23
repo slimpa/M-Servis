@@ -17,6 +17,7 @@ import dto.ProizvodjacDTO;
 import dto.StanjeTelefonaDTO;
 import dto.TipDodatneOpremeDTO;
 import dto.ZaposleniDTO;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -39,7 +40,9 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import mySQL.MySQLDAOFactory;
 
 /**
@@ -276,6 +279,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Dodavanje nije moguće!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -291,6 +295,7 @@ public class AdminController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Brisanje nije moguće!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
         } else {
@@ -298,6 +303,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije izabran proizvođač iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -316,6 +322,7 @@ public class AdminController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Izmjena nije moguća!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
         } else if (stari == null || naziv.isEmpty()) {
@@ -323,6 +330,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Potrebno je izabrati proizvođača iz tabele i unijeti novi naziv!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -381,6 +389,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Dodavanje nije moguće!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -396,6 +405,7 @@ public class AdminController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Nije moguće brisanje!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
         } else {
@@ -403,6 +413,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije izabran tip iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -420,6 +431,7 @@ public class AdminController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Nije moguća izmjena!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
 
@@ -428,6 +440,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Potrebno izabrati tip iz tabele i unijeti novi naziv!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -497,6 +510,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Dodavanje nije moguće!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -512,6 +526,7 @@ public class AdminController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Nije moguće brisanje!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
         } else {
@@ -519,6 +534,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije izabrano stanje iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -536,6 +552,7 @@ public class AdminController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Nije moguća izmjena!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
 
@@ -544,6 +561,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Potrebno izabrati stanje iz tabele i unijeti novi naziv!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -570,6 +588,7 @@ public class AdminController implements Initializable {
             alert.setTitle("");
             alert.setHeaderText(null);
             alert.setContentText("Potrebno je unijeti naziv usluge za pretragu!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } else {
             String naziv = tfUsluga.getText();
@@ -609,6 +628,7 @@ public class AdminController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Dodavanje nije moguće!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
         } else {
@@ -616,6 +636,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Popuniti podatke o novoj usluzi!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -631,6 +652,7 @@ public class AdminController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Nije moguće brisanje!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
         } else {
@@ -638,6 +660,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije izabrana usluga iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -657,6 +680,7 @@ public class AdminController implements Initializable {
                     alert.setTitle("Greška!");
                     alert.setHeaderText(null);
                     alert.setContentText("Nije moguća izmjena!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
                 }
 
@@ -666,6 +690,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Potrebno izabrati uslugu iz tabele i unijeti novi naziv i cijenu!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -728,6 +753,7 @@ public class AdminController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Brisanje naloga nije uspjelo!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
             popuniTabeluAdmina();
@@ -736,6 +762,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije izabran korisnički nalog iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -750,6 +777,7 @@ public class AdminController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Brisanje naloga nije uspjelo!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
             popuniTabeluZaposlenih();
@@ -758,6 +786,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije izabran korisnički nalog iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -776,6 +805,9 @@ public class AdminController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dodaj admina");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
 
             this.popuniTabeluAdmina();
@@ -799,6 +831,9 @@ public class AdminController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dodaj zaposlenog");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
 
             this.popuniTabeluZaposlenih();
@@ -826,6 +861,9 @@ public class AdminController implements Initializable {
                 Scene scene = new Scene(p);
                 scene.getStylesheets().add("dark-theme.css");
                 stage.setScene(scene);
+                stage.setResizable(false);
+                stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
+                stage.initStyle(StageStyle.TRANSPARENT);
                 stage.showAndWait();
                 tableAdmin.refresh();
                 popuniTabeluAdmina();
@@ -837,6 +875,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije izabran korisnički nalog iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -860,6 +899,9 @@ public class AdminController implements Initializable {
                 Scene scene = new Scene(p);
                 scene.getStylesheets().add("dark-theme.css");
                 stage.setScene(scene);
+                stage.setResizable(false);
+                stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
+                stage.initStyle(StageStyle.TRANSPARENT);
                 stage.showAndWait();
                 tableZaposleni.refresh();
                 popuniTabeluZaposlenih();
@@ -871,6 +913,7 @@ public class AdminController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije izabran korisnički nalog iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -899,6 +942,7 @@ public class AdminController implements Initializable {
                     alert.setTitle("Greška!");
                     alert.setHeaderText(null);
                     alert.setContentText("Izmjena nije moguća!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
                 } else {
 
@@ -906,6 +950,7 @@ public class AdminController implements Initializable {
                     alert.setTitle("Obavještenje!");
                     alert.setHeaderText(null);
                     alert.setContentText("Uspješna izmjena!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
                     tableAdmin.refresh();
                     popuniTabeluAdmina();
@@ -918,10 +963,13 @@ public class AdminController implements Initializable {
             Parent root2;
 
             root2 = FXMLLoader.load(getClass().getResource("Login.fxml"));
-
+            stage.setResizable(false);
             Scene scene = new Scene(root2);
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Prijavljivanje");
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene(scene);
             
             Stage s = (Stage) btnOdjava.getScene().getWindow();

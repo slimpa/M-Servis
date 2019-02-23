@@ -21,6 +21,7 @@ import dto.RezervniDioDTO;
 import dto.StanjeTelefonaDTO;
 import dto.TelefonDTO;
 import dto.ZaposleniDTO;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -49,8 +50,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import mySQL.MySQLDAOFactory;
 import net.sf.jasperreports.engine.JRException;
 import service.GeneratorIzvjestaja;
@@ -193,13 +196,13 @@ public class ManipulacijaArtiklimaController implements Initializable {
 
     @FXML
     private TextField tfPretragaDodatnaOprema;
-    
+
     @FXML
     private TableColumn<TelefonDTO, String> colBarkodTelefon;
-    
+
     @FXML
     private TableColumn<DodatnaOpremaDTO, String> colBarkodDodatna;
-    
+
     @FXML
     private TableColumn<RezervniDioDTO, String> colBarkodRezervni;
 
@@ -224,6 +227,9 @@ public class ManipulacijaArtiklimaController implements Initializable {
     private Button btnOtkazi;
     @FXML
     private Button btnObrisiStavku;
+
+    @FXML
+    private Button btnIzadji;
 
     @FXML
     private TextField tfUkupno;
@@ -329,7 +335,6 @@ public class ManipulacijaArtiklimaController implements Initializable {
         RezervniDioDAO rezervniDio = new MySQLDAOFactory().getRezervniDioDAO();
         List<RezervniDioDTO> lista = rezervniDio.selectAllDetailed();
 
-      
         ObservableList<RezervniDioDTO> listaRezervnihDijelova = FXCollections.observableArrayList(lista);
 
         if (listaRezervnihDijelova != null) {
@@ -349,7 +354,6 @@ public class ManipulacijaArtiklimaController implements Initializable {
         TelefonDAO telefoni = new MySQLDAOFactory().getTelefonDAO();
         List<TelefonDTO> listaTelefona = telefoni.selectAll();
         ObservableList<TelefonDTO> listaSvihTelefona = FXCollections.observableArrayList(listaTelefona);
-       
 
         if (listaSvihTelefona != null) {
             colTelefonIdTelefona.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Integer>("IdModelTelefona"));
@@ -392,6 +396,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
         String pretraga = cbRezervniDijeloviPretraga.getValue().toString();
         RezervniDioDAO rezervniDio = new MySQLDAOFactory().getRezervniDioDAO();
         List<RezervniDioDTO> lista = new ArrayList<RezervniDioDTO>();
+
         if (!"".equals(naziv)) {
             if (pretraga.equals("Naziv")) {
                 lista = rezervniDio.selectBy(naziv);
@@ -485,6 +490,9 @@ public class ManipulacijaArtiklimaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dodavanje dodatne opreme");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
             this.popuniTabeluDodatneOpreme();
             tableDodatnaOprema.refresh();
@@ -508,6 +516,9 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 scene.getStylesheets().add("dark-theme.css");
                 stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setResizable(false);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
                 stage.showAndWait();
                 this.popuniTabeluDodatneOpreme();
                 tableDodatnaOprema.refresh();
@@ -520,6 +531,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste odabrali artikal!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -529,12 +541,12 @@ public class ManipulacijaArtiklimaController implements Initializable {
         DodatnaOpremaDAO dodatnaOpremaDAO = (new MySQLDAOFactory()).getDodatnaOpremaDAO();
         if (dodatnaOpremaDTO != null) {
             dodatnaOpremaDAO.delete(dodatnaOpremaDTO);
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste odabrali artikal!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
         tableDodatnaOprema.getItems().removeAll();
@@ -568,6 +580,9 @@ public class ManipulacijaArtiklimaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dodavanje telefona");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
             this.popuniTabeluTelefona();
             tableTelefoni.refresh();
@@ -589,7 +604,10 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 Scene scene = new Scene(root1);
                 scene.getStylesheets().add("dark-theme.css");
                 stage.setScene(scene);
+                stage.initStyle(StageStyle.TRANSPARENT);
                 stage.initModality(Modality.APPLICATION_MODAL);
+                stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
+                stage.setResizable(false);
                 stage.showAndWait();
 
                 this.popuniTabeluTelefona();
@@ -598,12 +616,12 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste odabrali artikal!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -613,13 +631,13 @@ public class ManipulacijaArtiklimaController implements Initializable {
         TelefonDAO telefonDAO = (new MySQLDAOFactory()).getTelefonDAO();
         if (telefonDTO != null) {
             telefonDAO.delete(telefonDTO);
-            
-        }
-        else {
+
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste odabrali artikal!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
         tableTelefoni.getItems().removeAll();
@@ -654,6 +672,9 @@ public class ManipulacijaArtiklimaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dodavanje rezervnog dijela");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
 
             this.popuniTabeluRezervnihDijelova();
@@ -677,6 +698,9 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 scene.getStylesheets().add("dark-theme.css");
                 stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setResizable(false);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
                 stage.showAndWait();
 
                 this.popuniTabeluRezervnihDijelova();
@@ -685,12 +709,12 @@ public class ManipulacijaArtiklimaController implements Initializable {
                 Logger.getLogger(DobavljacController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste odabrali artikal!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -700,12 +724,12 @@ public class ManipulacijaArtiklimaController implements Initializable {
         RezervniDioDAO rezervniDioDAO = (new MySQLDAOFactory()).getRezervniDioDAO();
         if (rezervniDioDTO != null) {
             rezervniDioDAO.delete(rezervniDioDTO);
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste odabrali artikal!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
         tableRezervniDijelovi.getItems().removeAll();
@@ -738,6 +762,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
         ButtonType button1 = new ButtonType("Da");
         ButtonType button2 = new ButtonType("Ne", ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(button1, button2);
+        alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == button1) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -788,6 +813,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste izabrali artikal!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
 
         }
@@ -802,7 +828,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
         ButtonType button1 = new ButtonType("Da");
         ButtonType button2 = new ButtonType("Ne", ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(button1, button2);
-
+        alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == button1) {
             racun.clear();
@@ -822,7 +848,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             ButtonType button1 = new ButtonType("OK");
             ButtonType button2 = new ButtonType("Otkaži", ButtonData.CANCEL_CLOSE);
             alert.getButtonTypes().setAll(button1, button2);
-
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == button1) {
                 StavkaRacuna stavkaTmp = new StavkaRacuna(telefon.getIdModelTelefona(), telefon.getNaziv(), telefon.getCijena(), 1, true, telefon.getSerijskiBroj());
@@ -831,6 +857,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
                     alert1.setTitle("Greška!");
                     alert1.setHeaderText(null);
                     alert1.setContentText("Odabrani artikal je na računu!");
+                    alert1.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert1.showAndWait();
                 } else {
                     racun.add(stavkaTmp);
@@ -845,6 +872,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste izabrali artikal!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
 
         }
@@ -857,14 +885,15 @@ public class ManipulacijaArtiklimaController implements Initializable {
             TextInputDialog dialog = new TextInputDialog("1");
             dialog.setTitle("Potvrda o dodavanju  na račun");
             dialog.setHeaderText("Rezervni dio: " + dio.getNazivRezervnogdijela());
-            dialog.setContentText("Unesite količinu(max " + dio.getKolicina() + " ):");
+            dialog.setContentText("Unesite količinu(max " + dio.getKolicinaRezervnogdijela() + " ):");
             ((Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Otkaži");
+            dialog.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             Optional<String> result = dialog.showAndWait();
 
             if (result.isPresent()) {
                 try {
                     int unesenaKolicina = Integer.parseInt(result.get());
-                    if (unesenaKolicina > dio.getKolicina()) {
+                    if (unesenaKolicina > dio.getKolicinaRezervnogdijela()) {
                         throw new Exception();
                     } else {
                         StavkaRacuna stavkaTmp = new StavkaRacuna(dio.getIdRezervniDio(), dio.getNazivRezervnogdijela(), dio.getCijena(), unesenaKolicina, false, null);
@@ -884,6 +913,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
                     alert.setTitle("Greška!");
                     alert.setHeaderText(null);
                     alert.setContentText("Unesena vrijednost nije ispravna!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
                 }
             }
@@ -892,6 +922,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste izabrali artikal!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -904,6 +935,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             dialog.setHeaderText("Dodatna oprema: " + oprema.getNaziv());
             dialog.setContentText("Unesite količinu(max " + oprema.getKolicina() + " ):");
             ((Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Otkaži");
+            dialog.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent()) {
                 try {
@@ -928,6 +960,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
                     alert.setTitle("Greška!");
                     alert.setHeaderText(null);
                     alert.setContentText("Unesena vrijednost nije ispravna!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
                 }
             }
@@ -936,6 +969,7 @@ public class ManipulacijaArtiklimaController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste izabrali artikal!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -956,6 +990,11 @@ public class ManipulacijaArtiklimaController implements Initializable {
         ukupnaCijena = racun.stream().map((s) -> s.getCijena() * s.getKolicina()).reduce(ukupnaCijena, (accumulator, _item) -> accumulator + _item);
 
         tfUkupno.setText(String.valueOf(ukupnaCijena));
+    }
+
+    public void btnIzadji(ActionEvent e) {
+        Stage stage = (Stage) btnIzadji.getScene().getWindow();
+        stage.close();
     }
 
 }

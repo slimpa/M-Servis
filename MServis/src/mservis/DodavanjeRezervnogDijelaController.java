@@ -15,6 +15,7 @@ import dto.CijenaDTO;
 import dto.ModelTelefonaDTO;
 import dto.ProizvodjacDTO;
 import dto.RezervniDioDTO;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -39,8 +40,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import static mservis.ManipulacijaArtiklimaController.rezervniDioDTO;
 import static mservis.ManipulacijaArtiklimaController.vrijednost;
 import mySQL.MySQLDAOFactory;
@@ -122,6 +125,7 @@ public class DodavanjeRezervnogDijelaController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste unijeli sve podatke!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } else {
             if (vrijednost.equals("izmjeni")) {
@@ -172,7 +176,7 @@ public class DodavanjeRezervnogDijelaController implements Initializable {
                     alert.setTitle("Informacija");
                     alert.setHeaderText(null);
                     alert.setContentText("Uspjesno dodano!");
-
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
 
                     Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
@@ -183,7 +187,7 @@ public class DodavanjeRezervnogDijelaController implements Initializable {
                     alert.setTitle("Greška");
                     alert.setHeaderText(null);
                     alert.setContentText("Dodavanje neuspješno!");
-
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
                 }
             } else {
@@ -229,7 +233,7 @@ public class DodavanjeRezervnogDijelaController implements Initializable {
                     alert.setTitle("Informacija");
                     alert.setHeaderText(null);
                     alert.setContentText("Uspjesno dodano!");
-
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
 
                     Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
@@ -240,7 +244,7 @@ public class DodavanjeRezervnogDijelaController implements Initializable {
                     alert.setTitle("Greška");
                     alert.setHeaderText(null);
                     alert.setContentText("Izmjena neuspješna!");
-
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
                 }
             }
@@ -296,7 +300,10 @@ public class DodavanjeRezervnogDijelaController implements Initializable {
             stage.setResizable(false);
             Scene scene = new Scene(root1);
             stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
+            stage.setResizable(false);
             stage.showAndWait();
 
             ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();

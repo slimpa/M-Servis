@@ -93,6 +93,7 @@ public class DodavanjeDobavljacaController implements Initializable{
             alert.setTitle("Obavijest");
             alert.setHeaderText(null);
             alert.setContentText("Podaci nisu ispravno unijeti!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }

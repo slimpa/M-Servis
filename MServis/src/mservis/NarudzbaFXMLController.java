@@ -96,6 +96,7 @@ public class NarudzbaFXMLController implements Initializable {
     private TableColumn columnKOL;
     @FXML
     private AnchorPane aPANE;
+   
     List<DobavljacDTO> dobavljacLIST = new ArrayList<>();
     ObservableList<NarudzbaHasArtikalDTO> narudzbaLIST;
     NarudzbaDTO narudzbaDTO = new NarudzbaDTO();
@@ -232,6 +233,7 @@ public class NarudzbaFXMLController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Podaci nisu ispravno unijeti.");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
 
         }
@@ -244,14 +246,14 @@ public class NarudzbaFXMLController implements Initializable {
             narudzbaHasArtikalDAO.delete(narudzbaHasArtikalDTO);
             tabelaNARUDZBA.getItems().remove(narudzbaHasArtikalDTO);
             osvjezi();
-        } else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije odabrana stavka iz tabele!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
-        
 
     }
 
@@ -318,6 +320,7 @@ public class NarudzbaFXMLController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Podaci nisu ispravno unijeti.");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -445,11 +448,12 @@ public class NarudzbaFXMLController implements Initializable {
             msg.setContent(emailContent);
 
             Transport.send(msg);
-            
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("");
             alert.setHeaderText(null);
             alert.setContentText("Narudžba uspješno poslata!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -458,4 +462,7 @@ public class NarudzbaFXMLController implements Initializable {
             e.printStackTrace();
         }
     }
+
+ 
+
 }

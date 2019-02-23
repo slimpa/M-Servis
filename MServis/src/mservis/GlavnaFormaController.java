@@ -5,6 +5,7 @@
  */
 package mservis;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,8 +20,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -58,6 +61,9 @@ public class GlavnaFormaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Dobavljaci");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,6 +82,9 @@ public class GlavnaFormaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Izvjestaji");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,6 +104,9 @@ public class GlavnaFormaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Narudzbe");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,6 +125,9 @@ public class GlavnaFormaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Manipulacija artiklima");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,6 +146,9 @@ public class GlavnaFormaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Racunima");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,6 +168,9 @@ public class GlavnaFormaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Servis");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -167,6 +188,9 @@ public class GlavnaFormaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setTitle("Login");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.show();
          } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);

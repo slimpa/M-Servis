@@ -84,6 +84,9 @@ public class IzmjenaServisController implements Initializable {
 
     @FXML
     ComboBox cbNovoStanje;
+    
+    @FXML
+    Button btnOtkazi;
 
     private RezervniDioDAO rezervniDioDao = new MySQLDAOFactory().getRezervniDioDAO();
     private CjenovnikUslugaDAO uslugaDao = new MySQLDAOFactory().getCjenovnikUslugaDAO();
@@ -199,6 +202,7 @@ public class IzmjenaServisController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Rezervni dio je već odabran!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             } else {
                 stavkeServisa.add(novaStavka);
@@ -209,6 +213,7 @@ public class IzmjenaServisController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije odabran rezervni dio!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -223,6 +228,7 @@ public class IzmjenaServisController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Usluga je već odabrana!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             } else {
                 stavkeServisa.add(novaStavka);
@@ -233,6 +239,7 @@ public class IzmjenaServisController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije odabrana usluga!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
 
@@ -248,6 +255,7 @@ public class IzmjenaServisController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije odabrana stavka!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -271,6 +279,7 @@ public class IzmjenaServisController implements Initializable {
                     alert.setTitle("Info");
                     alert.setHeaderText(null);
                     alert.setContentText("Uspješno servisiranje!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
 
                     Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
@@ -280,6 +289,7 @@ public class IzmjenaServisController implements Initializable {
                     alert.setTitle("Greška!");
                     alert.setHeaderText(null);
                     alert.setContentText("Neuspješno servisiranje!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
 
                     Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
@@ -301,6 +311,7 @@ public class IzmjenaServisController implements Initializable {
                     alert.setTitle("Info");
                     alert.setHeaderText(null);
                     alert.setContentText("Uspješno servisiranje!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
 
                     Stage stage = (Stage) btnPotvrdi.getScene().getWindow();
@@ -311,6 +322,7 @@ public class IzmjenaServisController implements Initializable {
                     alert.setTitle("Greška!");
                     alert.setHeaderText(null);
                     alert.setContentText("Neuspješno servisiranje!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
 
                 }
@@ -321,6 +333,7 @@ public class IzmjenaServisController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nije odabrano stanje telefona!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }
@@ -332,5 +345,12 @@ public class IzmjenaServisController implements Initializable {
     public void setNaServisu(boolean naServisu) {
         this.naServisu = naServisu;
     }
+    
+    
+    public void btnOtkazi(ActionEvent e){
+         Stage stage = (Stage) btnOtkazi.getScene().getWindow();
+         stage.close();
+    }
+
 
 }

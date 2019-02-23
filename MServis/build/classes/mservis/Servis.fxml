@@ -10,11 +10,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="1276.0" stylesheets="@../dark-theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.ServisController">
    <children>
-      <Label layoutX="17.0" layoutY="28.0" text="Pretraga" />
+      <Label layoutX="23.0" layoutY="29.0" text="Pretraga" />
       <TextField fx:id="tfIdServisa" layoutX="95.0" layoutY="24.0" prefHeight="31.0" prefWidth="134.0" promptText="Id servisa" />
       <ComboBox fx:id="cbStanje" layoutX="246.0" layoutY="24.0" prefHeight="31.0" prefWidth="164.0" promptText="Stanje uređaja" />
-      <Button fx:id="btnDodaj" layoutX="34.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnNoviServis" prefHeight="51.0" prefWidth="105.0" text="Novi servis" />
-      <Button fx:id="btnServisiraj" layoutX="586.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnServisiraj" prefHeight="51.0" prefWidth="105.0" text="Servisiraj" />
+      <Button fx:id="btnDodaj" layoutX="46.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnNoviServis" prefHeight="50.0" prefWidth="165.0" text="Novi servis" />
+      <Button fx:id="btnServisiraj" layoutX="561.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnServisiraj" prefHeight="50.0" prefWidth="165.0" text="Servisiraj" />
       <TableView fx:id="tableServis" layoutX="23.0" layoutY="76.0" prefHeight="331.0" prefWidth="1241.0">
         <columns>
           <TableColumn fx:id="columnIdServisa" prefWidth="64.00003051757812" text="Šifra" />
@@ -27,7 +27,8 @@
             <TableColumn fx:id="columnStanje" prefWidth="123.0" text="Stanje uređaja" />
         </columns>
       </TableView>
-      <Button fx:id="btnPretraziServis" layoutX="448.0" layoutY="24.0" mnemonicParsing="false" onAction="#btnPretraziHandler" text="Pretraži" />
-      <Button fx:id="btnPreuzimanje" layoutX="1050.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnPreuzimanjeHandler" prefHeight="51.0" prefWidth="164.0" text="Preuzimanje uređaja" />
+      <Button fx:id="btnPretraziServis" layoutX="430.0" layoutY="23.0" mnemonicParsing="false" onAction="#btnPretraziHandler" text="Pretraži" />
+      <Button fx:id="btnPreuzimanje" layoutX="1068.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnPreuzimanjeHandler" prefHeight="50.0" prefWidth="165.0" text="Preuzimanje uređaja" />
+      <Button fx:id="btnIzadji" layoutX="1125.0" layoutY="27.0" mnemonicParsing="false" onAction="#btnIzadji" prefWidth="76.0" text="Izađi" />
    </children>
 </AnchorPane>

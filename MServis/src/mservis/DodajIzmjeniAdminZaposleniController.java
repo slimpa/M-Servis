@@ -18,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -56,6 +57,8 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
     private Button btnDodaj;
     @FXML
     private Label lblLozinka;
+    @FXML
+    private Button btnOtkazi;
 
     private static boolean admin = false;
     private boolean izmjena = false;
@@ -74,7 +77,7 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
             tfFirma.setEditable(false);
             tfFirma.setText("m:servis");
         }
-        if(AdminController.isIzmjena()){
+        if (AdminController.isIzmjena()) {
             tfLozinka.setVisible(false);
             lblLozinka.setVisible(false);
         }
@@ -94,6 +97,7 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Niste unijeli sve podatke!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
 
         } else {
@@ -107,6 +111,7 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
                         alert.setTitle("Greška!");
                         alert.setHeaderText(null);
                         alert.setContentText("Korisničko ime postoji!");
+                        alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                         alert.showAndWait();
                     } else if (izmjena) {
                         if (!adminDao.update(adminNovi)) {
@@ -114,6 +119,7 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
                             alert.setTitle("Greška!");
                             alert.setHeaderText(null);
                             alert.setContentText("Izmjena nije moguća!");
+                            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                             alert.showAndWait();
                         } else {
 
@@ -121,6 +127,7 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
                             alert.setTitle("Obavještenje!");
                             alert.setHeaderText(null);
                             alert.setContentText("Uspješna izmjena!");
+                            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                             alert.showAndWait();
 
                             Stage stage = (Stage) btnDodaj.getScene().getWindow();
@@ -133,12 +140,14 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
                             alert.setTitle("Greška!");
                             alert.setHeaderText(null);
                             alert.setContentText("Dodavanje nije moguće!");
+                            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                             alert.showAndWait();
                         } else {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Obavještenje!");
                             alert.setHeaderText(null);
                             alert.setContentText("Uspješno dodavanje!");
+                            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                             alert.showAndWait();
 
                             Stage stage = (Stage) btnDodaj.getScene().getWindow();
@@ -155,6 +164,7 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
                         alert.setTitle("Greška!");
                         alert.setHeaderText(null);
                         alert.setContentText("Korisničko ime postoji!");
+                        alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                         alert.showAndWait();
                     } else if (izmjena) {
                         if (!zaposleniDao.update(zaposleniNovi)) {
@@ -162,6 +172,7 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
                             alert.setTitle("Greška!");
                             alert.setHeaderText(null);
                             alert.setContentText("Izmjena nije moguća!");
+                            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                             alert.showAndWait();
                         } else {
 
@@ -169,6 +180,7 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
                             alert.setTitle("Obavještenje!");
                             alert.setHeaderText(null);
                             alert.setContentText("Uspješna izmjena!");
+                            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                             alert.showAndWait();
 
                             Stage stage = (Stage) btnDodaj.getScene().getWindow();
@@ -181,12 +193,14 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
                             alert.setTitle("Greška!");
                             alert.setHeaderText(null);
                             alert.setContentText("Dodavanje nije moguće!");
+                            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                             alert.showAndWait();
                         } else {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Obavještenje!");
                             alert.setHeaderText(null);
                             alert.setContentText("Uspješno dodavanje!");
+                            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                             alert.showAndWait();
 
                             Stage stage = (Stage) btnDodaj.getScene().getWindow();
@@ -199,6 +213,7 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Broj telefona nije u odgovarajućem formatu!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             }
         }
@@ -244,6 +259,11 @@ public class DodajIzmjeniAdminZaposleniController implements Initializable {
 
     public static void setOdabraniId(int odabraniId) {
         DodajIzmjeniAdminZaposleniController.odabraniId = odabraniId;
+    }
+
+    public void btnOtkazi(ActionEvent e) {
+        Stage stage = (Stage) btnOtkazi.getScene().getWindow();
+        stage.close();
     }
 
 }

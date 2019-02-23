@@ -13,6 +13,7 @@ import dto.ArtikalDTO;
 import dto.CijenaDTO;
 import dto.ModelTelefonaDTO;
 import dto.TelefonDTO;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -34,8 +35,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import static mservis.ManipulacijaArtiklimaController.vrijednost;
 import static mservis.ManipulacijaArtiklimaController.telefonDTO;
 import mySQL.MySQLDAOFactory;
@@ -99,6 +102,7 @@ public class DodavanjeTelefonaController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Niste unijeli sve podatke!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             } else {
                 String model = cbModel.getValue().toString();
@@ -126,6 +130,7 @@ public class DodavanjeTelefonaController implements Initializable {
                     alert.setTitle("Informacija");
                     alert.setHeaderText(null);
                     alert.setContentText("Uspješno izmjenjeno!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
 
                     vrijednost = "nesto";
@@ -138,6 +143,8 @@ public class DodavanjeTelefonaController implements Initializable {
                     alert.setTitle("Greška");
                     alert.setHeaderText(null);
                     alert.setContentText("Neuspješna izmjena!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
+                    alert.showAndWait();
                 }
             }
         } else {
@@ -156,6 +163,7 @@ public class DodavanjeTelefonaController implements Initializable {
                 alert.setTitle("Greška!");
                 alert.setHeaderText(null);
                 alert.setContentText("Telefon sa datim serijskim brojem postoji!");
+                alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                 alert.showAndWait();
             } else {
                 if ("".equals(tfSerijskiBroj.getText()) || cbModel.getSelectionModel().isEmpty() || cbModel.getSelectionModel().isEmpty() || cbBoja.getSelectionModel().isEmpty()) {
@@ -163,6 +171,7 @@ public class DodavanjeTelefonaController implements Initializable {
                     alert.setTitle("Greška!");
                     alert.setHeaderText(null);
                     alert.setContentText("Niste unijeli sve podatke!");
+                    alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                     alert.showAndWait();
                 } else {
                     String model = cbModel.getValue().toString();
@@ -190,7 +199,7 @@ public class DodavanjeTelefonaController implements Initializable {
                         alert.setTitle("Informacija");
                         alert.setHeaderText(null);
                         alert.setContentText("Uspješno dodano!");
-
+                        alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
                         alert.showAndWait();
 
                         Stage stage = (Stage) btnSacuvaj.getScene().getWindow();
@@ -200,6 +209,8 @@ public class DodavanjeTelefonaController implements Initializable {
                         alert.setTitle("Greška");
                         alert.setHeaderText(null);
                         alert.setContentText("Dodavanje neuspješno!");
+                        alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
+                        alert.showAndWait();
                     }
                 }
 
@@ -234,6 +245,9 @@ public class DodavanjeTelefonaController implements Initializable {
             scene.getStylesheets().add("dark-theme.css");
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
             stage.showAndWait();
 
             ModelTelefonaDAO modelTelefonaDAODAO = (new MySQLDAOFactory()).getModelTelefonaDAO();
@@ -264,12 +278,14 @@ public class DodavanjeTelefonaController implements Initializable {
             alert.setTitle("");
             alert.setHeaderText(null);
             alert.setContentText("Uspješna izmjena cijene modela!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greška!");
             alert.setHeaderText(null);
             alert.setContentText("Nemoguća izmjena cijene modela!");
+            alert.getDialogPane().getScene().getStylesheets().add("dark-theme.css");
             alert.showAndWait();
         }
     }

@@ -9,11 +9,11 @@
 
 <AnchorPane id="AnchorPane" fx:id="aPANE" prefHeight="530.0" prefWidth="887.0" stylesheets="@../dark-theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.NarudzbaFXMLController">
    <children>
-      <ComboBox fx:id="comboDOBAVLJACI" editable="true" layoutX="25.0" layoutY="42.0" onAction="#insertNarudzbu" prefHeight="38.0" prefWidth="207.0" promptText="Dobavljači" />
-      <ComboBox fx:id="comboTIP" editable="true" layoutX="25.0" layoutY="106.0" onAction="#dodajArtikle" prefHeight="38.0" prefWidth="207.0" promptText="Tip Artikla" />
-      <ComboBox fx:id="comboARTIKAL" editable="true" layoutX="25.0" layoutY="173.0" prefHeight="38.0" prefWidth="207.0" promptText="Artikal" />
-      <TextField fx:id="tKOLICINA" layoutX="113.0" layoutY="246.0" prefHeight="38.0" prefWidth="119.0" promptText="količina" />
-      <Button fx:id="tDODAJ" layoutX="164.0" layoutY="311.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="38.0" prefWidth="68.0" text="Dodaj" />
+      <ComboBox fx:id="comboDOBAVLJACI" editable="true" layoutX="25.0" layoutY="42.0" onAction="#insertNarudzbu" prefHeight="38.0" prefWidth="242.0" promptText="Dobavljači" />
+      <ComboBox fx:id="comboTIP" editable="true" layoutX="25.0" layoutY="106.0" onAction="#dodajArtikle" prefHeight="38.0" prefWidth="242.0" promptText="Tip Artikla" />
+      <ComboBox fx:id="comboARTIKAL" editable="true" layoutX="25.0" layoutY="173.0" prefHeight="38.0" prefWidth="242.0" promptText="Artikal" />
+      <TextField fx:id="tKOLICINA" layoutX="146.0" layoutY="246.0" prefHeight="38.0" prefWidth="119.0" promptText="količina" />
+      <Button fx:id="tDODAJ" layoutX="197.0" layoutY="311.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="38.0" prefWidth="68.0" text="Dodaj" />
       <TableView fx:id="tabelaNARUDZBA" layoutX="350.0" layoutY="35.0" prefHeight="314.0" prefWidth="470.0">
         <columns>
           <TableColumn fx:id="columnID" prefWidth="82.0" text="Id Artikal" />
@@ -21,8 +21,8 @@
             <TableColumn fx:id="columnKOL" prefWidth="94.0" text="Količina" />
         </columns>
       </TableView>
-      <Button fx:id="btnOBRISI" layoutX="724.0" layoutY="373.0" mnemonicParsing="false" onAction="#btnObrisi" prefHeight="38.0" prefWidth="96.0" text="Obriši" />
+      <Button fx:id="btnOBRISI" layoutX="752.0" layoutY="368.0" mnemonicParsing="false" onAction="#btnObrisi" prefHeight="38.0" prefWidth="68.0" text="Obriši" />
       <Button fx:id="btnKREIRAJ" layoutX="659.0" layoutY="454.0" mnemonicParsing="false" onAction="#btnKreiraj" prefHeight="46.0" prefWidth="161.0" text="Kreiraj narudžbu" />
-      <Button fx:id="btnODUSTANI" layoutX="25.0" layoutY="454.0" mnemonicParsing="false" onAction="#btnOdustani" prefHeight="46.0" prefWidth="138.0" text="Otkaži" />
+      <Button fx:id="btnODUSTANI" layoutX="25.0" layoutY="454.0" mnemonicParsing="false" onAction="#btnOdustani" prefHeight="46.0" prefWidth="161.0" text="Otkaži" />
    </children>
 </AnchorPane>

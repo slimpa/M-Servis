@@ -10,16 +10,17 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="699.0" stylesheets="@../dark-theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.PrijemUredjajaServisController">
    <children>
       <TextField fx:id="tfIme" layoutX="14.0" layoutY="50.0" prefHeight="25.0" prefWidth="236.0" />
-      <TextField fx:id="tfPrezime" layoutX="14.0" layoutY="125.0" prefHeight="25.0" prefWidth="236.0" />
-      <TextField fx:id="tfBroj" layoutX="14.0" layoutY="218.0" prefHeight="25.0" prefWidth="236.0" />
+      <TextField fx:id="tfPrezime" layoutX="14.0" layoutY="130.0" prefHeight="25.0" prefWidth="236.0" />
+      <TextField fx:id="tfBroj" layoutX="14.0" layoutY="210.0" prefHeight="25.0" prefWidth="236.0" />
       <Label layoutX="14.0" layoutY="25.0" text="Ime klijenta" />
-      <Label layoutX="14.0" layoutY="100.0" text="Prezime klijenta" />
-      <Label layoutX="14.0" layoutY="194.0" text="Broj telefona klijenta" />
-      <Button fx:id="btnDodaj" layoutX="561.0" layoutY="319.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="54.0" prefWidth="111.0" text="Potvrdi" />
-      <Label layoutX="382.0" layoutY="169.0" text="Opis kvara" />
-      <Label layoutX="382.0" layoutY="95.0" text="Serijski broj uređaja" />
-      <TextField fx:id="tfSerijski" layoutX="380.0" layoutY="123.0" prefHeight="25.0" prefWidth="236.0" />
-      <ComboBox fx:id="cbModel" layoutX="380.0" layoutY="46.0" prefHeight="25.0" prefWidth="236.0" promptText="Model uređaja" />
-      <TextArea fx:id="taOpis" layoutX="380.0" layoutY="197.0" prefHeight="104.0" prefWidth="236.0" />
+      <Label layoutX="14.0" layoutY="105.0" text="Prezime klijenta" />
+      <Label layoutX="14.0" layoutY="185.0" text="Broj telefona klijenta" />
+      <Button fx:id="btnDodaj" layoutX="561.0" layoutY="331.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="42.0" prefWidth="111.0" text="Potvrdi" />
+      <Label layoutX="380.0" layoutY="185.0" text="Opis kvara" />
+      <Label layoutX="380.0" layoutY="105.0" text="Serijski broj uređaja" />
+      <TextField fx:id="tfSerijski" layoutX="380.0" layoutY="130.0" prefHeight="25.0" prefWidth="236.0" />
+      <ComboBox fx:id="cbModel" layoutX="380.0" layoutY="50.0" prefHeight="25.0" prefWidth="236.0" promptText="Model uređaja" />
+      <TextArea fx:id="taOpis" layoutX="380.0" layoutY="210.0" prefHeight="104.0" prefWidth="236.0" />
+      <Button fx:id="btnIzadji" layoutX="21.0" layoutY="331.0" mnemonicParsing="false" onAction="#btnIzadji" prefHeight="42.0" prefWidth="111.0" text="Otkaži" />
    </children>
 </AnchorPane>

@@ -11,23 +11,23 @@
    <children>
       <Pane layoutY="-5.0" prefHeight="576.0" prefWidth="777.0" stylesheets="@../dark-theme.css">
          <children>
-            <Button fx:id="btnIzadji" layoutX="641.0" layoutY="486.0" mnemonicParsing="false" onAction="#btnIzadjiHandler" prefHeight="62.0" prefWidth="105.0" text="Otkaži" />
-            <Button fx:id="btnSacuvaj" layoutX="644.0" layoutY="399.0" mnemonicParsing="false" onAction="#btnSacuvajHandler" prefHeight="62.0" prefWidth="99.0" text="Sačuvaj" />
-            <Label layoutX="87.0" layoutY="76.0" text="Naziv" />
-            <Label layoutX="87.0" layoutY="160.0" text="Model telefona" />
-            <Label layoutX="87.0" layoutY="241.0" text="Opis" />
-            <Label layoutX="87.0" layoutY="312.0" text="Količina" />
-            <Label layoutX="87.0" layoutY="373.0" text="Cijena" />
-            <TextField fx:id="tfNaziv" layoutX="206.0" layoutY="71.0" prefHeight="31.0" prefWidth="392.0" />
-            <ComboBox fx:id="cbModelTelefona" layoutX="207.0" layoutY="156.0" prefHeight="25.0" prefWidth="176.0" />
-            <TextField fx:id="tfOpis" layoutX="210.0" layoutY="236.0" prefHeight="31.0" prefWidth="392.0" />
-            <TextField fx:id="tfKolicina" layoutX="210.0" layoutY="307.0" prefHeight="25.0" prefWidth="176.0" />
-            <TextField fx:id="tfCijena" layoutX="210.0" layoutY="369.0" prefHeight="25.0" prefWidth="176.0" />
-            <ComboBox fx:id="cbProizvodjac" layoutX="209.0" layoutY="426.0" prefHeight="25.0" prefWidth="176.0" />
-            <Label layoutX="87.0" layoutY="430.0" text="Proizvodjač" />
-            <Label layoutX="87.0" layoutY="490.0" text="Bar code" />
-            <TextField fx:id="tfBarKod" layoutX="210.0" layoutY="486.0" prefHeight="25.0" prefWidth="176.0" />
-            <Button fx:id="btnDodajModelTelefona" layoutX="399.0" layoutY="156.0" mnemonicParsing="false" onAction="#btnDodajModelTelefonaHandler" text="Dodaj novi model telefona" />
+            <Button fx:id="btnIzadji" layoutX="644.0" layoutY="471.0" mnemonicParsing="false" onAction="#btnIzadjiHandler" prefHeight="50.0" prefWidth="100.0" text="Otkaži" />
+            <Button fx:id="btnSacuvaj" layoutX="644.0" layoutY="401.0" mnemonicParsing="false" onAction="#btnSacuvajHandler" prefHeight="50.0" prefWidth="100.0" text="Sačuvaj" />
+            <Label layoutX="90.0" layoutY="60.0" text="Naziv" />
+            <Label layoutX="87.0" layoutY="130.0" text="Model telefona" />
+            <Label layoutX="87.0" layoutY="200.0" text="Opis" />
+            <Label layoutX="87.0" layoutY="270.0" text="Količina" />
+            <Label layoutX="87.0" layoutY="340.0" text="Cijena" />
+            <TextField fx:id="tfNaziv" layoutX="206.0" layoutY="60.0" prefHeight="31.0" prefWidth="392.0" />
+            <ComboBox fx:id="cbModelTelefona" layoutX="207.0" layoutY="130.0" prefHeight="25.0" prefWidth="176.0" />
+            <TextField fx:id="tfOpis" layoutX="210.0" layoutY="200.0" prefHeight="31.0" prefWidth="392.0" />
+            <TextField fx:id="tfKolicina" layoutX="210.0" layoutY="270.0" prefHeight="25.0" prefWidth="176.0" />
+            <TextField fx:id="tfCijena" layoutX="210.0" layoutY="340.0" prefHeight="25.0" prefWidth="176.0" />
+            <ComboBox fx:id="cbProizvodjac" layoutX="209.0" layoutY="410.0" prefHeight="25.0" prefWidth="176.0" />
+            <Label layoutX="87.0" layoutY="410.0" text="Proizvodjač" />
+            <Label layoutX="87.0" layoutY="480.0" text="Bar code" />
+            <TextField fx:id="tfBarKod" layoutX="210.0" layoutY="480.0" prefHeight="25.0" prefWidth="176.0" />
+            <Button fx:id="btnDodajModelTelefona" layoutX="399.0" layoutY="130.0" mnemonicParsing="false" onAction="#btnDodajModelTelefonaHandler" text="Dodaj novi model telefona" />
          </children>
       </Pane>
    </children>

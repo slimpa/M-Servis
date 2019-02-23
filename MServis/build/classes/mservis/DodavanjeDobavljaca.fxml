@@ -15,7 +15,7 @@
       <TextField fx:id="tADRESA" layoutX="105.0" layoutY="121.0" prefHeight="28.0" prefWidth="551.0" />
       <TextField fx:id="tTEL" layoutX="105.0" layoutY="201.0" prefHeight="28.0" prefWidth="551.0" />
       <TextField fx:id="tEMAIL" layoutX="105.0" layoutY="281.0" prefHeight="28.0" prefWidth="551.0" />
-      <Button fx:id="btnOTKAZI" layoutX="46.0" layoutY="358.0" mnemonicParsing="false" onAction="#btnOtkazi" prefHeight="65.0" prefWidth="118.0" text="Otkaži" />
-      <Button fx:id="btnPOTVRDI" layoutX="601.0" layoutY="358.0" mnemonicParsing="false" onAction="#btnPotvrdi" prefHeight="65.0" prefWidth="110.0" text="Potvrdi" />
+      <Button fx:id="btnOTKAZI" layoutX="46.0" layoutY="358.0" mnemonicParsing="false" onAction="#btnOtkazi" prefHeight="60.0" prefWidth="120.0" text="Otkaži" />
+      <Button fx:id="btnPOTVRDI" layoutX="601.0" layoutY="358.0" mnemonicParsing="false" onAction="#btnPotvrdi" prefHeight="60.0" prefWidth="120.0" text="Potvrdi" />
    </children>
 </AnchorPane>
