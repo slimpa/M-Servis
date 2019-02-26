@@ -19,7 +19,7 @@
       <Button fx:id="tDODAJ" layoutX="197.0" layoutY="311.0" mnemonicParsing="false" onAction="#btnDodaj" prefHeight="38.0" prefWidth="68.0" text="Dodaj" />
       <TableView fx:id="tabelaNARUDZBA" layoutX="350.0" layoutY="35.0" prefHeight="314.0" prefWidth="470.0">
         <columns>
-          <TableColumn fx:id="columnID" prefWidth="82.0" text="Id Artikal" />
+          <TableColumn fx:id="columnID" prefWidth="82.0" text="Šifra" />
           <TableColumn fx:id="columnARTIKAL" prefWidth="293.0" text="Artikal" />
             <TableColumn fx:id="columnKOL" prefWidth="94.0" text="Količina" />
         </columns>

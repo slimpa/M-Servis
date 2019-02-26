@@ -299,6 +299,7 @@ public class DodavanjeRezervnogDijelaController implements Initializable {
             stage.setTitle("Dodavanje modela telefona");
             stage.setResizable(false);
             Scene scene = new Scene(root1);
+            scene.getStylesheets().add("dark-theme.css");
             stage.setScene(scene);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);

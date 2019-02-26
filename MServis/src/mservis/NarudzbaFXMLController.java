@@ -202,7 +202,7 @@ public class NarudzbaFXMLController implements Initializable {
 
     public void btnDodaj(ActionEvent actionEvent) {
         int ID = 0;
-        if (comboDOBAVLJACI.getValue() != null && comboTIP.getValue() != null && comboARTIKAL.getValue() != null && tKOLICINA.getText().length() > 0 && Integer.parseInt(tKOLICINA.getText()) > 0 && provjeri(String.valueOf(comboARTIKAL.getValue()))) {
+        if (comboDOBAVLJACI.getValue() != null && comboTIP.getValue() != null && comboARTIKAL.getValue() != null && tKOLICINA.getText().length() > 0 && (tKOLICINA.getText().matches("[1-9][0-9]*")) && Integer.parseInt(tKOLICINA.getText()) > 0 && provjeri(String.valueOf(comboARTIKAL.getValue()))) {
             if (comboTIP.getValue().equals("Telefon")) {
                 for (ModelTelefonaDTO t : modelTelefonLIST) {
                     if (t.getNazivModela().equals(String.valueOf(comboARTIKAL.getValue()))) {
@@ -364,7 +364,7 @@ public class NarudzbaFXMLController implements Initializable {
     }
 
     private void addTableHeader(PdfPTable table) {
-        Stream.of("Id Artikal", "Naziv Artikla", "Kolicina")
+        Stream.of("Sifra", "Naziv Artikla", "Kolicina")
                 .forEach(new Consumer<String>() {
                     @Override
                     public void accept(String columnTitle) {

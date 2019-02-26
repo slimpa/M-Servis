@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -31,6 +32,8 @@ import javafx.stage.StageStyle;
  */
 public class GlavnaFormaController implements Initializable {
 
+    @FXML
+    private ImageView imgView;
     @FXML
     private AnchorPane glavnaFormaPane;
     @FXML
@@ -202,6 +205,14 @@ public class GlavnaFormaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         ime.setText(LoginController.getKorisnickoIme());
+        imgView.setImage(new Image("file:resources" + File.separator + "user.png"));
+        dobavljaciButton.setFocusTraversable(false);
+        izvjestajiButton.setFocusTraversable(false);
+        narudzbeButton.setFocusTraversable(false);
+        radSaArtiklimaButton.setFocusTraversable(false);
+        servisButton.setFocusTraversable(false);
+        odjavaButton.setFocusTraversable(false);
+       
     }    
 
     

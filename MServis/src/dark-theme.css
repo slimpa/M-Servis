@@ -10,6 +10,7 @@
     -fx-blue: #1976D2;
     -fx-red: #FF0000;
     -fx-color-1:#1976D2;
+    -fx-filltext:#CCCC00;
 }
 
 .root{
@@ -40,17 +41,17 @@
 
 .text-field
 {
-    -fx-text-fill: -fx-primarytext;
+    -fx-text-fill: #CCCC00;
     -fx-font-size : 11pt;
     -jfx-focus-color: -fx-secondary;
-    -fx-text-fill: derive(#ffff5b, 5%);
-    -fx-background-color: -fx-primarytext;
+    -fx-text-fill: derive(#CCCC00, 2%);
+    -fx-background-color: #F5F5F5;
     -fx-font-weight: bold;
 }
 
 .text-area
 {
-    -fx-text-fill: -fx-secondary;
+    -fx-text-fill: -fx-filltext;
     -fx-font-size : 11pt;
     -jfx-focus-color: -fx-secondary;
     -fx-background-color: #2A2E37;
@@ -64,7 +65,7 @@
 
 .label
 {
-    -fx-text-fill: -fx-secondary;
+    -fx-text-fill: -fx-filltext;
     -fx-font-size: 11pt;
     -fx-font-weight: bold;
     
@@ -190,7 +191,7 @@
 /*Text styling*/
 .main-text
 {
-    -fx-fill: -fx-secondary;
+    -fx-fill: -fx-filltext;
     -fx-font-size: 11pt;
     -fx-text-alignment: center;
 }
@@ -400,5 +401,5 @@
 .custom-alert:header *.header-panel *.label{
     -fx-font-size: 18px;
     -fx-font-style: italic;
-    -fx-fill: -fx-primary;
+    -fx-fill: white;
 }

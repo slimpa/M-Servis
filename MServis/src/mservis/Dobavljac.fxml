@@ -17,7 +17,7 @@
          <children>
             <TableView fx:id="tableDOBAVLJACI" layoutX="23.0" layoutY="113.0" prefHeight="374.0" prefWidth="954.0">
               <columns>
-                <TableColumn fx:id="columnID" prefWidth="119.0" text="Id dobavljača" />
+                <TableColumn fx:id="columnID" prefWidth="119.0" text="Šifra" />
                 <TableColumn fx:id="columnNAZIV" prefWidth="150.0" text="Naziv" />
                   <TableColumn fx:id="columnADRESA" prefWidth="284.0" text="Adresa" />
                   <TableColumn fx:id="columnTEL" prefWidth="188.0" text="Telefon" />
@@ -29,7 +29,6 @@
             <Button fx:id="btnOBRISI" layoutX="41.0" layoutY="517.0" mnemonicParsing="false" onAction="#btnOBrisi" prefHeight="30.0" prefWidth="115.0" text="Obriši" />
             <Button fx:id="btnPRETRAZI" layoutX="258.0" layoutY="39.0" mnemonicParsing="false" onAction="#btnPretrazi" prefHeight="30.0" prefWidth="115.0" text="Pretraži" />
             <TextField fx:id="tPRETRAZI" layoutX="24.0" layoutY="39.0" prefHeight="25.0" prefWidth="216.0" promptText="Naziv" />
-            <Label layoutX="27.0" layoutY="14.0" text="Naziv dobavljača" />
             <Button fx:id="btnIzadji" layoutX="853.0" layoutY="39.0" mnemonicParsing="false" onAction="#btnIzadji" prefHeight="30.0" prefWidth="115.0" text="Izađi" />
          </children>
       </Pane>
