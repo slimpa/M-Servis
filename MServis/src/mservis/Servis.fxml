@@ -11,7 +11,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="1276.0" stylesheets="@../dark-theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mservis.ServisController">
    <children>
       <Label layoutX="23.0" layoutY="29.0" text="Pretraga" />
-      <TextField fx:id="tfIdServisa" layoutX="95.0" layoutY="24.0" prefHeight="31.0" prefWidth="134.0" promptText="Id servisa" />
+      <TextField fx:id="tfIdServisa" layoutX="95.0" layoutY="24.0" prefHeight="31.0" prefWidth="134.0" promptText="Šifra servisa" text="Šifra servisa" />
       <ComboBox fx:id="cbStanje" layoutX="246.0" layoutY="24.0" prefHeight="31.0" prefWidth="164.0" promptText="Stanje uređaja" />
       <Button fx:id="btnDodaj" layoutX="46.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnNoviServis" prefHeight="50.0" prefWidth="165.0" text="Novi servis" />
       <Button fx:id="btnServisiraj" layoutX="561.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnServisiraj" prefHeight="50.0" prefWidth="165.0" text="Servisiraj" />

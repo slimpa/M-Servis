@@ -120,6 +120,7 @@ public class LoginController implements Initializable {
                 stage.setTitle("Admin forma");
                 stage.setResizable(false);
                 stage.setScene(scene);
+                stage.initStyle(StageStyle.TRANSPARENT);
                 stage.getIcons().add(new Image("file:resources" + File.separator + "icon.png"));
                 stage.show();
             } catch (IOException ex) {

@@ -135,14 +135,12 @@
                   <Label layoutX="120.0" layoutY="289.0" text="Broj telefona" />
                   <Label layoutX="125.0" layoutY="423.0" text="Naziv firme" />
                   <Label layoutX="644.0" layoutY="31.0" text="Korisničko ime" />
-                  <Label layoutX="668.0" layoutY="165.0" text="Lozinka" />
                   <TextField fx:id="tfImeAdmin" layoutX="17.0" layoutY="69.0" prefHeight="31.0" prefWidth="296.0" />
                   <TextField fx:id="tfPrezimeAdmin" layoutX="19.0" layoutY="202.0" prefHeight="31.0" prefWidth="297.0" />
                   <TextField fx:id="tfTelefonAdmin" layoutX="22.0" layoutY="337.0" prefHeight="31.0" prefWidth="292.0" />
                   <TextField fx:id="tfFirmaAdmin" layoutX="16.0" layoutY="460.0" prefHeight="31.0" prefWidth="297.0" />
                   <TextField fx:id="tfKorisnickoAdmin" layoutX="546.0" layoutY="69.0" prefHeight="31.0" prefWidth="303.0" />
-                  <TextField fx:id="tfLozinkaAdmin" layoutX="546.0" layoutY="202.0" prefHeight="31.0" prefWidth="297.0" />
-                  <Button fx:id="btnSacuvajAdmin" layoutX="721.0" layoutY="441.0" mnemonicParsing="false" onAction="#btnSacuvajAdminHandler" prefHeight="60.0" prefWidth="150.0" text="Sačuvaj izmjene" />
+                  <Button fx:id="btnSacuvajAdmin" layoutX="721.0" layoutY="441.0" mnemonicParsing="false" onAction="#btnSacuvajAdminHandler" prefHeight="60.0" prefWidth="150.0" text="Potvrdi izmjene" />
                   <Button fx:id="btnOdjava" layoutX="937.0" layoutY="441.0" mnemonicParsing="false" onAction="#btnOdjavaHandler" prefHeight="60.0" prefWidth="150.0" text="Odjava" />
                </children>
             </AnchorPane>

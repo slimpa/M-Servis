@@ -214,8 +214,6 @@ public class AdminController implements Initializable {
     @FXML
     private TextField tfKorisnickoAdmin;
     @FXML
-    private TextField tfLozinkaAdmin;
-    @FXML
     private Button btnSacuvajAdmin;
     @FXML
     private Button btnOdjava;
@@ -930,8 +928,6 @@ public class AdminController implements Initializable {
         tfTelefonAdmin.setText(admin.getBrojTelefona());
         tfFirmaAdmin.setText(admin.getNazivFirme());
         tfKorisnickoAdmin.setText(admin.getKoriscnikoIme());
-        tfLozinkaAdmin.setText(admin.getLozinka());
-        tfLozinkaAdmin.setEditable(false);
     }
     
     public void btnSacuvajAdminHandler(ActionEvent e){

@@ -122,7 +122,6 @@ public class ServisController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tfIdServisa.setText("Id servisa");
         this.popuniComboStanja();
         this.popuniTabeluServis();
     }
