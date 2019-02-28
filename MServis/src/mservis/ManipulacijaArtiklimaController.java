@@ -270,64 +270,9 @@ public class ManipulacijaArtiklimaController implements Initializable {
         cbRezervniDijeloviPretraga.getItems().addAll("Naziv", "Model telefona");
         cbRezervniDijeloviPretraga.getSelectionModel().selectFirst();
 
-        //rezervni dijelovi
-//        RezervniDioDAO rezervniDio = new MySQLDAOFactory().getRezervniDioDAO();
-//        List<RezervniDioDTO> lista = rezervniDio.selectAllDetailed();
-//        ObservableList<RezervniDioDTO> listaRezervnihDijelova = FXCollections.observableArrayList(lista);
-//
-//        if (listaRezervnihDijelova != null) {
-//            colIdRezervniDio.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdRezervniDio"));
-//            colIdModelTelefona.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("IdModelTelefona"));
-//            colOpis.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("Opis"));
-//            colNaziv.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, String>("nazivRezervnogdijela"));
-//            colKolicina.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Integer>("kolicinaRezervnogdijela"));
-//            colCijena.setCellValueFactory(new PropertyValueFactory<RezervniDioDTO, Double>("Cijena"));
-//            tableRezervniDijelovi.setItems(listaRezervnihDijelova);
-//        }
-//        
-//        cbDodatnaOpremaPretraga.getItems().addAll("Naziv", "Tip", "Model telefona");
-//        cbDodatnaOpremaPretraga.getSelectionModel().selectFirst();
+ 
         this.popuniTabeluRezervnihDijelova();
-        //telefoni
-//        TelefonDAO telefoni = new MySQLDAOFactory().getTelefonDAO();
-//        List<TelefonDTO> listaTelefona = telefoni.selectAll();
-//        ObservableList<TelefonDTO> listaSvihTelefona = FXCollections.observableArrayList(listaTelefona);
-//
-//        if (listaSvihTelefona != null) {
-//            colTelefonIdTelefona.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Integer>("IdModelTelefona"));
-//            colTelefonNaziv.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Naziv"));
-//            colTelefonModel.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Model"));
-//            colTelefonProizvodjac.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Proizvodjac"));
-//            colTelefonBoja.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Boja"));
-//            colTelefonSpecifikacija.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("Specifikacija"));
-//            colTelefonSerijskiBroj.setCellValueFactory(new PropertyValueFactory<TelefonDTO, String>("SerijskiBroj"));
-//            colTelefonCijena.setCellValueFactory(new PropertyValueFactory<TelefonDTO, Double>("Cijena"));
-//            tableTelefoni.setItems(listaSvihTelefona);
-//        }
-//        
-//        cbTelefonPretraga.getItems().addAll("Naziv", "Model", "Serijski broj");
-//        cbTelefonPretraga.getSelectionModel().selectFirst();
         this.popuniTabeluTelefona();
-
-        //dodatna oprema
-//        DodatnaOpremaDAO dodatnaOprema = new MySQLDAOFactory().getDodatnaOpremaDAO();
-//        List<DodatnaOpremaDTO> listaDodatneOpreme = dodatnaOprema.selectAll();
-//        ObservableList<DodatnaOpremaDTO> listaSveDodatneOpreme = FXCollections.observableArrayList(listaDodatneOpreme);
-//
-//        if (listaSveDodatneOpreme != null) {
-//            colDodatnaOpremaIdDodatneOpreme.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, Integer>("idDodatnaOprema"));
-//            colDodatnaOpremaNaziv.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Naziv"));
-//            colDodatnaOpremaTip.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("TipOpreme"));
-//            colDodatnaOpremaBoja.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Boja"));
-//            colDodatnaOpremaModelTelefona.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("ModelTelefona"));
-//            colDodatnaOpremaKolicina.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, String>("Kolicina"));
-//            colDodatnaOpremaCijena.setCellValueFactory(new PropertyValueFactory<DodatnaOpremaDTO, Double>("Cijena"));
-//
-//            tableDodatnaOprema.setItems(listaSveDodatneOpreme);
-//        }
-//        
-//        cbRezervniDijeloviPretraga.getItems().addAll("Naziv", "Model telefona");
-//        cbRezervniDijeloviPretraga.getSelectionModel().selectFirst();
         this.popuniTabeluDodatneOpreme();
     }
 
